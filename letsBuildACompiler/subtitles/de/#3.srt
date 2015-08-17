@@ -1,0 +1,1008 @@
+﻿1
+00:00:00,000 --> 00:00:02,610
+Willkommen zurück zu "Let's build a compiler".
+
+2
+00:00:02,610 --> 00:00:06,790
+In dieser Folge zeige ich euch wie ihr mit einem von ANTLR generierten Visitor
+
+3
+00:00:06,790 --> 00:00:09,740
+und eigenem Code euren Syntaxbaum verarbeitet.
+
+4
+00:00:09,740 --> 00:00:13,500
+Als Erstes wollen wir unseren Parser in Eclipse einbinden
+
+5
+00:00:13,500 --> 00:00:16,440
+damit wir gleich angenehmer coden können.
+
+6
+00:00:16,440 --> 00:00:20,130
+Ihr ladet euch eclipse auf eclipse.org herunter,
+
+7
+00:00:20,130 --> 00:00:22,150
+geht hier auf "Download eclipse"
+
+8
+00:00:22,150 --> 00:00:26,560
+und da habe ich dann einfach das "Eclipse Standard" genommen.
+
+9
+00:00:26,560 --> 00:00:28,670
+Ich habe das auch schonmal heruntergeladen
+
+10
+00:00:28,670 --> 00:00:30,960
+und auch hier schon gestartet.
+
+11
+00:00:30,960 --> 00:00:33,690
+Dann haben wir jetzt hier einen leeren "Package Explorer"
+
+12
+00:00:33,690 --> 00:00:37,580
+da gehen wir dann: Rechte Maustaste -> New -> Java Project
+
+13
+00:00:37,580 --> 00:00:40,440
+und legen ein Projekt an, ich nenne es
+
+14
+00:00:40,440 --> 00:00:44,120
+Parser, immerhin wird nachher ein Parser drin sein.
+
+15
+00:00:44,120 --> 00:00:46,120
+Dann gehen wir auf "Finish"
+
+16
+00:00:46,120 --> 00:00:49,590
+und wir legen uns einen Ordner an
+
+17
+00:00:49,590 --> 00:00:53,120
+mit der Grammatik, die wir haben
+
+18
+00:00:53,120 --> 00:00:57,470
+und wir legen uns einen Ordner an
+
+19
+00:00:57,470 --> 00:01:00,990
+wo wir unser ANTLR-Jar reinspeichern werden.
+
+20
+00:01:00,990 --> 00:01:03,380
+Die holen wir uns jetzt erstmal ins Projekt rein
+
+21
+00:01:03,380 --> 00:01:05,670
+indem wir hier auf "Import" gehen,
+
+22
+00:01:07,210 --> 00:01:10,940
+das Jar liegt hier bei mir in compiler/lib
+
+23
+00:01:11,820 --> 00:01:17,480
+und die Grammatik holen wir uns in das Grammatikverzeichnis rein
+
+24
+00:01:17,480 --> 00:01:21,990
+liegt bei mir in compiler/Demo.g4.
+
+25
+00:01:23,900 --> 00:01:28,080
+Und schon können wir wieder damit weitermachen den Parser zu generieren.
+
+26
+00:01:28,080 --> 00:01:30,510
+Dafür gehen wir auf die Konsole,
+
+27
+00:01:31,020 --> 00:01:35,510
+gehen in das Verzeichnis von unserem eclipse-Workspace,
+
+28
+00:01:35,510 --> 00:01:38,060
+das ist bei mir einfach "workspace",
+
+29
+00:01:38,060 --> 00:01:40,850
+dadrin ist jetzt ein Verzeichnis mit unserem Projekt,
+
+30
+00:01:40,850 --> 00:01:44,190
+"Parser" und dadrin ist ein... das Verzeichnis "grammar",
+
+31
+00:01:44,190 --> 00:01:46,270
+was wir gerade eben angelegt haben
+
+32
+00:01:46,270 --> 00:01:49,640
+und hier befindet sich unsere Grammatik.
+
+33
+00:01:50,020 --> 00:01:52,260
+Jetzt können wir ANTLR wieder starten
+
+34
+00:01:52,260 --> 00:01:54,750
+und unseren Parser generieren lassen indem wir
+
+35
+00:01:54,750 --> 00:02:01,700
+java -jar ../lib und dann antlr.jar aufrufen.
+
+36
+00:02:01,850 --> 00:02:04,450
+Dann schauen wir mal was wir für Optionen brauchen:
+
+37
+00:02:04,450 --> 00:02:07,080
+Ich möchte diesmal, dass unser Parser
+
+38
+00:02:07,080 --> 00:02:10,240
+nicht einfach ins Standard-Package von Java gelegt wird,
+
+39
+00:02:10,240 --> 00:02:12,620
+sondern explizit ein Package angeben.
+
+40
+00:02:12,620 --> 00:02:15,480
+Deswegen haben wir hier die Option "-package",
+
+41
+00:02:15,480 --> 00:02:19,040
+die generiert uns die Packageoption oben
+
+42
+00:02:19,040 --> 00:02:21,410
+in die Javadatei hinein.
+
+43
+00:02:22,700 --> 00:02:24,090
+Daher geb' ich die jetzt an
+
+44
+00:02:24,090 --> 00:02:25,690
+und als Package nehme ich mal
+
+45
+00:02:25,690 --> 00:02:34,010
+de.letsbuildacompiler.parser
+
+46
+00:02:36,470 --> 00:02:39,140
+Dann möchte ich auch noch ein "output-dir" angeben
+
+47
+00:02:39,140 --> 00:02:41,880
+in dem unsere Javadateien gespeichert werden,
+
+48
+00:02:42,140 --> 00:02:44,810
+das ist einmal ../src,
+
+49
+00:02:44,810 --> 00:02:47,790
+das ist in eclipse hier dieses Verzeichnis
+
+50
+00:02:48,600 --> 00:02:51,080
+und dann auch noch der Pfad
+
+51
+00:02:51,080 --> 00:02:54,760
+mit dem Package, weil das macht das ANTLR nicht automatisch.
+
+52
+00:02:54,760 --> 00:03:03,270
+Also "de/letsbuildacompiler/parser".
+
+53
+00:03:04,920 --> 00:03:08,400
+Dann brauchen wir erstmal keinen Listener,
+
+54
+00:03:09,460 --> 00:03:11,000
+den schalte ich entsprechend ab,
+
+55
+00:03:11,000 --> 00:03:15,160
+aber ich möchte euch zeigen was wir mit einem Visitor alles anstellen können,
+
+56
+00:03:15,160 --> 00:03:17,960
+also mache ich die Option "-visitor" an.
+
+57
+00:03:18,530 --> 00:03:20,370
+Und jetzt, ganz wichtig:
+
+58
+00:03:20,370 --> 00:03:22,640
+den Namen der Grammatik noch angeben.
+
+59
+00:03:24,050 --> 00:03:25,870
+Dann führen wir das ganze aus
+
+60
+00:03:26,690 --> 00:03:28,930
+und haben jetzt, wenn wir hier in eclipse
+
+61
+00:03:28,930 --> 00:03:30,610
+einmal "F5" drücken
+
+62
+00:03:31,100 --> 00:03:36,310
+im "src"-Verzeichnis unseren Visitor und unseren Parser generiert.
+
+63
+00:03:37,360 --> 00:03:40,000
+Dabei fällt jetzt noch auf, dass im Moment
+
+64
+00:03:40,780 --> 00:03:44,080
+das org.antlr-Package hier oben nicht gefunden werden kann,
+
+65
+00:03:44,080 --> 00:03:47,110
+das liegt daran weil wir unseren build-path noch nicht eingestellt haben.
+
+66
+00:03:47,660 --> 00:03:50,320
+Wir gehen also hier mit der rechten Maustaste
+
+67
+00:03:50,680 --> 00:03:52,050
+auf das Parserprojekt,
+
+68
+00:03:52,050 --> 00:03:54,780
+dann "Build Path" -> "Configure Build Path..."
+
+69
+00:03:55,300 --> 00:03:57,310
+und dann auf das "Libraries"-Tab,
+
+70
+00:03:57,950 --> 00:03:59,530
+gehen auf "Add JARs...",
+
+71
+00:04:00,030 --> 00:04:03,380
+und fügen dann in "lib" unser antlr.jar hinzu
+
+72
+00:04:05,870 --> 00:04:09,270
+und schon kann Eclipse alles finden was es braucht,
+
+73
+00:04:09,270 --> 00:04:10,990
+kann diese Dateien hier kompilieren
+
+74
+00:04:11,240 --> 00:04:12,680
+und alle sind glücklich.
+
+75
+00:04:15,320 --> 00:04:17,430
+Wie angekündigt möchte ich euch als Nächstes zeigen
+
+76
+00:04:17,430 --> 00:04:19,600
+was man mit einem Visitor alles tolles anstellen kann.
+
+77
+00:04:20,130 --> 00:04:22,490
+Dafür erstellen wir jetzt ein neues Projekt,
+
+78
+00:04:23,510 --> 00:04:25,640
+das Projekt nenne ich jetzt "compiler",
+
+79
+00:04:29,380 --> 00:04:31,620
+das bekommt hier im "Projects"-Tab
+
+80
+00:04:31,620 --> 00:04:33,550
+eine Abhängigkeit auf unseren Parser,
+
+81
+00:04:33,550 --> 00:04:36,150
+denn der Compiler verwendet den Parser
+
+82
+00:04:38,760 --> 00:04:40,270
+und dann erstellen wir hier
+
+83
+00:04:40,270 --> 00:04:42,470
+in unserem neu angelegten Projekt
+
+84
+00:04:42,470 --> 00:04:44,200
+eine neue Klasse
+
+85
+00:04:44,200 --> 00:04:52,060
+im Package "de.letsbuildacompiler.parser",
+
+86
+00:04:52,370 --> 00:04:55,350
+ähm... nein... Hierfür nehmen wir jetzt "Compiler"
+
+87
+00:04:58,220 --> 00:05:02,110
+und nennen diese Klasse dann "MyVisitor".
+
+88
+00:05:06,780 --> 00:05:09,760
+Diese Klasse leitet jetzt von unserem generierten
+
+89
+00:05:09,760 --> 00:05:11,760
+"DemoBaseVisitor" ab.
+
+90
+00:05:16,500 --> 00:05:17,700
+Der bekommt einen Typ,
+
+91
+00:05:17,700 --> 00:05:19,860
+am Anfang ist uns der Typ noch egal,
+
+92
+00:05:19,860 --> 00:05:21,610
+später wird der sehr wichtig,
+
+93
+00:05:21,610 --> 00:05:24,150
+ich gebe jetzt hier als Erstes mal "String" an.
+
+94
+00:05:24,650 --> 00:05:27,400
+Jetzt sehr ihr schon: Hier gibt's einen kleinen Fehler,
+
+95
+00:05:27,400 --> 00:05:29,320
+"The hierarchy is inconsistent",
+
+96
+00:05:29,320 --> 00:05:31,660
+wenn ich jetzt speichere gibt's noch 'nen anderen Fehler,
+
+97
+00:05:32,010 --> 00:05:34,230
+nämlich, und der ist hilfreicher,
+
+98
+00:05:34,230 --> 00:05:37,760
+"The AbstractParseTreeVisitor cannot be resolved".
+
+99
+00:05:38,080 --> 00:05:41,360
+Das liegt daran weil wir in unserem Parserprojekt
+
+100
+00:05:42,010 --> 00:05:44,670
+im Build-Path nicht eingestellt haben,
+
+101
+00:05:44,670 --> 00:05:47,360
+dass das ANTLR-Jar auch abhängigen Projekten
+
+102
+00:05:47,360 --> 00:05:48,900
+zur Verfügung gestellt wird.
+
+103
+00:05:49,280 --> 00:05:51,460
+Das machen wir in dem wir hier im "Java Build Path"
+
+104
+00:05:51,460 --> 00:05:54,810
+bei "Order and Export" das antlr.jar,
+
+105
+00:05:54,810 --> 00:05:56,980
+dieses Häckchen hier setzen für "export".
+
+106
+00:05:56,980 --> 00:05:58,770
+Dann gehen wir auf "OK"
+
+107
+00:05:58,770 --> 00:06:00,770
+und schon sind alle glücklich.
+
+108
+00:06:01,660 --> 00:06:03,960
+Wenn wir jetzt Steuerung+Leertaste drücken,
+
+109
+00:06:03,960 --> 00:06:06,520
+dann sehen wir ein paar Vorschläge was wir machen können,
+
+110
+00:06:06,520 --> 00:06:08,400
+nämlich vorallem Methoden überschreiben
+
+111
+00:06:08,400 --> 00:06:10,880
+und ich fange jetzt hier mal an hier "visit" zu tippen
+
+112
+00:06:11,840 --> 00:06:15,380
+und da kommen wir dann zu unserer interessanten Methode,
+
+113
+00:06:15,380 --> 00:06:18,170
+nämlich der "visitAddition"-Methode.
+
+114
+00:06:19,000 --> 00:06:20,780
+Die heißt jetzt genauso wie der Regel
+
+115
+00:06:20,780 --> 00:06:23,360
+"addition" bei uns aus der Grammatik
+
+116
+00:06:25,320 --> 00:06:28,810
+und statt dieser Defaultimplementierung
+
+117
+00:06:29,090 --> 00:06:31,090
+können wir jetzt hier etwas anderes machen.
+
+118
+00:06:32,090 --> 00:06:35,010
+Dafür zeige ich euch nochmal zur Erinnerung
+
+119
+00:06:35,010 --> 00:06:38,020
+wie der Baum aussieht und was wir hier machen können.
+
+120
+00:06:46,950 --> 00:06:48,640
+Also: Hier der Baum.
+
+121
+00:06:49,720 --> 00:06:54,230
+Und dieser Kontextknoten "AdditionContext"
+
+122
+00:06:54,230 --> 00:06:57,610
+ist jetzt ein Knoten in diesem Baum.
+
+123
+00:06:58,680 --> 00:07:02,890
+Wir möchten diese Knoten jetzt ähm Post-Order durchgehen
+
+124
+00:07:02,890 --> 00:07:05,300
+und müssen dabei einen Unterschied beachten.
+
+125
+00:07:05,300 --> 00:07:09,150
+Nämlich: Der Knoten kann ein Kind haben,
+
+126
+00:07:09,150 --> 00:07:11,230
+wie der hier ganz unten mit der 3,
+
+127
+00:07:11,230 --> 00:07:13,430
+oder er kann drei Kinder haben, nämlich
+
+128
+00:07:13,430 --> 00:07:16,830
+wieder eine Addition, ein Plus und eine Zahl.
+
+129
+00:07:17,750 --> 00:07:19,850
+Das müssen wir jetzt unterscheiden.
+
+130
+00:07:19,890 --> 00:07:23,150
+Das machen wir ganz einfach in dem wir nachgucken,
+
+131
+00:07:23,780 --> 00:07:30,220
+if... context... punkt... get child count
+
+132
+00:07:30,220 --> 00:07:32,220
+ist gleich gleich eins
+
+133
+00:07:35,520 --> 00:07:38,800
+(wenn ihr euch übrigens fragt warum ich ständig soviele Tippfehler mache,
+
+134
+00:07:38,800 --> 00:07:41,710
+das liegt daran, weil erstens das Mikrophon
+
+135
+00:07:41,710 --> 00:07:43,960
+zwischen mir und meiner Tastatur ist
+
+136
+00:07:43,960 --> 00:07:45,880
+und ich die Tastatur nicht sehen kann und zweitens
+
+137
+00:07:45,880 --> 00:07:48,300
+das eine sehr ungewohnte Tastatur ist für mich,
+
+138
+00:07:48,300 --> 00:07:52,020
+denn ich bin ja, wie schonmal erwähnt in Gadarol's Studio.),
+
+139
+00:07:55,310 --> 00:07:58,060
+jetzt geb' ich einfach mal die Zahl aus,
+
+140
+00:07:58,060 --> 00:07:59,990
+wenn es denn nu' ein Zahl gibt,
+
+141
+00:07:59,990 --> 00:08:02,640
+und die, an die komme ich indem ich
+
+142
+00:08:02,640 --> 00:08:09,340
+context.getChild(0) aufrufe.
+
+143
+00:08:10,100 --> 00:08:13,270
+Nochmal zum Abgleich der Baum daneben,
+
+144
+00:08:13,920 --> 00:08:16,940
+wenn wir hier bei dem unteren Knoten sind, der nur ein Kind hat,
+
+145
+00:08:16,940 --> 00:08:20,310
+wo die drei hier unten ist, dann ist das hier das erste Kind,
+
+146
+00:08:20,750 --> 00:08:23,000
+und die Nummerierung beginnt bei null,
+
+147
+00:08:23,000 --> 00:08:25,920
+deswegen müssen wir hier mit getChild(0)
+
+148
+00:08:25,920 --> 00:08:28,840
+auf diese drei hier unten zugreifen.
+
+149
+00:08:30,770 --> 00:08:33,770
+Wenn es ein nicht genau einen Knoten hat,
+
+150
+00:08:33,770 --> 00:08:35,840
+dann wird es drei Knoten haben.
+
+151
+00:08:36,840 --> 00:08:40,400
+In dem Fall möchte ich die Zahl ausgeben,
+
+152
+00:08:40,400 --> 00:08:42,780
+die rechts steht, das ist jetzt
+
+153
+00:08:42,780 --> 00:08:45,640
+der Knoten Nummer 3, also
+
+154
+00:08:45,640 --> 00:08:49,080
+nach nullbasiertem Index der Knoten 2,
+
+155
+00:08:50,350 --> 00:08:53,830
+und außerdem soll danach
+
+156
+00:08:53,830 --> 00:08:57,000
+auch noch ausgegeben werden, dass jetzt 'ne Addition kommt.
+
+157
+00:09:04,580 --> 00:09:07,030
+Gut? Nein? Fehlt noch was?
+
+158
+00:09:07,480 --> 00:09:10,340
+Also ja, einerseits ein return-Statement,
+
+159
+00:09:10,340 --> 00:09:12,420
+ich geb' jetzt hier erstmal "return null" an,
+
+160
+00:09:12,420 --> 00:09:15,090
+wie schon angekündigt, später wird da was anderes stehen,
+
+161
+00:09:15,090 --> 00:09:16,750
+das wird noch interessant werden,
+
+162
+00:09:16,750 --> 00:09:19,890
+aber für's Erste brauchen wir das nicht.
+
+163
+00:09:20,440 --> 00:09:24,130
+Was fehlt noch? Naja unsere Kindknoten müssen wir durchgehen.
+
+164
+00:09:24,130 --> 00:09:27,120
+Und da ich gesagt habe wir wollen das Post-Order machen,
+
+165
+00:09:27,120 --> 00:09:29,580
+also zuerst immer die Kindknoten durchgehen
+
+166
+00:09:29,580 --> 00:09:32,850
+und dann erst den Wurzelknoten uns ansehen,
+
+167
+00:09:32,850 --> 00:09:36,230
+müssen wir das machen bevor wir diese Ausgaben hier tun.
+
+168
+00:09:36,870 --> 00:09:38,920
+Praktischerweise wurde uns von ANTLR
+
+169
+00:09:38,920 --> 00:09:42,400
+hier eine visitChildren-Methode generiert,
+
+170
+00:09:42,400 --> 00:09:44,780
+der übergeben wir einfach den Kontext
+
+171
+00:09:44,780 --> 00:09:47,340
+und der sagt einfach: Geh' die Kinder durch
+
+172
+00:09:47,340 --> 00:09:50,690
+und ruf' enstprechend die passenden visit-Methoden auf.
+
+173
+00:09:51,790 --> 00:09:54,500
+Dann brauchen wir noch eine Main-Klasse,
+
+174
+00:09:58,020 --> 00:10:00,010
+ich nenne sie vielsagend "Main",
+
+175
+00:10:00,010 --> 00:10:04,080
+die bekommt hier eine "public static main"-Methode
+
+176
+00:10:08,370 --> 00:10:10,680
+und hier werden wir jetzt ANTLR aufrufen,
+
+177
+00:10:10,680 --> 00:10:13,540
+ein so 'n Baum generieren und dann
+
+178
+00:10:14,240 --> 00:10:16,620
+unseren Visitor mit diesem Baum füttern.
+
+179
+00:10:16,620 --> 00:10:18,770
+Das funktioniert folgendermaßen:
+
+180
+00:10:18,770 --> 00:10:22,210
+Als erstes brauchen wir ein ANTLR-Inputstream
+
+181
+00:10:26,940 --> 00:10:32,870
+und wir können hier als Input einen ANTLRFileStream nehmen,
+
+182
+00:10:32,870 --> 00:10:37,180
+und aus unser code.demo-Datei einlesen.
+
+183
+00:10:37,180 --> 00:10:42,060
+Dafür muss die code.demo-Datei natürlich auch hier existieren,
+
+184
+00:10:42,060 --> 00:10:46,580
+entsprechend importiere ich diese gerade in unser Projekt
+
+185
+00:10:49,640 --> 00:10:52,730
+und das hier schmeißt eine IOException,
+
+186
+00:10:52,730 --> 00:10:54,920
+Wir müssen uns jetzt für dieses Tutorial
+
+187
+00:10:54,920 --> 00:10:58,480
+allerdings wirklich nicht mit den Exceptions herumärgern,
+
+188
+00:10:58,480 --> 00:11:02,300
+deswegen geb' ich unser main-Methode einfach ein "throws Exception".
+
+189
+00:11:02,300 --> 00:11:04,600
+In dem Fall wird, wenn ein Fehler auftritt
+
+190
+00:11:04,600 --> 00:11:08,300
+unser Programm einfach sich mit einer Fehlermeldung verabschieden,
+
+191
+00:11:08,300 --> 00:11:10,830
+aber das wäre hierfür schon OK.
+
+192
+00:11:11,780 --> 00:11:14,390
+Dann müssen wir unseren Lexer erzeugen,
+
+193
+00:11:14,390 --> 00:11:16,390
+der Lexer wurde hier generiert,
+
+194
+00:11:16,390 --> 00:11:18,170
+das ist der DemoLexer,
+
+195
+00:11:18,550 --> 00:11:21,720
+der heißt natürlich ansonsten so wie eure Grammatik heißt,
+
+196
+00:11:21,720 --> 00:11:23,210
+bei mir heißt die Grammatik eben "Demo",
+
+197
+00:11:23,210 --> 00:11:25,820
+deswegen heißt der Lexer auch DemoLexer
+
+198
+00:11:34,930 --> 00:11:39,500
+und den füttern wir jetzt mit unserem Input.
+
+199
+00:11:40,740 --> 00:11:43,160
+Aus dem Lexer kommt ein...
+
+200
+00:11:43,970 --> 00:11:45,650
+...CommonTokenStream raus.
+
+201
+00:11:45,950 --> 00:11:48,680
+Ihr müsst übrigens dabei drauf achten, dass ihr
+
+202
+00:11:48,680 --> 00:11:51,680
+von diesen Klassen die ANTLR euch anbietet
+
+203
+00:11:51,680 --> 00:11:53,090
+häufiger zwei habt, auch hier:
+
+204
+00:11:53,090 --> 00:11:54,620
+CommonTokenStream gibt's zweimal
+
+205
+00:11:54,620 --> 00:11:56,140
+und der Unterschied liegt hier:
+
+206
+00:11:56,140 --> 00:11:59,040
+Einmal in "v4" und einmal ohne "v4".
+
+207
+00:11:59,690 --> 00:12:02,740
+In diesem Fall wenn euch zwei angeboten werden,
+
+208
+00:12:02,740 --> 00:12:06,070
+dann wollt ihr immer die v4-Variante haben.
+
+209
+00:12:07,620 --> 00:12:09,970
+Wenn ihr dabei einen Fehler macht,
+
+210
+00:12:09,970 --> 00:12:12,380
+dann bekommt ihr ganz merkwürdige Fehler
+
+211
+00:12:12,380 --> 00:12:15,730
+mit "invalid argument" oder "wrong type"
+
+212
+00:12:15,730 --> 00:12:18,740
+und das kann manchmal ein bißchen dauern bis man
+
+213
+00:12:18,740 --> 00:12:20,910
+drauf kommt wo eigentlich das Problem ist,
+
+214
+00:12:20,910 --> 00:12:22,570
+das ist dann nämlich das falsche Package
+
+215
+00:12:22,570 --> 00:12:23,770
+und das sieht man dann hier oben
+
+216
+00:12:23,770 --> 00:12:25,770
+in den import statements nachher nurnoch,
+
+217
+00:12:25,770 --> 00:12:28,610
+dass hier das "v4" fehlt.
+
+218
+00:12:35,720 --> 00:12:37,750
+So, unser TokenSource,
+
+219
+00:12:37,750 --> 00:12:41,240
+wo wir unsere Tokens herkriegen ist der Lexer.
+
+220
+00:12:43,500 --> 00:12:47,380
+Mit diesen Tokens füttern wir jetzt wiederrum unseren Parser
+
+221
+00:12:58,630 --> 00:13:03,500
+und jetzt können wir mit dem ganzen unseren ParseTree erzeugen.
+
+222
+00:13:09,620 --> 00:13:11,760
+Und zwar rufen wir jetzt die Methode auf
+
+223
+00:13:11,760 --> 00:13:14,220
+mit der mit dem Namen der Regel
+
+224
+00:13:14,220 --> 00:13:16,940
+mit der der Parser anfangen soll zu parsen.
+
+225
+00:13:16,940 --> 00:13:20,330
+Wir haben im Moment nur eine Regel, nämlich die Additionsregel,
+
+226
+00:13:20,330 --> 00:13:22,330
+also rufen wir entsprechend diese auf.
+
+227
+00:13:26,630 --> 00:13:30,020
+Und dann werden wir unseren
+
+228
+00:13:30,020 --> 00:13:34,230
+Visitor, den wir eben erzeugt haben, den "MyVisitor" erzeugen
+
+229
+00:13:34,230 --> 00:13:39,360
+und visit aufrufen, dem können wir direkt hier den ganzen ParseTree übergeben.
+
+230
+00:13:42,820 --> 00:13:46,880
+Dann speicher ich das und lass' es einmal laufen.
+
+231
+00:13:51,230 --> 00:13:52,750
+Wie ihr seht wir haben herausgekriegt:
+
+232
+00:13:52,750 --> 00:13:56,850
+3, 42, addition, 5, addition, 6, addition.
+
+233
+00:13:57,090 --> 00:14:01,080
+Wenn wir uns das jetzt einmal zusammen mit unserem Baum anschauen,
+
+234
+00:14:01,930 --> 00:14:05,680
+Dann sehen wir hier, die drei ist hier, dann die 42,
+
+235
+00:14:05,680 --> 00:14:08,310
+dann addition, dann die 5,
+
+236
+00:14:08,310 --> 00:14:12,010
+wieder addition, die 6 und wieder die addition.
+
+237
+00:14:12,760 --> 00:14:15,620
+Huraah, das sind nämlich auch genau die Instruktionen,
+
+238
+00:14:15,620 --> 00:14:18,410
+die wir nachher brauchen, wenn wir 
+
+239
+00:14:18,410 --> 00:14:22,240
+dies als Code auf unserem Prozessor ausführen wollen.
+
+240
+00:14:22,240 --> 00:14:25,070
+Also zumindest ist es schonmal die richtige Reihenfolge.
+
+241
+00:14:25,070 --> 00:14:27,550
+Wir haben unseren ersten einfachen Visitor geschrieben
+
+242
+00:14:27,550 --> 00:14:31,360
+und sind nurnoch einen kleinen Schritt von richtigen Instruktionscode entfernt.
+
+243
+00:14:31,360 --> 00:14:34,360
+In den nächsten Videos zeige ich euch wie wir Labels einsetzen
+
+244
+00:14:34,360 --> 00:14:36,790
+um unseren Visitor lesbarer zu gestalten
+
+245
+00:14:36,790 --> 00:14:39,100
+wie wir tatsächlichen Instruktionscode generiern
+
+246
+00:14:39,100 --> 00:14:40,440
+und vieles mehr.
+
+247
+00:14:40,440 --> 00:14:43,190
+Ich freue mich über Daumen, Kommentare und Abos.
+
+248
+00:14:43,190 --> 00:14:45,500
+Vielen Dank an Gadarol, der mir für die Aufnahmen
+
+249
+00:14:45,500 --> 00:14:47,270
+sein Studio zur Verfügung stellt.
+
+250
+00:14:47,270 --> 00:14:48,630
+Ich hoffe es hat euch Spaß gemacht,
+
+251
+00:14:48,630 --> 00:14:50,460
+auf Wiedersehen und bis zum nächsten Mal.
+
+252
+00:14:50,460 --> 00:14:54,210
+Schaltet wieder ein, wenn es wieder heißt "Let's build a compiler".
+

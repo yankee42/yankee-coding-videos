@@ -1,0 +1,920 @@
+﻿1
+00:00:00,000 --> 00:00:03,690
+Hallo und herzlich willkommen zu "Let's build a compiler"
+
+2
+00:00:03,690 --> 00:00:05,970
+Ihr möchtet eure eigene Programmiersprache entwerfen,
+
+3
+00:00:05,970 --> 00:00:10,690
+wisst aber nicht wir ihr den enstandenen Code danach zu einem ausführbaren Programm kompiliert?
+
+4
+00:00:10,690 --> 00:00:14,340
+Oder ihr interessiert euch einfach nur für die Magie die in Compilern steckt?
+
+5
+00:00:14,340 --> 00:00:16,620
+Dann habt ihr die wichtige Quelle gefunden.
+
+6
+00:00:16,620 --> 00:00:19,700
+Ich zeige euch wie ihr euren eigenen Compiler schreibt.
+
+7
+00:00:19,710 --> 00:00:21,900
+Praxisnah und zum Mitmachen.
+
+8
+00:00:21,900 --> 00:00:26,090
+Mein Name ist Yankee, ich Wünsche euch viel Freude und macht mit!
+
+9
+00:00:26,090 --> 00:00:28,280
+Wir werden den Compiler in Java schreiben,
+
+10
+00:00:28,280 --> 00:00:31,510
+daher solltet ihr Grundlagen in Javaprogrammierung mitbringen.
+
+11
+00:00:31,510 --> 00:00:33,690
+Wenn Java nicht eure Lieblingssprache ist,
+
+12
+00:00:33,690 --> 00:00:37,970
+keine Angst, das hier erlernte Wissen lässt sich ebenso in anderen Sprachen anwenden.
+
+13
+00:00:38,080 --> 00:00:41,510
+Als Erstes zeige ich euch wie ein einfacher Prozess funktioniert.
+
+14
+00:00:41,580 --> 00:00:45,910
+Hier ist eine Simulation eines eben solchen genannten einfachen Prozessors,
+
+15
+00:00:46,200 --> 00:00:50,950
+dieser Prozessor hat sehr wenige Elemente, er hat nämlich nur einen Stack
+
+16
+00:00:51,330 --> 00:00:52,610
+den seht ihr auf der rechten Seite,
+
+17
+00:00:52,820 --> 00:00:57,720
+auf der linken Seite seht ihr die Befehle die der Prozessor ausführen kann
+
+18
+00:00:57,870 --> 00:00:59,480
+und... das...
+
+19
+00:00:59,480 --> 00:01:00,890
+war's auch schon.
+
+20
+00:01:01,280 --> 00:01:03,500
+LDC heißt "load constant",
+
+21
+00:01:03,500 --> 00:01:06,020
+"iadd" heißt "Integer addition".
+
+22
+00:01:06,020 --> 00:01:08,730
+"load constant" legt eine Zahl auf den Stack.
+
+23
+00:01:08,730 --> 00:01:11,290
+Die, die ihm als Parameter übergeben wurde,
+
+24
+00:01:11,290 --> 00:01:15,100
+als erstes also die 3. Ich führe diese erste Zeile aus
+
+25
+00:01:15,100 --> 00:01:18,600
+und die 3 erscheint auf dem Stack.
+
+26
+00:01:18,600 --> 00:01:21,930
+danach... das gleiche nochmal mit der 2
+
+27
+00:01:21,930 --> 00:01:25,670
+und "iadd" nimmt die obersten beiden Zahlen vom Stack,
+
+28
+00:01:25,670 --> 00:01:27,290
+addiert diese
+
+29
+00:01:27,290 --> 00:01:30,290
+und legt dann das Ergebnis wiederum auf den Stack.
+
+30
+00:01:30,320 --> 00:01:32,700
+Hier noch mal ein etwas komplexeres Beispiel:
+
+31
+00:01:32,700 --> 00:01:36,220
+Wir haben die Rechnung 3+2*5.
+
+32
+00:01:36,220 --> 00:01:39,790
+Hier wollen wir jetzt 2*5 zuerst rechnen
+
+33
+00:01:39,790 --> 00:01:44,710
+und dann erst 3 + das Ergebnis von 2+5 ausrechnen.
+
+34
+00:01:44,840 --> 00:01:47,940
+Hier ist eine Möglichkeit wie wir dies erreichen können:
+
+35
+00:01:48,030 --> 00:01:50,870
+Zuerst legen wir die 3 auf dem Stack,
+
+36
+00:01:51,120 --> 00:01:53,520
+dann legen wir die 2 auf den Stack.
+
+37
+00:01:53,530 --> 00:01:58,540
+Jetzt allerdings werden wir nicht die 3 und die 2 mit iadd zusammenaddieren,
+
+38
+00:01:58,540 --> 00:02:01,870
+sondern wir werden zuerst auch noch die 5 auf dem Stack legen.
+
+39
+00:02:02,210 --> 00:02:05,850
+Dann können wir die 5 und die 2 zusammenaddieren,
+
+40
+00:02:05,850 --> 00:02:08,860
+erhalten auf dem Stack oben die 10 und dadrunter die 3
+
+41
+00:02:08,860 --> 00:02:11,020
+und wenn wir die beiden jetzt zusammenaddieren,
+
+42
+00:02:11,020 --> 00:02:14,850
+erhalten wir - das gewünschte Ergebnis - die 13.
+
+43
+00:02:14,850 --> 00:02:18,580
+Wie kommen wir also von unserer Rechnung, dem 3+2,
+
+44
+00:02:18,580 --> 00:02:21,450
+zu den Instruktionen die  wir eben gesehen haben?
+
+45
+00:02:21,450 --> 00:02:25,220
+dafür zerlegen wir unsere Rechnung zunächst in seine Bestandteile,
+
+46
+00:02:25,220 --> 00:02:28,040
+nämlich der 3, dem + und der 2
+
+47
+00:02:28,120 --> 00:02:31,010
+und dann basteln wird daraus einen Baum.
+
+48
+00:02:31,710 --> 00:02:34,340
+Aus diesem Baum können wir immer noch ablesen
+
+49
+00:02:34,340 --> 00:02:37,870
+was hier eigentlich passiert: 3+2
+
+50
+00:02:37,870 --> 00:02:41,220
+allerdings können wir hier auch die Instruktionen die wir brauchen
+
+51
+00:02:41,220 --> 00:02:42,640
+sehr einfach ablesen
+
+52
+00:02:42,640 --> 00:02:47,870
+und zwar indem wir diesen Baum Post-Order durchgehen. Post-Order heißt
+
+53
+00:02:47,870 --> 00:02:52,760
+wir nehmen von jedem Knoten zuerst das linke Kind, dann das rechte Kind
+
+54
+00:02:52,760 --> 00:02:57,040
+und dann den oberen Knoten, den Wurzelknoten.
+
+55
+00:02:57,040 --> 00:03:01,470
+Das bedeutete in unserem Fall wir nehmen zuerst das linke Kind, die 3,
+
+56
+00:03:01,470 --> 00:03:06,100
+dann das rechte Kind, die 2 und dann die Wurzel das "+".
+
+57
+00:03:06,100 --> 00:03:11,300
+Unsere Instruktionen sind entsprechend load constant 3, load constant 2
+
+58
+00:03:11,300 --> 00:03:12,870
+und dann iadd.
+
+59
+00:03:12,870 --> 00:03:16,170
+Das funktioniert immer noch wenn das Beispiel ein bisschen komplexer wird.
+
+60
+00:03:16,170 --> 00:03:19,020
+Zum Beispiel in diesem Beispiel:
+
+61
+00:03:19,020 --> 00:03:22,740
+Hier zerlegen wir auch wieder unsere Rechnung in die Bestandteile
+
+62
+00:03:22,790 --> 00:03:24,790
+und bauen dann einen Baum.
+
+63
+00:03:24,790 --> 00:03:28,120
+Wie ihr schon seht: Der Baum hat jetzt eine Ebene mehr,
+
+64
+00:03:28,120 --> 00:03:31,030
+aber das Prinzip funktioniert immer noch.
+
+65
+00:03:31,030 --> 00:03:34,480
+Zuerst das linke Kind, hier die 3,
+
+66
+00:03:34,480 --> 00:03:36,200
+dann das rechte Kind,
+
+67
+00:03:36,200 --> 00:03:37,950
+das ist wieder ein Knoten der Kinder hat,
+
+68
+00:03:37,950 --> 00:03:40,860
+was bedeutet wir müssen weiter nach unten,
+
+69
+00:03:40,860 --> 00:03:43,120
+also wieder erst nach links, die 2,
+
+70
+00:03:43,120 --> 00:03:44,810
+dann nach rechts, die 5,
+
+71
+00:03:44,810 --> 00:03:47,080
+und dann "*" und dann "+".
+
+72
+00:03:47,080 --> 00:03:49,370
+Also sind unsere Instruktionen
+
+73
+00:03:49,370 --> 00:03:52,670
+load constant 3, load constant 2,
+
+74
+00:03:52,670 --> 00:03:55,250
+load constant 5,
+
+75
+00:03:55,250 --> 00:03:56,560
+multiplizieren,
+
+76
+00:03:56,560 --> 00:03:58,900
+und dann addieren.
+
+77
+00:03:58,900 --> 00:04:02,930
+Fertig sind unsere Instruktionen.
+
+78
+00:04:02,930 --> 00:04:06,430
+Um den Baum zu erstellen haben wir unsere Operatoren "+" und "*"
+
+79
+00:04:06,430 --> 00:04:10,060
+als Wurzelknoten genommen und die Operanden als Subknoten angehängt.
+
+80
+00:04:10,140 --> 00:04:13,030
+Dabei kann ein Operand auch wieder eine Rechnung sein.
+
+81
+00:04:13,030 --> 00:04:16,520
+In dem Fall trägt der Subknoten wieder einen Operator,
+
+82
+00:04:16,520 --> 00:04:19,650
+und wiederrum seine Operanden als Subknoten.
+
+83
+00:04:20,050 --> 00:04:22,600
+wenn wir als Mensch das Ergebnis errechnen wollen
+
+84
+00:04:22,600 --> 00:04:24,680
+müssen wir dies von unten nach oben tun.
+
+85
+00:04:24,680 --> 00:04:25,630
+das heißt:
+
+86
+00:04:25,630 --> 00:04:29,500
+Wir berechnen zuerst 2*5
+
+87
+00:04:29,500 --> 00:04:33,470
+und dann bleibt die Rechnung 3+10 über
+
+88
+00:04:33,470 --> 00:04:37,150
+mit der wir das Ergebnis 13 erhalten.
+
+89
+00:04:39,340 --> 00:04:42,460
+Bis jetzt waren unsere Bäume geradezu winzig,
+
+90
+00:04:42,460 --> 00:04:45,870
+aber stellt euch vor wie groß die Bäume werden wenn wir erstmal tausend
+
+91
+00:04:45,870 --> 00:04:47,900
+Zeilen Code haben die wir compilieren,
+
+92
+00:04:47,900 --> 00:04:51,940
+die nicht nur einfachee Plus- und Malrechnungen enthalten, sondern auch noch
+
+93
+00:04:51,940 --> 00:04:54,870
+Variabeln, Schleifen und so weiter.
+
+94
+00:04:54,870 --> 00:04:57,310
+Hierfür brauchen wir eine übersichtliche Methode
+
+95
+00:04:57,310 --> 00:04:59,180
+wie wir unsere Bäume generieren können.
+
+96
+00:04:59,180 --> 00:05:01,380
+Ein Tool dafür ist ANTLR.
+
+97
+00:05:01,380 --> 00:05:06,120
+Wie ihr damit umgeht und euch Bäume generiert zeige ich euch jetzt.
+
+98
+00:05:06,120 --> 00:05:09,270
+Als erstes müsst ihr euch ANTLR herunterladen.
+
+99
+00:05:09,270 --> 00:05:16,270
+Das könnt ihr auf antlr.org.
+
+100
+00:05:17,020 --> 00:05:21,970
+Hier findet ihr direkt auf der Startseite einmal den Download-link,
+
+101
+00:05:21,970 --> 00:05:23,430
+beziehungsweise,
+
+102
+00:05:23,430 --> 00:05:27,570
+auf der Quickstart-Seite für Windows (das hier unten soll übrigens Tabs darstellen)
+
+103
+00:05:28,490 --> 00:05:31,090
+findet ihr das sogar als Link zum anklicken
+
+104
+00:05:31,090 --> 00:05:35,430
+ansonsten gibt's hier oben auch noch 'ne Downloadseite wo ihr den Link auch nochmal findet.
+
+105
+00:05:35,430 --> 00:05:36,870
+schafft ihr schon.
+
+106
+00:05:36,870 --> 00:05:41,400
+außerdem braucht ihr das JDK, das findet ihr
+
+107
+00:05:41,400 --> 00:05:46,550
+am einfachsten indem er bei Google nach "JDK" sucht,
+
+108
+00:05:46,550 --> 00:05:50,750
+dann ist es direkt das erste Suchergebnis,
+
+109
+00:05:50,750 --> 00:05:53,400
+ihr geht hier auf Download
+
+110
+00:05:53,400 --> 00:05:57,390
+und findet hier für alle möglichen Systeme, was auch immer ihr habt,
+
+111
+00:05:57,390 --> 00:05:59,160
+euer JDK.
+
+112
+00:05:59,160 --> 00:06:03,590
+Wenn ihr Java regelmäßg entwickelt, dann werdet ihr das natürlich schon haben.
+
+113
+00:06:03,590 --> 00:06:06,550
+Ich hoffe mal das ist eigentlich der Fall ist.
+
+114
+00:06:06,550 --> 00:06:11,520
+Wenn nicht, macht auch nichts, dann müsst ihr es jetzt sehr schnell lernen.
+
+115
+00:06:11,520 --> 00:06:14,940
+Ich habe ANTLR für euch schon mal heruntergeladen
+
+116
+00:06:14,940 --> 00:06:17,450
+und das JAR hier in
+
+117
+00:06:17,450 --> 00:06:20,020
+das "lib"-Verzeichnis abgespeichert
+
+118
+00:06:20,020 --> 00:06:22,490
+und jetzt zeige ich euch wie man damit umgeht.
+
+119
+00:06:22,490 --> 00:06:27,050
+Als erstes benenne ich das ANTLR-JAR mal um, weil der Name ist mir zu lang,
+
+120
+00:06:27,690 --> 00:06:33,360
+es muss auch einfach nur antlr.jar tun für mich.
+
+121
+00:06:34,400 --> 00:06:39,130
+Dann erstellen wir die Datei die wir parsen wollen.
+
+122
+00:06:39,130 --> 00:06:43,790
+Nenne ich sie mal code.demo.
+
+123
+00:06:46,300 --> 00:06:50,240
+Und da schreibe ich einfach nur rein: "3+2".
+
+124
+00:06:50,240 --> 00:06:53,620
+Das soll unser erstes ein einfaches Programm sein.
+
+125
+00:06:54,680 --> 00:06:59,990
+Dann brauchen oder außerdem eine Grammatik die unsere Sprache beschreibt.
+
+126
+00:06:59,990 --> 00:07:02,470
+Unser Grammatik müssen wir auch einen Namen geben
+
+127
+00:07:02,470 --> 00:07:04,780
+und der Dateiname sollte
+
+128
+00:07:04,780 --> 00:07:07,430
+der Gleiche sein wie der Name unser Grammatik
+
+129
+00:07:07,430 --> 00:07:10,180
+nur mit der Endung ".g4".
+
+130
+00:07:10,180 --> 00:07:15,180
+Außerdem wird empfohlen dass Grammatiken mit einem Großbuchstaben beginnen,
+
+131
+00:07:15,180 --> 00:07:20,210
+daher nenne ich die Datei jetzt also mit großem "D" "Demo.g4".
+
+132
+00:07:21,080 --> 00:07:25,120
+In diese Datei schreiben wir als Erstes den Namen unserer Grammatik rein
+
+133
+00:07:25,120 --> 00:07:27,460
+mit dem Präfix "grammar"
+
+134
+00:07:31,310 --> 00:07:33,130
+und dann können wir
+
+135
+00:07:33,130 --> 00:07:35,210
+Regeln definieren.
+
+136
+00:07:35,210 --> 00:07:37,810
+Wir kommen für's Erste mal mit einer Regel aus,
+
+137
+00:07:37,810 --> 00:07:42,740
+nämlich unser Additionsregel, nenne ich sie also "addition"
+
+138
+00:07:42,740 --> 00:07:50,050
+und die kann einfach nur 3 plus 2.
+
+139
+00:07:50,050 --> 00:07:52,330
+Mehr geht nicht.
+
+140
+00:07:52,330 --> 00:07:55,830
+das soll uns auch für's Erste reichen
+
+141
+00:07:55,830 --> 00:08:00,020
+und jetzt können wir ANTLR dazu bewegen zu dieser Grammatik
+
+142
+00:08:00,020 --> 00:08:03,360
+eine... einen Parser zu generieren.
+
+143
+00:08:03,360 --> 00:08:10,270
+Das machen wir indem wir einfach "java -jar" aufrufen mit unserem ANTLR-Jar und
+
+144
+00:08:10,270 --> 00:08:14,770
+unsere Grammatikdatei übergeben.
+
+145
+00:08:14,770 --> 00:08:16,080
+Ihr seht dann,
+
+146
+00:08:16,080 --> 00:08:21,740
+dass mehrere Javadateien hier entstanden sind, die hat ANTLR für uns generiert
+
+147
+00:08:21,740 --> 00:08:24,800
+und die werden wir jetzt als nächstes kompilieren.
+
+148
+00:08:24,800 --> 00:08:26,890
+Zum kompilieren müsst ihr beachten,
+
+149
+00:08:26,890 --> 00:08:31,420
+dass ... Abhängigkeiten zu dem ANTLR-Jar bestehen,
+
+150
+00:08:31,420 --> 00:08:35,310
+deswegen müsst ihr das antlr.jar dem Compiler mitgeben.
+
+151
+00:08:35,310 --> 00:08:39,250
+Das macht ihr mit der classpath-Option "-cp"
+
+152
+00:08:39,310 --> 00:08:44,380
+lib und dann antlr.jar.
+
+153
+00:08:45,800 --> 00:08:47,790
+Und dann wollen wir alle Javadateien
+
+154
+00:08:47,790 --> 00:08:52,690
+kompilieren, also "*.java"
+
+155
+00:08:52,690 --> 00:08:56,490
+Der Javacompiler hat uns also einige .class-Files erstellt
+
+156
+00:08:56,490 --> 00:09:00,760
+das ist jetzt unser ausführbarer Parser.
+
+157
+00:09:00,760 --> 00:09:02,970
+von ANTLR gibt es ein nettes Tool,
+
+158
+00:09:02,970 --> 00:09:06,180
+welches uns einen Baum direkt darstellen kann
+
+159
+00:09:06,180 --> 00:09:08,470
+das können wir jetzt aufrufen
+
+160
+00:09:08,470 --> 00:09:11,170
+in dem wir
+
+161
+00:09:11,170 --> 00:09:13,690
+mit dem classpath Punkt,
+
+162
+00:09:13,690 --> 00:09:16,450
+weil Punkt das ist das aktuelle Verzeichnis da liegt unser
+
+163
+00:09:16,450 --> 00:09:18,720
+Parser den müssen wir haben
+
+164
+00:09:18,720 --> 00:09:21,380
+und Doppelpunkt getrennt auf Linux
+
+165
+00:09:21,380 --> 00:09:24,790
+auf Windows mit einem Semikolon getrennt
+
+166
+00:09:25,270 --> 00:09:28,410
+das ANTLR-Jar
+
+167
+00:09:30,510 --> 00:09:31,850
+und dann
+
+168
+00:09:31,850 --> 00:09:34,850
+die Klasse die wir aufrufen die den Baum für uns
+
+169
+00:09:34,850 --> 00:09:37,340
+generieren kann das ist
+
+170
+00:09:37,420 --> 00:09:49,070
+org.antlr.v4.runtime.misc.TestRig
+
+171
+00:09:49,480 --> 00:09:53,110
+Wenn wir die das jetzt einfach mal ohne Argumente aufrufen,
+
+172
+00:09:53,110 --> 00:09:54,800
+dann kommt eine kleine Hilfeseite
+
+173
+00:09:54,800 --> 00:09:58,370
+die uns erklärt was wir mit diesem Programm alles anstellen können.
+
+174
+00:09:58,370 --> 00:10:01,880
+Als erstes hätte es gerne den Namen der Grammatik,
+
+175
+00:10:02,160 --> 00:10:04,360
+das ist "Demo",
+
+176
+00:10:04,360 --> 00:10:06,360
+dann den Name der Startregel,
+
+177
+00:10:06,360 --> 00:10:08,710
+wir haben nur eine Regel,
+
+178
+00:10:08,710 --> 00:10:11,460
+die übergeben wir dann hier,
+
+179
+00:10:11,460 --> 00:10:14,800
+dann haben wir jede Menge Optionen was wir hier machen wollen
+
+180
+00:10:14,800 --> 00:10:18,000
+wir nehmen jetzt als erstes mal die Option "-gui",
+
+181
+00:10:18,000 --> 00:10:22,080
+weil die zeigt uns den Baum an
+
+182
+00:10:22,080 --> 00:10:23,930
+und Input-filenames,
+
+183
+00:10:23,930 --> 00:10:27,160
+das ist dann die Datei die wir kompilieren wollen,
+
+184
+00:10:27,160 --> 00:10:28,360
+wenn ihr die weglasst,
+
+185
+00:10:28,360 --> 00:10:31,990
+dann liest das Programm von Standard-In.
+
+186
+00:10:31,990 --> 00:10:35,400
+Aber wir haben ja extra eine Datei erstellt,
+
+187
+00:10:35,400 --> 00:10:39,340
+sie hieß "code.demo".
+
+188
+00:10:39,340 --> 00:10:41,840
+hier seht ihr jetzt den generierten Baum
+
+189
+00:10:41,840 --> 00:10:43,300
+und weil er unheimlich klein ist
+
+190
+00:10:43,300 --> 00:10:46,210
+und ich nicht weiß ob ihr den am Ende auf YouTube noch
+
+191
+00:10:46,210 --> 00:10:48,390
+erkennen könnt
+
+192
+00:10:48,390 --> 00:10:52,780
+(man kann hier zwar ein bißchen zoomen, aber das ist nicht sehr viel),
+
+193
+00:10:52,780 --> 00:10:55,880
+werde ich den nochmal auf eine etwas andere Art und Weise generieren
+
+194
+00:10:55,880 --> 00:10:58,880
+und zwar indem ich nicht "-gui" nehme,
+
+195
+00:10:58,880 --> 00:11:01,700
+sondern "-ps"
+
+196
+00:11:01,700 --> 00:11:05,770
+und generiere damit unseren Baum,
+
+197
+00:11:08,690 --> 00:11:14,090
+die Datei kann ich jetzt nämlich ganz einfach öffnen
+
+198
+00:11:18,810 --> 00:11:22,400
+und dann vollbild anzeigen.
+
+199
+00:11:22,400 --> 00:11:24,520
+Hier seht ihr jetzt also den generierten Baum
+
+200
+00:11:24,520 --> 00:11:26,420
+und da fällt schonmal etwas auf:
+
+201
+00:11:26,420 --> 00:11:29,300
+Nämlich das "+" kommt doppelt vor.
+
+202
+00:11:29,300 --> 00:11:33,470
+einmal hier oben in dem Wort "Addition", da steckt das Plus drin
+
+203
+00:11:33,470 --> 00:11:35,990
+auch wenn das nicht so offensichtlich ist
+
+204
+00:11:35,990 --> 00:11:39,110
+und dann steckt das "+" noch mal hier unten drin.
+
+205
+00:11:39,110 --> 00:11:42,880
+Wir wollen ja dass unsere Operan.. äh unsere Operatoren
+
+206
+00:11:42,880 --> 00:11:44,870
+immer oben im Wurzelknoten stehen
+
+207
+00:11:44,870 --> 00:11:48,010
+deswegen interessiert uns eigentlich nur
+
+208
+00:11:48,010 --> 00:11:49,500
+das "addition" hier oben.
+
+209
+00:11:49,500 --> 00:11:52,530
+Das Plus hier unten kann uns völlig egal sein nachher,
+
+210
+00:11:52,530 --> 00:11:55,760
+das dürfte ihr gerne einfach ignorieren.
+
+211
+00:11:55,760 --> 00:11:57,860
+Damit haben wir schonmal
+
+212
+00:11:57,860 --> 00:12:00,330
+die erste einfache Aufgabe mit ANTLR erfüllt,
+
+213
+00:12:00,330 --> 00:12:02,890
+nämlich einen einfachen Baum erstellt.
+
+214
+00:12:02,890 --> 00:12:04,990
+In den nächsten Videos zeige ich euch
+
+215
+00:12:04,990 --> 00:12:09,170
+wie ihr statt nur 3 und 2 beliebige Zahlen als Operanden akzeptieren könnt,
+
+216
+00:12:09,170 --> 00:12:13,050
+wie ihr Kettenausdrücke wie "1 + 2 + 3 + 4" akzeptiert,
+
+217
+00:12:13,050 --> 00:12:15,210
+wir ihr weitere Operation hinzufügt,
+
+218
+00:12:15,210 --> 00:12:18,700
+wie ihr ein ausführbares Programm erzeugt und vieles mehr.
+
+219
+00:12:18,700 --> 00:12:20,990
+Wenn ihr euch für ein Buch über ANTLR interessiert
+
+220
+00:12:20,990 --> 00:12:25,050
+kann ich euch "The definitive ANTLR4 Reference" empfehlen.
+
+221
+00:12:25,050 --> 00:12:28,180
+Ich packe euch ein Affiliate-Link in die Videobeschreibung.
+
+222
+00:12:28,180 --> 00:12:31,650
+Wenn ihr das Buch oder eure neue Waschmaschine über den Link kauft,
+
+223
+00:12:31,650 --> 00:12:34,290
+bekomme ich ein paar Cent ab und dann freue ich mich.
+
+224
+00:12:34,290 --> 00:12:36,880
+Außerdem freue ich mich über Kommentar und Daumen.
+
+225
+00:12:36,880 --> 00:12:39,420
+Hat es euch gefallen? Habt ihr Fragen?
+
+226
+00:12:39,420 --> 00:12:41,920
+Von mir geht ein großes danke an Gadarol,
+
+227
+00:12:41,920 --> 00:12:45,000
+der mir für die Aufnahmen sein Studio zur Verfügung stellt.
+
+228
+00:12:45,000 --> 00:12:48,490
+Vielen dank für eure Aufmerksamkeit, ich hoffe es hat euch Spaß gemacht,
+
+229
+00:12:48,490 --> 00:12:51,790
+schaut wieder rein wenn es wieder heißt "Let's build a compiler".
+
+230
+00:12:51,790 --> 00:12:56,310
+Mein Name ist yankee, tschüss und auf Wiedersehen, bis zum nächsten Mal.
+
