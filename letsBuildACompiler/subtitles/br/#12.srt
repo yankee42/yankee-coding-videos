@@ -1,0 +1,663 @@
+﻿1
+00:00:00,000 --> 00:00:02,946
+Bem-vindo de volta ao "Let's build a compiler".
+
+2
+00:00:02,940 --> 00:00:05,555
+No último episódio nós construímos no nosso visitor
+
+3
+00:00:05,550 --> 00:00:08,520
+Uma "UndeclaredVariableException",
+
+4
+00:00:08,520 --> 00:00:11,542
+que acessa sobre uma variável não definida
+
+5
+00:00:11,540 --> 00:00:13,435
+dizendo corretamente o que ela é.
+
+6
+00:00:13,430 --> 00:00:16,111
+E inclusive o número da linha e número da coluna
+
+7
+00:00:16,110 --> 00:00:18,995
+do nosso arquivo quando o acesso é realizado.
+
+8
+00:00:19,644 --> 00:00:22,933
+Neste episódio iremos expandir as nossas Exceptions,
+
+9
+00:00:22,930 --> 00:00:25,586
+isso também servirá para melhorar as formas dos erros.
+
+10
+00:00:25,666 --> 00:00:27,555
+Adicionalmente, iremos ter uma Exception
+
+11
+00:00:27,550 --> 00:00:30,182
+para definição de variáveis duplicadas
+
+12
+00:00:30,180 --> 00:00:32,457
+e iremos ver o que realmente se passa
+
+13
+00:00:32,450 --> 00:00:34,511
+se o nosso compilador não testar
+
+14
+00:00:34,510 --> 00:00:37,057
+uma entrada cheia de falhas.
+
+15
+00:00:39,186 --> 00:00:42,111
+Nós temos aqui ainda esta "varDeclaration",
+
+16
+00:00:42,110 --> 00:00:43,266
+ali em cima eu digo:
+
+17
+00:00:43,260 --> 00:00:45,906
+Isto é naturalmente bom se uma variável não está declarada,
+
+18
+00:00:45,900 --> 00:00:47,915
+porque nós não queremos definir duas vezes,
+
+19
+00:00:47,910 --> 00:00:49,777
+mas certamente acima nós ainda temos um ponto:
+
+20
+00:00:49,777 --> 00:00:51,770
+Ela não deve já estar existindo.
+
+21
+00:00:51,770 --> 00:00:54,000
+Se a variável já existe
+
+22
+00:00:54,000 --> 00:00:56,297
+nós devemos ainda dar uma erro.
+
+23
+00:00:56,290 --> 00:00:59,457
+Também expandiremos nossa especificação:
+
+24
+00:01:01,306 --> 00:01:05,413
+Pegamos mais uma vez este caso de teste daqui como modelo
+
+25
+00:01:05,410 --> 00:01:07,053
+e então dizemos aqui:
+
+26
+00:01:07,050 --> 00:01:10,031
+Nós temos "int x"
+
+27
+00:01:11,217 --> 00:01:15,346
+e então temos na próxima linha
+
+28
+00:01:19,444 --> 00:01:21,306
+mais uma vez "int x".
+
+29
+00:01:21,942 --> 00:01:28,342
+Na, nós pegaríamos preferencialmente o "System.lineSeparator" aqui.
+
+30
+00:01:29,520 --> 00:01:32,737
+Isto agora é um erro e nós devemos dizer agora
+
+31
+00:01:32,730 --> 00:01:35,671
+não "throwsUndeclaredVariableException",
+
+32
+00:01:35,670 --> 00:01:43,991
+mas: "throwsVariableAlreadyDefinedException"...
+
+33
+00:01:43,990 --> 00:01:47,595
+..."ifVariable"... ou...
+
+34
+00:01:47,590 --> 00:01:54,515
+"whenDefiningAlreadyDefinedVariable".
+
+35
+00:01:57,693 --> 00:01:59,324
+Então devemos naturalmente ainda
+
+36
+00:01:59,320 --> 00:02:01,933
+ajustar o "expectedException" aqui,
+
+37
+00:02:01,930 --> 00:02:04,666
+também não é mais "undeclaredVariable",
+
+38
+00:02:04,660 --> 00:02:09,008
+mas "VariableAlreadyDefined".
+
+39
+00:02:10,137 --> 00:02:14,248
+Também nosso "expectedExceptionsMessageRegExp"
+
+40
+00:02:14,240 --> 00:02:15,608
+irá se alterar um pouco:
+
+41
+00:02:15,600 --> 00:02:19,680
+E realmente ele é o erro aqui do número 2 
+
+42
+00:02:20,133 --> 00:02:25,128
+e na posição 1, 2, 3, 4.
+
+43
+00:02:30,320 --> 00:02:32,684
+E agora nós temos:
+
+44
+00:02:34,884 --> 00:02:39,813
+Variable already defined.
+
+45
+00:02:41,057 --> 00:02:42,844
+Talvez mais um dois pontos,
+
+46
+00:02:42,840 --> 00:02:44,662
+então a sentença faz mais sentido.
+
+47
+00:02:45,124 --> 00:02:48,075
+Agora ainda devemos criar esta Exception.
+
+48
+00:02:51,755 --> 00:02:53,715
+Novamente no nosso diretório fonte
+
+49
+00:02:53,710 --> 00:02:56,248
+e ao nosso outro Exception
+
+50
+00:02:57,586 --> 00:02:59,177
+e é claro que precisamos aqui
+
+51
+00:02:59,170 --> 00:03:00,626
+coisas bem similares
+
+52
+00:03:00,620 --> 00:03:04,035
+como nós temos no nosso UndeclaredVariableException também,
+
+53
+00:03:04,030 --> 00:03:06,844
+também a "line" e a "column"
+
+54
+00:03:06,840 --> 00:03:08,075
+e por isso isto faz sentido
+
+55
+00:03:08,070 --> 00:03:10,720
+nós pegamos aqui uma superclasse comum.
+
+56
+00:03:10,720 --> 00:03:14,315
+também criamos aqui mais uma vez uma nova classe
+
+57
+00:03:14,310 --> 00:03:17,697
+e então chamamos ela de "CompileException"
+
+58
+00:03:18,964 --> 00:03:22,893
+como uma superclasse para todas as Exceptions que
+
+59
+00:03:22,890 --> 00:03:25,911
+ocorrem enquanto nosso processo compila.
+
+60
+00:03:27,080 --> 00:03:29,124
+E que agora pega algumas características,
+
+61
+00:03:29,120 --> 00:03:33,840
+que até agora ocorreram no "UndeclaredVariableException".
+
+62
+00:03:33,840 --> 00:03:38,324
+que é extendida da "RuntimeException",
+
+63
+00:03:43,080 --> 00:03:47,240
+então pegamos também "line" e "column" aqui
+
+64
+00:03:50,613 --> 00:03:55,026
+e em ambos os campos nós fazemos então "protected"
+
+65
+00:03:55,020 --> 00:03:58,760
+com isso nós podemos acessá-la das classes aferentes.
+
+66
+00:03:58,760 --> 00:04:01,666
+E então nós iremos
+
+67
+00:04:01,660 --> 00:04:05,293
+também inserir ainda o constructor.
+
+68
+00:04:12,626 --> 00:04:15,066
+Isto não é necessariamente um varName do token,
+
+69
+00:04:15,060 --> 00:04:17,368
+por isso eu chamo a variável ainda de "token" apenas,
+
+70
+00:04:17,360 --> 00:04:19,537
+porque não sabemos para o que é este token
+
+71
+00:04:19,530 --> 00:04:23,253
+e então não poderíamos aqui no "varName"
+
+72
+00:04:23,250 --> 00:04:25,382
+expandi-lo também.
+
+73
+00:04:25,822 --> 00:04:28,435
+O nome ainda deve ser ajustado
+
+74
+00:04:28,430 --> 00:04:29,924
+e então está bom.
+
+75
+00:04:30,208 --> 00:04:34,511
+Então não vamos mais extender agora 
+
+76
+00:04:34,510 --> 00:04:36,893
+a UndeclaredVariableException da RuntimeException,
+
+77
+00:04:36,890 --> 00:04:39,968
+mas da nossa CompileException
+
+78
+00:04:40,404 --> 00:04:41,924
+e nós iremos aqui
+
+79
+00:04:41,920 --> 00:04:44,253
+jogar fora a "line" e a "column"
+
+80
+00:04:45,711 --> 00:04:48,235
+e isto daqui também jogamos fora
+
+81
+00:04:48,488 --> 00:04:53,408
+e em vez de delegar ao nosso super-constructor.
+
+82
+00:04:55,315 --> 00:04:56,542
+Assim, com a nossa classe
+
+83
+00:04:56,540 --> 00:04:58,253
+desta vez ele se torna um pouco mais curto
+
+84
+00:04:58,250 --> 00:05:01,208
+e na nossa VariableAlreadyDefinedException
+
+85
+00:05:01,200 --> 00:05:02,613
+você vê algo similar a isto aqui,
+
+86
+00:05:02,610 --> 00:05:07,884
+aqui nós estendemos do nosso caso de cima pelo nosso CompileException,
+
+87
+00:05:11,204 --> 00:05:14,208
+colocamos um constructor nele,
+
+88
+00:05:15,271 --> 00:05:18,000
+que se torna "variableToken"
+
+89
+00:05:25,026 --> 00:05:28,760
+e ele delega a superclasse
+
+90
+00:05:34,995 --> 00:05:38,426
+e ele ainda tem um "variableName"
+
+91
+00:05:43,293 --> 00:05:45,391
+e nós precisamos também aqui
+
+92
+00:05:45,390 --> 00:05:48,613
+mais um método getMessage.
+
+93
+00:05:51,146 --> 00:05:53,986
+Ele se mostra aqui um pouco similar,
+
+94
+00:05:53,986 --> 00:05:55,980
+por isso eu o pego aqui,
+
+95
+00:05:59,102 --> 00:06:02,093
+apenas para que não chame "undeclared variable"
+
+96
+00:06:02,090 --> 00:06:07,840
+mas "variable already defined".
+
+97
+00:06:11,582 --> 00:06:14,173
+Assim, aqui falta ainda o "import",
+
+98
+00:06:14,813 --> 00:06:18,915
+Ctrl+Shift+O, te fornece então o auto-imports,
+
+99
+00:06:18,910 --> 00:06:21,191
+pegamos o token v4
+
+100
+00:06:22,888 --> 00:06:25,240
+e então precisamos é claro, lançar 
+
+101
+00:06:25,240 --> 00:06:27,360
+esta Exception ainda. 
+
+102
+00:06:27,906 --> 00:06:30,617
+Para isso, vamos também novamente no nosso visitor
+
+103
+00:06:30,610 --> 00:06:34,942
+e vamos para a "visitVarDeclaration"
+
+104
+00:06:36,026 --> 00:06:38,986
+e observamos isso agora, antes que tarde demais:
+
+105
+00:06:38,980 --> 00:06:45,053
+"if (variables.containsKey)"
+
+106
+00:06:45,977 --> 00:06:48,542
+e agora a partir do nosso contexto:
+
+107
+00:06:49,364 --> 00:06:53,395
+"varName.getText()".
+
+108
+00:06:54,884 --> 00:06:58,702
+Também, quando esta variável já está definida,
+
+109
+00:06:59,871 --> 00:07:07,004
+então jogamos um VariableAlreadyDefinedException.
+
+110
+00:07:08,764 --> 00:07:11,293
+O "new" é muito importante, não se esqueça
+
+111
+00:07:11,773 --> 00:07:16,062
+e passando "ctx.varName".
+
+112
+00:07:18,484 --> 00:07:22,542
+Então, executamos nosso teste mais uma vez
+
+113
+00:07:28,306 --> 00:07:30,111
+e veja: Eu esqueci algo.
+
+114
+00:07:30,110 --> 00:07:33,835
+Ou seja, aqui: Nisto daqui apenas chegou null,
+
+115
+00:07:33,830 --> 00:07:35,284
+isto também é óbvio
+
+116
+00:07:35,280 --> 00:07:37,204
+quando ele não inicia corretamente 
+
+117
+00:07:37,200 --> 00:07:39,435
+e aqui você pode mais uma vez ver,
+
+118
+00:07:39,430 --> 00:07:42,613
+esta é uma especificação na forma de um
+
+119
+00:07:42,610 --> 00:07:44,857
+teste automático que ajuda muito,
+
+120
+00:07:44,850 --> 00:07:47,200
+porque se alguém esquecer de coisas assim pequenas,
+
+121
+00:07:47,200 --> 00:07:49,004
+então encontra-as rapidamente.
+
+122
+00:07:50,071 --> 00:07:53,711
+Assim vamos de volta no nosso
+
+123
+00:07:53,710 --> 00:07:56,373
+VariableAlreadyDefinedException
+
+124
+00:07:56,370 --> 00:08:00,075
+e escrevemos aqui então 
+
+125
+00:08:00,070 --> 00:08:03,200
+o "varName"
+
+126
+00:08:03,200 --> 00:08:05,973
+da nossa variableNameToken
+
+127
+00:08:05,970 --> 00:08:08,751
+quando é iniciada.
+
+128
+00:08:10,608 --> 00:08:12,515
+Então rodamos o teste mais uma vez
+
+129
+00:08:15,422 --> 00:08:17,231
+e desta vez ele funcionou,
+
+130
+00:08:17,230 --> 00:08:19,080
+Todos os testes estão em ordem,
+
+131
+00:08:19,080 --> 00:08:23,075
+também o nosso novo teste "throwsVariableAlreadyDefinedException".
+
+132
+00:08:23,075 --> 00:08:23,083
+Portanto, eu quero mostrar a vocês novamente
+
+133
+00:08:25,070 --> 00:08:26,324
+como tudo isto se parece,
+
+134
+00:08:26,320 --> 00:08:30,151
+se executamos o nosso Compiler, por assim dizer, "normal"
+
+135
+00:08:30,150 --> 00:08:33,635
+com a ajuda da nossa classe main e a ocorrência de um erro.
+
+136
+00:08:33,630 --> 00:08:36,644
+Também iremos ajustar o nosso arquivo code.demo
+
+137
+00:08:36,640 --> 00:08:40,351
+e agora jogamos dentro daqui:
+
+138
+00:08:42,737 --> 00:08:44,133
+"println(x)".
+
+139
+00:08:45,582 --> 00:08:49,426
+e então iremos executar o nosso "Main" uma vez.
+
+140
+00:08:49,631 --> 00:08:52,204
+Então observamos o que vai junto à saída.
+
+141
+00:08:52,200 --> 00:08:54,942
+Também enxergamos agora uma exceção no main,
+
+142
+00:08:54,940 --> 00:08:58,377
+com uma UndeclaredVariableException,
+
+143
+00:08:58,370 --> 00:09:01,000
+na linha 1, na posição 8,
+
+144
+00:09:01,000 --> 00:09:04,022
+aqui temos então uma "undeclared variable" "x".
+
+145
+00:09:04,617 --> 00:09:08,351
+Agora nós podemos, a partir disso, ler muito bem
+
+146
+00:09:08,350 --> 00:09:10,031
+o que nós fizemos de errado.
+
+147
+00:09:10,791 --> 00:09:12,648
+Neste episódio nós aprendemos como podemos
+
+148
+00:09:12,640 --> 00:09:13,960
+usar Exceptions no visitor 
+
+149
+00:09:13,960 --> 00:09:16,613
+para diferentes tipos de erros.
+
+150
+00:09:16,610 --> 00:09:19,640
+Uma superclasse comum para todos os erros de compilação,
+
+151
+00:09:19,640 --> 00:09:21,888
+que pode salvar a linha e a coluna do erro
+
+152
+00:09:21,880 --> 00:09:23,528
+e podendo armazenar
+
+153
+00:09:23,520 --> 00:09:26,426
+detalhes de erros específicos em classes estendidas.
+
+154
+00:09:26,884 --> 00:09:28,560
+Você tem alguma perguntas ou pedidos?
+
+155
+00:09:28,560 --> 00:09:30,311
+Me escreva nos comentários!
+
+156
+00:09:30,310 --> 00:09:32,231
+Não se esqueça de curtir
+
+157
+00:09:32,230 --> 00:09:33,706
+se você gostou do vídeo
+
+158
+00:09:33,700 --> 00:09:36,662
+e se inscreva para não perder nenhum episódio.
+
+159
+00:09:36,977 --> 00:09:38,275
+Muito obrigado ao Gadarol,
+
+160
+00:09:38,270 --> 00:09:39,248
+que me permitiu a gravar
+
+161
+00:09:39,240 --> 00:09:40,835
+usando o seu estúdio.
+
+162
+00:09:40,830 --> 00:09:43,373
+E muito obrigado para vocês pela atenção.
+
+163
+00:09:43,640 --> 00:09:44,928
+Meu nome é Yankee,
+
+164
+00:09:44,920 --> 00:09:46,391
+Eu espero que tenham se divertido,
+
+165
+00:09:46,390 --> 00:09:47,582
+Até a próxima,
+
+166
+00:09:47,580 --> 00:09:50,368
+para o próximo: "Let's build a compiler".

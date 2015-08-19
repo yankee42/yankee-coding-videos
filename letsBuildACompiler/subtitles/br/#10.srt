@@ -1,0 +1,1000 @@
+1
+00:00:00,000 --> 00:00:02,790
+Bem-vindo de volta ao "Let's build a compiler".
+
+2
+00:00:02,790 --> 00:00:05,450
+Neste episódio queremos ampliar a nossa a linguagem de
+
+3
+00:00:05,450 --> 00:00:07,610
+programação com variáveis simples.
+
+4
+00:00:07,610 --> 00:00:10,140
+Nós aprenderemos o que é uma tabela de variáveis no Java
+
+5
+00:00:10,140 --> 00:00:14,580
+e como utilizar as instruções "iload" e "istore" para trabalhar com elas.
+
+6
+00:00:14,580 --> 00:00:18,070
+Meu nome é Yankee e quero que vocês se divirtam!
+
+7
+00:00:18,650 --> 00:00:21,400
+No episódio #8 eu infelizmente fui um pouso estúpido,
+
+8
+00:00:21,400 --> 00:00:25,220
+porque eu ainda não tinha escrito um caso de teste adicional
+
+9
+00:00:25,220 --> 00:00:30,630
+e então eu na confusão o reescrevi novamente.
+
+10
+00:00:30,630 --> 00:00:33,180
+Eu estou curioso em saber se alguém de vocês notou,
+
+11
+00:00:33,180 --> 00:00:35,430
+o episódio 8 ainda não está saiu totalmente,
+
+12
+00:00:35,430 --> 00:00:37,790
+eu gravarei em frente com um pouco de aviso prévio,
+
+13
+00:00:37,790 --> 00:00:39,150
+porque ainda me saio bem,
+
+14
+00:00:39,150 --> 00:00:40,490
+por ser necessário, porque na próxima semana
+
+15
+00:00:40,490 --> 00:00:43,080
+eu provavelmente não terei tempo para gravar algo.
+
+16
+00:00:43,810 --> 00:00:47,280
+E este caso de teste executo mais uma vez contendo:
+
+17
+00:00:47,280 --> 00:00:53,160
+O teste que significa "8-2+5",        
+
+18
+00:00:53,820 --> 00:00:56,640
+que deve ser 11.
+
+19
+00:00:56,640 --> 00:00:59,880
+Também "8-2" são 6, "+5" são 11
+
+20
+00:00:59,880 --> 00:01:04,250
+e não primeiro "2+5" que seriam 7
+
+21
+00:01:04,250 --> 00:01:07,010
+e então "8-7" seria apenas 1.
+
+22
+00:01:07,010 --> 00:01:09,080
+Então executo o teste mais uma vez
+
+23
+00:01:10,690 --> 00:01:13,820
+e como nós vemos: tudo verde, todos os testes funcionaram
+
+24
+00:01:13,820 --> 00:01:15,680
+assim como o novo abaixo.
+
+25
+00:01:15,680 --> 00:01:21,870
+então expandindo mais o nosso teste para o objetivo do episódio atual.
+
+26
+00:01:24,230 --> 00:01:27,070
+Nós queremos também inserir variáveis,
+
+27
+00:01:27,070 --> 00:01:32,860
+que significa, eu digo aqui: nós podemos primeiro declarar um variável,
+
+28
+00:01:32,860 --> 00:01:35,790
+vamos chamá-la de "foo"
+
+29
+00:01:35,790 --> 00:01:38,660
+e então atribuir um valor,
+
+30
+00:01:39,230 --> 00:01:41,900
+porque pegamos 42
+
+31
+00:01:41,900 --> 00:01:45,980
+e então queremos o valor de saída.
+
+32
+00:01:48,080 --> 00:01:53,010
+Aqui devemos então logicamente sai o 42,
+
+33
+00:01:53,900 --> 00:01:58,630
+eu quero também poder utilizar a variável nos cálculos,
+
+34
+00:01:58,630 --> 00:02:03,970
+assim como neste exemplo, então teria que sair 44
+
+35
+00:02:03,970 --> 00:02:08,960
+e deve também haver a possibilidade de existirem mais variáveis.
+
+36
+00:02:08,960 --> 00:02:13,000
+Assim chamo "int a", "int b"
+
+37
+00:02:14,050 --> 00:02:18,160
+e a deve ser 2
+
+38
+00:02:18,160 --> 00:02:22,970
+e b... deve ser 5
+
+39
+00:02:24,160 --> 00:02:31,600
+e então "a+b" deve ser 7.
+
+40
+00:02:35,490 --> 00:02:38,000
+Então deixemos nossos testes mais uma vez rodarem,
+
+41
+00:02:40,050 --> 00:02:42,580
+note: Hurrah, isto dá cada tipo de erro,
+
+42
+00:02:42,580 --> 00:02:47,410
+nossos testes ainda não funcionaram, todos os três novos.
+
+43
+00:02:48,040 --> 00:02:51,530
+Isto está naturalmente conectado, porque nós ainda não os fizemos
+
+44
+00:02:51,530 --> 00:02:53,780
+e isso virá como próximo agora.
+
+45
+00:02:54,270 --> 00:02:58,310
+Vamos sobre a nossa gramática expandi-la nisto
+
+46
+00:02:59,800 --> 00:03:02,890
+e então iremos executar aqui uma nova regra
+
+47
+00:03:02,890 --> 00:03:05,790
+para juntar a declaração de variáveis.
+
+48
+00:03:05,790 --> 00:03:08,090
+Isto se parece assim:
+
+49
+00:03:09,690 --> 00:03:16,810
+Nós criamos uma regra, então logo a chamamos de "varDeclaration"
+
+50
+00:03:18,140 --> 00:03:22,350
+E para com uma declaração de variável vem primeiro nosso tipo,
+
+51
+00:03:22,350 --> 00:03:25,060
+que é até agora simplesmente apenas um Integer,
+
+52
+00:03:25,780 --> 00:03:29,600
+então vem um nome de variável,
+
+53
+00:03:29,600 --> 00:03:33,920
+tipicamente logo após qualquer "Identifier"
+
+54
+00:03:36,210 --> 00:03:38,710
+e era isso.
+
+55
+00:03:39,660 --> 00:03:42,820
+Então ainda precisamos expandir nosso "program",
+
+56
+00:03:42,820 --> 00:03:46,420
+isto pode não apenas vir uma println,
+
+57
+00:03:46,420 --> 00:03:49,630
+mas também uma declaração de variáveis,
+
+58
+00:03:49,630 --> 00:03:54,990
+por isso, eu manipulo o "println" daqui em uma regra de "statement".
+
+59
+00:03:57,400 --> 00:04:02,360
+Isso pode em um "statement" vir um println
+
+60
+00:04:02,360 --> 00:04:07,700
+ou uma declaração de variáveis
+
+61
+00:04:14,150 --> 00:04:20,140
+e o "program" agora consiste de vários statements
+
+62
+00:04:20,140 --> 00:04:23,100
+seguido por um ponto e vírgula.
+
+63
+00:04:24,140 --> 00:04:25,960
+Agora precisamos naturalmente ainda declarar
+
+64
+00:04:25,960 --> 00:04:28,680
+o que é um "IDENTIFIER",
+
+65
+00:04:28,680 --> 00:04:32,210
+fazemos isto aqui embaixo então com nossas regras do lexer
+
+66
+00:04:34,880 --> 00:04:40,780
+e um "IDENTIFIER" começa com uma letra,
+
+67
+00:04:42,170 --> 00:04:45,830
+sendo ou uma letra minúscula ou letra maiúscula
+
+68
+00:04:46,400 --> 00:04:52,230
+e depois disso, segue com mais uma letra minúscula,
+
+69
+00:04:52,230 --> 00:04:56,220
+a seguir uma letra maiúscula ou um número
+
+70
+00:04:56,220 --> 00:04:59,140
+e a partir daí qualquer número.
+
+71
+00:05:00,460 --> 00:05:03,820
+Agora a nossa variável pode ainda naturalmente
+
+72
+00:05:03,820 --> 00:05:06,200
+ocorrer aqui como parte de uma "expression",
+
+73
+00:05:06,200 --> 00:05:10,030
+também, até agora temos a possibilidade de fazer os cálculos
+
+74
+00:05:10,030 --> 00:05:11,630
+ou nós simplesmente temos apenas um "Number",
+
+75
+00:05:11,630 --> 00:05:16,610
+mas em vez de apenas o número, poderíamos também voltar apenas uma variável
+
+76
+00:05:16,610 --> 00:05:21,180
+Assim, tomemos ainda como possibilidade:
+
+77
+00:05:21,180 --> 00:05:27,040
+"varName=IDENTIFIER"
+
+78
+00:05:27,460 --> 00:05:31,910
+e damos a ela o nome "Variable".
+
+79
+00:05:33,100 --> 00:05:35,790
+Mostramos curtamente mais uma vez nosso teste:
+
+80
+00:05:35,790 --> 00:05:38,450
+A declaração que aqui temos.
+
+81
+00:05:38,450 --> 00:05:40,880
+Aqui não temos ainda uma alocação.
+
+82
+00:05:40,880 --> 00:05:44,330
+Temos o acesso a "foo" como expressão.
+
+83
+00:05:44,330 --> 00:05:49,180
+e a parte em que "foo" pode ser uma parte da "expression",
+
+84
+00:05:49,180 --> 00:05:51,180
+também temos ainda um mais.
+
+85
+00:05:51,790 --> 00:05:54,810
+Mais tarde chega também: a alocação daqui
+
+86
+00:05:54,810 --> 00:05:57,000
+'int' e então um IDENTIFIER.
+
+87
+00:05:57,750 --> 00:05:59,700
+O "println", a "expression":
+
+88
+00:05:59,700 --> 00:06:04,140
+Uma "expression" pode mais tarde ser um simples Identifier/Variable
+
+89
+00:06:04,140 --> 00:06:07,140
+ou uma parte de um cálculo aqui,
+
+90
+00:06:07,140 --> 00:06:09,820
+também como exemplo com o mais, o que eu tomei como exemplo 
+
+91
+00:06:09,820 --> 00:06:13,980
+a parte esquerda ou a parte direita também só podem ser uma "expression"
+
+92
+00:06:13,980 --> 00:06:17,000
+e com isso também, novamente, apenas um nome de variável.
+
+93
+00:06:17,000 --> 00:06:21,730
+Agora nos falta aqui também, como mencionado antes, a alocação.
+
+94
+00:06:22,280 --> 00:06:28,000
+Então criamos aqui mais uma regra "assignment" 
+
+95
+00:06:29,630 --> 00:06:35,100
+e junto uma alocação para que venha primeiro um "IDENTIFIER",
+
+96
+00:06:35,100 --> 00:06:37,180
+nomeadamente a nome da nossa variável
+
+97
+00:06:37,180 --> 00:06:43,110
+e então vem uma para mostrá-la imediatamente
+
+98
+00:06:44,120 --> 00:06:46,620
+e então vem um valor da atribuição
+
+99
+00:06:46,620 --> 00:06:49,410
+e então novamente uma "expression".
+
+100
+00:06:51,500 --> 00:06:55,820
+Em algum caso desses queremos depois acessar o "IDENTIFIER",
+
+101
+00:06:55,820 --> 00:07:00,140
+também notamos que aqui existe um Label.
+
+102
+00:07:00,140 --> 00:07:05,130
+O mesmo também vale naturalmente para "variable declaration".
+
+103
+00:07:06,140 --> 00:07:10,060
+E sobre a "expression" talvez queiramos também acessá-la,
+
+104
+00:07:10,630 --> 00:07:12,880
+damos conta dela aqui também. 
+
+105
+00:07:13,570 --> 00:07:16,460
+Então precisamos naturalmente criar mais um
+
+106
+00:07:16,460 --> 00:07:20,860
+para que o "assignment" também possa ser chamado, 
+
+107
+00:07:21,410 --> 00:07:25,490
+e possa ainda por cima ser um "statement", uma alocação,
+
+108
+00:07:25,490 --> 00:07:29,320
+também escrevemos em conjunto dentro do statement "assignment".
+
+109
+00:07:30,170 --> 00:07:34,400
+Então salvamos isso, geramos nosso parser novo,
+
+110
+00:07:35,180 --> 00:07:38,220
+damos "F5" no parser,
+
+111
+00:07:38,220 --> 00:07:42,020
+e executamos nossos teste mais uma vez
+
+112
+00:07:42,020 --> 00:07:44,950
+e, por hora, vemos o que agora temos de saída.
+
+113
+00:07:44,950 --> 00:07:47,720
+Os erros que vemos aqui agora, virão depois,
+
+114
+00:07:47,720 --> 00:07:51,530
+pois nosso visitor gerou código inválido do Jasmin
+
+115
+00:07:51,530 --> 00:07:53,570
+e então se o Jasmin tenta estes
+
+116
+00:07:53,570 --> 00:07:57,450
+códigos inválidos, o parsing sobre os erros são aqui lançados.
+
+117
+00:07:57,450 --> 00:07:59,830
+Queremos consertar isto depois,
+
+118
+00:07:59,830 --> 00:08:03,030
+por isso vamos no nosso visitor
+
+119
+00:08:03,030 --> 00:08:07,260
+e então adicionamos aqui aquele nosso novo método de visita.
+
+120
+00:08:07,260 --> 00:08:09,870
+Iniciamos com um visitVarDeclaration
+
+121
+00:08:12,870 --> 00:08:17,310
+e se nós nos agora esbarrarmos com um "declaration",
+
+122
+00:08:17,310 --> 00:08:18,650
+o que faremos então?
+
+123
+00:08:18,650 --> 00:08:20,280
+Por isso, precisamos por primeiro saber,
+
+124
+00:08:20,280 --> 00:08:23,580
+como funciona a tabela de variáveis do Java.
+
+125
+00:08:23,980 --> 00:08:26,850
+Nós temos aqui nossa classe Main,
+
+126
+00:08:26,850 --> 00:08:29,340
+escrito uma vez no 
+
+127
+00:08:29,340 --> 00:08:34,270
+esqueleto do Jasmin ". limit locals 100".
+
+128
+00:08:34,270 --> 00:08:38,820
+Isto significa que nós temos agora uma tabela de variáveis com tamanho "100",
+
+129
+00:08:38,820 --> 00:08:42,000
+a tabela de variáveis no Java trabalha com escrita de 4-Bytes,
+
+130
+00:08:42,000 --> 00:08:46,680
+isto quer dizer que esta tabela de variáveis tem 100 entradas de 4 bytes
+
+131
+00:08:46,680 --> 00:08:50,470
+e assim podemos armazenar na nossa tabela 400 bytes.
+
+132
+00:08:50,470 --> 00:08:52,360
+Até agora usamos apenas integers
+
+133
+00:08:52,360 --> 00:08:56,160
+e enquanto integers tem 4 bytes
+
+134
+00:08:56,160 --> 00:09:02,790
+nós podemos assim armazenar na nossa tabela de variáveis 100 integers.
+
+135
+00:09:02,790 --> 00:09:05,330
+Agora podemos, todavia, apenas colocar números com um índice,
+
+136
+00:09:05,330 --> 00:09:08,000
+também podemos dizer "nos dê a variável na posição 17"
+
+137
+00:09:08,000 --> 00:09:09,160
+ou na "21",
+
+138
+00:09:09,160 --> 00:09:12,960
+mas não "dê-nos a variável a" ou "a variável foo".
+
+139
+00:09:12,960 --> 00:09:15,230
+Por isso nós precisamos que os
+
+140
+00:09:15,230 --> 00:09:19,550
+nomes das variáveis tenham um mapeamento para o índice na tabela.
+
+141
+00:09:20,180 --> 00:09:23,480
+Para isso, nós necessitamos primeiramente de um variável
+
+142
+00:09:23,480 --> 00:09:25,800
+que poderia salvar esta alocação,
+
+143
+00:09:25,800 --> 00:09:30,160
+para isto eu crio aqui no visitor simplesmente um Map
+
+144
+00:09:31,750 --> 00:09:35,700
+as Strings, os nomes das variáveis para integers,
+
+145
+00:09:35,700 --> 00:09:39,280
+portanto posições mapeadas para tabela de variáveis.
+
+146
+00:09:50,990 --> 00:09:52,450
+e nós iremos aqui então,
+
+147
+00:09:52,450 --> 00:09:56,560
+sempre que esbarrarmos sobre uma declaração de variáveis,
+
+148
+00:09:56,560 --> 00:10:02,660
+vamos declarar estas para armazenar no nosso mapa de variáveis.
+
+149
+00:10:03,440 --> 00:10:06,690
+Fazemos isso onde nós dizemos:
+
+150
+00:10:06,690 --> 00:10:10,190
+"variables.put"
+
+151
+00:10:10,660 --> 00:10:14,900
+e como chave chamamos nossos nomes de variáveis
+
+152
+00:10:17,430 --> 00:10:24,290
+e como valor chamamos o tamanho da tabela de variáveis atualizada.
+
+153
+00:10:26,330 --> 00:10:30,100
+E não precisamos fazer mais nada no método de declaração,
+
+154
+00:10:30,100 --> 00:10:34,470
+pois ela pode simplesmente ler a String para retornar o resultado,
+
+155
+00:10:34,470 --> 00:10:36,690
+porque ela não gera as instruções.
+
+156
+00:10:37,780 --> 00:10:42,710
+Agora, seguindo, no método de visita: "visitAssignment".
+
+157
+00:10:42,710 --> 00:10:45,170
+Precisamos atribuir algo na variável                        
+
+158
+00:10:45,170 --> 00:10:47,850
+primeiro, naturalmente, um valor,
+
+159
+00:10:47,850 --> 00:10:49,850
+para podermos alocar a variável.
+
+160
+00:10:49,850 --> 00:10:52,370
+As instruções, que geram estes valores,
+
+161
+00:10:52,370 --> 00:10:59,460
+são pegas para chamarmos nosso "visit" no "ctx.expression".
+
+162
+00:11:01,110 --> 00:11:03,540
+Agora nos perguntamos: O que fazer
+
+163
+00:11:03,540 --> 00:11:07,330
+com o valor que retornou junto?
+
+164
+00:11:07,330 --> 00:11:10,990
+Isto, no Java, nos dá uma instrução "istore"
+
+165
+00:11:10,990 --> 00:11:17,160
+e a instrução "istore" pega o Integer do topo da pilha
+
+166
+00:11:17,160 --> 00:11:19,600
+e salva-o na tabela de variáveis
+
+167
+00:11:19,600 --> 00:11:22,020
+e na posição a ser especificada.
+
+168
+00:11:22,020 --> 00:11:24,180
+Eu posso escrever também "istore 17"
+
+169
+00:11:24,180 --> 00:11:28,480
+e então o valor da pilha, o que fica bem no topo,
+
+170
+00:11:28,480 --> 00:11:31,500
+na tabela de variáveis é salvo na posição 17
+
+171
+00:11:31,500 --> 00:11:33,910
+e a partir disso eu posso chamá-lo de novo.
+
+172
+00:11:34,680 --> 00:11:38,170
+Agora esta não na posição 17, naturalmente,
+
+173
+00:11:38,170 --> 00:11:43,080
+mas nós pegamos a posição no nosso map variáveis,
+
+174
+00:11:43,080 --> 00:11:45,550
+nele nós perguntamos:
+
+175
+00:11:47,230 --> 00:11:53,170
+Qual é a posição do nosso nome da variável?
+
+176
+00:11:57,070 --> 00:11:59,790
+Então precisamos ainda juntá-las aqui,
+
+177
+00:11:59,790 --> 00:12:03,810
+não esquecendo da quebra de linha entre as duas instruções
+
+178
+00:12:07,830 --> 00:12:12,550
+e então retornar o resultado disto.
+
+179
+00:12:15,640 --> 00:12:19,630
+Oh, eu tenho trabalhado aqui ao juntar um caractere cômico.
+
+180
+00:12:21,210 --> 00:12:22,460
+Assim está correto.
+
+181
+00:12:23,140 --> 00:12:27,830
+O mesmo ocorre ao contrário por ainda chamar uma variável
+
+182
+00:12:27,830 --> 00:12:29,340
+na "visitVariable".
+
+183
+00:12:29,340 --> 00:12:31,890
+Se nós queremos chamar uma variável,
+
+184
+00:12:31,890 --> 00:12:36,510
+então vamos fazer similarmente ao "istore" com "iload".
+
+185
+00:12:40,150 --> 00:12:43,280
+"iload" agora faz exatamente a parte contrária do "istore":
+
+186
+00:12:43,280 --> 00:12:46,940
+Ele chama a variável ao definir a posição
+
+187
+00:12:46,940 --> 00:12:49,460
+e armazena novamente no topo da pilha.
+
+188
+00:12:49,730 --> 00:12:52,150
+Então queremos por vez provar o que aconteceu agora,
+
+189
+00:12:52,150 --> 00:12:54,750
+quando nós performamos nossos testes.
+
+190
+00:12:55,610 --> 00:12:58,930
+E como ele nos diz: Todos os testes funcionaram,
+
+191
+00:12:58,930 --> 00:13:02,140
+14 testes executados, nenhuma falha,
+
+192
+00:13:02,140 --> 00:13:04,880
+logo, realmente foi um sucesso.
+
+193
+00:13:04,880 --> 00:13:07,530
+Para fechar eu gostaria de mais uma vez lhes
+
+194
+00:13:07,530 --> 00:13:11,780
+gerar a árvore e então gerar o código Jasmin
+
+195
+00:13:11,780 --> 00:13:15,420
+do nosso último exemplo para mostrar.
+
+196
+00:13:15,420 --> 00:13:20,310
+Para isso, pegamos este exemplo do teste que foi gerado,
+
+197
+00:13:21,540 --> 00:13:23,460
+copiamos isto,
+
+198
+00:13:24,770 --> 00:13:28,520
+juntamos à nossa code.demo,
+
+199
+00:13:31,610 --> 00:13:34,450
+então pegamos nosso TestRig,
+
+200
+00:13:35,550 --> 00:13:39,510
+passando nosso arquivo code.demo,
+
+201
+00:13:39,510 --> 00:13:43,130
+no qual está o diretório do compilador 
+
+202
+00:13:44,800 --> 00:13:48,220
+e deixamos mostrar a árvore.
+
+203
+00:13:49,010 --> 00:13:51,560
+Como você vê: nossa árvore ficou bem maior.
+
+204
+00:13:51,560 --> 00:13:54,080
+Nosso programa aqui consiste agora
+
+205
+00:13:54,080 --> 00:13:56,920
+de uma série de Statements juntos.
+
+206
+00:13:56,920 --> 00:14:00,330
+Nossas declarações de variáveis sempre existem
+
+207
+00:14:00,330 --> 00:14:03,670
+aqui no "int" e um nome de variável,
+
+208
+00:14:03,670 --> 00:14:06,690
+a ser alocado com o operador,
+
+209
+00:14:06,690 --> 00:14:09,180
+com o operador de atribuição no meio
+
+210
+00:14:09,180 --> 00:14:12,940
+e qualquer expressão
+
+211
+00:14:12,940 --> 00:14:15,290
+e ainda o valor visto:
+
+212
+00:14:15,290 --> 00:14:17,680
+Aqui bem a direita o Statement com o "println",
+
+213
+00:14:17,680 --> 00:14:21,360
+o mais complexo Statement do nosso código,
+
+214
+00:14:21,650 --> 00:14:24,090
+onde apenas está o "println" sobre a definição,
+
+215
+00:14:24,090 --> 00:14:25,820
+consistindo do println e uma "expression" 
+
+216
+00:14:25,820 --> 00:14:28,710
+e a "expression" sobre uma adição
+
+217
+00:14:28,710 --> 00:14:34,130
+e as duas "expression"s novamente respectivas a uma variável.
+
+218
+00:14:34,670 --> 00:14:36,240
+Daí ainda no código para:
+
+219
+00:14:36,240 --> 00:14:39,720
+Para isso, vamos novamente de volta ao Eclipse, sobre o projeto do nosso compilador
+
+220
+00:14:39,720 --> 00:14:43,360
+e executamos o nosso método Main mais uma vez.
+
+221
+00:14:44,250 --> 00:14:46,990
+Então vemos ele gerar o código
+
+222
+00:14:47,530 --> 00:14:50,940
+E aqui temos a seguir o nosso, 2,
+
+223
+00:14:51,490 --> 00:14:53,210
+que está colocado sobre a pilha
+
+224
+00:14:53,210 --> 00:14:58,910
+e então será salva na posição 0 da tabela de variáveis. 
+
+225
+00:15:00,130 --> 00:15:03,990
+Por isso seria bem legal, nós teríamos mais um código ao lado,
+
+226
+00:15:03,990 --> 00:15:06,820
+assim o faço mais uma vez.
+
+227
+00:15:09,370 --> 00:15:13,000
+Portanto, ele pode vê-lo simultaneamente.
+
+228
+00:15:14,750 --> 00:15:16,270
+Assim se parece:
+
+229
+00:15:17,130 --> 00:15:20,150
+Aqui está o 2, que está na posição 0,
+
+230
+00:15:20,150 --> 00:15:23,070
+esta é a posição para a nossa variável a ser salvar,
+
+231
+00:15:23,070 --> 00:15:25,620
+e então o 5 na posição 1,
+
+232
+00:15:25,620 --> 00:15:27,950
+então vem o "println",
+
+233
+00:15:27,950 --> 00:15:31,200
+que colocamos o PrintStream sobre a pilha,
+
+234
+00:15:31,200 --> 00:15:34,380
+então armazenamos as variáveis a e b da pilha,
+
+235
+00:15:34,380 --> 00:15:36,510
+tendo agora três valores na pilha,
+
+236
+00:15:37,080 --> 00:15:39,340
+então adicionamos os dois de cima juntos,
+
+237
+00:15:39,340 --> 00:15:41,320
+tendo agora apenas dois valores na pilha,
+
+238
+00:15:41,320 --> 00:15:46,790
+que são o "System.out" e o cálculo de adição do 2 e 5, o 7
+
+239
+00:15:46,790 --> 00:15:49,260
+e então podemos com isso dar um println
+
+240
+00:15:49,260 --> 00:15:51,080
+e estamos prontos.
+
+241
+00:15:51,620 --> 00:15:53,600
+Neste episódio aprendemos como nós podemos
+
+242
+00:15:53,600 --> 00:15:57,840
+mapear os nomes das variáveis para posição numa tabela de variáveis.
+
+243
+00:15:57,840 --> 00:15:59,100
+Além disso, aprendemos                                     
+
+244
+00:15:59,100 --> 00:16:02,030
+como podemos usar as instruções "iload" e "istore"
+
+245
+00:16:02,030 --> 00:16:06,550
+sobre dois valores de pilha e copiar para cá e para lá na tabela de variáveis.
+
+246
+00:16:06,550 --> 00:16:09,090
+Pelo caminho, ele ainda permite ocorrerem bastantes erros,
+
+247
+00:16:09,090 --> 00:16:10,710
+que são difíceis de encontrar.
+
+248
+00:16:10,710 --> 00:16:12,190
+Isto também é assim porque nós
+
+249
+00:16:12,190 --> 00:16:16,240
+até o momento não havíamos trabalhado com mensagens de erro úteis de saída.
+
+250
+00:16:16,240 --> 00:16:18,730
+Este deve ser o tema do próximo episódio.
+

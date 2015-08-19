@@ -1,0 +1,1103 @@
+﻿1
+00:00:00,000 --> 00:00:03,017
+Bem-vindo de volta ao "Let's build a compiler". 
+
+2
+00:00:03,010 --> 00:00:04,942
+No último episódio nós havíamos começado
+
+3
+00:00:04,940 --> 00:00:07,720
+a estabelecer funções simples na nossa linguagem.
+
+4
+00:00:07,720 --> 00:00:09,382
+No entanto, com elas podemos colocar apenas
+
+5
+00:00:09,380 --> 00:00:12,013
+statement de retorno e nada mais.
+
+6
+00:00:12,010 --> 00:00:14,240
+Neste episódio iremos expandir nossas funções
+
+7
+00:00:14,240 --> 00:00:15,942
+para que possa também
+
+8
+00:00:15,940 --> 00:00:17,471
+conter código.
+
+9
+00:00:17,470 --> 00:00:18,884
+Dentro do contexto, nós iremos
+
+10
+00:00:18,880 --> 00:00:21,240
+também pela primeira vez trabalhar com escopos (Scopes).
+
+11
+00:00:21,240 --> 00:00:23,128
+Porque nós queremos a tabela de variáveis
+
+12
+00:00:23,120 --> 00:00:25,466
+separe mais funções.
+
+13
+00:00:25,880 --> 00:00:27,120
+Aqui nós temos nosso exemplo
+
+14
+00:00:27,120 --> 00:00:28,315
+do último episódio:
+
+15
+00:00:28,310 --> 00:00:29,817
+O simplório "randomNumber"
+
+16
+00:00:29,810 --> 00:00:31,653
+com o "return 4".
+
+17
+00:00:31,650 --> 00:00:34,328
+Eu o copio agora uma vez para cá,
+
+18
+00:00:37,293 --> 00:00:39,217
+adiciono no nosso editor de texto
+
+19
+00:00:39,210 --> 00:00:41,653
+e então podemos mais facilmente
+
+20
+00:00:41,653 --> 00:00:43,650
+formatar em volta.
+
+21
+00:00:44,751 --> 00:00:47,951
+Agora neste exemplo mais legível
+
+22
+00:00:47,950 --> 00:00:49,493
+faremos que o código fonte
+
+23
+00:00:49,490 --> 00:00:51,306
+seja um pouco mais complexo.
+
+24
+00:00:51,300 --> 00:00:52,808
+Como exemplo podemos dizer aqui:
+
+25
+00:00:52,800 --> 00:00:56,017
+Nós temos aqui um integer "i"
+
+26
+00:00:56,582 --> 00:00:59,640
+aí nós temos o quatro
+
+27
+00:01:00,137 --> 00:01:01,657
+e então queremos
+
+28
+00:01:01,650 --> 00:01:04,111
+retornar esta variável aqui.
+
+29
+00:01:04,342 --> 00:01:06,551
+Ela deve também continuar com o resultado de sempre
+
+30
+00:01:06,550 --> 00:01:08,746
+na saída, mas o código fonte está agora
+
+31
+00:01:08,740 --> 00:01:10,573
+um pouco mais complicado.
+
+32
+00:01:10,570 --> 00:01:13,160
+e com isso temos um exemplo para uma função
+
+33
+00:01:13,160 --> 00:01:16,048
+que tenha mais do que apenas um statement de retorno.
+
+34
+00:01:16,351 --> 00:01:18,831
+Nós copiamos tudo novamente
+
+35
+00:01:19,391 --> 00:01:22,764
+e adicionamos isto aqui.
+
+36
+00:01:22,760 --> 00:01:24,475
+Para isto, precisamos por primeiro
+
+37
+00:01:24,470 --> 00:01:26,435
+copiar este caractere aqui,
+
+38
+00:01:28,977 --> 00:01:32,564
+e então copiar isto daqui mais uma vez
+
+39
+00:01:32,560 --> 00:01:34,764
+e então inserimos aqui.
+
+40
+00:01:38,942 --> 00:01:41,137
+Assim, então falta ainda atrás
+
+41
+00:01:41,130 --> 00:01:42,866
+uma vírgula ainda
+
+42
+00:01:42,860 --> 00:01:45,231
+e então podemos deixar o teste rodando.
+
+43
+00:01:47,404 --> 00:01:49,480
+Observamos o resultado adiante:
+
+44
+00:01:49,480 --> 00:01:52,177
+E aqui em cima o ANTLR notou:
+
+45
+00:01:52,170 --> 00:01:53,782
+Ele diz "mismatched input 'int'",
+
+46
+00:01:53,780 --> 00:01:55,942
+Ele esperou por um "return".
+
+47
+00:01:55,940 --> 00:01:58,013
+Se nós agora observarmos nossa gramática
+
+48
+00:01:58,010 --> 00:01:58,973
+então vemos aqui,
+
+49
+00:01:58,970 --> 00:02:01,817
+que depois do abre chaves
+
+50
+00:02:01,810 --> 00:02:03,760
+deve voltar diretamente um "return",
+
+51
+00:02:03,760 --> 00:02:06,231
+e que não o nosso "int"
+
+52
+00:02:06,230 --> 00:02:08,515
+com a definição de variável.
+
+53
+00:02:08,510 --> 00:02:10,173
+Também queremos agora aqui,
+
+54
+00:02:10,170 --> 00:02:13,582
+entre o abre chaves e o "return"
+
+55
+00:02:13,580 --> 00:02:15,706
+não permitir qualquer statement.
+
+56
+00:02:15,700 --> 00:02:17,960
+Para isso, adicionamos aqui também
+
+57
+00:02:21,840 --> 00:02:23,720
+quais statements retornados devem
+
+58
+00:02:23,720 --> 00:02:25,302
+ser um "statementList".
+
+59
+00:02:25,300 --> 00:02:27,155
+Ainda devemos definir o que o "statementList"
+
+60
+00:02:27,155 --> 00:02:29,150
+exatamente será, é claro.
+
+61
+00:02:29,786 --> 00:02:32,786
+Portanto, adicionamos aqui uma nova regra.
+
+62
+00:02:39,928 --> 00:02:42,311
+Assim fazemos com nosso statementlist
+
+63
+00:02:42,310 --> 00:02:44,271
+para que tenha um statement
+
+64
+00:02:44,270 --> 00:02:46,880
+respectivamente seguido de um ponto e vírgula
+
+65
+00:02:47,155 --> 00:02:49,693
+e que deve então retornar com frequência,
+
+66
+00:02:49,690 --> 00:02:52,231
+mesmo não retornando nada,
+
+67
+00:02:52,230 --> 00:02:53,720
+então ele pode verdadeiramente
+
+68
+00:02:53,720 --> 00:02:56,502
+conter apenas um "return" na nossa função
+
+69
+00:02:56,500 --> 00:02:58,186
+e nenhum outro statement.
+
+70
+00:02:58,180 --> 00:03:00,933
+Então geramos nosso novo parser novamente
+
+71
+00:03:03,835 --> 00:03:06,857
+e pressionamos com "F5".
+
+72
+00:03:07,746 --> 00:03:10,128
+executamos nossos testes
+
+73
+00:03:12,617 --> 00:03:14,724
+e como você pode ver, ele fornece agora aqui acima
+
+74
+00:03:14,720 --> 00:03:17,564
+sem ter mais erros do ANTLR ou Jasmin
+
+75
+00:03:17,560 --> 00:03:19,586
+mas aqui embaixo nós temos ainda
+
+76
+00:03:19,580 --> 00:03:23,666
+UndeclaredVariableException, a variável "i"
+
+77
+00:03:23,660 --> 00:03:24,995
+que acessamos aqui
+
+78
+00:03:24,990 --> 00:03:27,284
+é alegadamente não definida.
+
+79
+00:03:27,280 --> 00:03:28,617
+Está desta forma porque,
+
+80
+00:03:28,610 --> 00:03:30,497
+isto aqui agora temos definido
+
+81
+00:03:30,490 --> 00:03:32,377
+na nossa gramática esta parte aqui
+
+82
+00:03:32,370 --> 00:03:34,711
+deva retornar, na forma de statementList,
+
+83
+00:03:34,710 --> 00:03:37,351
+mas nós nunca geramos instruções
+
+84
+00:03:37,350 --> 00:03:38,960
+para este código aqui e por isso
+
+85
+00:03:38,960 --> 00:03:42,040
+a variável "i" ainda não está definida.
+
+86
+00:03:42,480 --> 00:03:44,671
+Assim vamos novamente para nosso visitor
+
+87
+00:03:44,670 --> 00:03:47,542
+para nosso "visitFunctionDefinition"
+
+88
+00:03:47,540 --> 00:03:49,973
+e... então...
+
+89
+00:03:49,970 --> 00:03:51,546
+criamos primeiramente aqui
+
+90
+00:03:51,546 --> 00:03:53,540
+o código para nossos statements.
+
+91
+00:04:00,653 --> 00:04:03,786
+E adicionamos esta lista então
+
+92
+00:04:03,780 --> 00:04:05,893
+neste local aqui.
+
+93
+00:04:08,351 --> 00:04:10,235
+Ele pode, todavia, ser que
+
+94
+00:04:10,230 --> 00:04:13,275
+estes "statementInstructions" sejam "null",
+
+95
+00:04:13,270 --> 00:04:15,986
+por não haverem instruções,
+
+96
+00:04:15,980 --> 00:04:19,097
+também quando não haverem statements,
+
+97
+00:04:19,090 --> 00:04:21,911
+então não podemos gerar aqui o nosso "visit",
+
+98
+00:04:21,910 --> 00:04:23,968
+ele simplesmente dá "null" de volta,
+
+99
+00:04:23,960 --> 00:04:26,462
+porque é o valor padrão de retorno
+
+100
+00:04:26,657 --> 00:04:29,520
+E então queremos aqui no local
+
+101
+00:04:29,520 --> 00:04:30,937
+não ter saída.
+
+102
+00:04:30,930 --> 00:04:33,506
+Também dizemos aqui
+
+103
+00:04:33,500 --> 00:04:36,342
+que se "statementInstructions"
+
+104
+00:04:36,342 --> 00:04:38,340
+igual igual a null,
+
+105
+00:04:38,884 --> 00:04:42,462
+então não deve adicionar aqui
+
+106
+00:04:42,460 --> 00:04:45,933
+e de outra forma apenas termine o "statementInstructions"
+
+107
+00:04:45,930 --> 00:04:50,262
+com uma nova linha
+
+108
+00:04:51,097 --> 00:04:54,182
+Então execute nosso teste mais uma vez.
+
+109
+00:04:54,871 --> 00:04:56,222
+E como nós vemos:
+
+110
+00:04:56,220 --> 00:04:57,484
+Tudo nele funcionou,
+
+111
+00:04:57,480 --> 00:04:59,484
+todos os testes passaram,
+
+112
+00:04:59,484 --> 00:05:01,480
+o nosso novo aqui também.
+
+113
+00:05:03,048 --> 00:05:05,880
+Vamos dar uma olhada novamente no nosso código fonte.
+
+114
+00:05:05,880 --> 00:05:07,871
+O acontece aqui se nós 
+
+115
+00:05:07,870 --> 00:05:10,613
+temos mais uma vez a variável "int i"?
+
+116
+00:05:12,457 --> 00:05:15,857
+E então atribuímos 42 aqui
+
+117
+00:05:19,297 --> 00:05:21,955
+e mostre ao fim.
+
+118
+00:05:22,382 --> 00:05:24,724
+Agora nós temos duas vezes a variável "i"
+
+119
+00:05:24,720 --> 00:05:26,808
+uma vez aqui e uma vez aqui.
+
+120
+00:05:27,222 --> 00:05:30,084
+Se nós chamamos agora "randomNumber",
+
+121
+00:05:30,080 --> 00:05:32,866
+então precisamos retornar algo
+
+122
+00:05:32,860 --> 00:05:33,951
+ou também não
+
+123
+00:05:34,240 --> 00:05:37,195
+e aqui também precisamos retornar algo.
+
+124
+00:05:37,190 --> 00:05:39,200
+O que você intuitivamente acredita
+
+125
+00:05:39,200 --> 00:05:41,200
+que aconteceu com este código fonte?
+
+126
+00:05:41,200 --> 00:05:43,537
+Eu direi: Ele logicamente
+
+127
+00:05:43,530 --> 00:05:45,684
+se está aqui no "i"
+
+128
+00:05:45,680 --> 00:05:48,026
+seria uma variável global
+
+129
+00:05:48,020 --> 00:05:50,862
+e aqui em cima no randomNumber
+
+130
+00:05:50,860 --> 00:05:54,951
+uma variável local, e depois
+
+131
+00:05:54,950 --> 00:05:58,693
+esta variável global se esconderá da variável local.
+
+132
+00:05:58,690 --> 00:06:00,448
+Se "randomNumber" for chamado,
+
+133
+00:06:00,440 --> 00:06:03,835
+trabalhará aqui com a variável local,
+
+134
+00:06:03,830 --> 00:06:05,355
+ele retornará 4,
+
+135
+00:06:05,350 --> 00:06:07,195
+quatro sendo a saída
+
+136
+00:06:07,190 --> 00:06:09,177
+e aqui esta função
+
+137
+00:06:09,170 --> 00:06:11,017
+também neste local pertence
+
+138
+00:06:11,010 --> 00:06:13,986
+à variável aqui de cima não conhecida
+
+139
+00:06:13,980 --> 00:06:16,702
+e depois irá então
+
+140
+00:06:16,700 --> 00:06:18,022
+dar 42 de saída.
+
+141
+00:06:18,020 --> 00:06:22,088
+Também deveríamos primeiro fazer sair quatro e então 42.
+
+142
+00:06:22,080 --> 00:06:23,733
+Vamos dar uma olhada
+
+143
+00:06:23,730 --> 00:06:25,937
+no que verdadeiramente é o caso,
+
+144
+00:06:25,930 --> 00:06:29,280
+no que o nosso código fonte coloca no compilador.
+
+145
+00:06:29,280 --> 00:06:31,262
+Então copiamos para nós
+
+146
+00:06:32,342 --> 00:06:34,604
+em um novo caso de teste,
+
+147
+00:06:35,226 --> 00:06:39,386
+eu copio primeiro nosso template de novo aqui de cima
+
+148
+00:06:50,120 --> 00:06:52,817
+e então precisamos, na minha opinião,
+
+149
+00:06:52,810 --> 00:06:56,875
+fornecer como saída o quatro primeiro
+
+150
+00:06:57,680 --> 00:06:59,164
+...e...
+
+151
+00:06:59,573 --> 00:07:03,008
+depois mais uma vez o 42.
+
+152
+00:07:06,404 --> 00:07:09,906
+Então executamos o compilador 
+
+153
+00:07:10,782 --> 00:07:13,182
+e olhamos o que realmente aconteceu.
+
+154
+00:07:13,475 --> 00:07:15,640
+Realmente, não temos nada como saída,
+
+155
+00:07:15,640 --> 00:07:18,528
+mas nós temos uma VariableAlreadyDefinedExcpeition
+
+156
+00:07:18,520 --> 00:07:21,160
+retornando, enquanto na linha 6,
+
+157
+00:07:21,160 --> 00:07:24,622
+assim isto é... 1, 2, 3, 4, 5, 6,
+
+158
+00:07:24,620 --> 00:07:26,293
+assim também é a linha daqui,
+
+159
+00:07:26,290 --> 00:07:29,555
+é a variável "i" alegadamente já definida.
+
+160
+00:07:29,550 --> 00:07:31,422
+O que com outras palavras significa:
+
+161
+00:07:31,420 --> 00:07:33,782
+Aqui embaixo, esta parte sabe
+
+162
+00:07:33,780 --> 00:07:36,186
+quais variáveis daqui em cima são definidas
+
+163
+00:07:36,180 --> 00:07:38,604
+e isto não deve ser o caso.
+
+164
+00:07:38,600 --> 00:07:40,617
+Isto é verdadeiramente um problema,
+
+165
+00:07:40,610 --> 00:07:42,924
+então podemos acessar a tabela de variáveis local
+
+166
+00:07:42,920 --> 00:07:45,226
+a partir desta função
+
+167
+00:07:45,220 --> 00:07:46,817
+mesmo se nós não quisermos
+
+168
+00:07:46,810 --> 00:07:49,222
+de uma outra função,
+
+169
+00:07:49,220 --> 00:07:51,297
+também sobre nossa função "main".
+
+170
+00:07:51,290 --> 00:07:53,226
+Então também devemos colocar as nossa variáveis
+
+171
+00:07:53,220 --> 00:07:56,831
+em outro lugar diferente da nosso tabela de variáveis.
+
+172
+00:07:56,830 --> 00:07:59,026
+O problema era que nós temos agora aqui 
+
+173
+00:07:59,020 --> 00:08:01,524
+trabalho com escopos.
+
+174
+00:08:01,520 --> 00:08:03,951
+Um escopo assim afirma:
+
+175
+00:08:03,950 --> 00:08:08,444
+Estas variáveis são válidas em uma área definida
+
+176
+00:08:08,440 --> 00:08:11,635
+e uma área definida assim é um escopo.
+
+177
+00:08:11,630 --> 00:08:14,000
+E nós temos agora então um escopo global aqui,
+
+178
+00:08:14,000 --> 00:08:15,617
+que é isto abaixo
+
+179
+00:08:15,610 --> 00:08:18,480
+ou para mim, é também um escopo local
+
+180
+00:08:18,480 --> 00:08:20,640
+da função "main"
+
+181
+00:08:20,640 --> 00:08:24,217
+mas aqui nós temos em todo caso um outro escopo,
+
+182
+00:08:24,210 --> 00:08:26,573
+que é um escopo local
+
+183
+00:08:26,570 --> 00:08:29,382
+a função "randomNumber".
+
+184
+00:08:29,380 --> 00:08:30,444
+Ali queremos agora ver
+
+185
+00:08:30,440 --> 00:08:32,213
+o que podemos fazer.
+
+186
+00:08:32,933 --> 00:08:35,728
+Assim vemos novamente no nosso visitor
+
+187
+00:08:35,720 --> 00:08:37,906
+e depois vemos novamente como
+
+188
+00:08:37,900 --> 00:08:41,924
+funciona o System com a definição de variáveis.
+
+189
+00:08:41,920 --> 00:08:43,151
+Nós temos aqui em cima neste mapa
+
+190
+00:08:43,150 --> 00:08:44,728
+com a tabela de variáveis,
+
+191
+00:08:44,720 --> 00:08:47,755
+que é simplesmente um mapa Hash de strings para integers
+
+192
+00:08:47,750 --> 00:08:50,435
+e classificadas de acordo com cada nome de variável
+
+193
+00:08:50,430 --> 00:08:53,240
+uma posição na tabela de variáveis.
+
+194
+00:08:53,502 --> 00:08:56,351
+Mas temos agora não apenas uma tabela de variáveis.
+
+195
+00:08:56,350 --> 00:08:58,560
+mas muitas, nomeada como uma função pro
+
+196
+00:08:58,560 --> 00:09:02,191
+e é ao menos uma vez a função "main"
+
+197
+00:09:02,190 --> 00:09:04,733
+e uma função local nossa
+
+198
+00:09:04,730 --> 00:09:07,337
+"randomNumber" no exemplo que tínhamos antes.
+
+199
+00:09:07,330 --> 00:09:08,546
+Nós podemos também dizer ainda,
+
+200
+00:09:08,540 --> 00:09:11,871
+que o escopo da função "main" deve ser global,
+
+201
+00:09:11,870 --> 00:09:13,715
+então tínhamos anteriormente um escopo global
+
+202
+00:09:13,710 --> 00:09:17,324
+e um escopo local para nossa função "randomNumber".
+
+203
+00:09:17,320 --> 00:09:18,982
+E se nós ainda temos mais funções,
+
+204
+00:09:18,980 --> 00:09:20,915
+teríamos ainda mais escopos locais acima,
+
+205
+00:09:20,910 --> 00:09:22,293
+Agora nós precisamos também ser capazes de
+
+206
+00:09:22,290 --> 00:09:25,017
+trocar entre estes escopos
+
+207
+00:09:25,010 --> 00:09:27,040
+e colocá-los corretamente.
+
+208
+00:09:27,040 --> 00:09:28,777
+Isto significa sempre quando é gerado
+
+209
+00:09:28,770 --> 00:09:31,573
+com o conteúdo de uma função que vamos lidar
+
+210
+00:09:31,570 --> 00:09:33,564
+precisamos da tabela de variáveis 
+
+211
+00:09:33,560 --> 00:09:36,151
+para que nos sirva na nossa função atual.
+
+212
+00:09:37,102 --> 00:09:39,084
+Isto significa que chegamos às funções
+
+213
+00:09:39,080 --> 00:09:41,880
+sempre quando nós pegamos uma "functionDeclaration".
+
+214
+00:09:42,573 --> 00:09:45,657
+Agora nós temos aqui estas "functionDefinition"s,
+
+215
+00:09:45,650 --> 00:09:48,120
+com as quais podemos dizer
+
+216
+00:09:48,488 --> 00:09:52,071
+para a função... nosso antigo escopo,
+
+217
+00:09:52,070 --> 00:09:56,600
+isto é a tabela de variáveis,
+
+218
+00:09:56,950 --> 00:09:58,973
+para que nós a notemos
+
+219
+00:10:00,737 --> 00:10:04,671
+e realmente esta é a "oldVariables"
+
+220
+00:10:06,426 --> 00:10:09,288
+e então colocamos 
+
+221
+00:10:09,280 --> 00:10:12,617
+na nossa tabela de variáveis atual
+
+222
+00:10:12,610 --> 00:10:15,511
+uma nova tabela de variáveis,
+
+223
+00:10:15,510 --> 00:10:17,906
+que começa vazia no início.
+
+224
+00:10:21,786 --> 00:10:23,826
+Agora nós podemos muito bem
+
+225
+00:10:23,820 --> 00:10:26,093
+trabalhar com esta tabela
+
+226
+00:10:26,417 --> 00:10:29,168
+e no fim devemos, naturalmente
+
+227
+00:10:29,160 --> 00:10:32,484
+restaurar esta antiga tabela "oldVariables",
+
+228
+00:10:32,480 --> 00:10:34,684
+que significa que podemos no fim do método
+
+229
+00:10:34,680 --> 00:10:36,866
+aquilo que usamos temporariamente,
+
+230
+00:10:36,860 --> 00:10:39,120
+esta tabela de variáveis esquecer
+
+231
+00:10:39,120 --> 00:10:41,982
+e de acordo falar então aqui:
+
+232
+00:10:41,980 --> 00:10:45,986
+"variables" é novamente "oldVariables".
+
+233
+00:10:45,980 --> 00:10:49,333
+Agora precisamos passar antes do "return",
+
+234
+00:10:49,330 --> 00:10:53,355
+isto significa que nós jogaremos isto daqui em uma variável temporária,
+
+235
+00:10:54,560 --> 00:10:57,777
+contido no nosso resultado com o código gerado
+
+236
+00:10:57,770 --> 00:10:59,480
+e fornecemos primeiro
+
+237
+00:10:59,480 --> 00:11:03,422
+depois nós restauramos a nossa tabela de variáveis de volta.
+
+238
+00:11:06,497 --> 00:11:09,982
+Então tentamos de novo, para saber o que acontece.
+
+239
+00:11:12,453 --> 00:11:14,097
+E como você pode ver:
+
+240
+00:11:14,090 --> 00:11:16,200
+Todos os testes funcionaram,
+
+241
+00:11:16,200 --> 00:11:18,200
+também este exemplo:
+
+242
+00:11:18,200 --> 00:11:21,773
+Nossas variáveis estão agora separadas,
+
+243
+00:11:21,770 --> 00:11:25,760
+isto significa que retorna primeiro o quatro aqui e então o 42.
+
+244
+00:11:25,760 --> 00:11:27,671
+O que naturalmente ainda não aconteceu
+
+245
+00:11:27,670 --> 00:11:29,937
+é que agora temos um escopo global,
+
+246
+00:11:29,930 --> 00:11:31,955
+que eu tenho assim primariamente implementado
+
+247
+00:11:31,950 --> 00:11:34,502
+para termos dois escopos locais, assim
+
+248
+00:11:34,500 --> 00:11:38,573
+a função "main" aqui debaixo tem um escopo loca
+
+249
+00:11:38,570 --> 00:11:39,960
+e a daqui tem uma local.
+
+250
+00:11:39,960 --> 00:11:41,195
+Isto significa que não podemos agora ainda
+
+251
+00:11:41,190 --> 00:11:43,408
+a partir daqui acessar a função "main".
+
+252
+00:11:43,400 --> 00:11:46,208
+Agora alguém poderia dizer a intenção é esta,
+
+253
+00:11:46,200 --> 00:11:51,191
+mas para um período de longa duração nós também construímos variáveis globais
+
+254
+00:11:51,190 --> 00:11:53,551
+simplesmente porque a gente pode.
+
+255
+00:11:54,555 --> 00:11:56,511
+Neste episódio nós aprendemos
+
+256
+00:11:56,510 --> 00:11:58,342
+como de um statement "return"
+
+257
+00:11:58,340 --> 00:12:00,933
+permitimos quaisquer expansões de instruções. 
+
+258
+00:12:00,930 --> 00:12:03,675
+Fora isso, também aprendemos como que a tabela de variáveis
+
+259
+00:12:03,670 --> 00:12:07,595
+permite mais funções com simples separações de recursos entre si.
+
+260
+00:12:07,800 --> 00:12:10,577
+No entanto, ainda falta muito o que fazer com as funções:
+
+261
+00:12:10,570 --> 00:12:12,840
+O statement de retorno precisa continuar como sempre
+
+262
+00:12:12,840 --> 00:12:15,351
+o último statement em cada função.
+
+263
+00:12:15,350 --> 00:12:17,622
+Ele não fornece nenhuma variável global.
+
+264
+00:12:17,620 --> 00:12:19,528
+Nós ainda não suportamos parâmetros
+
+265
+00:12:19,520 --> 00:12:22,066
+e nem ainda funções sem valor de retorno.
+
+266
+00:12:22,060 --> 00:12:25,386
+Como fazer isso, nós veremos nos próximos episódios.
+
+267
+00:12:26,128 --> 00:12:29,351
+Escreva-me suas perguntas, problemas e sugestões nos comentários.
+
+268
+00:12:29,350 --> 00:12:31,906
+Curta o vídeo se você gostou dele
+
+269
+00:12:31,900 --> 00:12:34,946
+e inscreva-se no canal para não perder nenhum episódio.
+
+270
+00:12:35,177 --> 00:12:36,426
+Muito obrigado ao Gadarol
+
+271
+00:12:36,420 --> 00:12:38,893
+que me permitiu usar o seu estúdio para as gravações
+
+272
+00:12:38,890 --> 00:12:41,751
+e muito obrigado a você pela sua atenção.
+
+273
+00:12:41,750 --> 00:12:43,066
+Meu nome é Yankee,
+
+274
+00:12:43,060 --> 00:12:44,733
+eu espero que vocês tenham se divertido,
+
+275
+00:12:44,730 --> 00:12:45,995
+até a próxima vez
+
+276
+00:12:45,990 --> 00:12:48,880
+para o próximo: "Let's build a compiler".

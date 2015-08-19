@@ -1,0 +1,1128 @@
+﻿1
+00:00:00,000 --> 00:00:03,057
+Welcome back to "Let's build a compiler". 
+
+2
+00:00:03,050 --> 00:00:04,413
+In the last episode we had
+
+3
+00:00:04,410 --> 00:00:06,968
+taught our function parameters
+
+4
+00:00:06,960 --> 00:00:09,373
+but we still have not taken care about
+
+5
+00:00:09,370 --> 00:00:12,253
+that comes some meaningful error message
+
+6
+00:00:12,250 --> 00:00:14,040
+if the programmer once more
+
+7
+00:00:14,040 --> 00:00:15,511
+any mortise nonsense 
+
+8
+00:00:15,510 --> 00:00:18,737
+as example calling a function
+
+9
+00:00:18,730 --> 00:00:20,515
+that was not defined at all.
+
+10
+00:00:20,964 --> 00:00:22,973
+By this, we go in this episode
+
+11
+00:00:22,970 --> 00:00:25,568
+care about this, for this very case,
+
+12
+00:00:25,560 --> 00:00:26,777
+namely the programmer
+
+13
+00:00:26,770 --> 00:00:29,102
+call a function not defined yet
+
+14
+00:00:29,100 --> 00:00:31,982
+a reasonable error message is thrown.
+
+15
+00:00:32,760 --> 00:00:34,306
+At first, we are going to
+
+16
+00:00:34,300 --> 00:00:36,333
+expand again our specification,
+
+17
+00:00:36,330 --> 00:00:37,626
+you know this already.
+
+18
+00:00:37,620 --> 00:00:39,324
+There we need something 
+
+19
+00:00:39,320 --> 00:00:40,582
+like what we have so far for our
+
+20
+00:00:40,580 --> 00:00:43,480
+"variable already defined",
+
+21
+00:00:43,480 --> 00:00:44,604
+so I copy this
+
+22
+00:00:44,600 --> 00:00:46,746
+and then we pass the test to something.
+
+23
+00:00:46,920 --> 00:00:48,564
+The test should now say, namely
+
+24
+00:00:48,560 --> 00:00:50,857
+that always an
+
+25
+00:00:50,850 --> 00:00:54,084
+"UndefinedFunctionException" is thrown
+
+26
+00:00:55,235 --> 00:00:58,373
+and whenever we
+
+27
+00:00:58,370 --> 00:01:01,955
+call a function, the... well...
+
+28
+00:01:01,950 --> 00:01:02,848
+you can think to yourself:
+
+29
+00:01:02,840 --> 00:01:04,284
+Is not defined.
+
+30
+00:01:05,728 --> 00:01:08,817
+Then we need, of course, another code
+
+31
+00:01:08,810 --> 00:01:11,235
+and the new code should now
+
+32
+00:01:11,230 --> 00:01:13,911
+call an undefined function.
+
+33
+00:01:17,222 --> 00:01:19,013
+The error is at the line one
+
+34
+00:01:19,010 --> 00:01:22,146
+and at position... 1, 2, 3, 4, 5, 6, 7, 8.
+
+35
+00:01:24,417 --> 00:01:26,786
+And the next we must, of course, also adapt
+
+36
+00:01:26,780 --> 00:01:28,115
+then we take there:
+
+37
+00:01:28,110 --> 00:01:32,493
+"Call to undefined ... function".
+
+38
+00:01:33,170 --> 00:01:35,537
+The name of the function
+
+39
+00:01:35,530 --> 00:01:38,426
+and now, naturally, is a little bigger than just "x".
+
+40
+00:01:39,333 --> 00:01:41,435
+Than we execute the test once more
+
+41
+00:01:41,430 --> 00:01:43,942
+and to control what it really gives as fails
+
+42
+00:01:43,940 --> 00:01:45,711
+and that we have to do something
+
+43
+00:01:46,253 --> 00:01:48,782
+and yes, it's missing
+
+44
+00:01:48,780 --> 00:01:50,351
+but we notice, there:
+
+45
+00:01:50,350 --> 00:01:54,777
+"Expected exception was *Variable*AlreadyDefinedException",
+
+46
+00:01:54,770 --> 00:01:56,933
+which we have unfortunately forgotten to adapt.
+
+47
+00:01:56,930 --> 00:01:59,986
+Then we also need to write inside:
+
+48
+00:01:59,980 --> 00:02:02,431
+"UndefinedFunctionException".
+
+49
+00:02:04,280 --> 00:02:06,653
+Then we put this class too,
+
+50
+00:02:06,650 --> 00:02:09,071
+to stay in our source directory
+
+51
+00:02:09,070 --> 00:02:11,177
+to our other exceptions
+
+52
+00:02:13,650 --> 00:02:18,235
+and we let them derivate from our "CompileException". 
+
+53
+00:02:18,973 --> 00:02:20,768
+We take with us the constructor 
+
+54
+00:02:20,760 --> 00:02:22,182
+and then it can continue.
+
+55
+00:02:22,620 --> 00:02:24,324
+The token that we've received,
+
+56
+00:02:24,320 --> 00:02:26,346
+that is taken now 
+
+57
+00:02:26,340 --> 00:02:29,711
+the token that stands in the "function name".
+
+58
+00:02:30,020 --> 00:02:32,360
+So, it is a little bit clearer
+
+59
+00:02:32,360 --> 00:02:34,222
+here we name the parameter 
+
+60
+00:02:34,220 --> 00:02:37,582
+and then we want to note the function name.
+
+61
+00:02:37,580 --> 00:02:41,364
+So we create here a member variable "functionName"
+
+62
+00:02:41,786 --> 00:02:45,160
+and so we fill our constructor here in the same way.
+
+63
+00:02:46,004 --> 00:02:48,462
+The "functionName" is simply
+
+64
+00:02:48,460 --> 00:02:51,937
+in the text token.
+
+65
+00:02:52,733 --> 00:02:55,777
+Then we also need a "getMessage()" function,
+
+66
+00:02:55,770 --> 00:02:57,528
+that is similar to...
+
+67
+00:02:57,520 --> 00:02:58,644
+what we already had,
+
+68
+00:02:58,640 --> 00:03:00,920
+for example, with the "variable already defined",
+
+69
+00:03:00,920 --> 00:03:02,680
+this is why we steal it again now
+
+70
+00:03:02,680 --> 00:03:04,391
+and then we adjust it
+
+71
+00:03:07,671 --> 00:03:11,702
+and then we get out from the test again
+
+72
+00:03:11,700 --> 00:03:14,191
+the text that should really be there,
+
+73
+00:03:14,190 --> 00:03:16,475
+so "call to undefined function"
+
+74
+00:03:16,470 --> 00:03:18,715
+and in the brackets there is, of course,
+
+75
+00:03:18,710 --> 00:03:21,866
+not a variable, but our functionName.
+
+76
+00:03:21,860 --> 00:03:23,893
+So, wonderful, we have now to throw this
+
+77
+00:03:23,890 --> 00:03:26,711
+exception again and by the "visitFunctionCall". 
+
+78
+00:03:26,710 --> 00:03:28,382
+We must look now after again:
+
+79
+00:03:28,380 --> 00:03:31,168
+This function, that we have just found,
+
+80
+00:03:31,160 --> 00:03:33,568
+so it would be called:
+
+81
+00:03:33,568 --> 00:03:35,560
+Is it really defined then?
+
+82
+00:03:35,560 --> 00:03:37,706
+When it's not the case:
+
+83
+00:03:38,342 --> 00:03:39,640
+Then...
+
+84
+00:03:39,640 --> 00:03:41,782
+we throw our
+
+85
+00:03:41,780 --> 00:03:46,204
+UndefinedFunctionException created new just before
+
+86
+00:03:46,200 --> 00:03:50,764
+and we pass this token with the function name.
+
+87
+00:03:51,595 --> 00:03:53,426
+Did we come just now in this
+
+88
+00:03:53,420 --> 00:03:55,862
+"funcitonIsDefined"? How do we know this? 
+
+89
+00:03:55,860 --> 00:03:57,915
+We call once more in memory
+
+90
+00:03:57,910 --> 00:04:00,280
+what all that we've done with the variables.
+
+91
+00:04:00,280 --> 00:04:02,524
+We had this variables by this map
+
+92
+00:04:02,520 --> 00:04:04,964
+and we have there all the variables definitions inside 
+
+93
+00:04:04,960 --> 00:04:07,422
+and if we have "visitAssignment" for example
+
+94
+00:04:07,420 --> 00:04:10,826
+we have there the "requireVariableIndex",
+
+95
+00:04:10,820 --> 00:04:13,333
+we access the variables table,
+
+96
+00:04:13,330 --> 00:04:14,551
+looking for:
+
+97
+00:04:14,777 --> 00:04:18,075
+Is this variable inside our variables table?
+
+98
+00:04:18,070 --> 00:04:20,146
+If not, then returns a "null" here
+
+99
+00:04:20,140 --> 00:04:23,360
+and we can throw our exception accordingly.
+
+100
+00:04:23,786 --> 00:04:27,724
+In "visitVarDeclaration" we fill the variables table
+
+101
+00:04:27,720 --> 00:04:30,511
+and after, the variables are
+
+102
+00:04:30,510 --> 00:04:31,955
+always inside the table.
+
+103
+00:04:31,950 --> 00:04:32,813
+Now we think over it:
+
+104
+00:04:32,810 --> 00:04:34,902
+What is then, if in this system
+
+105
+00:04:34,900 --> 00:04:37,311
+we want to pass our functions?
+
+106
+00:04:37,310 --> 00:04:39,786
+So saying, that we have such a function, 
+
+107
+00:04:39,780 --> 00:04:42,195
+just with any content
+
+108
+00:04:42,466 --> 00:04:45,200
+and after this we call this function.
+
+109
+00:04:45,200 --> 00:04:47,404
+Wonderful: Our visitor 
+
+110
+00:04:47,400 --> 00:04:49,777
+traverse our code from the top to the bottom,
+
+111
+00:04:49,770 --> 00:04:51,782
+this means that it at first
+
+112
+00:04:51,780 --> 00:04:54,471
+finds the "function declaration"
+
+113
+00:04:54,470 --> 00:04:56,115
+and then the function call.
+
+114
+00:04:56,110 --> 00:04:58,986
+There would, firstly, be found a "function declaration"
+
+115
+00:04:58,980 --> 00:05:01,333
+the function would be applied
+
+116
+00:05:01,330 --> 00:05:03,813
+but if we would now change the order
+
+117
+00:05:03,810 --> 00:05:05,453
+and would call the function first
+
+118
+00:05:05,450 --> 00:05:07,200
+and declaring it first,
+
+119
+00:05:07,200 --> 00:05:10,128
+then the before function is still not defined.
+
+120
+00:05:11,097 --> 00:05:12,760
+Early one would say that,
+
+121
+00:05:12,760 --> 00:05:15,177
+generally to make in a simpler compiler:
+
+122
+00:05:15,170 --> 00:05:16,111
+Well, this will not stop,
+
+123
+00:05:16,110 --> 00:05:17,662
+one does call the function 
+
+124
+00:05:17,660 --> 00:05:19,622
+that must stop before it's defined.
+
+125
+00:05:19,620 --> 00:05:22,706
+So in C it's exemplified, but also in Pascal 
+
+126
+00:05:22,700 --> 00:05:25,733
+and there he gives the so called
+
+127
+00:05:25,730 --> 00:05:27,031
+"Forward declarations",
+
+128
+00:05:27,030 --> 00:05:28,408
+So when someone would like
+
+129
+00:05:28,400 --> 00:05:31,368
+to call a function, coming the first later,
+
+130
+00:05:31,360 --> 00:05:33,413
+then one must define before:
+
+131
+00:05:33,410 --> 00:05:36,253
+This function will be defined later after
+
+132
+00:05:36,250 --> 00:05:38,280
+but, so being, we will call
+
+133
+00:05:38,280 --> 00:05:39,920
+and here are the parameters
+
+134
+00:05:39,920 --> 00:05:40,755
+and then one can
+
+135
+00:05:40,750 --> 00:05:42,786
+before even access the function
+
+136
+00:05:42,780 --> 00:05:46,093
+but we are in the 20th century,
+
+137
+00:05:46,090 --> 00:05:47,182
+we surely want 
+
+138
+00:05:47,180 --> 00:05:49,875
+that we don't need to do the same again.
+
+139
+00:05:50,288 --> 00:05:52,582
+To get there
+
+140
+00:05:52,580 --> 00:05:55,488
+that we can also call functions
+
+141
+00:05:55,480 --> 00:06:00,471
+that would be called before our 
+
+142
+00:06:00,470 --> 00:06:01,942
+function definitions
+
+143
+00:06:02,090 --> 00:06:03,475
+we must, however, firstly
+
+144
+00:06:03,470 --> 00:06:06,435
+pass our complete tree
+
+145
+00:06:06,430 --> 00:06:09,417
+and search for all the functions definitions.
+
+146
+00:06:09,410 --> 00:06:10,773
+so that we know all functions
+
+147
+00:06:10,770 --> 00:06:13,271
+that they are defined.
+
+148
+00:06:13,270 --> 00:06:16,475
+For this we create a new visitor,
+
+149
+00:06:16,470 --> 00:06:18,720
+which knows exactly to do this.
+
+150
+00:06:19,244 --> 00:06:21,822
+We will call this visitor
+
+151
+00:06:21,820 --> 00:06:23,928
+"FunctionDefinitionFinder"
+
+152
+00:06:25,191 --> 00:06:28,160
+and we lay it like our other visitor
+
+153
+00:06:28,160 --> 00:06:30,253
+from "DemoBaseVisitor".
+
+154
+00:06:32,053 --> 00:06:33,764
+It must now
+
+155
+00:06:33,760 --> 00:06:35,395
+return a set,
+
+156
+00:06:35,390 --> 00:06:37,151
+a set with strings,
+
+157
+00:06:37,822 --> 00:06:40,222
+namely, strictly speaking, a set
+
+158
+00:06:40,220 --> 00:06:43,466
+containing all the function names
+
+159
+00:06:43,460 --> 00:06:44,768
+that are defined.
+
+160
+00:06:45,946 --> 00:06:47,933
+The functions names that we get
+
+161
+00:06:47,930 --> 00:06:50,497
+from the "FunctionDefinition".
+
+162
+00:06:51,640 --> 00:06:52,973
+that have right now
+
+163
+00:06:52,970 --> 00:06:56,240
+our function names inside the context
+
+164
+00:06:58,600 --> 00:07:01,697
+and now we only need to return as set.
+
+165
+00:07:01,690 --> 00:07:03,431
+There it gives us the corresponding Java
+
+166
+00:07:03,430 --> 00:07:05,857
+"Collections.singleton()"
+
+167
+00:07:05,850 --> 00:07:09,773
+and he creates a set with exactly one entry.
+
+168
+00:07:11,155 --> 00:07:12,857
+Now it may, of course be quite so,
+
+169
+00:07:12,850 --> 00:07:15,773
+that our program has a few more
+
+170
+00:07:15,770 --> 00:07:18,311
+function definitions and then we need
+
+171
+00:07:18,310 --> 00:07:19,902
+to be able to add something together,
+
+172
+00:07:19,900 --> 00:07:21,635
+for that we could implemente again the
+
+173
+00:07:21,630 --> 00:07:24,080
+"aggregateResult" method.
+
+174
+00:07:24,653 --> 00:07:26,853
+For the begin to work similarly the same
+
+175
+00:07:26,850 --> 00:07:28,253
+like in our 
+
+176
+00:07:28,250 --> 00:07:30,057
+main visitor we have again:
+
+177
+00:07:30,050 --> 00:07:32,848
+We take a look, at first: Is the aggregate "null"?
+
+178
+00:07:32,840 --> 00:07:34,591
+If it's "null",
+
+179
+00:07:34,590 --> 00:07:37,111
+then we give our nextResult as return,
+
+180
+00:07:37,457 --> 00:07:41,764
+if the aggregate also wasn't "null"
+
+181
+00:07:41,764 --> 00:07:43,760
+but the nextResult is "null",
+
+182
+00:07:43,760 --> 00:07:46,168
+then we return the aggregate
+
+183
+00:07:46,160 --> 00:07:48,026
+and if it's not the case,
+
+184
+00:07:48,020 --> 00:07:50,053
+then both aren't null,
+
+185
+00:07:50,050 --> 00:07:53,160
+as well as the aggregate the nextResult
+
+186
+00:07:53,160 --> 00:07:54,115
+are not null
+
+187
+00:07:54,110 --> 00:07:57,275
+and then we need to join both sets.
+
+188
+00:07:57,270 --> 00:08:00,200
+So that we create now a new set too
+
+189
+00:08:00,200 --> 00:08:03,226
+and to execute the combined set,
+
+190
+00:08:03,220 --> 00:08:05,195
+so I name it "merged"
+
+191
+00:08:05,613 --> 00:08:08,582
+and then we create there a new HashSet
+
+192
+00:08:08,580 --> 00:08:11,311
+and then we pass to our constructor a collection,
+
+193
+00:08:11,310 --> 00:08:13,795
+in which comes everything inside the set,
+
+194
+00:08:13,790 --> 00:08:15,866
+we say everything that goes over the aggregate
+
+195
+00:08:15,860 --> 00:08:17,862
+inside our merged set and
+
+196
+00:08:17,860 --> 00:08:19,240
+then we need
+
+197
+00:08:19,240 --> 00:08:21,675
+all the entries from the "nextResult"
+
+198
+00:08:21,670 --> 00:08:23,306
+that also fit inside the set,
+
+199
+00:08:23,300 --> 00:08:25,435
+for that we can just call "addAll"
+
+200
+00:08:25,430 --> 00:08:27,244
+and pass nextResult.
+
+201
+00:08:27,240 --> 00:08:31,080
+Then we give our merged set as return
+
+202
+00:08:31,555 --> 00:08:33,515
+and we are here ready.
+
+203
+00:08:34,377 --> 00:08:35,977
+Now we must, of course,
+
+204
+00:08:35,970 --> 00:08:39,324
+also call our "FunctionDefinitionFinder",
+
+205
+00:08:39,320 --> 00:08:41,413
+this we do inside the "Main"
+
+206
+00:08:41,410 --> 00:08:43,377
+at the same point
+
+207
+00:08:43,370 --> 00:08:46,786
+where we also called our visitor until now.
+
+208
+00:08:47,284 --> 00:08:49,533
+We get it accordingly
+
+209
+00:08:49,530 --> 00:08:51,675
+also the set
+
+210
+00:08:52,151 --> 00:08:54,088
+with the strings
+
+211
+00:08:55,657 --> 00:08:58,328
+produced inside our visitor
+
+212
+00:08:58,320 --> 00:08:59,440
+and once again
+
+213
+00:08:59,440 --> 00:09:01,973
+we let our collected ParseTree.
+
+214
+00:09:01,970 --> 00:09:04,395
+If our Set
+
+215
+00:09:04,835 --> 00:09:06,915
+does not contain a function at all,
+
+216
+00:09:06,910 --> 00:09:08,022
+we need to keep in mind,
+
+217
+00:09:08,020 --> 00:09:10,213
+that "definedFunctions" is null now.
+
+218
+00:09:10,631 --> 00:09:13,137
+In MyVisitor we still need yet
+
+219
+00:09:13,130 --> 00:09:15,413
+create a constructor,
+
+220
+00:09:15,973 --> 00:09:18,617
+for joining all the collection
+
+221
+00:09:18,610 --> 00:09:21,760
+of definition answers
+
+222
+00:09:22,204 --> 00:09:24,577
+and save accordingly
+
+223
+00:09:24,570 --> 00:09:26,715
+so that afterward we can look for commands:
+
+224
+00:09:27,306 --> 00:09:29,231
+For any given string:
+
+225
+00:09:29,230 --> 00:09:32,137
+It's given to us a function with this name.
+
+226
+00:09:33,435 --> 00:09:35,484
+In this case we don't need
+
+227
+00:09:35,480 --> 00:09:36,573
+to care about the
+
+228
+00:09:36,570 --> 00:09:38,826
+"definedFunctions" can be null
+
+229
+00:09:38,820 --> 00:09:40,257
+we consider that just here,
+
+230
+00:09:40,250 --> 00:09:42,048
+we say that if it is "null":
+
+231
+00:09:42,040 --> 00:09:44,151
+Then our "definedFunctions" need
+
+232
+00:09:44,150 --> 00:09:46,288
+to be just an "empty set",
+
+233
+00:09:47,311 --> 00:09:50,124
+giving a practical "emptySet" method
+
+234
+00:09:50,120 --> 00:09:52,777
+to return an efficient empty set
+
+235
+00:09:52,990 --> 00:09:54,973
+and if it's not "null",
+
+236
+00:09:54,970 --> 00:09:56,520
+then we just take the set,
+
+237
+00:09:56,520 --> 00:09:58,146
+which was handed over to us.
+
+238
+00:10:00,013 --> 00:10:02,102
+So, now we can return again
+
+239
+00:10:02,100 --> 00:10:04,017
+on our "visitFunctionCall"
+
+240
+00:10:04,010 --> 00:10:06,275
+and now we have all files available
+
+241
+00:10:06,270 --> 00:10:09,062
+to create on our "functionIsDefined"
+
+242
+00:10:09,062 --> 00:10:11,060
+with something that works.
+
+243
+00:10:11,542 --> 00:10:13,120
+We take a look also here,
+
+244
+00:10:13,120 --> 00:10:15,311
+in our "definedFunctions":
+
+245
+00:10:15,542 --> 00:10:19,977
+If this set does not contain:
+
+246
+00:10:19,970 --> 00:10:23,355
+An entry with our "function name",
+
+247
+00:10:23,350 --> 00:10:25,413
+then our function is not defined
+
+248
+00:10:25,410 --> 00:10:27,555
+and we want to throw an error.
+
+249
+00:10:27,826 --> 00:10:29,657
+Now we can execute our test once more
+
+250
+00:10:29,650 --> 00:10:31,728
+and we look if it goes
+
+251
+00:10:31,720 --> 00:10:33,200
+and the test passes.
+
+252
+00:10:33,200 --> 00:10:35,751
+And really: It has worked!
+
+253
+00:10:36,053 --> 00:10:38,382
+The test runs successfully,
+
+254
+00:10:38,380 --> 00:10:39,688
+immediately is
+
+255
+00:10:39,680 --> 00:10:42,333
+thrown a reasonable error message
+
+256
+00:10:42,330 --> 00:10:44,782
+as soon as we call a function,
+
+257
+00:10:44,780 --> 00:10:46,631
+not yet defined.
+
+258
+00:10:47,030 --> 00:10:48,595
+In this episode we learned
+
+259
+00:10:48,590 --> 00:10:50,875
+how we can put in an additional visitor
+
+260
+00:10:50,870 --> 00:10:54,106
+to obtain a list with all the defined functions.
+
+261
+00:10:54,100 --> 00:10:55,435
+In addition, we learned
+
+262
+00:10:55,430 --> 00:10:57,373
+how to set the obtained list so that
+
+263
+00:10:57,370 --> 00:11:00,115
+we produce a meaningful error message
+
+264
+00:11:00,110 --> 00:11:01,524
+if the programmer searches
+
+265
+00:11:01,520 --> 00:11:02,888
+a function call in which
+
+266
+00:11:02,880 --> 00:11:04,493
+it wasn't defined already.
+
+267
+00:11:04,490 --> 00:11:05,400
+In the next episodes
+
+268
+00:11:05,400 --> 00:11:06,782
+we'll be able to expand our system
+
+269
+00:11:06,780 --> 00:11:09,217
+by verifying that the number of parameters
+
+270
+00:11:09,210 --> 00:11:10,915
+is correct in the function call
+
+271
+00:11:10,910 --> 00:11:13,697
+and that no function was not twice defined.
+
+272
+00:11:13,690 --> 00:11:14,715
+Until then:
+
+273
+00:11:14,710 --> 00:11:16,680
+Comment with your questions,
+
+274
+00:11:16,680 --> 00:11:18,071
+problems and requests.
+
+275
+00:11:18,070 --> 00:11:20,235
+Leave a thumb up if you liked the video
+
+276
+00:11:20,230 --> 00:11:21,604
+and subscribe my channel
+
+277
+00:11:21,600 --> 00:11:23,977
+so you will not miss any new episode.
+
+278
+00:11:24,151 --> 00:11:25,346
+Thanks a lot to Gadarol
+
+279
+00:11:25,340 --> 00:11:27,853
+that permitted to use his studio for the recordings
+
+280
+00:11:27,850 --> 00:11:30,253
+and thanks a lot to you for paying attention. 
+
+281
+00:11:30,250 --> 00:11:32,280
+We'll be back together in another:
+
+282
+00:11:32,280 --> 00:11:34,280
+"Let's build a compiler".
+

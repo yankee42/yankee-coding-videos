@@ -1,0 +1,664 @@
+﻿1
+00:00:00,000 --> 00:00:02,946
+Welcome back to "Let's build a compiler".
+
+2
+00:00:02,940 --> 00:00:05,555
+In the last episode we had constructed in our visitor
+
+3
+00:00:05,550 --> 00:00:08,520
+A "UndeclaredVariableException",
+
+4
+00:00:08,520 --> 00:00:11,542
+that access over an undefined variable
+
+5
+00:00:11,540 --> 00:00:13,435
+saying what it really is.
+
+6
+00:00:13,430 --> 00:00:16,111
+and including the line number and column line
+
+7
+00:00:16,110 --> 00:00:18,995
+from our file when the access is done.
+
+8
+00:00:19,644 --> 00:00:22,933
+In this episode we will expand our exceptions,
+
+9
+00:00:22,930 --> 00:00:25,586
+this is also good for changing the error forms.
+
+10
+00:00:25,666 --> 00:00:27,555
+Also, we will add an Exception
+
+11
+00:00:27,550 --> 00:00:30,182
+for duplicated variables definition
+
+12
+00:00:30,180 --> 00:00:32,457
+and we will look at what actually passes
+
+13
+00:00:32,450 --> 00:00:34,511
+if our compiler don't tests
+
+14
+00:00:34,510 --> 00:00:37,057
+an erroneous source.
+
+15
+00:00:39,186 --> 00:00:42,111
+We have here also this "varDeclaration",
+
+16
+00:00:42,110 --> 00:00:43,266
+above there I say:
+
+17
+00:00:43,260 --> 00:00:45,906
+This is naturally good if one variable is undeclared,
+
+18
+00:00:45,900 --> 00:00:47,915
+because we don't want to define it twice,
+
+19
+00:00:47,910 --> 00:00:49,777
+but certainly, above we still have a point:
+
+20
+00:00:49,777 --> 00:00:51,770
+It doesn't have so soon to exist.
+
+21
+00:00:51,770 --> 00:00:54,000
+If the variable does yet exist
+
+22
+00:00:54,000 --> 00:00:56,297
+we should also return an error.
+
+23
+00:00:56,290 --> 00:00:59,457
+Also we will expand our specification:
+
+24
+00:01:01,306 --> 00:01:05,413
+We take once more this test case from here as template
+
+25
+00:01:05,410 --> 00:01:07,053
+and then we say here:
+
+26
+00:01:07,050 --> 00:01:10,031
+We have "int x"
+
+27
+00:01:11,217 --> 00:01:15,346
+and then we have in the next line
+
+28
+00:01:19,444 --> 00:01:21,306
+one more time "int x".
+
+29
+00:01:21,942 --> 00:01:28,342
+Na, we would prefer here to take the "System.lineSeparator".
+
+30
+00:01:29,520 --> 00:01:32,737
+This is an error and we need to say now
+
+31
+00:01:32,730 --> 00:01:35,671
+not "throwsUndeclaredVariableException",
+
+32
+00:01:35,670 --> 00:01:43,991
+but: "throwsVariableAlreadyDefinedException"...
+
+33
+00:01:43,990 --> 00:01:47,595
+..."ifVariable"... or...
+
+34
+00:01:47,590 --> 00:01:54,515
+"whenDefiningAlreadyDefinedVariable".
+
+35
+00:01:57,693 --> 00:01:59,324
+Then we need here naturally also
+
+36
+00:01:59,320 --> 00:02:01,933
+adjust the "expectedException",
+
+37
+00:02:01,930 --> 00:02:04,666
+also it isn't anymore "undeclaredVariable",
+
+38
+00:02:04,660 --> 00:02:09,008
+but "VariableAlreadyDefined".
+
+39
+00:02:10,137 --> 00:02:14,248
+Also our "expectedExceptionsMessageRegExp"
+
+40
+00:02:14,240 --> 00:02:15,608
+will change itself a bit:
+
+41
+00:02:15,600 --> 00:02:19,680
+And really, it's the number 2 error in here
+
+42
+00:02:20,133 --> 00:02:25,128
+and at position 1, 2, 3, 4.
+
+43
+00:02:30,320 --> 00:02:32,684
+And now we have:
+
+44
+00:02:34,884 --> 00:02:39,813
+Variable already defined.
+
+45
+00:02:41,057 --> 00:02:42,844
+Perhaps more a colon,
+
+46
+00:02:42,840 --> 00:02:44,662
+then the sentence makes more sense.
+
+47
+00:02:45,124 --> 00:02:48,075
+Now we need to create this Exception.
+
+48
+00:02:51,755 --> 00:02:53,715
+Again in our source directory
+
+49
+00:02:53,710 --> 00:02:56,248
+and to our other Exception
+
+50
+00:02:57,586 --> 00:02:59,177
+and we need here, of course,
+
+51
+00:02:59,170 --> 00:03:00,626
+very similar things
+
+52
+00:03:00,620 --> 00:03:04,035
+like we also have in our UndeclaredVariableException,
+
+53
+00:03:04,030 --> 00:03:06,844
+we have "line" and the "column" too
+
+54
+00:03:06,840 --> 00:03:08,075
+and that's why it makes sense
+
+55
+00:03:08,070 --> 00:03:10,720
+we take a common superclass.
+
+56
+00:03:10,720 --> 00:03:14,315
+also we create a new class here again
+
+57
+00:03:14,310 --> 00:03:17,697
+and then we name it "CompileException"
+
+58
+00:03:18,964 --> 00:03:22,893
+like an all Exceptions superclass that
+
+59
+00:03:22,890 --> 00:03:25,911
+occurs during our compiling process.   
+
+60
+00:03:27,080 --> 00:03:29,124
+And now gets some of the features,  
+
+61
+00:03:29,120 --> 00:03:33,840
+which until now occurred in the "UndeclaredVariableException".
+
+62
+00:03:33,840 --> 00:03:38,324
+namely it extends from the "RuntimeException",
+
+63
+00:03:43,080 --> 00:03:47,240
+then here it gets "line" and "column" here
+
+64
+00:03:50,613 --> 00:03:55,026
+and we do both fields then "protected"
+
+65
+00:03:55,020 --> 00:03:58,760
+with it we can access in the efferent classes.
+
+66
+00:03:58,760 --> 00:04:01,666
+And then we'll
+
+67
+00:04:01,660 --> 00:04:05,293
+also we insert the constructor here.
+
+68
+00:04:12,626 --> 00:04:15,066
+This is now, clearly, not necessarily a varName token,
+
+69
+00:04:15,060 --> 00:04:17,368
+that's why I call the variable only "token",
+
+70
+00:04:17,360 --> 00:04:19,537
+because we don't know what this one token is for
+
+71
+00:04:19,530 --> 00:04:23,253
+and then we couldn't here on "varName"
+
+72
+00:04:23,250 --> 00:04:25,382
+expand it too.
+
+73
+00:04:25,822 --> 00:04:28,435
+The name need to be adjusted
+
+74
+00:04:28,430 --> 00:04:29,924
+and then it's good.
+
+75
+00:04:30,208 --> 00:04:34,511
+Then we will not extend that now
+
+76
+00:04:34,510 --> 00:04:36,893
+the UndeclaredVariableException from the RuntimeException,
+
+77
+00:04:36,890 --> 00:04:39,968
+but from our CompileException
+
+78
+00:04:40,404 --> 00:04:41,924
+and we will here
+
+79
+00:04:41,920 --> 00:04:44,253
+toss out the "line" and the "column"
+
+80
+00:04:45,711 --> 00:04:48,235
+and here we toss this out too
+
+81
+00:04:48,488 --> 00:04:53,408
+and instead of delegate to our super-constructor.
+
+82
+00:04:55,315 --> 00:04:56,542
+So, with it is our class
+
+83
+00:04:56,540 --> 00:04:58,253
+this time it becomes a little shorter
+
+84
+00:04:58,250 --> 00:05:01,208
+and in our VariableAlreadyDefinedException
+
+85
+00:05:01,200 --> 00:05:02,613
+you see something like this here,
+
+86
+00:05:02,610 --> 00:05:07,884
+there we extend in the case above from our CompileException,
+
+87
+00:05:11,204 --> 00:05:14,208
+we put a constructor on,
+
+88
+00:05:15,271 --> 00:05:18,000
+that becomes "variableToken"
+
+89
+00:05:25,026 --> 00:05:28,760
+and it delegates the superclass
+
+90
+00:05:34,995 --> 00:05:38,426
+and it has also a "variableName"
+
+91
+00:05:43,293 --> 00:05:45,391
+and we need here also
+
+92
+00:05:45,390 --> 00:05:48,613
+another getMessage method.
+
+93
+00:05:51,146 --> 00:05:53,986
+Here it looks a little similar,
+
+94
+00:05:53,986 --> 00:05:55,980
+so I hold it here,
+
+95
+00:05:59,102 --> 00:06:02,093
+only that it doesn't call "undeclared variable"
+
+96
+00:06:02,090 --> 00:06:07,840
+but "variable already defined".
+
+97
+00:06:11,582 --> 00:06:14,173
+So, we only have still missing the "import",
+
+98
+00:06:14,813 --> 00:06:18,915
+Ctrl+Shift+O, then gives you the auto-imports,
+
+99
+00:06:18,910 --> 00:06:21,191
+we take the v4 token
+
+100
+00:06:22,888 --> 00:06:25,240
+and then we need this Exception
+
+101
+00:06:25,240 --> 00:06:27,360
+of course, to throw.
+
+102
+00:06:27,906 --> 00:06:30,617
+For this, we go again into our visitor
+
+103
+00:06:30,610 --> 00:06:34,942
+and we go to the "visitVarDeclaration"
+
+104
+00:06:36,026 --> 00:06:38,986
+and we look at it now, before looking it later:
+
+105
+00:06:38,980 --> 00:06:45,053
+"if (variables.containsKey)"
+
+106
+00:06:45,977 --> 00:06:48,542
+and now from our context:
+
+107
+00:06:49,364 --> 00:06:53,395
+"varName.getText()".
+
+108
+00:06:54,884 --> 00:06:58,702
+Also, when this variable is already defined,
+
+109
+00:06:59,871 --> 00:07:07,004
+then we toss out a VariableAlreadyDefinedException.
+
+110
+00:07:08,764 --> 00:07:11,293
+The new is really important, don't you forget
+
+111
+00:07:11,773 --> 00:07:16,062
+and pass "ctx.varName".
+ 
+112
+00:07:18,484 --> 00:07:22,542
+So, we execute our test one more time
+
+113
+00:07:28,306 --> 00:07:30,111
+and se: I have forgot something.
+
+114
+00:07:30,110 --> 00:07:33,835
+Namely here: There is only null arrived,
+
+115
+00:07:33,830 --> 00:07:35,284
+this is also obvious
+
+116
+00:07:35,280 --> 00:07:37,204
+when it doesn't start properly
+
+117
+00:07:37,200 --> 00:07:39,435
+and as you can see one more time,
+
+118
+00:07:39,430 --> 00:07:42,613
+that is such a specification in the form of a
+
+119
+00:07:42,610 --> 00:07:44,857
+very helpful automated test,
+
+120
+00:07:44,850 --> 00:07:47,200
+because if one does forget such little things,
+
+121
+00:07:47,200 --> 00:07:49,004
+then does find it very quickly.
+
+122
+00:07:50,071 --> 00:07:53,711
+So we go back to our
+
+123
+00:07:53,710 --> 00:07:56,373
+VariableAlreadyDefinedException
+
+124
+00:07:56,370 --> 00:08:00,075
+and we write here then
+
+125
+00:08:00,070 --> 00:08:03,200
+the "varName"
+
+126
+00:08:03,200 --> 00:08:05,973
+from our variableNameToken
+
+127
+00:08:05,970 --> 00:08:08,751
+when it starts.
+
+128
+00:08:10,608 --> 00:08:12,515
+Then we run the test one more time
+
+129
+00:08:15,422 --> 00:08:17,231
+and this time it did work,
+
+130
+00:08:17,230 --> 00:08:19,080
+All tests are okay,
+
+131
+00:08:19,080 --> 00:08:23,075
+also our new "throwsVariableAlreadyDefinedException" test.
+
+132
+00:08:23,075 --> 00:08:23,083
+Thus, I want to show you one more time
+
+133
+00:08:25,070 --> 00:08:26,324
+how all this looks,
+
+134
+00:08:26,320 --> 00:08:30,151
+if we execute our Compiler, so to speak, "normal"
+
+135
+00:08:30,150 --> 00:08:33,635
+with the help of our main class and an error occurrence.
+
+136
+00:08:33,630 --> 00:08:36,644
+We will also adjust or code.demo file
+
+137
+00:08:36,640 --> 00:08:40,351
+and now we toss in here:
+
+138
+00:08:42,737 --> 00:08:44,133
+"println(x)".
+
+139
+00:08:45,582 --> 00:08:49,426
+and then we'll execute our "Main" once.
+
+140
+00:08:49,631 --> 00:08:52,204
+Then we observe what goes with the output.
+
+141
+00:08:52,200 --> 00:08:54,942
+We see here also a Exception in main now,
+
+142
+00:08:54,940 --> 00:08:58,377
+with an UndeclaredVariableException,
+
+143
+00:08:58,370 --> 00:09:01,000
+in row 1, at position 8,
+
+144
+00:09:01,000 --> 00:09:04,022
+here we have then an "undeclared variable" "x".
+
+145
+00:09:04,617 --> 00:09:08,351
+Now we can, by this, read very well
+
+146
+00:09:08,350 --> 00:09:10,031
+what we have done wrong,
+
+147
+00:09:10,791 --> 00:09:12,648
+In this episode we learned how we can
+
+148
+00:09:12,640 --> 00:09:13,960
+use Exception on Visitor
+
+149
+00:09:13,960 --> 00:09:16,613
+for different types of errors.
+
+150
+00:09:16,610 --> 00:09:19,640
+A common superclass for all the compilation errors,
+
+151
+00:09:19,640 --> 00:09:21,888
+that can save the error line and column
+
+152
+00:09:21,880 --> 00:09:23,528
+and can store
+
+153
+00:09:23,520 --> 00:09:26,426
+specific error details in extended classes.
+
+154
+00:09:26,884 --> 00:09:28,560
+Do you have questions or requests?
+
+155
+00:09:28,560 --> 00:09:30,311
+Write me in the comments!
+
+156
+00:09:30,310 --> 00:09:32,231
+Let me a thumb up here
+
+157
+00:09:32,230 --> 00:09:33,706
+if you liked the video
+
+158
+00:09:33,700 --> 00:09:36,662
+and subscribe so that you never miss a new episode.
+
+159
+00:09:36,977 --> 00:09:38,275
+Thanks a lot to Gadarol,
+
+160
+00:09:38,270 --> 00:09:39,248
+that permitted me
+
+161
+00:09:39,240 --> 00:09:40,835
+record in his studio.
+
+162
+00:09:40,830 --> 00:09:43,373
+And thank you very much for your attention.
+
+163
+00:09:43,640 --> 00:09:44,928
+My name is Yankee,
+
+164
+00:09:44,920 --> 00:09:46,391
+I hope you have enjoyed,
+
+165
+00:09:46,390 --> 00:09:47,582
+Until next time,
+
+166
+00:09:47,580 --> 00:09:50,368
+for the next: "Let's build a compiler".
+
