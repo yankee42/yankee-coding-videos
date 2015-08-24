@@ -1,0 +1,587 @@
+﻿1
+00:00:00,000 --> 00:00:02,940
+Welcome back to "Let's build a compiler". 
+
+2
+00:00:02,940 --> 00:00:04,330
+In this episode we will
+
+3
+00:00:04,330 --> 00:00:08,580
+build in our language the minus, times and division operators.
+
+4
+00:00:08,580 --> 00:00:12,890
+My name is Yankee and I hope you have a lot of fun.
+
+5
+00:00:13,080 --> 00:00:16,850
+Initially, we will specify our compiler,
+
+6
+00:00:16,850 --> 00:00:20,460
+which will as well be known by the name "CompilerTest".
+
+7
+00:00:20,460 --> 00:00:24,640
+Then we'll go to our examples, that we want to be able to
+
+8
+00:00:24,640 --> 00:00:28,600
+copy one line as sample
+
+9
+00:00:28,600 --> 00:00:33,110
+and put down here some examples.
+
+10
+00:00:33,110 --> 00:00:35,710
+In fact: What will we build?
+
+11
+00:00:35,710 --> 00:00:38,210
+Firstly, we'll have a subtraction,
+
+12
+00:00:38,210 --> 00:00:40,390
+taking "3-2" for example,
+
+13
+00:00:40,390 --> 00:00:43,960
+then we will have an 1 as output.
+
+14
+00:00:43,960 --> 00:00:47,320
+Then we might as well build multiplication,
+
+15
+00:00:47,320 --> 00:00:52,550
+taking "2+3", so that we need "6" as output.
+
+16
+00:00:52,550 --> 00:00:59,920
+then Division, namely "6/2" as example of it,
+
+17
+00:00:59,920 --> 00:01:03,940
+so comes 3 as output.
+
+18
+00:01:03,940 --> 00:01:05,600
+Then, we can think later
+
+19
+00:01:05,600 --> 00:01:08,720
+on what happens if no result returns as output,
+
+20
+00:01:08,720 --> 00:01:13,050
+also, what should happened with "7/2"?
+
+21
+00:01:13,050 --> 00:01:16,320
+Typically, when we deal with integers
+
+22
+00:01:16,320 --> 00:01:19,100
+we cut the ".5" from behind,
+
+23
+00:01:19,100 --> 00:01:21,080
+Until this moment, we've worked only with integers,
+
+24
+00:01:21,080 --> 00:01:24,030
+later we naturally will have floating point types
+
+25
+00:01:24,030 --> 00:01:26,970
+but for the beginning we still with what we have
+
+26
+00:01:26,970 --> 00:01:32,650
+and the result stays 3, without the 0.5 behind.
+
+27
+00:01:32,650 --> 00:01:36,140
+Then one could naturally combine the operators:
+
+28
+00:01:36,140 --> 00:01:40,840
+For example, if we have: "8-2+5",
+
+29
+00:01:40,840 --> 00:01:46,750
+is really important to calculate first the "8-2" (making 6)
+
+30
+00:01:46,750 --> 00:01:50,380
+and thereafter "+5", so we'll have 11.
+
+31
+00:01:50,380 --> 00:01:53,980
+In place of "2+5", which would be 7 
+
+32
+00:01:53,980 --> 00:01:57,130
+and so does "8-7", which would be 1.
+
+33
+00:01:57,130 --> 00:02:06,250
+The same happening to division, were we could take "8/2*4" as example.
+
+34
+00:02:06,250 --> 00:02:11,300
+"8/2" are 4, times 4 makes 16.
+
+35
+00:02:11,880 --> 00:02:13,860
+Here again, another thing outcomes,
+
+36
+00:02:13,860 --> 00:02:17,780
+if we calculate first the '2*4", it would be 8
+
+37
+00:02:17,780 --> 00:02:21,010
+and then we would have "8/8, naturally 1.
+
+38
+00:02:21,010 --> 00:02:27,350
+Then we can also combine subtraction with the multiplication:
+
+39
+00:02:27,350 --> 00:02:32,140
+We can take for example "2+3*3",
+
+40
+00:02:32,140 --> 00:02:38,520
+we should first calculate "3*3" (being 9), "+2" being 11, 
+
+41
+00:02:38,520 --> 00:02:43,760
+if we would first calculate "2+3", then would be 5, times 3 would be 15,
+
+42
+00:02:43,760 --> 00:02:46,170
+that's another thing again.
+
+43
+00:02:46,570 --> 00:02:50,660
+and the same, once again, with the subtraction:
+
+44
+00:02:50,660 --> 00:02:56,070
+Like in the example "9-2*3":
+
+45
+00:02:56,500 --> 00:03:02,150
+"2*3" are 6 and "9-6" are 3.
+
+46
+00:03:02,150 --> 00:03:09,570
+In reverse, "9-2" would be 7, times 3 would be 21.
+
+47
+00:03:10,320 --> 00:03:13,780
+Then we save this and go forward...
+
+48
+00:03:13,780 --> 00:03:18,380
+Ah, for the first time we will see if our test has fails already.
+
+49
+00:03:18,710 --> 00:03:22,220
+Yes, we have many "Failures" here, 7 Failures,
+
+50
+00:03:22,220 --> 00:03:24,290
+these all are our new tests
+
+51
+00:03:24,290 --> 00:03:28,770
+and here at the top we have many "Token recognition error"s,
+
+52
+00:03:28,770 --> 00:03:33,170
+because ANTLR still not recognize all these operators over here.
+
+53
+00:03:33,170 --> 00:03:36,660
+So now we go next to our grammar
+
+54
+00:03:36,660 --> 00:03:40,220
+and we will continue with our new operators.
+
+55
+00:03:40,220 --> 00:03:45,440
+At first, we rename now some things in our grammar.
+
+56
+00:03:45,440 --> 00:03:49,110
+Because our "addition" rule will either way be expanded,
+
+57
+00:03:49,110 --> 00:03:51,340
+to make it contain not only additions,
+
+58
+00:03:51,340 --> 00:03:54,090
+but any math expression,
+
+59
+00:03:54,090 --> 00:03:58,020
+for this I call the "expression" rule
+
+60
+00:03:58,610 --> 00:04:02,730
+and then I will be using default English terms here,
+
+61
+00:04:02,730 --> 00:04:08,520
+because at the moment there is an incompatibility between German and English writing
+
+62
+00:04:08,520 --> 00:04:11,980
+and this is not good.
+
+63
+00:04:13,400 --> 00:04:16,510
+Otherwise, I like the idea where 
+
+64
+00:04:16,510 --> 00:04:20,000
+with this number translate to the English
+
+65
+00:04:20,000 --> 00:04:25,890
+e is very unpractical, if there are too much German terms.
+
+66
+00:04:31,210 --> 00:04:34,010
+After we have this done...
+
+67
+00:04:37,410 --> 00:04:40,400
+After we have this done again
+
+68
+00:04:40,400 --> 00:04:44,110
+in our usual known way
+
+69
+00:04:44,110 --> 00:04:46,520
+I build our parser again,
+
+70
+00:04:46,520 --> 00:04:48,900
+pressing "F5" on parser,
+
+71
+00:04:48,900 --> 00:04:50,720
+then we go to the visitor
+
+72
+00:04:50,720 --> 00:04:53,080
+and adapt our terms,
+
+73
+00:04:53,080 --> 00:04:56,050
+this thing here is called naturally "right" now,
+
+74
+00:04:56,050 --> 00:05:03,080
+"ZahlContext" doesn't work anymore, now we name it "NumberContext"
+
+75
+00:05:04,160 --> 00:05:09,910
+with "Ctrl+Shift+0" we can fix the importations,
+
+76
+00:05:17,080 --> 00:05:20,610
+and we save again and we'll see later,
+
+77
+00:05:20,610 --> 00:05:25,000
+if our tests still correct or working badly like just before.
+
+78
+00:05:25,000 --> 00:05:27,540
+Yes, our first three tests are working
+
+79
+00:05:27,540 --> 00:05:31,670
+and the news, those, that we generated just now, aren't working.
+
+80
+00:05:31,670 --> 00:05:34,710
+We go back to our grammar
+
+81
+00:05:34,710 --> 00:05:37,400
+and start now with the improvements.
+
+82
+00:05:37,400 --> 00:05:41,520
+At first, we will build our "minus" operator.
+
+83
+00:05:41,520 --> 00:05:44,850
+We'll gona by here also copy our previous "plus" rule
+
+84
+00:05:44,850 --> 00:05:49,340
+and put an alternative for the "minus".
+
+85
+00:05:49,340 --> 00:05:52,770
+We call this "Minus",
+
+86
+00:05:52,770 --> 00:05:54,940
+we change the operator to "minus" here,
+
+87
+00:05:54,940 --> 00:05:58,300
+we save, we return again to the console,
+
+88
+00:05:58,300 --> 00:06:01,970
+we leave our parser generate anew,
+
+89
+00:06:01,970 --> 00:06:04,250
+go to the parser, press "F5",
+
+90
+00:06:04,250 --> 00:06:07,030
+we go over the visitor, behind the visitPlus
+
+91
+00:06:07,030 --> 00:06:12,040
+now we can insert a new "visitMinus" method,
+
+92
+00:06:12,040 --> 00:06:15,350
+it works similarly to "visitPlus",
+
+93
+00:06:15,350 --> 00:06:19,350
+Now, here I simply copy the template,
+
+94
+00:06:20,080 --> 00:06:25,760
+for the subtraction we only in place of "iadd" we name it "isub".
+
+95
+00:06:25,760 --> 00:06:31,410
+Wonderful, we close it and leave the test run once more.
+
+96
+00:06:34,200 --> 00:06:36,290
+What's the result?
+
+97
+00:06:37,090 --> 00:06:41,940
+In our minus test the "println(3-2) worked!
+
+98
+00:06:41,940 --> 00:06:43,820
+Hey! That was simple!
+
+99
+00:06:43,820 --> 00:06:47,760
+We want to see once again if it will be right together with the other operators.
+
+100
+00:06:47,760 --> 00:06:51,300
+So we copy again our previous rule too,
+
+101
+00:06:51,300 --> 00:06:57,070
+again for the division and multiplication,
+
+102
+00:07:06,760 --> 00:07:13,320
+our parser must be generated again with the old known command,
+
+103
+00:07:13,320 --> 00:07:16,480
+let's go to the parser with "F5",
+
+104
+00:07:16,480 --> 00:07:18,520
+we go to our visitor
+
+105
+00:07:18,520 --> 00:07:22,950
+and will implement the new "visit" method.
+
+106
+00:07:23,600 --> 00:07:26,230
+For division
+
+107
+00:07:27,780 --> 00:07:31,070
+The same again what we have had with minus,
+
+108
+00:07:31,070 --> 00:07:35,890
+just with "idiv" standing for i-divide
+
+109
+00:07:36,400 --> 00:07:41,210
+and then again another for multiplication
+
+110
+00:07:42,520 --> 00:07:47,280
+and we call the instructions "imul".
+
+111
+00:07:47,980 --> 00:07:52,350
+We save, leave our tests run
+
+112
+00:07:53,910 --> 00:07:56,380
+and what do we see here?
+
+113
+00:07:56,780 --> 00:08:01,510
+Eight of our tests worked, two doesn't.
+
+114
+00:08:01,510 --> 00:08:04,000
+Times worked, division worked,
+
+115
+00:08:04,000 --> 00:08:07,340
+that with the "7/2" also worked,
+
+116
+00:08:07,340 --> 00:08:10,520
+"8/2*4" worked too,
+
+117
+00:08:10,520 --> 00:08:14,600
+but, unfortunately these two didn't work.
+
+118
+00:08:14,600 --> 00:08:19,750
+And as you can see here: we have 11 waiting, but 15 retrieved,
+
+119
+00:08:19,750 --> 00:08:24,340
+obviously, the operator order was not properly observed here,
+
+120
+00:08:24,340 --> 00:08:29,210
+here it would have to calculate "2+3" first, making 5
+
+121
+00:08:29,210 --> 00:08:32,720
+and then times 3, making 15, and it's what we received here.
+
+122
+00:08:32,720 --> 00:08:35,970
+but, sadly, this is not what we wanted.
+
+123
+00:08:36,340 --> 00:08:38,670
+At this local it gives us a little Cliffhanger.
+
+124
+00:08:38,670 --> 00:08:41,400
+How we manage correctly the operators priorities,
+
+125
+00:08:41,400 --> 00:08:45,570
+so that our two remaining tests would work you will learn in the next episode.
+
+126
+00:08:45,570 --> 00:08:48,090
+In this episode we learned how to build minus
+
+127
+00:08:48,090 --> 00:08:51,230
+division and plus operators in the grammar
+
+128
+00:08:51,230 --> 00:08:53,700
+and how we generate combined instructions:
+
+129
+00:08:53,700 --> 00:08:56,350
+Further operators with sub-rules definitions
+
+130
+00:08:56,350 --> 00:08:59,520
+and combined instructions generation with new visit methods,
+
+131
+00:08:59,520 --> 00:09:02,660
+looks almost exactly like "visitPlus" method.
+
+132
+00:09:02,660 --> 00:09:05,250
+On our next episode we're expecting, as mentioned
+
+133
+00:09:05,250 --> 00:09:07,730
+the right order definition for the operators
+
+134
+00:09:07,730 --> 00:09:08,910
+and we expect later
+
+135
+00:09:08,910 --> 00:09:12,790
+variables, loops, conditional functions and much more.
+
+136
+00:09:12,790 --> 00:09:15,920
+Write me in the comments, for what you want for the next episodes.
+
+137
+00:09:15,920 --> 00:09:18,480
+Naturally, I would be flattered with comment replies:
+
+138
+00:09:18,480 --> 00:09:19,950
+What are the pluses and the minuses?
+
+139
+00:09:19,950 --> 00:09:21,950
+How do you take advantage of the videos?
+
+140
+00:09:21,950 --> 00:09:23,470
+Do you program along?
+
+141
+00:09:23,470 --> 00:09:26,440
+You use the videos for research about concrete problems?
+
+142
+00:09:26,440 --> 00:09:30,050
+Or do you watch the videos without any project, just for interest?
+
+143
+00:09:30,050 --> 00:09:33,730
+Thanks a lot to Gadarol, that permitted to record in his studio
+
+144
+00:09:33,730 --> 00:09:36,200
+and thank you very much for paying attention.
+
+145
+00:09:36,200 --> 00:09:38,570
+My name is Yankee, I hope you've had fun,
+
+146
+00:09:38,570 --> 00:09:40,420
+goodbye and see you later
+
+147
+00:09:40,420 --> 00:09:43,520
+for another: "Let's build a compiler".
