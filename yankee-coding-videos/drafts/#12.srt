@@ -1,0 +1,842 @@
+﻿1
+00:00:00,000 --> 00:00:02,946
+Willkommen zurück zu "Let's build a compiler".
+Bem-vindo de volta ao "Let's build a compiler".
+Welcome back to "Let's build a compiler".
+
+2
+00:00:02,940 --> 00:00:05,555
+In der letzten Folge haben wir in unserem Visitor
+No último episódio nós construímos no nosso visitor
+In the last episode we had constructed in our visitor
+
+3
+00:00:05,550 --> 00:00:08,520
+eine "UndeclaredVariableException" eingebaut,
+Uma "UndeclaredVariableException",
+A "UndeclaredVariableException",
+
+4
+00:00:08,520 --> 00:00:11,542
+die uns bei einem Zugriff auf eine nicht definierte Variable
+que acessa sobre uma variável não definida
+that access over an undefined variable
+
+5
+00:00:11,540 --> 00:00:13,435
+genau sagt was Sache ist.
+dizendo corretamente o que ela é.
+saying what it really is.
+
+6
+00:00:13,430 --> 00:00:16,111
+Und zwar inklusive Zeilennummer und Spaltennummer
+E inclusive o número da linha e número da coluna
+and including the line number and column line
+
+7
+00:00:16,110 --> 00:00:18,995
+aus unser Datei in der der Zugriff erfolgt.
+do nosso arquivo quando o acesso é realizado.
+from our file when the access is done.
+
+8
+00:00:19,644 --> 00:00:22,933
+In dieser Folge werden wir unsere Exceptions so ausweiten,
+Neste episódio iremos expandir as nossas Exceptions,
+In this episode we will expand our exceptions,
+
+9
+00:00:22,930 --> 00:00:25,586
+dass es auch für andere Formen von Fehlern taugt.
+isso também servirá para melhorar as formas dos erros.
+this is also good for changing the error forms.
+
+10
+00:00:25,666 --> 00:00:27,555
+Außerdem werden wir eine Exception
+Adicionalmente, iremos ter uma Exception
+Also, we will add an Exception
+
+11
+00:00:27,550 --> 00:00:30,182
+für doppelt definierte Variablen hinzufügen
+para definição de variáveis duplicadas
+for duplicated variables definition
+
+12
+00:00:30,180 --> 00:00:32,457
+und uns ansehen was eigentlich passiert
+e iremos ver o que realmente se passa
+and we will look at what actually passes
+
+13
+00:00:32,450 --> 00:00:34,511
+wenn wir unseren Compiler ohne Test
+se o nosso compilador não testar
+if our compiler don't tests
+
+14
+00:00:34,510 --> 00:00:37,057
+mit einem fehlerhaften Quelltext füttern.
+uma entrada cheia de falhas.
+an erroneous source.
+
+15
+00:00:39,186 --> 00:00:42,111
+Wir haben hier auch noch diese "varDeclaration",
+Nós temos aqui ainda esse "varDeclaration",
+We have here also this "varDeclaration",
+
+16
+00:00:42,110 --> 00:00:43,266
+da habe ich eben gesagt:
+ali em cima eu digo:
+above there I say:
+
+17
+00:00:43,260 --> 00:00:45,906
+Da ist es natürlich gut wenn die Variable nicht deklariert ist,
+Isto é naturalmente bom se uma variável não está declarada,
+This is naturally good if one variable is undeclared,
+
+18
+00:00:45,900 --> 00:00:47,915
+weil wir wollen sie ja nicht zweimal definieren,
+porque nós não queremos definir duas vezes,
+because we don't want to define it twice,
+
+19
+00:00:47,910 --> 00:00:49,777
+aber genau das ist eben auch noch ein Punkt:
+mas certamente acima nós ainda temos um ponto:
+but certainly, above we still have a point:
+
+20
+00:00:49,777 --> 00:00:51,770
+Sie sollte nicht schon existieren.
+Ela não deve já estar existindo.
+It doesn't have so soon to exist.
+
+21
+00:00:51,770 --> 00:00:54,000
+Wenn die Variable schon existiert
+Se a variável já existe
+If the variable does yet exist
+
+22
+00:00:54,000 --> 00:00:56,297
+sollten wir auch einen Fehler ausgeben.
+nós devemos ainda dar uma erro.
+we should also return an error.
+
+23
+00:00:56,290 --> 00:00:59,457
+Also erweitern wir wieder unsere Spezifikation:
+Também expandiremos nossa especificação:
+Also we will expand our specification:
+
+24
+00:01:01,306 --> 00:01:05,413
+Nehmen mal wieder diesen Testfall hier als Template
+Pegamos mais uma vez este caso de teste daqui como modelo
+We take once more this test case from here as template
+
+25
+00:01:05,410 --> 00:01:07,053
+und dann sagen wir hier:
+e então dizemos aqui:
+and then we say here:
+
+26
+00:01:07,050 --> 00:01:10,031
+Wir haben "int x"
+Nós temos "int x"
+We have "int x"
+
+27
+00:01:11,217 --> 00:01:15,346
+und dann haben wir in der nächsten Zeile
+e então temos na próxima linha
+and then we have in the next line
+
+28
+00:01:19,444 --> 00:01:21,306
+nochmal "int x".
+mais uma vez "int x".
+one more time "int x".
+
+29
+00:01:21,942 --> 00:01:28,342
+Na, nehmen wir hier lieber den "System.lineSperator".
+Na, nós pegaríamos preferencialmente o "System.lineSeparator" aqui.
+Na, we would prefer here to take the "System.lineSeparator".
+
+30
+00:01:29,520 --> 00:01:32,737
+Das ist jetzt ein Fehler und da sollten wir jetzt sagen
+Isto agora é um erro e nós devemos dizer agora
+This is an error and we need to say now
+
+31
+00:01:32,730 --> 00:01:35,671
+nicht "throwsUndeclaredVariableException",
+não "throwsUndeclaredVariableException",
+not "throwsUndeclaredVariableException",
+
+32
+00:01:35,670 --> 00:01:43,991
+sondern: "throwsVariableAlreadyDefinedException"...
+mas: "throwsVariableAlreadyDefinedException"...
+but: "throwsVariableAlreadyDefinedException"...
+
+33
+00:01:43,990 --> 00:01:47,595
+..."ifVariable"... oder...
+..."ifVariable"... ou...
+..."ifVariable"... or...
+
+34
+00:01:47,590 --> 00:01:54,515
+"whenDefiningAlreadyDefinedVariable".
+"whenDefiningAlreadyDefinedVariable".
+"whenDefiningAlreadyDefinedVariable".
+
+35
+00:01:57,693 --> 00:01:59,324
+Dann müssen wir natürlich hier unsere
+Então devemos naturalmente ainda
+Then we need here naturally also
+
+36
+00:01:59,320 --> 00:02:01,933
+"expectedException" auch noch anpassen,
+ajustar o "expectedException" aqui,
+adjust the "expectedException",
+
+37
+00:02:01,930 --> 00:02:04,666
+also ist es nicht mehr "undeclaredVariable",
+também não é mais "undeclaredVariable",
+also it isn't anymore "undeclaredVariable",
+
+38
+00:02:04,660 --> 00:02:09,008
+sondern "VariableAlreadyDefined".
+mas "VariableAlreadyDefined".
+but "VariableAlreadyDefined".
+
+39
+00:02:10,137 --> 00:02:14,248
+Auch unsere "expectedExceptionsMessageRegExp"
+Também nosso "expectedExceptionsMessageRegExp"
+Also our "expectedExceptionsMessageRegExp"
+
+40
+00:02:14,240 --> 00:02:15,608
+wird sich ein wenig ändern:
+irá se alterar um pouco:
+will change itself a bit:
+
+41
+00:02:15,600 --> 00:02:19,680
+Und zwar ist der Fehler jetzt hier in der 2. Zeile
+E realmente ele é o erro aqui do número 2 
+And really, it's the number 2 error in here
+
+42
+00:02:20,133 --> 00:02:25,128
+und dann an Position 1, 2, 3, 4.
+e na posição 1, 2, 3, 4.
+and at position 1, 2, 3, 4.
+
+43
+00:02:30,320 --> 00:02:32,684
+Und da haben wir jetzt:
+E agora nós temos:
+And now we have:
+
+44
+00:02:34,884 --> 00:02:39,813
+Variable already defined.
+Variable already defined.
+Variable already defined.
+
+45
+00:02:41,057 --> 00:02:42,844
+Vielleicht noch ein Doppelpunkt,
+Talvez mais um dois pontos,
+Perhaps more a colon,
+
+46
+00:02:42,840 --> 00:02:44,662
+dann macht der Satz mehr Sinn.
+então a sentença faz mais sentido.
+then the sentence makes more sense.
+
+47
+00:02:45,124 --> 00:02:48,075
+Auch diese Exception müssen wir jetzt anlegen.
+Agora ainda devemos criar este Exception.
+Now we need to create this Exception.
+
+48
+00:02:51,755 --> 00:02:53,715
+Wieder in unserem source directory
+Novamente no nosso diretório fonte
+Again in our source directory
+
+49
+00:02:53,710 --> 00:02:56,248
+und zu unser anderen Exception
+e ao nosso outro Exception
+and to our other Exception
+
+50
+00:02:57,586 --> 00:02:59,177
+und jetzt brauchen wir hier natürlich
+e é claro que precisamos aqui
+and we need here, of course,
+
+51
+00:02:59,170 --> 00:03:00,626
+ganz ähnliche Dinge
+coisas bem similares
+very similar things
+
+52
+00:03:00,620 --> 00:03:04,035
+wie wir auch in unser UndeclaredVariableException hatten,
+como nós temos no nosso UndeclaredVariableException também,
+like we also have in our UndeclaredVariableException,
+
+53
+00:03:04,030 --> 00:03:06,844
+also die "line" und die "column"
+também a "line" e a "column"
+we have "line" and the "column" too
+
+54
+00:03:06,840 --> 00:03:08,075
+und deswegen macht es Sinn
+e por isso isto faz sentido
+and that's why it makes sense
+
+55
+00:03:08,070 --> 00:03:10,720
+wir nehmen da eine gemeinsame Superklasse.
+nós pegamos aqui uma superclasse comum.
+we take a common superclass.
+
+56
+00:03:10,720 --> 00:03:14,315
+Also erstellen wir hier noch einmal eine neue Klasse
+também criamos aqui mais uma vez uma nova classe
+also we create a new class here again
+
+57
+00:03:14,310 --> 00:03:17,697
+und dann nennen wir die hier "CompileException"
+e então chamamos ela de "CompileException"
+and then we name it "CompileException"
+
+58
+00:03:18,964 --> 00:03:22,893
+als eine Superklasse für alle Exceptions die
+como uma superclasse para todas as Exceptions que
+like an all Exceptions superclass that
+
+59
+00:03:22,890 --> 00:03:25,911
+während unseres Kompiliervorgangs auftreten.
+ocorre enquanto nosso processo compila.
+occurs during our compiling process.   
+
+60
+00:03:27,080 --> 00:03:29,124
+Und die bekommt jetzt einige der Features,
+E que agora pega algumas características,
+And now gets some of the features,  
+
+61
+00:03:29,120 --> 00:03:33,840
+die bis jetzt in der "UndeclaredVariableException" vorkamen.
+que até agora ocorreram no "UndeclaredVariableException".
+which until now occurred in the "UndeclaredVariableException".
+
+62
+00:03:33,840 --> 00:03:38,324
+Nämlich sie leitet von der "RuntimeException" ab,
+que é derivado da "RuntimeException",
+namely it derives from the "RuntimeException",
+
+63
+00:03:43,080 --> 00:03:47,240
+dann bekommt sie hier auch "line" und "column"
+então pegamos também "line" e "column" aqui
+then here it gets "line" and "column" here
+
+64
+00:03:50,613 --> 00:03:55,026
+und die beiden Felder machen wir dann "protected"
+e em ambos os campos nós fazemos então "protected"
+and we do both fields then "protected"
+
+65
+00:03:55,020 --> 00:03:58,760
+damit wir in den ableitenden Klassen darauf zugreifen können.
+com isso nós podemos acessá-la das classes aferentes.
+with it we can access in the efferent classes.
+
+66
+00:03:58,760 --> 00:04:01,666
+Und dann werden wir
+E então nós iremos
+And then we'll
+
+67
+00:04:01,660 --> 00:04:05,293
+auch den Constructor hier noch einfügen.
+também inserimos ainda o construtor.
+also we insert the constructor here.
+
+68
+00:04:12,626 --> 00:04:15,066
+Das jetzt natürlich nicht unbedingt ein varName-Token,
+Isto é agora, claramente, não necessariamente um varName do token,
+This is now, clearly, not necessarily a varName token,
+
+69
+00:04:15,060 --> 00:04:17,368
+deswegen nenne ich die Variable auch nur "token",
+por isso eu chamo a variável ainda de "token" apenas,
+that's why I call the variable only "token",
+
+70
+00:04:17,360 --> 00:04:19,537
+weil wir wissen nicht was das für ein Token ist
+porque não sabemos para o que é este token
+because we don't know what this one token is for
+
+71
+00:04:19,530 --> 00:04:23,253
+und den "varName" können wir hier natürlich
+e então não poderíamos aqui no "varName"
+and then we couldn't here on "varName"
+
+72
+00:04:23,250 --> 00:04:25,382
+auch nicht verwenden.
+expandi-lo também.
+expand it too.
+
+73
+00:04:25,822 --> 00:04:28,435
+Der Name muss noch angepasst werden
+O nome deve ainda ser ajustado
+The name need to be adjusted
+
+74
+00:04:28,430 --> 00:04:29,924
+und dann ist gut.
+e então está bom.
+and then it's good.
+
+75
+00:04:30,208 --> 00:04:34,511
+Dann wird jetzt hier die UndeclaredVariableException
+Então não vamos mais derivar agora 
+Then we will not derive that now
+
+76
+00:04:34,510 --> 00:04:36,893
+nicht mehr von der RuntimeException ableiten,
+a UndeclaredVariableException da RuntimeException,
+the UndeclaredVariableException from the RuntimeException,
+
+77
+00:04:36,890 --> 00:04:39,968
+sondern von unser CompileException
+mas da nossa CompileException
+but from our CompileException
+
+78
+00:04:40,404 --> 00:04:41,924
+und wir werden hier
+e nós iremos aqui
+and we will here
+
+79
+00:04:41,920 --> 00:04:44,253
+das "line" und das "column" rauschmeißen
+jogar fora a "line" e a "column"
+toss out the "line" and the "column"
+
+80
+00:04:45,711 --> 00:04:48,235
+und das hier auch rausschmeißen     
+e isto daqui também jogamos fora
+and here we toss this out too
+
+81
+00:04:48,488 --> 00:04:53,408
+und stattdessen an unseren super-Konstruktor delegieren.
+e em vez de delegar ao nosso super-construtor.
+and instead of delegate to our super-constructor.
+
+82
+00:04:55,315 --> 00:04:56,542
+So, damit ist unsere Klasse
+Assim, com a nossa classe
+So, with it is our class
+
+83
+00:04:56,540 --> 00:04:58,253
+schonmal ein bißchen kürzer geworden
+desta vez ele se torna um pouco mais curto
+this time it becomes a little shorter
+
+84
+00:04:58,250 --> 00:05:01,208
+und in unser VariableAlreadyDefinedException
+e na nossa VariableAlreadyDefinedException
+and in our VariableAlreadyDefinedException
+
+85
+00:05:01,200 --> 00:05:02,613
+sieht das jetzt so ähnlich aus,
+você vê algo similar a isto aqui,
+you see something like this here,
+
+86
+00:05:02,610 --> 00:05:07,884
+da leiten wir ebenfalls von unser CompileException ab,
+aqui nós derivamos do nosso caso de cima pelo nosso CompileException,
+there we derive in the case above from our CompileException,
+
+87
+00:05:11,204 --> 00:05:14,208
+fügen einen Constructor ein,
+colocamos um construtor nele,
+we put a constructor on,
+
+88
+00:05:15,271 --> 00:05:18,000
+der das "variableToken" bekommt
+que se torna "variableToken"
+that becomes "variableToken"
+
+89
+00:05:25,026 --> 00:05:28,760
+und an die Superklasse delegiert
+e ele delega a superclasse
+and it delegates the superclass
+
+90
+00:05:34,995 --> 00:05:38,426
+und der hat auch einen "variableName"
+
+91
+00:05:43,293 --> 00:05:45,391
+und auch hier brauchen wir dann
+
+92
+00:05:45,390 --> 00:05:48,613
+noch eine getMessage-Methode.
+
+93
+00:05:51,146 --> 00:05:53,986
+Die sieht der hier ein wenig ähnlich,
+
+94
+00:05:53,986 --> 00:05:55,980
+deswegen klaue ich die mal hier,
+
+95
+00:05:59,102 --> 00:06:02,093
+nur dass es jetzt nicht heißt "undeclared variable"
+
+96
+00:06:02,090 --> 00:06:07,840
+sondern "variable already defined".
+
+97
+00:06:11,582 --> 00:06:14,173
+So, hier fehlt mir noch das "import",
+
+98
+00:06:14,813 --> 00:06:18,915
+Strg+Shift+O, dann kriegt ihr die auto-imports,
+
+99
+00:06:18,910 --> 00:06:21,191
+nehmen wir das v4-Token
+
+100
+00:06:22,888 --> 00:06:25,240
+und dann müssen wir diese Exception
+
+101
+00:06:25,240 --> 00:06:27,360
+natürlich auch noch werfen.
+
+102
+00:06:27,906 --> 00:06:30,617
+Dafür gehen wir also wieder in unseren Visitor
+
+103
+00:06:30,610 --> 00:06:34,942
+und gehen dann zu "visitVarDeclaration"
+
+104
+00:06:36,026 --> 00:06:38,986
+und da schauen wir jetzt vorher einmal nach:
+
+105
+00:06:38,980 --> 00:06:45,053
+"if (variables.containsKey)"
+
+106
+00:06:45,977 --> 00:06:48,542
+und jetzt von unserem Kontext:
+
+107
+00:06:49,364 --> 00:06:53,395
+"varName.getText()".
+
+108
+00:06:54,884 --> 00:06:58,702
+Also wenn diese Variable schon definiert ist,
+
+109
+00:06:59,871 --> 00:07:07,004
+ dann schmeißen wir eine VariableAlreadyDefinedException.
+
+110
+00:07:08,764 --> 00:07:11,293
+Das "new" ist ganz wichtig, nicht vergessen
+
+111
+00:07:11,773 --> 00:07:16,062
+und übergeben "ctx.varName".
+
+112
+00:07:18,484 --> 00:07:22,542
+So, dann führen wir unseren Test mal wieder aus
+
+113
+00:07:28,306 --> 00:07:30,111
+und sehen: Ich habe etwas vergessen.
+
+114
+00:07:30,110 --> 00:07:33,835
+Nämlich hier: Da ist hier nur null angekommen,
+
+115
+00:07:33,830 --> 00:07:35,284
+das habe ich also offensichtlich
+
+116
+00:07:35,280 --> 00:07:37,204
+ mal nicht richtig initialisiert
+
+117
+00:07:37,200 --> 00:07:39,435
+und da könnt ihr schonmal wieder sehen,
+
+118
+00:07:39,430 --> 00:07:42,613
+dass so eine Spezifikation in Form eines
+
+119
+00:07:42,610 --> 00:07:44,857
+automatisieren Tests sehr hilfreich ist,
+
+120
+00:07:44,850 --> 00:07:47,200
+denn wenn man solche Kleinigkeiten vergisst,
+
+121
+00:07:47,200 --> 00:07:49,004
+dann findet man die sehr schnell.
+
+122
+00:07:50,071 --> 00:07:53,711
+Also gehen wir zurück zu unser
+
+123
+00:07:53,710 --> 00:07:56,373
+VariableAlreadyDefinedException
+
+124
+00:07:56,370 --> 00:08:00,075
+und schreiben dann hier auch noch
+
+125
+00:08:00,070 --> 00:08:03,200
+dass der "varName" bitte
+
+126
+00:08:03,200 --> 00:08:05,973
+von dem variableNameToken
+
+127
+00:08:05,970 --> 00:08:08,751
+aus initialisert wird.
+
+128
+00:08:10,608 --> 00:08:12,515
+Dann führen wir den Test nochmal aus
+
+129
+00:08:15,422 --> 00:08:17,231
+und diesmal hat es geklappt,
+
+130
+00:08:17,230 --> 00:08:19,080
+Alle Tests sind in Ordnung,
+
+131
+00:08:19,080 --> 00:08:23,075
+auch unser neuer "throwsVariableAlreadyDefinedException"-Test.
+
+132
+00:08:23,075 --> 00:08:23,083
+So, dann möchte ich euch nochmal zeigen
+
+133
+00:08:25,070 --> 00:08:26,324
+wie das ganze aussieht,
+
+134
+00:08:26,320 --> 00:08:30,151
+wenn wir unseren Compiler sozusagen "normal" ausführen
+
+135
+00:08:30,150 --> 00:08:33,635
+mit Hilfe von unser Mainklasse und ein Fehler auftritt.
+
+136
+00:08:33,630 --> 00:08:36,644
+Also werden wir unsere code.demo-Datei anpassen
+
+137
+00:08:36,640 --> 00:08:40,351
+und hier jetzt mal reinschreiben:
+
+138
+00:08:42,737 --> 00:08:44,133
+"println(x)".
+
+139
+00:08:45,582 --> 00:08:49,426
+Und dann werden wir unsere "Main" einmal ausführen.
+
+140
+00:08:49,631 --> 00:08:52,204
+Dann schauen wir uns an was dabei rauskommt.
+
+141
+00:08:52,200 --> 00:08:54,942
+Wir sehen hier jetzt also eine Exception in main,
+
+142
+00:08:54,940 --> 00:08:58,377
+mit einer UndeclaredVariableException,
+
+143
+00:08:58,370 --> 00:09:01,000
+in Zeile 1, an Position 8,
+
+144
+00:09:01,000 --> 00:09:04,022
+da haben wir jetzt eine "undeclared variable" "x".
+
+145
+00:09:04,617 --> 00:09:08,351
+Jetzt können wir daraus sehr gut ablesen
+
+146
+00:09:08,350 --> 00:09:10,031
+was wir falsch gemacht haben.
+
+147
+00:09:10,791 --> 00:09:12,648
+In dieser Folge haben wir gelernt wie wir
+
+148
+00:09:12,640 --> 00:09:13,960
+Exceptions im Visitor für
+
+149
+00:09:13,960 --> 00:09:16,613
+unterschiedliche Fehlertypen verwenden können.
+
+150
+00:09:16,610 --> 00:09:19,640
+Eine gemeinsame Superklasse für alle Kompilierungsfehler
+
+151
+00:09:19,640 --> 00:09:21,888
+kann die Zeile und Spalte des Fehlers speichern
+
+152
+00:09:21,880 --> 00:09:23,528
+und spezifische Fehlerdetails
+
+153
+00:09:23,520 --> 00:09:26,426
+ können in ableitenden Klassen untergebracht werden.
+
+154
+00:09:26,884 --> 00:09:28,560
+Habt ihr Fragen oder Wünsche?
+
+155
+00:09:28,560 --> 00:09:30,311
+Schreibt es mir in die Kommentare!
+
+156
+00:09:30,310 --> 00:09:32,231
+Lasst mir außerdem einen Daumen da
+
+157
+00:09:32,230 --> 00:09:33,706
+wenn euch das Video gefallen hat
+
+158
+00:09:33,700 --> 00:09:36,662
+und ein Abo damit ihr keine neue Folge verpasst.
+
+159
+00:09:36,977 --> 00:09:38,275
+Vielen Dank an Gadarol,
+
+160
+00:09:38,270 --> 00:09:39,248
+der mir für die Aufnahmen
+
+161
+00:09:39,240 --> 00:09:40,835
+sein Studio zur Verfügung stellt.
+
+162
+00:09:40,830 --> 00:09:43,373
+Und euch vielen Dank für eure Aufmerksamkeit.
+
+163
+00:09:43,640 --> 00:09:44,928
+Mein Name ist yankee,
+
+164
+00:09:44,920 --> 00:09:46,391
+ich hoffe es hat euch Spaß gemacht,
+
+165
+00:09:46,390 --> 00:09:47,582
+Bis zum nächsten Mal,
+
+166
+00:09:47,580 --> 00:09:50,368
+wenn es wieder heißt: "Let's build a compiler".
+
