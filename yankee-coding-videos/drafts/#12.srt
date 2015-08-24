@@ -535,110 +535,164 @@ and it delegates the superclass
 90
 00:05:34,995 --> 00:05:38,426
 und der hat auch einen "variableName"
+e ele ainda tem um "variableName"
+and it has also a "variableName"
 
 91
 00:05:43,293 --> 00:05:45,391
 und auch hier brauchen wir dann
+e nós precisamos também aqui
+and we need here also
 
 92
 00:05:45,390 --> 00:05:48,613
 noch eine getMessage-Methode.
+mais um método getMessage.
+another getMessage method.
 
 93
 00:05:51,146 --> 00:05:53,986
 Die sieht der hier ein wenig ähnlich,
+Ele se mostra aqui um pouco similar,
+Here it looks a little similar,
 
 94
 00:05:53,986 --> 00:05:55,980
 deswegen klaue ich die mal hier,
+por isso eu o seguro aqui,
+so I hold it here,
 
 95
 00:05:59,102 --> 00:06:02,093
 nur dass es jetzt nicht heißt "undeclared variable"
+apenas para que não chame "undeclared variable"
+only that it doesn't call "undeclared variable"
 
 96
 00:06:02,090 --> 00:06:07,840
 sondern "variable already defined".
+mas "variable already defined".
+but "variable already defined".
 
 97
 00:06:11,582 --> 00:06:14,173
 So, hier fehlt mir noch das "import",
+Assim, aqui falta ainda o "import",
+So, we only still missing the "import",
 
 98
 00:06:14,813 --> 00:06:18,915
 Strg+Shift+O, dann kriegt ihr die auto-imports,
+Ctrl+Shift+O, te fornece então o auto-imports,
+Ctrl+Shift+O, then gives you the auto-imports,
 
 99
 00:06:18,910 --> 00:06:21,191
 nehmen wir das v4-Token
+pegamos o token v4
+we take the v4 token
 
 100
 00:06:22,888 --> 00:06:25,240
 und dann müssen wir diese Exception
+e então precisamos desta Exception
+and then we need this Exception
 
 101
 00:06:25,240 --> 00:06:27,360
 natürlich auch noch werfen.
+é claro, ainda lançada. 
+of course, still throw.
 
 102
 00:06:27,906 --> 00:06:30,617
 Dafür gehen wir also wieder in unseren Visitor
+Para isso, vamos também novamente no nosso visitor
+For this, we go again into our visitor
 
 103
 00:06:30,610 --> 00:06:34,942
 und gehen dann zu "visitVarDeclaration"
+e vamos para a "visitVarDeclaration"
+and we go to the "visitVarDeclaration"
 
 104
 00:06:36,026 --> 00:06:38,986
 und da schauen wir jetzt vorher einmal nach:
+e observamos isso agora antes que mais tarde:
+and we look at it now, before looking it later:
 
 105
 00:06:38,980 --> 00:06:45,053
+"if (variables.containsKey)"
+"if (variables.containsKey)"
 "if (variables.containsKey)"
 
 106
 00:06:45,977 --> 00:06:48,542
 und jetzt von unserem Kontext:
+e agora a partir do nosso contexto:
+and now from our context:
 
 107
 00:06:49,364 --> 00:06:53,395
+"varName.getText()".
+"varName.getText()".
 "varName.getText()".
 
 108
 00:06:54,884 --> 00:06:58,702
 Also wenn diese Variable schon definiert ist,
+Também, quando esta variável já está definida,
+Also, when this variable is already defined,
 
 109
 00:06:59,871 --> 00:07:07,004
- dann schmeißen wir eine VariableAlreadyDefinedException.
+dann schmeißen wir eine VariableAlreadyDefinedException.
+então jogamos fora um VariableAlreadyDefinedException.
+then we toss out a VariableAlreadyDefinedException.
 
 110
 00:07:08,764 --> 00:07:11,293
 Das "new" ist ganz wichtig, nicht vergessen
+O "new" é muito importante, não se esqueça
+The is really important, don't you forget
 
 111
 00:07:11,773 --> 00:07:16,062
 und übergeben "ctx.varName".
+e passe "ctx.varName".
+and pass "ctx.varName".
 
 112
 00:07:18,484 --> 00:07:22,542
 So, dann führen wir unseren Test mal wieder aus
+Então, executamos nosso teste mais uma vez
+So, we execute our test one more time
 
 113
 00:07:28,306 --> 00:07:30,111
 und sehen: Ich habe etwas vergessen.
+e veja: Eu esqueci algo.
+and se: I have forgot something.
 
 114
 00:07:30,110 --> 00:07:33,835
 Nämlich hier: Da ist hier nur null angekommen,
+Ou seja, aqui: Nisto daqui apenas chegou null,
+Namely here: There is only null arrived,
 
 115
 00:07:33,830 --> 00:07:35,284
 das habe ich also offensichtlich
+isto também é óbvio
+this is also obvious
 
 116
 00:07:35,280 --> 00:07:37,204
  mal nicht richtig initialisiert
+quando ele não inicia corretamente 
+when it doesn't start properly
 
 117
 00:07:37,200 --> 00:07:39,435
