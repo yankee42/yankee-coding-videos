@@ -1,0 +1,1128 @@
+﻿1
+00:00:00,000 --> 00:00:03,057
+Willkommen zurück zu "Let's build a compiler".
+
+2
+00:00:03,050 --> 00:00:04,413
+In der letzten Folge haben wir
+
+3
+00:00:04,410 --> 00:00:06,968
+unseren Funktionen Parameter beigebracht
+
+4
+00:00:06,960 --> 00:00:09,373
+aber wir haben uns immernoch nicht darum gekümmert
+
+5
+00:00:09,370 --> 00:00:12,253
+dass irgend eine sinnvolle Fehlermeldung kommt
+
+6
+00:00:12,250 --> 00:00:14,040
+wenn der Programmierer mal wieder
+
+7
+00:00:14,040 --> 00:00:15,511
+irgendeinen Blödsinn verzapft,
+
+8
+00:00:15,510 --> 00:00:18,737
+Wie zum Beispiel eine Funktion aufzurufen
+
+9
+00:00:18,730 --> 00:00:20,515
+die überhaupt nicht definiert ist.
+
+10
+00:00:20,964 --> 00:00:22,973
+Deswegen werden wir uns in dieser Folge
+
+11
+00:00:22,970 --> 00:00:25,568
+darum kümmern, dass genau für diesen Fall,
+
+12
+00:00:25,560 --> 00:00:26,777
+nämlich dass der Programmierer
+
+13
+00:00:26,770 --> 00:00:29,102
+eine Funktion aufruft die nicht definiert ist
+
+14
+00:00:29,100 --> 00:00:31,982
+eine vernünftige Fehlermeldung geworfen wird.
+
+15
+00:00:32,760 --> 00:00:34,306
+Als erstes werden wir
+
+16
+00:00:34,300 --> 00:00:36,333
+wieder unsere Spezifikation erweitern,
+
+17
+00:00:36,330 --> 00:00:37,626
+ihr kennt das ja.
+
+18
+00:00:37,620 --> 00:00:39,324
+Da brauchen wir so etwas ähnliches
+
+19
+00:00:39,320 --> 00:00:40,582
+wie was wir bis jetzt für unsere
+
+20
+00:00:40,580 --> 00:00:43,480
+für unsere "Variable already defined" schonmal hatten,
+
+21
+00:00:43,480 --> 00:00:44,604
+deswegen kopier ich das
+
+22
+00:00:44,600 --> 00:00:46,746
+und dann passen wir den Test etwas an.
+
+23
+00:00:46,920 --> 00:00:48,564
+Der Test soll jetzt nämlich sagen
+
+24
+00:00:48,560 --> 00:00:50,857
+dass immer eine
+
+25
+00:00:50,850 --> 00:00:54,084
+"UndefinedFunctionException" geworfen wird
+
+26
+00:00:55,235 --> 00:00:58,373
+und zwar immer dann, wenn wir
+
+27
+00:00:58,370 --> 00:01:01,955
+eine Funktion aufrufen, die... naja...
+
+28
+00:01:01,950 --> 00:01:02,848
+ihr könnt's euch denken:
+
+29
+00:01:02,840 --> 00:01:04,284
+Nicht definiert ist.
+
+30
+00:01:05,728 --> 00:01:08,817
+Dann brauchen wir natürlich auch einen anderen Code
+
+31
+00:01:08,810 --> 00:01:11,235
+und der neue Code soll jetzt
+
+32
+00:01:11,230 --> 00:01:13,911
+eine undefinierte Funktion aufrufen.
+
+33
+00:01:17,222 --> 00:01:19,013
+Der Fehler ist jetzt in Zeile eins
+
+34
+00:01:19,010 --> 00:01:22,146
+und an Position... 1, 2, 3, 4, 5, 6, 7, 8.
+
+35
+00:01:24,417 --> 00:01:26,786
+Und die Nachricht müssen wir natürlich noch anpassen,
+
+36
+00:01:26,780 --> 00:01:28,115
+da nehmen wir dann:
+
+37
+00:01:28,110 --> 00:01:32,493
+"Call to undefined ... function".
+
+38
+00:01:33,170 --> 00:01:35,537
+Der Name der Funktion
+
+39
+00:01:35,530 --> 00:01:38,426
+ist jetzt natürlich auch ein bißchen länger als nur "x".
+
+40
+00:01:39,333 --> 00:01:41,435
+Dann führen wir den Test einmal aus
+
+41
+00:01:41,430 --> 00:01:43,942
+um zu kontrollieren dass er auch wirklich fehlschlägt
+
+42
+00:01:43,940 --> 00:01:45,711
+und wir etwas zu tun haben
+
+43
+00:01:46,253 --> 00:01:48,782
+und ja, er schlägt fehlt
+
+44
+00:01:48,780 --> 00:01:50,351
+aber wir merken da steht:
+
+45
+00:01:50,350 --> 00:01:54,777
+"Expected exception was *Variable*AlreadyDefinedException",
+
+46
+00:01:54,770 --> 00:01:56,933
+das haben wir leider vergessen anzupassen.
+
+47
+00:01:56,930 --> 00:01:59,986
+Da müssen wir jetzt also auch noch hier reinschreiben:
+
+48
+00:01:59,980 --> 00:02:02,431
+"UndefinedFunctionException".
+
+49
+00:02:04,280 --> 00:02:06,653
+Dann erstellen wir diese Klasse natürlich noch,
+
+50
+00:02:06,650 --> 00:02:09,071
+legen die ins source-Verzeichnis
+
+51
+00:02:09,070 --> 00:02:11,177
+zu unseren anderen Exceptions
+
+52
+00:02:13,650 --> 00:02:18,235
+und lassen sie von unser "CompileException" ableiten.
+
+53
+00:02:18,973 --> 00:02:20,768
+Den Constructor nehmen wir auch noch mit
+
+54
+00:02:20,760 --> 00:02:22,182
+und dann kann es losgehen.
+
+55
+00:02:22,620 --> 00:02:24,324
+Das Token was wir hier kriegen,
+
+56
+00:02:24,320 --> 00:02:26,346
+das ist jetzt genau genommen
+
+57
+00:02:26,340 --> 00:02:29,711
+das Token indem der "function name" steht.
+
+58
+00:02:30,020 --> 00:02:32,360
+Damit das ein bißchen klarer ist
+
+59
+00:02:32,360 --> 00:02:34,222
+benennen wir hier den Parameter um
+
+60
+00:02:34,220 --> 00:02:37,582
+und dann wollen wir uns den Name der Funktion merken.
+
+61
+00:02:37,580 --> 00:02:41,364
+Also erstellen wir hier eine Membervariable "functionName"
+
+62
+00:02:41,786 --> 00:02:45,160
+und die werden wir jetzt gleich im Constructor befüllen.
+
+63
+00:02:46,004 --> 00:02:48,462
+Der "functionName" ist dann einfach
+
+64
+00:02:48,460 --> 00:02:51,937
+aus dem Token der Text.
+
+65
+00:02:52,733 --> 00:02:55,777
+Dann brauchen wir noch eine "getMessage()"-Funktion,
+
+66
+00:02:55,770 --> 00:02:57,528
+die ist so ähnlich von... 
+
+67
+00:02:57,520 --> 00:02:58,644
+was wir schonmal hatten,
+
+68
+00:02:58,640 --> 00:03:00,920
+zum Beispiel bei "variable already defined",
+
+69
+00:03:00,920 --> 00:03:02,680
+deswegen klauen wir uns die jetzt da mal
+
+70
+00:03:02,680 --> 00:03:04,391
+und dann passen wir die an
+
+71
+00:03:07,671 --> 00:03:11,702
+und dann holen wir uns aus dem Test nochmal
+
+72
+00:03:11,700 --> 00:03:14,191
+den Text der da wirklich stehen soll,
+
+73
+00:03:14,190 --> 00:03:16,475
+also "call to undefined function"
+
+74
+00:03:16,470 --> 00:03:18,715
+und in den Klammern steht natürlich
+
+75
+00:03:18,710 --> 00:03:21,866
+nicht ein varName, sondern unser functionName.
+
+76
+00:03:21,860 --> 00:03:23,893
+So, wunderbar, jetzt müssen wir diese Exception
+
+77
+00:03:23,890 --> 00:03:26,711
+nurnoch werfen und zwar bei "visitFunctionCall".
+
+78
+00:03:26,710 --> 00:03:28,382
+Da müssen wir jetzt nachgucken:
+
+79
+00:03:28,380 --> 00:03:31,168
+Diese Function, die wir gerade gefunden haben,
+
+80
+00:03:31,160 --> 00:03:33,568
+also die aufgerufen werden soll:
+
+81
+00:03:33,568 --> 00:03:35,560
+Ist die denn tatsächlich definiert?
+
+82
+00:03:35,560 --> 00:03:37,706
+Wenn das nicht der Fall ist:
+
+83
+00:03:38,342 --> 00:03:39,640
+Dann...
+
+84
+00:03:39,640 --> 00:03:41,782
+schmeißen wir unsere
+
+85
+00:03:41,780 --> 00:03:46,204
+gerade eben neu angelegte UndefinedFunctionException
+
+86
+00:03:46,200 --> 00:03:50,764
+und übergeben der das Token mit dem Funktionsname.
+
+87
+00:03:51,595 --> 00:03:53,426
+Nur wir kommen jetzt an dieses
+
+88
+00:03:53,420 --> 00:03:55,862
+"functionIsDefined"? Woher wissen wir das?
+
+89
+00:03:55,860 --> 00:03:57,915
+Rufen wir uns doch nochmal ins Gedächtnis
+
+90
+00:03:57,910 --> 00:04:00,280
+wie wir das Ganze mit den Variablen gemacht haben.
+
+91
+00:04:00,280 --> 00:04:02,524
+Bei den Variablen haben wir hier diese Map
+
+92
+00:04:02,520 --> 00:04:04,964
+und da stehen alle definierten Variablen drin
+
+93
+00:04:04,960 --> 00:04:07,422
+und wenn wir zum Beispiel "visitAssignment" haben
+
+94
+00:04:07,420 --> 00:04:10,826
+da haben wir diese "requireVariableIndex"-Funktion,
+
+95
+00:04:10,820 --> 00:04:13,333
+da greifen wir auf die Variablentabelle zu,
+
+96
+00:04:13,330 --> 00:04:14,551
+schauen nach:
+
+97
+00:04:14,777 --> 00:04:18,075
+Ist diese Variable in der Variablentabelle drin?
+
+98
+00:04:18,070 --> 00:04:20,146
+Wenn nicht, kommt hier ein "null" zurück
+
+99
+00:04:20,140 --> 00:04:23,360
+und wir können entsprechend unsere Exception werfen.
+
+100
+00:04:23,786 --> 00:04:27,724
+In "visitVarDeclaration" befüllen wir die Variablentabelle
+
+101
+00:04:27,720 --> 00:04:30,511
+und daher sind die Variablen
+
+102
+00:04:30,510 --> 00:04:31,955
+auch immer in der Tabelle drin.
+
+103
+00:04:31,950 --> 00:04:32,813
+Jetzt überlegen wir mal:
+
+104
+00:04:32,810 --> 00:04:34,902
+Was ist denn, wenn wir dieses System
+
+105
+00:04:34,900 --> 00:04:37,311
+jetzt anpassen wollen auf unsere Funktionen?
+
+106
+00:04:37,310 --> 00:04:39,786
+Also sagen wir mal, wir haben eine solche Funktion,
+
+107
+00:04:39,780 --> 00:04:42,195
+ganz einfach mit irgendeinem Inhalt
+
+108
+00:04:42,466 --> 00:04:45,200
+und danach wird diese Funktion aufgerufen.
+
+109
+00:04:45,200 --> 00:04:47,404
+Wunderbar: Unser Visitor geht
+
+110
+00:04:47,400 --> 00:04:49,777
+den Code von oben nach unten durch,
+
+111
+00:04:49,770 --> 00:04:51,782
+das heißt er wird zuerst
+
+112
+00:04:51,780 --> 00:04:54,471
+die "function declaration" finden
+
+113
+00:04:54,470 --> 00:04:56,115
+und dann den Funktionsaufruf.
+
+114
+00:04:56,110 --> 00:04:58,986
+Da die "function declaration" zuerst gefunden wurde
+
+115
+00:04:58,980 --> 00:05:01,333
+wäre die Funktion angelegt
+
+116
+00:05:01,330 --> 00:05:03,813
+aber wenn wir jetzt die Reihenfolge vertauschen
+
+117
+00:05:03,810 --> 00:05:05,453
+und zuerst die Funktion aufrufen
+
+118
+00:05:05,450 --> 00:05:07,200
+und sie dann erst deklarieren,
+
+119
+00:05:07,200 --> 00:05:10,128
+dann ist die Funktion eben noch nicht definiert.
+
+120
+00:05:11,097 --> 00:05:12,760
+Früher hat man gesagt,
+
+121
+00:05:12,760 --> 00:05:15,177
+häufig um Compiler einfacher zu machen:
+
+122
+00:05:15,170 --> 00:05:16,111
+Naja das geht halt nicht,
+
+123
+00:05:16,110 --> 00:05:17,662
+die Funktion die man aufruft
+
+124
+00:05:17,660 --> 00:05:19,622
+die muss halt vorher definiert sein.
+
+125
+00:05:19,620 --> 00:05:22,706
+Also in C ist das zum Beispiel so oder in Pascal
+
+126
+00:05:22,700 --> 00:05:25,733
+und da gibt es dann sogenannte
+
+127
+00:05:25,730 --> 00:05:27,031
+"Forward declarations",
+
+128
+00:05:27,030 --> 00:05:28,408
+Also wenn man eine Funktion
+
+129
+00:05:28,400 --> 00:05:31,368
+doch aufrufen möchte, die erst später kommt,
+
+130
+00:05:31,360 --> 00:05:33,413
+dann muss man erstmal definieren:
+
+131
+00:05:33,410 --> 00:05:36,253
+Diese Funktion wird demnächst noch definiert
+
+132
+00:05:36,250 --> 00:05:38,280
+aber so wird sie heißen
+
+133
+00:05:38,280 --> 00:05:39,920
+und das hier sind die Parameter
+
+134
+00:05:39,920 --> 00:05:40,755
+und dann konnte man
+
+135
+00:05:40,750 --> 00:05:42,786
+auch schon vorher auf die Funktion zugreifen
+
+136
+00:05:42,780 --> 00:05:46,093
+aber das ist wirklich ziemlich 20. Jahrhundert,
+
+137
+00:05:46,090 --> 00:05:47,182
+wir wollen natürlich
+
+138
+00:05:47,180 --> 00:05:49,875
+dass wir sowas nicht mehr machen müssen.
+
+139
+00:05:50,288 --> 00:05:52,582
+Um dahin zu kommen
+
+140
+00:05:52,580 --> 00:05:55,488
+dass jetzt wir auch Funktionen aufrufen können
+
+141
+00:05:55,480 --> 00:06:00,471
+die bereits vor unserer Funktionsdefiniton
+
+142
+00:06:00,470 --> 00:06:01,942
+aufgerufen werden
+
+143
+00:06:02,090 --> 00:06:03,475
+müssen wir allerdings erstmal
+
+144
+00:06:03,470 --> 00:06:06,435
+über unseren kompletten Baum drübergehen
+
+145
+00:06:06,430 --> 00:06:09,417
+und alle Funktionsdefinitionen uns raussuchen
+
+146
+00:06:09,410 --> 00:06:10,773
+damit wir alle Funktionen
+
+147
+00:06:10,770 --> 00:06:13,271
+von Anfang an kennen, die definiert sind.
+
+148
+00:06:13,270 --> 00:06:16,475
+Dafür erstellen wir uns einen neuen Visitor,
+
+149
+00:06:16,470 --> 00:06:18,720
+der genau das für uns tut.
+
+150
+00:06:19,244 --> 00:06:21,822
+Diesen Visitor, den nennen wir dann
+
+151
+00:06:21,820 --> 00:06:23,928
+"FunctionDefinitionFinder"
+
+152
+00:06:25,191 --> 00:06:28,160
+und leiten wie unseren anderen Visitor
+
+153
+00:06:28,160 --> 00:06:30,253
+von "DemoBaseVisitor" ab.
+
+154
+00:06:32,053 --> 00:06:33,764
+Der soll uns jetzt einfach
+
+155
+00:06:33,760 --> 00:06:35,395
+ein Set zurückgeben,
+
+156
+00:06:35,390 --> 00:06:37,151
+ein Set mit Strings,
+
+157
+00:06:37,822 --> 00:06:40,222
+nämlich genau genommen ein Set
+
+158
+00:06:40,220 --> 00:06:43,466
+welches alle Funktionsnamen enthält
+
+159
+00:06:43,460 --> 00:06:44,768
+die definiert sind.
+
+160
+00:06:45,946 --> 00:06:47,933
+Funktionsnamen bekommen wir
+
+161
+00:06:47,930 --> 00:06:50,497
+aus der "FunctionDefinition".
+
+162
+00:06:51,640 --> 00:06:52,973
+Da steht jetzt
+
+163
+00:06:52,970 --> 00:06:56,240
+unser Funktionsname in dem Kontext drin
+
+164
+00:06:58,600 --> 00:07:01,697
+und jetzt müssen wir den nurnoch als Set zurückgeben.
+
+165
+00:07:01,690 --> 00:07:03,431
+Da gibt es in Java passenderweise
+
+166
+00:07:03,430 --> 00:07:05,857
+"Collections.singleton()"
+
+167
+00:07:05,850 --> 00:07:09,773
+und das erstellt ein Set mit genau einem Eintrag.
+
+168
+00:07:11,155 --> 00:07:12,857
+Jetzt kann es natürlich durchaus noch sein,
+
+169
+00:07:12,850 --> 00:07:15,773
+dass unser Programm ein paar mehr
+
+170
+00:07:15,770 --> 00:07:18,311
+Funktionsdefinitionen hat und dann müssen wir die
+
+171
+00:07:18,310 --> 00:07:19,902
+irgendwie zusammenfügen können,
+
+172
+00:07:19,900 --> 00:07:21,635
+dafür implementieren wir wieder die
+
+173
+00:07:21,630 --> 00:07:24,080
+"aggregateResult"-Methode.
+
+174
+00:07:24,653 --> 00:07:26,853
+Für den Anfang funktioniert das ganz ähnlich
+
+175
+00:07:26,850 --> 00:07:28,253
+wie wir das in unserem
+
+176
+00:07:28,250 --> 00:07:30,057
+Hauptvisitor auch schonmal haben:
+
+177
+00:07:30,050 --> 00:07:32,848
+Wir gucken erstmal nach: Ist das aggregate "null"?
+
+178
+00:07:32,840 --> 00:07:34,591
+Wenn das "null" ist,
+
+179
+00:07:34,590 --> 00:07:37,111
+dann geben wir das nextResult zurück,
+
+180
+00:07:37,457 --> 00:07:41,764
+wenn aggregate also nicht "null" war
+
+181
+00:07:41,764 --> 00:07:43,760
+aber nextResult "null" ist,
+
+182
+00:07:43,760 --> 00:07:46,168
+dann geben wir das aggregate zurück
+
+183
+00:07:46,160 --> 00:07:48,026
+und wenn das nicht der Fall ist,
+
+184
+00:07:48,020 --> 00:07:50,053
+dann sind beide nicht null,
+
+185
+00:07:50,050 --> 00:07:53,160
+also sowohl aggregate als auch nextResult
+
+186
+00:07:53,160 --> 00:07:54,115
+sind nicht null
+
+187
+00:07:54,110 --> 00:07:57,275
+und dann müssen wir die beiden Sets mergen.
+
+188
+00:07:57,270 --> 00:08:00,200
+Dafür erstellen wir uns jetzt also ein neues Set
+
+189
+00:08:00,200 --> 00:08:03,226
+und das ist das zusammengeführte Set,
+
+190
+00:08:03,220 --> 00:08:05,195
+also nenne ich es mal "merged"
+
+191
+00:08:05,613 --> 00:08:08,582
+und da erstellen wir uns dann ein neues HashSet
+
+192
+00:08:08,580 --> 00:08:11,311
+und übergeben im Constructor eine Collection,
+
+193
+00:08:11,310 --> 00:08:13,795
+das kommt schonmal alles in das Set rein,
+
+194
+00:08:13,790 --> 00:08:15,866
+sagen wir mal alles aus dem aggregate
+
+195
+00:08:15,860 --> 00:08:17,862
+geht in das merged Set rein und
+
+196
+00:08:17,860 --> 00:08:19,240
+dann müssen wir
+
+197
+00:08:19,240 --> 00:08:21,675
+alle Einträge aus dem "nextResult"
+
+198
+00:08:21,670 --> 00:08:23,306
+auch noch in das Set reinpacken,
+
+199
+00:08:23,300 --> 00:08:25,435
+dafür können wir einfach "addAll" aufrufen
+
+200
+00:08:25,430 --> 00:08:27,244
+und nextResult übergeben.
+
+201
+00:08:27,240 --> 00:08:31,080
+Dann geben wir unser merged Set zurück
+
+202
+00:08:31,555 --> 00:08:33,515
+und sind hiermit fertig.
+
+203
+00:08:34,377 --> 00:08:35,977
+Jetzt müssen wir natürlich
+
+204
+00:08:35,970 --> 00:08:39,324
+unseren "FunctionDefinitionFinder" auch aufrufen,
+
+205
+00:08:39,320 --> 00:08:41,413
+das machen wir dann in der "Main"
+
+206
+00:08:41,410 --> 00:08:43,377
+an der gleichen Stelle
+
+207
+00:08:43,370 --> 00:08:46,786
+an der wir auch unseren bisjetzigen Visitor aufufen.
+
+208
+00:08:47,284 --> 00:08:49,533
+Da holen wir uns also entsprechend
+
+209
+00:08:49,530 --> 00:08:51,675
+auch wieder das Set
+
+210
+00:08:52,151 --> 00:08:54,088
+mit den Strings
+
+211
+00:08:55,657 --> 00:08:58,328
+indem wir unseren Visitor erzeugen
+
+212
+00:08:58,320 --> 00:08:59,440
+und den einmal auf
+
+213
+00:08:59,440 --> 00:09:01,973
+unseren gesammelten ParseTree loslassen.
+
+214
+00:09:01,970 --> 00:09:04,395
+Wenn unser Set
+
+215
+00:09:04,835 --> 00:09:06,915
+überhaupt keine Funktionen enthält,
+
+216
+00:09:06,910 --> 00:09:08,022
+das müssen wir im Kopf behalten,
+
+217
+00:09:08,020 --> 00:09:10,213
+dann ist "definedFunctions" jetzt natürlich null.
+
+218
+00:09:10,631 --> 00:09:13,137
+In MyVisitor müssen wir dann jetzt noch
+
+219
+00:09:13,130 --> 00:09:15,413
+einen Constructor anlegen,
+
+220
+00:09:15,973 --> 00:09:18,617
+der unsere ganzen gesammelten
+
+221
+00:09:18,610 --> 00:09:21,760
+Definitionen entgegennimmt
+
+222
+00:09:22,204 --> 00:09:24,577
+und entsprechend speichert
+
+223
+00:09:24,570 --> 00:09:26,715
+damit wir nachher nachgucken können:
+
+224
+00:09:27,306 --> 00:09:29,231
+Zu jedem beliebigen String:
+
+225
+00:09:29,230 --> 00:09:32,137
+Gibt es eine Funktion mit diesem Name.
+
+226
+00:09:33,435 --> 00:09:35,484
+Damit wir jetzt nicht diesen Sonderfall
+
+227
+00:09:35,480 --> 00:09:36,573
+beachten müssen, dass
+
+228
+00:09:36,570 --> 00:09:38,826
+"definedFunctions" null sein kann
+
+229
+00:09:38,820 --> 00:09:40,257
+prüfen wir das einfach hier,
+
+230
+00:09:40,250 --> 00:09:42,048
+sagen wenn das "null" ist:
+
+231
+00:09:42,040 --> 00:09:44,151
+Dann sollen unsere "definedFunctions"
+
+232
+00:09:44,150 --> 00:09:46,288
+einfach ein "empty set" sein,
+
+233
+00:09:47,311 --> 00:09:50,124
+da gibt es diese praktische "emptySet"-Methode,
+
+234
+00:09:50,120 --> 00:09:52,777
+die uns ein effizientes leeres Set zurückgibt
+
+235
+00:09:52,990 --> 00:09:54,973
+und wenn es nicht "null" ist,
+
+236
+00:09:54,970 --> 00:09:56,520
+dann nehmen wir eben das Set,
+
+237
+00:09:56,520 --> 00:09:58,146
+was uns übergeben wurde.
+
+238
+00:10:00,013 --> 00:10:02,102
+So, jetzt können wir wieder zurückgehen
+
+239
+00:10:02,100 --> 00:10:04,017
+auf unser "visitFunctionCall"
+
+240
+00:10:04,010 --> 00:10:06,275
+und jetzt haben wir alle Daten zur Verfügung
+
+241
+00:10:06,270 --> 00:10:09,062
+um unser "functionIsDefined" zu ersetzen
+
+242
+00:10:09,062 --> 00:10:11,060
+mit etwas, was funktioniert.
+
+243
+00:10:11,542 --> 00:10:13,120
+Schauen wir also hier nach,
+
+244
+00:10:13,120 --> 00:10:15,311
+in unseren "definedFunctions":
+
+245
+00:10:15,542 --> 00:10:19,977
+Wenn dieses Set nicht enthält:
+
+246
+00:10:19,970 --> 00:10:23,355
+Einen Eintrag mit unserem "function name",
+
+247
+00:10:23,350 --> 00:10:25,413
+dann ist unsere Funktion nicht definiert
+
+248
+00:10:25,410 --> 00:10:27,555
+und wir wollen einen Fehler werfen.
+
+249
+00:10:27,826 --> 00:10:29,657
+Jetzt führen wir den Test einmal aus
+
+250
+00:10:29,650 --> 00:10:31,728
+und gucken ob es so einfach war
+
+251
+00:10:31,720 --> 00:10:33,200
+und der Test schon durchläuft.
+
+252
+00:10:33,200 --> 00:10:35,751
+Und tatsächlich: Es hat funktioniert!
+
+253
+00:10:36,053 --> 00:10:38,382
+Der Test läuft erfolgreich druch,
+
+254
+00:10:38,380 --> 00:10:39,688
+ab sofort wird
+
+255
+00:10:39,680 --> 00:10:42,333
+eine vernünftige Fehlermeldung geworfen
+
+256
+00:10:42,330 --> 00:10:44,782
+sobald wir eine Funktion aufrufen,
+
+257
+00:10:44,780 --> 00:10:46,631
+die nicht definiert ist.
+
+258
+00:10:47,030 --> 00:10:48,595
+In dieser Folge haben wir gelernt
+
+259
+00:10:48,590 --> 00:10:50,875
+wie wir einen zusätzlichen Visitor einsetzen können
+
+260
+00:10:50,870 --> 00:10:54,106
+um eine Liste mit allen definierten Funktionen zu erhalten.
+
+261
+00:10:54,100 --> 00:10:55,435
+Außerdem haben wir gelernt
+
+262
+00:10:55,430 --> 00:10:57,373
+wie wir die erhaltene Liste dazu einsetzen
+
+263
+00:10:57,370 --> 00:11:00,115
+eine aussagekräftige Fehlermeldung zu produzieren
+
+264
+00:11:00,110 --> 00:11:01,524
+wenn der Programmierer versucht
+
+265
+00:11:01,520 --> 00:11:02,888
+eine Funktion aufzurufen,
+
+266
+00:11:02,880 --> 00:11:04,493
+die er nicht vorher definiert hat.
+
+267
+00:11:04,490 --> 00:11:05,400
+In den nächsten Folgen
+
+268
+00:11:05,400 --> 00:11:06,782
+können wir das System noch ausbauen
+
+269
+00:11:06,780 --> 00:11:09,217
+um zu überprüfen dass die Anzahl der Parameter
+
+270
+00:11:09,210 --> 00:11:10,915
+in Funktionsaufrufen auch stimmt
+
+271
+00:11:10,910 --> 00:11:13,697
+und das keine Funktion zweimal definiert wurde.
+
+272
+00:11:13,690 --> 00:11:14,715
+Bis dahin:
+
+273
+00:11:14,710 --> 00:11:16,680
+Lasst mir Kommentar mit euren Fragen,
+
+274
+00:11:16,680 --> 00:11:18,071
+Problemen und Wünschen da.
+
+275
+00:11:18,070 --> 00:11:20,235
+Gebt mir einen Daumen wenn euch das Video gefallen hat
+
+276
+00:11:20,230 --> 00:11:21,604
+und abboniert meinen Kanal
+
+277
+00:11:21,600 --> 00:11:23,977
+damit ihr keine neue Folge verpasst.
+
+278
+00:11:24,151 --> 00:11:25,346
+Vielen Dank an Gadarol
+
+279
+00:11:25,340 --> 00:11:27,853
+der mir für die Aufnahmen sein Studio zur Verfügung stellt
+
+280
+00:11:27,850 --> 00:11:30,253
+und euch vielen Dank für eure Aufmerksamkeit.
+
+281
+00:11:30,250 --> 00:11:32,280
+Schaltet wieder ein, wenn es wieder heißt:
+
+282
+00:11:32,280 --> 00:11:34,280
+"Let's build a compiler".
+

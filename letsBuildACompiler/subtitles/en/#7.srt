@@ -1,0 +1,1000 @@
+﻿1
+00:00:00,000 --> 00:00:03,430
+Welcome back to "Let's build a compiler"
+
+2
+00:00:03,430 --> 00:00:04,920
+with a new start screen
+
+3
+00:00:04,920 --> 00:00:07,260
+including a clickable list of contents.
+
+4
+00:00:07,260 --> 00:00:08,620
+Do you think that is helpful?
+
+5
+00:00:08,620 --> 00:00:10,690
+Write it into the comments!
+
+6
+00:00:10,690 --> 00:00:11,940
+In this episode we will
+
+7
+00:00:11,940 --> 00:00:13,880
+fix our tests for Windows,
+
+8
+00:00:13,880 --> 00:00:17,230
+add an explicit println function,
+
+9
+00:00:17,230 --> 00:00:18,660
+skip whitespaces
+
+10
+00:00:18,660 --> 00:00:21,240
+and allow multiple commands at once.
+
+11
+00:00:21,960 --> 00:00:24,420
+At first we will deal with flaw
+
+12
+00:00:24,420 --> 00:00:26,650
+introduced in previous episode:
+
+13
+00:00:26,650 --> 00:00:28,500
+During last epsiode
+
+14
+00:00:28,500 --> 00:00:31,130
+for a linefeed I simply used "\ n"
+
+15
+00:00:31,130 --> 00:00:32,900
+where the n means linefeed.
+
+16
+00:00:32,900 --> 00:00:35,500
+On Unix systems that is all very well,
+
+17
+00:00:35,500 --> 00:00:37,450
+but on Windows this does not work
+
+18
+00:00:37,450 --> 00:00:41,230
+because on Windows the line seperator is "\r\ n".
+
+19
+00:00:41,230 --> 00:00:42,520
+To fix this
+
+20
+00:00:42,520 --> 00:00:45,000
+so that it also works on Windows
+
+21
+00:00:45,000 --> 00:00:47,290
+we will remove this here and write
+
+22
+00:00:47,290 --> 00:00:51,770
+"System.lineSeparator()" instead.
+
+23
+00:00:53,200 --> 00:00:57,050
+And of course the same in the row below.
+
+24
+00:01:02,840 --> 00:01:06,020
+Next we want to make our language more powerful
+
+25
+00:01:06,020 --> 00:01:08,240
+so we can do more with it
+
+26
+00:01:08,240 --> 00:01:10,230
+than printing a single number.
+
+27
+00:01:10,230 --> 00:01:11,950
+For example we can add
+
+28
+00:01:11,950 --> 00:01:14,450
+that we can print two numbers.
+
+29
+00:01:14,450 --> 00:01:15,990
+What a progress.
+
+30
+00:01:16,490 --> 00:01:18,020
+Of course there are lots of possibilities
+
+31
+00:01:18,020 --> 00:01:21,270
+how a language can be designed in this direction.
+
+32
+00:01:21,580 --> 00:01:25,250
+You are invited to get involved using the comments
+
+33
+00:01:25,250 --> 00:01:28,130
+and tell me about your ideas and wishes what I should add.
+
+34
+00:01:28,130 --> 00:01:29,240
+If you do not write anything
+
+35
+00:01:29,240 --> 00:01:31,590
+then it will be something in the direction
+
+36
+00:01:31,590 --> 00:01:34,610
+of C or a C-like language,
+
+37
+00:01:34,610 --> 00:01:37,050
+a mixture of C, Java and so on.
+
+38
+00:01:37,320 --> 00:01:38,890
+First I will add
+
+39
+00:01:38,890 --> 00:01:41,960
+a function "println" here
+
+40
+00:01:42,080 --> 00:01:45,680
+which will replace our current implicit output.
+
+41
+00:01:48,890 --> 00:01:51,470
+The we will here just write "println"
+
+42
+00:01:52,300 --> 00:01:55,970
+and also here on our existing samples
+
+43
+00:01:56,580 --> 00:01:58,000
+and of course I want
+
+44
+00:01:58,000 --> 00:02:00,850
+that multiple "println"s work as well.
+
+45
+00:02:00,850 --> 00:02:03,380
+Thus I copy one of these examples,
+
+46
+00:02:03,380 --> 00:02:04,860
+simplify it a bit,
+
+47
+00:02:04,860 --> 00:02:08,010
+because in this example we do not want to test
+
+48
+00:02:08,010 --> 00:02:09,940
+that the calculation is working
+
+49
+00:02:09,940 --> 00:02:13,790
+but that the "println" commands are working.
+
+50
+00:02:14,400 --> 00:02:15,810
+You should always design your test cases
+
+51
+00:02:15,810 --> 00:02:17,720
+as simple as possible
+
+52
+00:02:17,720 --> 00:02:20,400
+and prefer to write multiple test cases
+
+53
+00:02:20,400 --> 00:02:22,920
+so that you can identify
+
+54
+00:02:22,920 --> 00:02:24,260
+what the problem is
+
+55
+00:02:24,260 --> 00:02:26,260
+if one test fails.
+
+56
+00:02:27,070 --> 00:02:29,450
+Now here I got the "1" and "2"
+
+57
+00:02:29,450 --> 00:02:31,670
+that means that our output
+
+58
+00:02:31,670 --> 00:02:34,770
+should contain "1" and "2"
+
+59
+00:02:34,770 --> 00:02:37,510
+with a line seperator after each.
+
+60
+00:02:39,590 --> 00:02:41,140
+Then we save
+
+61
+00:02:41,140 --> 00:02:42,990
+and run the tests
+
+62
+00:02:42,990 --> 00:02:45,620
+and have a look the result.
+
+63
+00:02:47,080 --> 00:02:49,190
+As you can see: At the beginning ANTLR
+
+64
+00:02:49,190 --> 00:02:51,400
+generates several "token recognition error"s
+
+65
+00:02:51,400 --> 00:02:53,890
+and their origin ist that this "println"
+
+66
+00:02:53,890 --> 00:02:56,240
+and the braces were not recognized.
+
+67
+00:02:56,240 --> 00:02:58,740
+What is ANTLR doing if it finds something like this?
+
+68
+00:02:58,740 --> 00:03:01,650
+It ignores the characters and just continues.
+
+69
+00:03:01,650 --> 00:03:03,900
+That means for ANTLR there is,
+
+70
+00:03:03,900 --> 00:03:05,160
+after parsing and after
+
+71
+00:03:05,160 --> 00:03:07,590
+it has ignored all these parts
+
+72
+00:03:07,590 --> 00:03:09,660
+still "1+2"
+
+73
+00:03:09,660 --> 00:03:12,930
+or "1+2+42" and so on.
+
+74
+00:03:12,930 --> 00:03:14,300
+When we have a look
+
+75
+00:03:14,300 --> 00:03:16,640
+on what that means for the output
+
+76
+00:03:16,640 --> 00:03:19,260
+then we see that our first two test cases,
+
+77
+00:03:19,260 --> 00:03:21,170
+those here,
+
+78
+00:03:21,170 --> 00:03:22,850
+still passed.
+
+79
+00:03:22,850 --> 00:03:27,040
+Makes sense, because ANTLR simply ignored the "println".
+
+80
+00:03:27,040 --> 00:03:30,140
+Our new test case however fails
+
+81
+00:03:30,140 --> 00:03:32,420
+because it stops after the "1" here
+
+82
+00:03:32,420 --> 00:03:34,420
+and does not continue here.
+
+83
+00:03:34,950 --> 00:03:36,360
+Now we want to fix this
+
+84
+00:03:36,360 --> 00:03:39,590
+first there should be no more token recognition errors
+
+85
+00:03:39,590 --> 00:03:41,110
+and second
+
+86
+00:03:41,110 --> 00:03:43,610
+all our tests should work again.
+
+87
+00:03:43,610 --> 00:03:46,850
+To now add support for our println function
+
+88
+00:03:46,850 --> 00:03:49,000
+we have to extend our grammar.
+
+89
+00:03:49,000 --> 00:03:51,000
+So let's open it
+
+90
+00:03:53,090 --> 00:03:56,200
+and add a new println rule.
+
+91
+00:03:56,910 --> 00:03:58,970
+That will include
+
+92
+00:03:59,600 --> 00:04:03,630
+that at first there is the word "println"
+
+93
+00:04:03,630 --> 00:04:05,960
+with an opening bracket,
+
+94
+00:04:06,610 --> 00:04:08,800
+then an addition
+
+95
+00:04:09,410 --> 00:04:12,460
+and then a closing bracket.
+
+96
+00:04:12,980 --> 00:04:17,130
+We will memorize the addition here as "argument".
+
+97
+00:04:18,010 --> 00:04:20,100
+The the rule ends here
+
+98
+00:04:20,600 --> 00:04:22,740
+and now we just need to add
+
+99
+00:04:22,740 --> 00:04:26,220
+that the rule can be called.
+
+100
+00:04:26,740 --> 00:04:29,720
+For that I'll append up here
+
+101
+00:04:29,720 --> 00:04:33,120
+a general rule "program"
+
+102
+00:04:33,380 --> 00:04:36,880
+which should describe our whole program
+
+103
+00:04:36,880 --> 00:04:39,410
+and should be our new start rule
+
+104
+00:04:39,410 --> 00:04:41,760
+instead of the "addition"
+
+105
+00:04:41,760 --> 00:04:43,120
+which was the only existing rule
+
+106
+00:04:43,120 --> 00:04:45,640
+and thus also our start rule.
+
+107
+00:04:45,640 --> 00:04:49,980
+And this says: There can be a "println"
+
+108
+00:04:50,910 --> 00:04:54,900
+but not only once, but arbitrary often
+
+109
+00:04:54,900 --> 00:04:57,150
+and always followed by a semi colon.
+
+110
+00:04:57,150 --> 00:04:59,350
+That means: Here follows a semicolon
+
+111
+00:05:00,330 --> 00:05:04,300
+and this part... can...
+
+112
+00:05:04,840 --> 00:05:06,800
+occur arbitrarly often.
+
+113
+00:05:06,800 --> 00:05:08,460
+But it should occur at least once,
+
+114
+00:05:08,460 --> 00:05:10,460
+because an empty program is boring.
+
+115
+00:05:11,230 --> 00:05:12,930
+Then we save this
+
+116
+00:05:13,290 --> 00:05:16,580
+and regenerate our grammar.
+
+117
+00:05:16,580 --> 00:05:19,590
+For that we switch to the console
+
+118
+00:05:19,590 --> 00:05:22,610
+navigate to the folder containing our grammar
+
+119
+00:05:24,710 --> 00:05:27,500
+and execute the ANTLR-Jar again
+
+120
+00:05:27,500 --> 00:05:29,690
+using our usual parameters.
+
+121
+00:05:31,270 --> 00:05:34,610
+Then we go back to eclipse, press "F5"
+
+122
+00:05:36,470 --> 00:05:39,850
+and now our visitor has new methods
+
+123
+00:05:39,850 --> 00:05:41,850
+that we are going to implement.
+
+124
+00:05:42,030 --> 00:05:44,580
+Or actually this is only a single new method for us,
+
+125
+00:05:44,580 --> 00:05:47,160
+namely the "visitPrintln"-method
+
+126
+00:05:47,160 --> 00:05:49,250
+which I add here.
+
+127
+00:05:50,790 --> 00:05:51,950
+OK and what does it return?
+
+128
+00:05:51,950 --> 00:05:53,230
+That is the part
+
+129
+00:05:53,230 --> 00:05:55,690
+that we had in our main class up until now
+
+130
+00:05:55,690 --> 00:05:59,780
+including the "getstatic" and the "invokevirtual" for the println.
+
+131
+00:05:59,780 --> 00:06:04,430
+This I copy from the template here
+
+132
+00:06:05,340 --> 00:06:08,070
+and add it here together with a "return"
+
+133
+00:06:10,410 --> 00:06:14,150
+and the "instructions" that we have in between here
+
+134
+00:06:14,150 --> 00:06:18,230
+can be derived by
+
+135
+00:06:18,230 --> 00:06:22,850
+examining the "ctx.argument"-node
+
+136
+00:06:22,850 --> 00:06:24,310
+and traverse it.
+
+137
+00:06:25,090 --> 00:06:27,320
+Let's have a look at what happens here:
+
+138
+00:06:27,320 --> 00:06:30,590
+The "getstatic" still puts
+
+139
+00:06:30,590 --> 00:06:32,790
+the "System.out" on the stack,
+
+140
+00:06:33,200 --> 00:06:35,730
+the "ctx.argument",
+
+141
+00:06:35,730 --> 00:06:38,900
+when combined with the respective visit method
+
+142
+00:06:38,900 --> 00:06:43,700
+will return a series of instructions
+
+143
+00:06:43,840 --> 00:06:48,350
+that should in the end leave an integer on the stack.
+
+144
+00:06:48,510 --> 00:06:50,620
+Thus we have System.out on the stack,
+
+145
+00:06:50,620 --> 00:06:51,880
+and integer on the stack
+
+146
+00:06:51,880 --> 00:06:54,800
+and then we can call the println method
+
+147
+00:06:54,800 --> 00:06:56,800
+and the number will be printed.
+
+148
+00:06:57,290 --> 00:06:59,720
+Then we go back to the main method,
+
+149
+00:06:59,720 --> 00:07:02,990
+because this part here is not needed anymore,
+
+150
+00:07:02,990 --> 00:07:05,380
+we do not need the "getstatic" anymore
+
+151
+00:07:05,380 --> 00:07:07,910
+and we do not need the "invokevirtual" anymore
+
+152
+00:07:07,910 --> 00:07:11,260
+because this is now contained in our visitor.
+
+153
+00:07:11,260 --> 00:07:14,020
+However all the rest we do still need.
+
+154
+00:07:14,690 --> 00:07:18,520
+Now we still need to adapt our addition method,
+
+155
+00:07:18,520 --> 00:07:20,270
+that needs to be "program"
+
+156
+00:07:20,270 --> 00:07:23,460
+because I exchanged the start rule,
+
+157
+00:07:23,460 --> 00:07:26,790
+the parser should now begin with "program" and not with "addition"
+
+158
+00:07:26,790 --> 00:07:29,290
+and then we can run our tests.
+
+159
+00:07:31,080 --> 00:07:34,040
+As you can see the tests work
+
+160
+00:07:34,040 --> 00:07:38,450
+but there is still a "token recognition error" at the space character.
+
+161
+00:07:38,450 --> 00:07:40,450
+Let's have a look where this originates.
+
+162
+00:07:40,450 --> 00:07:41,830
+Navigate to our test
+
+163
+00:07:41,830 --> 00:07:44,500
+and the only space character that we have is here.
+
+164
+00:07:44,500 --> 00:07:46,190
+That was quickly found.
+
+165
+00:07:46,190 --> 00:07:50,070
+Why do we get a "token recognition error" at this point?
+
+166
+00:07:50,070 --> 00:07:51,800
+Of course:
+
+167
+00:07:51,800 --> 00:07:54,930
+We have never recognized a space character.
+
+168
+00:07:54,930 --> 00:07:58,420
+Actually we do not even care for spaces,
+
+169
+00:07:58,420 --> 00:08:02,250
+like in most programming languages we use them just as separator
+
+170
+00:08:02,250 --> 00:08:06,560
+to separate two tokens from each other,
+
+171
+00:08:06,560 --> 00:08:09,560
+but apart from that they are worthless.
+
+172
+00:08:09,560 --> 00:08:13,340
+What we can do not is to insert a "WHITESPACE"-rule
+
+173
+00:08:14,550 --> 00:08:17,690
+and this "WHITESPACE"-rule should ignore
+
+174
+00:08:17,690 --> 00:08:19,470
+spaces,
+
+175
+00:08:19,470 --> 00:08:20,680
+tabs,
+
+176
+00:08:21,210 --> 00:08:22,440
+linefeeds
+
+177
+00:08:22,440 --> 00:08:24,440
+and carrgiage returns
+
+178
+00:08:24,440 --> 00:08:28,120
+no matter how often they occur.
+
+179
+00:08:28,120 --> 00:08:31,070
+For that we can add the following lexer command:
+
+180
+00:08:31,070 --> 00:08:35,020
+"-> skip" and then all whitespaces,
+
+181
+00:08:35,020 --> 00:08:36,610
+namely all these here,
+
+182
+00:08:36,610 --> 00:08:38,200
+will be simply ignored.
+
+183
+00:08:38,200 --> 00:08:41,080
+Next we need to regenerate
+
+184
+00:08:41,760 --> 00:08:45,830
+the parser and lexer from our grammar,
+
+185
+00:08:47,230 --> 00:08:51,900
+select our parser in eclipse and press "F5"
+
+186
+00:08:52,110 --> 00:08:55,380
+and then rerun all our tests.
+
+187
+00:08:56,780 --> 00:09:00,130
+As you can see there are no more token recognition errors,
+
+188
+00:09:00,130 --> 00:09:03,020
+the space character was just ignored
+
+189
+00:09:03,020 --> 00:09:06,690
+but not as an error, but this time on purpose.
+
+190
+00:09:07,190 --> 00:09:09,690
+Now I want to show you the current tree
+
+191
+00:09:09,690 --> 00:09:12,540
+for "println(1); println(2);".
+
+192
+00:09:12,540 --> 00:09:15,650
+For that I copy the code here,
+
+193
+00:09:15,650 --> 00:09:17,420
+navigate to the console,
+
+194
+00:09:17,980 --> 00:09:22,910
+where I am in "workspace" of our parser project
+
+195
+00:09:23,270 --> 00:09:24,970
+and when you have a look here,
+
+196
+00:09:24,970 --> 00:09:26,410
+here is the "bin"-folder
+
+197
+00:09:26,410 --> 00:09:29,200
+and in the bin folder which was created by Eclipse,
+
+198
+00:09:29,200 --> 00:09:33,770
+there are our compiled .class files with lexer and parser
+
+199
+00:09:33,770 --> 00:09:35,690
+and I already prepared
+
+200
+00:09:35,690 --> 00:09:38,810
+the TestRig command:
+
+201
+00:09:38,810 --> 00:09:42,660
+You have now on the classpath
+
+202
+00:09:42,660 --> 00:09:45,480
+the folder bin instead of the dot,
+
+203
+00:09:45,480 --> 00:09:48,480
+because now the "bin" folder contains the .class files
+
+204
+00:09:48,480 --> 00:09:50,810
+and not the current working directory.
+
+205
+00:09:51,390 --> 00:09:54,630
+This part here is the same as before
+
+206
+00:09:55,090 --> 00:09:56,990
+but here preceding our grammar,
+
+207
+00:09:56,990 --> 00:09:59,210
+that was previously just "Demo"
+
+208
+00:09:59,210 --> 00:10:02,320
+and now this includes the full package name.
+
+209
+00:10:02,320 --> 00:10:03,780
+Then the new start rule
+
+210
+00:10:03,780 --> 00:10:07,140
+which is now not "addition" anymore, but "program"
+
+211
+00:10:07,140 --> 00:10:09,800
+and I use "-ps" here
+
+212
+00:10:09,800 --> 00:10:12,310
+to generate a PostScript file,
+
+213
+00:10:12,310 --> 00:10:15,720
+but you can directly use "-gui".
+
+214
+00:10:16,810 --> 00:10:18,340
+Then we execute the command
+
+215
+00:10:18,340 --> 00:10:20,940
+and since I did not pass a "code.demo" file
+
+216
+00:10:20,940 --> 00:10:22,910
+the program reads from stdin
+
+217
+00:10:22,910 --> 00:10:25,510
+that means I can simply
+
+218
+00:10:25,820 --> 00:10:28,850
+paste the copied source code,
+
+219
+00:10:29,230 --> 00:10:32,920
+then on Linux press "Ctrl+D"
+
+220
+00:10:34,570 --> 00:10:38,560
+and on Windows "Ctrl+Z" and then enter
+
+221
+00:10:38,990 --> 00:10:41,890
+to send an EOF
+
+222
+00:10:41,890 --> 00:10:46,360
+to tell TestRig that the input is complete.
+
+223
+00:10:47,220 --> 00:10:51,610
+Then we'll have a look at our generated tree again,
+
+224
+00:10:52,510 --> 00:10:54,570
+that's how it looks like:
+
+225
+00:10:55,220 --> 00:10:57,710
+It has already grown a bit:
+
+226
+00:10:57,710 --> 00:11:00,670
+Our "program" with two "println" statements
+
+227
+00:11:00,670 --> 00:11:02,930
+and both "println"-statements consist respectively of
+
+228
+00:11:02,930 --> 00:11:05,960
+a "println"-call, an "addition"
+
+229
+00:11:05,960 --> 00:11:09,440
+and the "addition" in turn consists of just a number.
+
+230
+00:11:10,090 --> 00:11:12,440
+We have learned how to include the
+
+231
+00:11:12,440 --> 00:11:14,000
+"println" command in our language
+
+232
+00:11:14,000 --> 00:11:16,360
+and how we can support multiple calls.
+
+233
+00:11:16,360 --> 00:11:19,480
+Additionally we learned how to ignore whitespaces.
+
+234
+00:11:19,950 --> 00:11:21,720
+In the next videos we are expected by
+
+235
+00:11:21,720 --> 00:11:22,440
+variables,
+
+236
+00:11:22,440 --> 00:11:23,090
+loops,
+
+237
+00:11:23,090 --> 00:11:23,660
+conditions,
+
+238
+00:11:23,660 --> 00:11:24,300
+functions
+
+239
+00:11:24,300 --> 00:11:25,760
+and much more.
+
+240
+00:11:25,760 --> 00:11:27,860
+What do you want to see next?
+
+241
+00:11:27,860 --> 00:11:30,360
+Post your wishes into the comments!
+
+242
+00:11:30,360 --> 00:11:32,880
+Of course I appreciate comments in general
+
+243
+00:11:32,880 --> 00:11:35,500
+including your feedback, questions and proposals
+
+244
+00:11:35,500 --> 00:11:38,170
+and of course thumbs and subscriptions.
+
+245
+00:11:38,170 --> 00:11:39,460
+Thank you to Gadarol
+
+246
+00:11:39,460 --> 00:11:42,390
+who allowed me to use his studio for the recordings.
+
+247
+00:11:42,390 --> 00:11:44,640
+Thank YOU for your attention,
+
+248
+00:11:44,640 --> 00:11:46,040
+I hope you had a lot of fun,
+
+249
+00:11:46,040 --> 00:11:48,100
+see you next time
+
+250
+00:11:48,100 --> 00:11:50,940
+when we are back to "Let's build a compiler".
+

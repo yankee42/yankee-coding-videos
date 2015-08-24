@@ -1,0 +1,1019 @@
+1
+00:00:00,000 --> 00:00:02,991
+Welcome back to "Let's build a compiler".
+
+2
+00:00:02,990 --> 00:00:05,226
+In the last episode we bring to you variables
+
+3
+00:00:05,220 --> 00:00:06,444
+for our language
+
+4
+00:00:06,440 --> 00:00:09,586
+and little by little we are closing the complexity in our compiler
+
+5
+00:00:09,586 --> 00:00:11,580
+and errors are difficult to find.
+
+6
+00:00:11,822 --> 00:00:14,591
+After, in this episode we will work 
+
+7
+00:00:14,590 --> 00:00:18,173
+with how our visitor can generate error messages.
+
+8
+00:00:19,982 --> 00:00:22,160
+Here, we unfortunately don't have any error allowed:
+
+9
+00:00:22,160 --> 00:00:25,973
+The "Files.newOutputStream" creates a new OutputStream,
+
+10
+00:00:25,970 --> 00:00:29,088
+then we write our class file in this OutputStream
+
+11
+00:00:29,080 --> 00:00:30,644
+but the OutputStream after
+
+12
+00:00:30,640 --> 00:00:31,955
+would be never closed.
+
+13
+00:00:32,173 --> 00:00:34,213
+On Linux, once again, there is no problem,
+
+14
+00:00:34,210 --> 00:00:37,875
+don't fail that much, the OutputStream generally still exists
+
+15
+00:00:37,870 --> 00:00:40,288
+but on Windows this tempDir after here
+
+16
+00:00:40,280 --> 00:00:41,355
+can not be deleted,
+
+17
+00:00:41,350 --> 00:00:44,084
+because on tempDir remains a file,
+
+18
+00:00:44,080 --> 00:00:45,168
+it still opened.
+
+19
+00:00:45,160 --> 00:00:47,066
+Like said, however, on Linux it works,
+
+20
+00:00:47,060 --> 00:00:48,928
+and somebody can open the deleted files
+
+21
+00:00:48,920 --> 00:00:50,560
+on Windows that's not possible
+
+22
+00:00:50,560 --> 00:00:53,542
+and because of this we should fix this
+
+23
+00:00:53,662 --> 00:00:55,204
+We'll simply make 
+
+24
+00:00:55,200 --> 00:00:59,328
+OutputStream first get a variable
+
+25
+00:01:01,320 --> 00:01:03,111
+and then we go here
+
+26
+00:01:03,110 --> 00:01:05,831
+use try-with-resources-Block.
+
+27
+00:01:15,866 --> 00:01:18,640
+Here we know now that Java
+
+28
+00:01:18,640 --> 00:01:21,368
+in the end of try blocks on OutputStream,
+
+29
+00:01:21,360 --> 00:01:23,488
+here we create automatic closures
+
+30
+00:01:23,480 --> 00:01:27,106
+and the same if an exception occurs here.
+
+31
+00:01:27,200 --> 00:01:30,071
+We'll prove once more if the tests still really make
+
+32
+00:01:30,644 --> 00:01:34,226
+and yes: it's not the case, everything still wonderful.
+
+33
+00:01:34,631 --> 00:01:36,795
+Then we want to begin working with
+
+34
+00:01:36,790 --> 00:01:38,755
+the error messages right for 
+
+35
+00:01:38,750 --> 00:01:40,324
+when sometime through the work
+
+36
+00:01:40,320 --> 00:01:42,875
+For this, therefore we first 
+
+37
+00:01:42,870 --> 00:01:44,946
+customize our specification.
+
+38
+00:01:45,568 --> 00:01:49,431
+We produced here, after our previous test
+
+39
+00:01:51,430 --> 00:01:53,711
+a new test,
+
+40
+00:01:55,297 --> 00:01:57,288
+and we say then:
+
+41
+00:01:57,622 --> 00:02:15,071
+"compilingCodeThrowsUndeclaredVariableException_ifVariableIsUndefined"
+
+42
+00:02:17,866 --> 00:02:20,626
+and then similarly
+
+43
+00:02:22,031 --> 00:02:26,653
+as previous Output compiling our String,
+
+44
+00:02:27,017 --> 00:02:29,457
+anyway we don't give any Output
+
+45
+00:02:29,450 --> 00:02:31,466
+from our program to evaluate,
+
+46
+00:02:31,460 --> 00:02:34,640
+but is given only a "compileAndRun".
+
+47
+00:02:36,333 --> 00:02:39,457
+like the code we given now soon be executed,
+
+48
+00:02:39,450 --> 00:02:44,048
+was referenced in respect to a "undeclared variable".
+
+49
+00:02:44,604 --> 00:02:46,644
+We also get here as a simple example:
+
+50
+00:02:46,640 --> 00:02:48,328
+"println(x)"
+
+51
+00:02:48,320 --> 00:02:49,982
+and after
+
+52
+00:02:49,980 --> 00:02:52,071
+we need naturally to prove 
+
+53
+00:02:52,070 --> 00:02:55,044
+if the error is the waited: 
+
+54
+00:02:55,040 --> 00:02:58,395
+Isto significa que escrevemos aqui dentro da nossa anotação de teste:
+This means that we write here inside our test annotation:
+
+55
+"expectedExceptions"
+"expectedExceptions"
+
+56
+e dizemos "expecten" 
+and we say "expecten"
+
+57
+"UndeclaredVariableException".
+"UndeclaredVariableException".
+
+00:03:12,440 --> 00:03:14,666
+And then we document here:
+
+00:03:14,660 --> 00:03:24,133
+"evaluation performed by expected exception".
+
+60
+Essa exceção não nos fornece nada até agora,
+That exception does not give us nothing until now,
+61
+isso significa que nós precisamos deixar,
+this means that we need to leave,
+
+isso já não acontece no nosso pacote de testes
+that it don't happen to our test package
+
+63
+but is normal again in the "source" package
+
+64
+e então criamos aqui mesmo
+
+65
+um pacote "exceptions".
+an "exceptions" package.
+66
+Para que então possa agora naturalmente passar por uma exceção,
+So that can now, naturally, pass through an exception,
+
+simplesmente rodamos de novo nosso "throws declaration" nele.
+just by running our "throws declaration" in it again.
+
+68
+With this, our test is expanded respectably,
+
+69
+então rodamos ele mais uma vez
+
+70
+e vemos agora por aqui:
+and then we see here:
+71
+Hurraa, um teste deu mensagem de erro,
+Hurraa, a test give us an error message,
+
+no nosso novo
+namely in our new
+
+73
+"expected exception was UndeclaredVariableException"
+
+74
+00:04:12,520 --> 00:04:15,280
+but in it's place we have
+
+75
+00:04:15,280 --> 00:04:18,986
+a "jasError" with "Bad argument" returned.
+
+76
+00:04:20,528 --> 00:04:21,857
+Now we want to implement this,
+
+77
+00:04:21,850 --> 00:04:24,911
+so that the UndeclaredVariableException also be throwed.
+
+78
+00:04:24,910 --> 00:04:26,591
+Hence, we go to our visitor,
+
+79
+00:04:26,590 --> 00:04:30,071
+the last stumble about it because there is no variable
+
+80
+00:04:30,070 --> 00:04:33,151
+and also in our case
+
+81
+00:04:33,150 --> 00:04:35,057
+one variable that we'll search,
+
+82
+00:04:35,050 --> 00:04:38,493
+that also is joined to "visitVariable"
+
+83
+00:04:38,490 --> 00:04:40,093
+and there can be,
+
+84
+00:04:40,090 --> 00:04:43,186
+that the "variables.got" do not return nothing at all
+
+85
+00:04:43,180 --> 00:04:46,120
+because in the same way, our variable was not defined.
+
+86
+00:04:46,120 --> 00:04:47,826
+Here we say then,
+
+87
+00:04:47,820 --> 00:04:49,453
+what we have here
+
+88
+00:04:49,450 --> 00:04:52,586
+also comes at first in the variable
+
+89
+00:04:54,671 --> 00:04:56,595
+and then so forth, is showed to us:
+
+90
+00:04:56,590 --> 00:05:00,977
+Case "varIndex", then will return us that we have "null",
+
+91
+00:05:01,546 --> 00:05:04,768
+thus, the variable is not defined
+
+92
+00:05:04,760 --> 00:05:07,368
+and we say on the local:
+
+93
+00:05:07,360 --> 00:05:11,928
+"throw new UndeclaredVariableException".
+
+94
+00:05:14,297 --> 00:05:17,760
+Now the exception still a "caught exception",
+
+95
+00:05:17,760 --> 00:05:22,528
+this means we have to add in our visitor,
+
+96
+00:05:22,520 --> 00:05:25,124
+in our throws declaration,
+
+97
+00:05:25,120 --> 00:05:27,306
+that we can't make,
+
+98
+00:05:27,300 --> 00:05:29,675
+because of a subscription method
+
+99
+00:05:29,670 --> 00:05:30,928
+of an superclass,
+
+100
+00:05:30,920 --> 00:05:33,680
+here we can't simply change the assignment
+
+101
+00:05:33,680 --> 00:05:35,164
+and add a throws,
+
+102
+00:05:35,160 --> 00:05:36,422
+this means we need here
+
+103
+00:05:36,420 --> 00:05:39,906
+still emend it for some "RuntimeException",
+
+104
+00:05:39,900 --> 00:05:42,004
+and make it just write inside
+
+105
+00:05:42,000 --> 00:05:45,600
+"extends RuntimeException" here.
+
+106
+00:05:46,000 --> 00:05:48,973
+Thus, we execute our test again
+
+107
+00:05:51,000 --> 00:05:54,275
+and as it says: Huraa, it worked!
+
+108
+00:05:54,270 --> 00:05:58,955
+Now we arrived to a "UndeclaredVariableException"
+
+109
+00:05:58,950 --> 00:06:01,915
+when we access a variable by the println,
+
+110
+00:06:01,915 --> 00:06:03,910
+it isn't defined.
+
+111
+00:06:03,910 --> 00:06:07,391
+Sadly, we say that the error message until now doesn't change, like as:
+
+112
+00:06:07,390 --> 00:06:10,862
+"Hey, I found a 'undeclared variable'".
+
+113
+00:06:10,860 --> 00:06:14,102
+Like it was with the error we yet not said
+
+114
+00:06:14,100 --> 00:06:15,960
+which variable isn't declared,
+
+115
+00:06:15,960 --> 00:06:19,328
+or how do we call and at which position does it occur.
+
+116
+00:06:19,320 --> 00:06:24,466
+For this, we go back to our specification,
+
+117
+00:06:24,460 --> 00:06:27,497
+and we'll continue and specify,
+
+118
+00:06:27,490 --> 00:06:29,902
+for that it gently needs to stop also.
+
+119
+00:06:29,900 --> 00:06:32,848
+This means we give here yet another on the:
+
+120
+00:06:32,840 --> 00:06:35,533
+"expectedExceptionsMessageRegexp",
+
+121
+00:06:35,530 --> 00:06:37,644
+saying it is an regular expression now,
+
+122
+00:06:37,640 --> 00:06:40,986
+which shall pass in this "message' of our exception.
+
+123
+00:06:40,980 --> 00:06:42,800
+There he should also have now inside:
+
+124
+00:06:42,800 --> 00:06:45,226
+The number of the lines, that stands here...
+
+125
+00:06:45,220 --> 00:06:47,720
+we need just a line, the number one line,
+
+126
+00:06:47,720 --> 00:06:49,360
+then the columns number,
+
+127
+00:06:49,360 --> 00:06:50,377
+and we'll see now, 
+
+128
+00:06:50,370 --> 00:06:53,324
+1, 2, 3, 4, 5, 6, 7, 8,
+
+129
+00:06:53,320 --> 00:06:55,853
+pertaining to the number 8 column
+
+130
+00:06:55,850 --> 00:06:58,404
+of the appearing error 
+
+131
+00:06:58,400 --> 00:07:04,982
+and there is a "undeclared variable"
+
+132
+00:07:05,662 --> 00:07:08,004
+and it's named as "x",
+
+133
+00:07:09,351 --> 00:07:11,204
+Then we save this,
+
+134
+00:07:11,413 --> 00:07:13,497
+and leave our test run again...
+
+135
+00:07:15,490 --> 00:07:18,448
+As customary: the test outputs an error message:
+
+136
+00:07:18,440 --> 00:07:22,248
+"The exception was thrown but with the wrong message".
+
+137
+00:07:23,031 --> 00:07:24,715
+We're going to fix this now,
+
+138
+00:07:24,710 --> 00:07:28,906
+to extend our "UndeclaredVariableException",
+
+139
+00:07:28,900 --> 00:07:32,008
+what it should know is:
+
+140
+00:07:32,000 --> 00:07:34,853
+In which line is the occurred problem,
+
+141
+00:07:35,786 --> 00:07:36,951
+it should know:
+
+142
+00:07:36,950 --> 00:07:40,928
+In which "column" the problem happened
+
+143
+00:07:46,942 --> 00:07:48,768
+and should know:
+
+144
+00:07:48,760 --> 00:07:52,697
+What's the name of the variable which is "undeclared"?
+
+145
+00:07:57,622 --> 00:08:02,777
+Then we want to implement our "getMessage" method
+
+146
+00:08:03,622 --> 00:08:06,684
+and it should now return
+
+147
+00:08:07,128 --> 00:08:13,880
+instead of just "line" a colon,
+
+148
+00:08:14,062 --> 00:08:16,275
+and the "column",
+
+149
+00:08:17,320 --> 00:08:24,266
+then  "undeclared variable"
+
+150
+00:08:25,973 --> 00:08:29,546
+and then the variable name.
+
+151
+00:08:34,088 --> 00:08:38,560
+Now we need to begin all the variables from above,
+
+152
+00:08:38,906 --> 00:08:42,080
+for the creation of a constructor
+
+153
+00:08:44,275 --> 00:08:46,608
+and with this constructor we can now just
+
+154
+00:08:46,600 --> 00:08:50,231
+deliver the token with our variable name.
+
+155
+00:08:53,355 --> 00:08:56,888
+Then there comes all the important informations for us
+
+156
+00:08:56,880 --> 00:09:00,395
+and occupying our variable on above.
+
+157
+00:09:01,013 --> 00:09:06,724
+The line furnishes "varNameToken.getLine()" as output,
+
+158
+00:09:08,862 --> 00:09:17,137
+the "column" give us "varNameToken.getCharPositionInLine()" as output
+
+159
+00:09:18,244 --> 00:09:26,666
+and a "varName" give us "varNameToken.getText()" as output.
+
+160
+00:09:27,311 --> 00:09:30,706
+Therefor we go again on out visitor
+
+161
+00:09:30,700 --> 00:09:32,502
+and we can see it claiming here,
+
+162
+00:09:32,500 --> 00:09:34,768
+because we do not deliver the token now
+
+163
+00:09:34,760 --> 00:09:39,560
+and our namely token "ctx.varName".
+
+164
+00:09:41,142 --> 00:09:43,586
+We leave our test run again...
+
+165
+00:09:46,448 --> 00:09:49,266
+... and see now then, it worked correctly.
+
+166
+00:09:49,260 --> 00:09:53,128
+Our error message made not only contain an information,
+
+167
+00:09:53,120 --> 00:09:56,808
+which occurred, in a place, an "undeclared variable",
+
+168
+00:09:56,800 --> 00:09:59,288
+but also exactly what variable
+
+169
+00:09:59,280 --> 00:10:03,257
+and in what position in our source code
+
+170
+00:10:03,746 --> 00:10:06,173
+So, we'll show once again if everything has passed.
+
+171
+00:10:06,170 --> 00:10:08,884
+For this, we go to our grammar:
+
+172
+00:10:08,880 --> 00:10:11,008
+We have at the moment on "expression"
+
+173
+00:10:11,000 --> 00:10:13,671
+varName=identifier, if over the variable is also
+
+174
+00:10:13,670 --> 00:10:15,311
+the read access
+
+175
+00:10:15,310 --> 00:10:18,151
+and a non existent variable, for us to intercept,
+
+176
+00:10:18,150 --> 00:10:21,351
+then we throw an errors order.
+
+177
+00:10:21,350 --> 00:10:24,942
+For when we'll have a "varDeclaration" we'll have a "varName",
+
+178
+00:10:24,940 --> 00:10:28,035
+then is good that a variable doesn't exist,
+
+179
+00:10:28,030 --> 00:10:30,377
+then we need to throw no error,
+
+180
+00:10:30,370 --> 00:10:33,560
+but then we'll still here the "assignment" case.
+
+181
+00:10:33,560 --> 00:10:36,582
+There we will then throw an error,
+
+182
+00:10:36,580 --> 00:10:39,791
+when there is no "varName" here,
+
+183
+00:10:40,235 --> 00:10:42,813
+We'll run on our test again,
+
+184
+00:10:42,810 --> 00:10:45,080
+Copy our test case
+
+185
+00:10:48,880 --> 00:10:51,346
+and then we need naturally to rename.
+
+186
+00:10:51,340 --> 00:10:53,271
+Now we need to have natural consistency at the call,
+
+187
+00:10:53,270 --> 00:11:00,471
+I've changed on "ifReadingUndefinedVariable". 
+
+188
+00:11:01,591 --> 00:11:06,702
+And the test here on the bottom does correspond to "ifWritingUndefinedVariable".
+
+189
+00:11:08,471 --> 00:11:10,951
+Then we need another code example,
+
+190
+00:11:10,950 --> 00:11:14,551
+I suppose a simple "x-5" for now
+
+191
+00:11:15,315 --> 00:11:21,200
+and then it continues being a undefined variable at line 1
+
+192
+00:11:21,200 --> 00:11:24,462
+but at the position 0, at the beginning position.
+
+193
+00:11:26,142 --> 00:11:27,524
+We save this,
+
+194
+00:11:27,524 --> 00:11:29,520
+we execute our test again
+
+195
+00:11:30,924 --> 00:11:34,120
+and as you can see: the test returns error,
+
+196
+00:11:34,120 --> 00:11:36,333
+also wonderful, we can work with this
+
+197
+00:11:36,330 --> 00:11:38,640
+as soon as we fix the new test.
+
+198
+00:11:38,640 --> 00:11:40,777
+We go to our visitor
+
+199
+00:11:40,770 --> 00:11:42,991
+and then we see here,
+
+200
+00:11:42,990 --> 00:11:47,444
+that the "visitAssignment" has with itself exactly the same constructor.
+
+201
+00:11:47,440 --> 00:11:52,422
+We reach it here with "variables.get" over our variable name.
+
+202
+00:11:52,420 --> 00:11:54,888
+And when it does not exist,
+
+203
+00:11:54,880 --> 00:11:58,271
+then we need immediately to throw the same error,
+
+204
+00:11:58,270 --> 00:12:00,177
+For that our code not to be duplicated
+
+205
+00:12:00,170 --> 00:12:02,862
+and here exactly the same for the same lines
+
+206
+00:12:02,860 --> 00:12:06,986
+as we can write here inserting a little help method.
+
+207
+00:12:07,568 --> 00:12:09,995
+I say here just now:
+
+208
+00:12:13,608 --> 00:12:17,804
+"requireVariableIndex".
+
+209
+00:12:17,800 --> 00:12:20,195
+And we would like,
+
+210
+00:12:20,190 --> 00:12:24,791
+from the token variable name, of corresponding index.
+
+211
+00:12:24,790 --> 00:12:26,991
+Delivering also a token here
+
+212
+00:12:33,875 --> 00:12:38,577
+and then comes all the source code from here...
+
+213
+00:12:39,573 --> 00:12:41,377
+...after here...
+
+214
+00:12:42,084 --> 00:12:47,120
+and in the end we could return "varIndex".
+
+215
+00:12:47,120 --> 00:12:49,960
+This means that our varName, more something,
+
+216
+00:12:49,960 --> 00:12:51,742
+isn't contained in a context at the moment
+
+217
+00:12:51,740 --> 00:12:54,546
+but we have it as a "varNameToken"
+
+218
+00:12:54,540 --> 00:12:56,386
+and here the same
+
+219
+00:12:56,380 --> 00:12:58,991
+and this method is already done.
+
+220
+00:12:58,990 --> 00:13:00,186
+Now we go to
+
+221
+00:13:00,180 --> 00:13:05,008
+instead of "varIndex" call "requireVariableIndex"
+
+222
+00:13:05,000 --> 00:13:09,653
+and our node "ctx.varName" passed.
+
+223
+00:13:10,311 --> 00:13:11,835
+Now the same applies here:
+
+224
+00:13:11,830 --> 00:13:14,551
+instead of directly access the variable map
+
+225
+00:13:14,550 --> 00:13:18,186
+here in our case named "requireVariableIndex"
+
+226
+00:13:18,180 --> 00:13:25,382
+and we catch from "ctx" the token varName.
+
+227
+00:13:27,204 --> 00:13:29,853
+Then we execute our test one more time
+
+228
+00:13:31,413 --> 00:13:33,902
+and Huraa, it worked,
+
+229
+00:13:33,900 --> 00:13:35,884
+our new test does the same,
+
+230
+00:13:35,880 --> 00:13:39,826
+by this, read and writes
+
+231
+00:13:39,820 --> 00:13:42,951
+throwing now a "UndeclaredVariableException"
+
+232
+00:13:42,950 --> 00:13:45,404
+with a reasonable message.
+
+233
+00:13:46,080 --> 00:13:47,631
+In this episode we have learned
+
+234
+00:13:47,630 --> 00:13:49,906
+how to establish exceptions on visitor
+
+235
+00:13:49,900 --> 00:13:51,897
+useful for error messages when reached
+
+236
+00:13:51,890 --> 00:13:54,706
+over non existent variables for production.
+
+237
+00:13:54,700 --> 00:13:57,240
+over a token that we could take the informations
+
+238
+00:13:57,240 --> 00:14:00,817
+in which number and column the error is contained
+
+239
+00:14:00,810 --> 00:14:02,191
+and through the exception type
+
+240
+00:14:02,190 --> 00:14:05,044
+we could say exactly what problem does it exhibit too.
+
+241
+00:14:05,040 --> 00:14:07,017
+With this we have a solid foundation
+
+242
+00:14:07,017 --> 00:14:09,010
+for error control.
+
+243
+00:14:09,010 --> 00:14:11,288
+In the next episode we will generalize
+
+244
+00:14:11,280 --> 00:14:14,182
+this foundation and apply over other errors.
+
+245
+00:14:14,180 --> 00:14:17,173
+As for example when a variable is declared twice.
+
+246
+00:14:17,484 --> 00:14:19,480
+Which problems and solutions
+
+247
+00:14:19,480 --> 00:14:22,542
+you found in the development of your compilers?
+
+248
+00:14:22,540 --> 00:14:24,240
+Do you have any doubt or suggestion?
+
+249
+00:14:24,240 --> 00:14:26,151
+Write me in the comments!
+
+250
+00:14:26,150 --> 00:14:27,857
+Don't forget to leave a thump up
+
+251
+00:14:27,850 --> 00:14:29,208
+if you liked the video
+
+252
+00:14:29,200 --> 00:14:31,973
+and subscribe, to never loose any episode.
+
+253
+00:14:32,231 --> 00:14:33,662
+Thanks a lot to Gadarol,
+
+254
+00:14:33,660 --> 00:14:36,213
+that permitted me to use his studio for the recordings
+
+255
+00:14:36,210 --> 00:14:38,680
+and thank you very much for paying attention.
+
+256
+00:14:38,680 --> 00:14:41,577
+My name is Yankee, I hope you had fun,
+
+257
+00:14:41,570 --> 00:14:43,951
+and see you later, with a new episode of:
+
+258
+00:14:43,951 --> 00:14:45,950
+"Let's build a compiler".
