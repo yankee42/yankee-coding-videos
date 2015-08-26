@@ -690,207 +690,306 @@ this is also obvious
 
 116
 00:07:35,280 --> 00:07:37,204
- mal nicht richtig initialisiert
+mal nicht richtig initialisiert
 quando ele não inicia corretamente 
 when it doesn't start properly
 
 117
 00:07:37,200 --> 00:07:39,435
 und da könnt ihr schonmal wieder sehen,
+e aqui você pode mais uma vez ver,
+and as you can see one more time,
 
 118
 00:07:39,430 --> 00:07:42,613
 dass so eine Spezifikation in Form eines
+esta é uma especificação na forma de um
+that is such a specification in the form of a
 
 119
 00:07:42,610 --> 00:07:44,857
 automatisieren Tests sehr hilfreich ist,
+teste automático que ajuda muito,
+very helpful automated test,
 
 120
 00:07:44,850 --> 00:07:47,200
 denn wenn man solche Kleinigkeiten vergisst,
+porque se alguém esquecer de coisas assim pequenas,
+because if one does forget such little things,
 
 121
 00:07:47,200 --> 00:07:49,004
 dann findet man die sehr schnell.
+então encontra-as rapidamente.
+then does find it very quickly.
 
 122
 00:07:50,071 --> 00:07:53,711
 Also gehen wir zurück zu unser
+Assim vamos de volta no nosso
+So we go back to our
 
 123
 00:07:53,710 --> 00:07:56,373
+VariableAlreadyDefinedException
+VariableAlreadyDefinedException
 VariableAlreadyDefinedException
 
 124
 00:07:56,370 --> 00:08:00,075
 und schreiben dann hier auch noch
+e escrevemos aqui então 
+and we write here then
 
 125
 00:08:00,070 --> 00:08:03,200
 dass der "varName" bitte
+o "varName"
+the "varName"
 
 126
 00:08:03,200 --> 00:08:05,973
 von dem variableNameToken
+da nossa variableNameToken
+from our variableNameToken
 
 127
 00:08:05,970 --> 00:08:08,751
 aus initialisert wird.
+quando é iniciada.
+when it starts.
 
 128
 00:08:10,608 --> 00:08:12,515
 Dann führen wir den Test nochmal aus
+Então rodamos o teste mais uma vez
+Then we run the test one more time
 
 129
 00:08:15,422 --> 00:08:17,231
 und diesmal hat es geklappt,
+e desta vez ele funcionou,
+and this time it did work,
 
 130
 00:08:17,230 --> 00:08:19,080
 Alle Tests sind in Ordnung,
+Todos os testes estão em ordem,
+All tests are okay,
 
 131
 00:08:19,080 --> 00:08:23,075
 auch unser neuer "throwsVariableAlreadyDefinedException"-Test.
+também o nosso novo teste "throwsVariableAlreadyDefinedException".
+also our new "throwsVariableAlreadyDefinedException" test.
 
 132
 00:08:23,075 --> 00:08:23,083
 So, dann möchte ich euch nochmal zeigen
+Portanto, eu quero mostrar a vocês novamente
+Thus, I want to show you one more time
 
 133
 00:08:25,070 --> 00:08:26,324
 wie das ganze aussieht,
+como tudo isto se parece,
+how all this looks,
 
 134
 00:08:26,320 --> 00:08:30,151
 wenn wir unseren Compiler sozusagen "normal" ausführen
+se executamos o nosso Compiler, por assim dizer, "normal"
+if we execute our Compiler, so to speak, "normal"
 
 135
 00:08:30,150 --> 00:08:33,635
 mit Hilfe von unser Mainklasse und ein Fehler auftritt.
+com a ajuda da nossa classe main e a ocorrência de um erro.
+with the help of our main class and an error occurrence.
 
 136
 00:08:33,630 --> 00:08:36,644
 Also werden wir unsere code.demo-Datei anpassen
+Também iremos ajustar o nosso arquivo code.demo
+We will also adjust or code.demo file
 
 137
 00:08:36,640 --> 00:08:40,351
 und hier jetzt mal reinschreiben:
+e agora jogamos dentro daqui:
+and now we toss in here:
 
 138
 00:08:42,737 --> 00:08:44,133
+"println(x)".
+"println(x)".
 "println(x)".
 
 139
 00:08:45,582 --> 00:08:49,426
 Und dann werden wir unsere "Main" einmal ausführen.
+e então iremos executar o nosso "Main" uma vez.
+and then we'll execute our "Main" once.
 
 140
 00:08:49,631 --> 00:08:52,204
 Dann schauen wir uns an was dabei rauskommt.
+Então observamos o que vai junto à saída.
+Then we observe what goes with the output.
 
 141
 00:08:52,200 --> 00:08:54,942
 Wir sehen hier jetzt also eine Exception in main,
+Também enxergamos agora uma exceção no main,
+We see here also a Exception in main now,
 
 142
 00:08:54,940 --> 00:08:58,377
 mit einer UndeclaredVariableException,
+com uma UndeclaredVariableException,
+with an UndeclaredVariableException,
 
 143
 00:08:58,370 --> 00:09:01,000
 in Zeile 1, an Position 8,
+na linha 1, na posição 8,
+in row 1, at position 8,
 
 144
 00:09:01,000 --> 00:09:04,022
 da haben wir jetzt eine "undeclared variable" "x".
+aqui temos então uma "undeclared variable" "x".
+here we have then an "undeclared variable" "x".
 
 145
 00:09:04,617 --> 00:09:08,351
 Jetzt können wir daraus sehr gut ablesen
+Agora nós podemos, a partir disso, ler muito bem
+Now we can, by this, read very well
 
 146
 00:09:08,350 --> 00:09:10,031
 was wir falsch gemacht haben.
+o que nós fizemos de errado.
+what we have done wrong,
 
 147
 00:09:10,791 --> 00:09:12,648
 In dieser Folge haben wir gelernt wie wir
+Neste episódio nós aprendemos como podemos
+In this episode we learned how we can
 
 148
 00:09:12,640 --> 00:09:13,960
 Exceptions im Visitor für
+usar Exceptions no visitor 
+use Exception on Visitor
 
 149
 00:09:13,960 --> 00:09:16,613
 unterschiedliche Fehlertypen verwenden können.
+para diferentes tipos de erros.
+for different types of errors.
 
 150
 00:09:16,610 --> 00:09:19,640
 Eine gemeinsame Superklasse für alle Kompilierungsfehler
+Uma superclasse comum para todos os erros de compilação,
+A common superclass for all the compilation errors,
 
 151
 00:09:19,640 --> 00:09:21,888
 kann die Zeile und Spalte des Fehlers speichern
+que pode salvar a linha e a coluna do erro
+that can save the error line and column
 
 152
 00:09:21,880 --> 00:09:23,528
 und spezifische Fehlerdetails
+e podendo armazenar
+and can store
 
 153
 00:09:23,520 --> 00:09:26,426
  können in ableitenden Klassen untergebracht werden.
+detalhes de erros específicos em classes derivadas.
+specific error details in derived classes.
 
 154
 00:09:26,884 --> 00:09:28,560
 Habt ihr Fragen oder Wünsche?
+Você tem alguma perguntas ou pedidos?
+Do you have questions or requests?
 
 155
 00:09:28,560 --> 00:09:30,311
 Schreibt es mir in die Kommentare!
+Me escreva nos comentários!
+Write me in the comments!
 
 156
 00:09:30,310 --> 00:09:32,231
 Lasst mir außerdem einen Daumen da
+Não se esqueça de curtir
+Let me a thumb up here
 
 157
 00:09:32,230 --> 00:09:33,706
 wenn euch das Video gefallen hat
+se você gostou do vídeo
+if you liked the video
 
 158
 00:09:33,700 --> 00:09:36,662
 und ein Abo damit ihr keine neue Folge verpasst.
+e se inscreva para não perder nenhum episódio.
+and subscribe so that you never miss a new episode.
 
 159
 00:09:36,977 --> 00:09:38,275
 Vielen Dank an Gadarol,
+Muito obrigado ao Gadarol,
+Thanks a lot to Gadarol,
 
 160
 00:09:38,270 --> 00:09:39,248
 der mir für die Aufnahmen
+que me permitiu a gravar
+that permitted me
 
 161
 00:09:39,240 --> 00:09:40,835
 sein Studio zur Verfügung stellt.
+usando o seu estúdio.
+record in his studio.
 
 162
 00:09:40,830 --> 00:09:43,373
 Und euch vielen Dank für eure Aufmerksamkeit.
+E muito obrigado para vocês pela atenção.
+And thank you very much for your attention.
 
 163
 00:09:43,640 --> 00:09:44,928
 Mein Name ist yankee,
+Meu nome é Yankee,
+My name is Yankee,
 
 164
 00:09:44,920 --> 00:09:46,391
 ich hoffe es hat euch Spaß gemacht,
+Eu espero que tenham se divertido,
+I hope you have enjoyed,
 
 165
 00:09:46,390 --> 00:09:47,582
 Bis zum nächsten Mal,
+Até a próxima,
+Until next time,
 
 166
 00:09:47,580 --> 00:09:50,368
 wenn es wieder heißt: "Let's build a compiler".
-
+para o próximo: "Let's build a compiler".
+for the next: "Let's build a compiler".
