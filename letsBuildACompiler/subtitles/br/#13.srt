@@ -1,0 +1,1495 @@
+﻿1
+00:00:00,000 --> 00:00:03,262
+Bem-vindo de volta ao "Let's build a compiler".
+
+2
+00:00:03,260 --> 00:00:05,897
+Neste episódio iremos introduzir pela primeira vez 
+
+3
+00:00:05,890 --> 00:00:08,524
+funções na nossa linguagem de programação.
+
+4
+00:00:08,520 --> 00:00:10,715
+Para tanto, primeiro nós queremos:
+
+5
+00:00:10,710 --> 00:00:12,595
+Sem parâmetro e como conteúdo
+
+6
+00:00:12,590 --> 00:00:14,800
+apenas retornando um único statement.
+
+7
+00:00:15,964 --> 00:00:19,520
+Então nós começamos a expandir nossa especificação,
+
+8
+00:00:19,520 --> 00:00:20,724
+vocês já sabem como.
+
+9
+00:00:20,720 --> 00:00:22,808
+Então, pensemos desta vez em um exemplo
+
+10
+00:00:22,808 --> 00:00:24,800
+para uma chamada de função.
+
+11
+00:00:25,271 --> 00:00:26,662
+E aqui eu digo agora:
+
+12
+00:00:26,660 --> 00:00:29,115
+Nós definimos primeiro uma função
+
+13
+00:00:29,110 --> 00:00:31,786
+e a chamamos "randomNumber",
+
+14
+00:00:34,062 --> 00:00:37,417
+Que deve retornar um número aleatório
+
+15
+00:00:37,410 --> 00:00:39,773
+por isso precisamos agora de um número aleatório,
+
+16
+00:00:39,770 --> 00:00:41,053
+Eu tenho aqui um dado,
+
+17
+00:00:41,050 --> 00:00:42,804
+este dado tem agora...
+
+18
+00:00:43,555 --> 00:00:45,360
+Aha... Um quatro.
+
+19
+00:00:47,315 --> 00:00:50,235
+e então queremos naturalmente que esta função
+
+20
+00:00:50,230 --> 00:00:51,737
+chame novamente
+
+21
+00:00:51,730 --> 00:00:53,595
+e dê o resultado.
+
+22
+00:00:53,590 --> 00:00:55,840
+Também escrevo aqui atrás:
+
+23
+00:00:56,453 --> 00:00:58,306
+"Println"
+
+24
+00:01:00,635 --> 00:01:02,306
+"randomNumber".
+
+25
+00:01:03,577 --> 00:01:05,960
+No total deve agora...
+
+26
+00:01:05,960 --> 00:01:07,000
+...quatro...
+
+27
+00:01:08,302 --> 00:01:10,764
+e dando nosso "lineSeparator".
+
+28
+00:01:12,560 --> 00:01:14,795
+Deixamos o teste rodar e controlar
+
+29
+00:01:14,790 --> 00:01:16,826
+o que ainda não funciona nele de verdade
+
+30
+00:01:18,071 --> 00:01:20,195
+e maravilha, não faz nada.
+
+31
+00:01:20,360 --> 00:01:21,968
+Agora iniciamos também a
+
+32
+00:01:21,960 --> 00:01:24,080
+expandir a nossa gramática.
+
+33
+00:01:24,284 --> 00:01:25,888
+Eu copio uma vez o que temos aqui
+
+34
+00:01:25,880 --> 00:01:27,484
+com o que logo podemos ver já ser
+
+35
+00:01:27,480 --> 00:01:29,626
+semelhante com nossa gramática.
+
+36
+00:01:29,620 --> 00:01:32,186
+Então vamos sobre a nossa gramática
+
+37
+00:01:32,180 --> 00:01:34,635
+e adicionamos para o nossa... ah...
+
+38
+00:01:34,630 --> 00:01:37,035
+para nossa chamada de função
+
+39
+00:01:37,030 --> 00:01:40,177
+e nossas novas regras na definição de funçãos.
+
+40
+00:01:40,170 --> 00:01:41,955
+Também observamos novamente 
+
+41
+00:01:41,955 --> 00:01:43,950
+o que temos aqui.
+
+42
+00:01:43,950 --> 00:01:45,977
+Isto uma vez sendo
+
+43
+00:01:45,970 --> 00:01:47,902
+a definição de função,
+
+44
+00:01:47,900 --> 00:01:49,093
+esta parte daqui
+
+45
+00:01:49,090 --> 00:01:51,977
+e a chamada de função é esta parte daqui,
+
+46
+00:01:51,970 --> 00:01:53,840
+Começamos com uma regra
+
+47
+00:01:53,840 --> 00:01:56,515
+para a definição de função.
+
+48
+00:01:57,360 --> 00:02:00,844
+Ela se chama: ..."function"... é...
+
+49
+00:02:00,840 --> 00:02:02,573
+ahhh... primeiro vem um "int",
+
+50
+00:02:03,182 --> 00:02:05,853
+então vem um "IDENTIFIER" aqui
+
+51
+00:02:05,850 --> 00:02:07,960
+para o nome da função,
+
+52
+00:02:11,026 --> 00:02:12,906
+então vem um parênteses
+
+53
+00:02:12,900 --> 00:02:14,937
+que inicia a lista de argumentos,
+
+54
+00:02:14,930 --> 00:02:16,635
+atualmente ainda vazia,
+
+55
+00:02:16,933 --> 00:02:19,248
+então vem o argumento,
+
+56               
+00:02:19,240 --> 00:02:20,480
+aqui não temos por enquanto nenhum
+
+57
+00:02:20,480 --> 00:02:22,373
+por isso deixo pela primeiramente fora,
+
+58
+00:02:22,370 --> 00:02:24,586
+também vem atrás um fecha parênteses,
+
+59
+00:02:24,580 --> 00:02:28,133
+então vem o "return" aqui,
+
+60
+00:02:28,130 --> 00:02:31,520
+também inicialmente um abre parênteses,
+
+61
+00:02:31,520 --> 00:02:33,520
+então um "return",
+
+62
+00:02:34,306 --> 00:02:37,662
+então vem aqui algo que possa ser "retornt",
+
+63
+00:02:37,660 --> 00:02:42,417
+isto é no nosso caso alguma "expression" qualquer,
+
+64
+00:02:46,946 --> 00:02:49,760
+então vem o ponto e vírgula
+
+65
+00:02:49,760 --> 00:02:53,275
+e então um fecha chaves. 
+
+66
+00:02:55,293 --> 00:02:58,102
+Então isto foi a definição de função
+
+67
+00:02:58,100 --> 00:03:00,884
+e agora ainda vem a chamada de função.
+
+68
+00:03:00,880 --> 00:03:02,782
+Agora, nós temos aqui no println,
+
+69
+00:03:02,780 --> 00:03:05,408
+também precisamos ter isto junto desta regra.
+
+70
+00:03:05,400 --> 00:03:08,031
+Este argumento pode ser uma "expression"
+
+71
+00:03:08,195 --> 00:03:10,377
+e é lógico agora,
+
+72
+00:03:10,370 --> 00:03:12,115
+que podemos escrever em qualquer lugar uma
+
+73
+00:03:12,110 --> 00:03:14,306
+chamada de função assim, onde temos
+
+74
+00:03:14,300 --> 00:03:15,733
+simplesmente apenas um nome de variável
+
+75
+00:03:15,730 --> 00:03:17,297
+ou podemos apenas escrever um número
+
+76
+00:03:17,290 --> 00:03:19,097
+que é, em parte, por si uma "expression".
+
+77
+00:03:19,090 --> 00:03:22,937
+Isto significa que agora escrevemos a chamada de função
+
+78
+00:03:22,930 --> 00:03:25,128
+igualmente aqui em cima para uma expressão pura, mas
+
+79
+00:03:25,120 --> 00:03:29,177
+primeiro colocamos uma regra para uma "Functioncall".
+
+80
+00:03:33,071 --> 00:03:35,595
+"functioncall" se parece assim simples:
+
+81
+00:03:35,590 --> 00:03:38,342
+Nós temos primeiro um "IDENTIFIER"
+
+82
+00:03:38,340 --> 00:03:39,964
+com uma função,
+
+83
+00:03:39,960 --> 00:03:42,240
+na parte daqui nós ainda temos juntos então 
+
+84
+00:03:42,240 --> 00:03:43,746
+ambos os parêntesis
+
+85
+00:03:43,740 --> 00:03:46,635
+e então isso já era.
+
+86
+00:03:48,000 --> 00:03:50,217
+Assim, então estamos... como foi dito,
+
+87
+00:03:50,210 --> 00:03:52,946
+temos isto dentro do "println" agora,
+
+88
+00:03:52,940 --> 00:03:54,462
+chamado de "expression",
+
+89
+00:03:54,586 --> 00:03:56,564
+então escrevemos aqui.
+
+90
+00:04:02,915 --> 00:04:04,955
+e então precisamos, é claro...
+
+91
+00:04:04,950 --> 00:04:06,724
+Ter também a parte completamente checada
+
+92
+00:04:06,720 --> 00:04:09,675
+e então devemos naturalmente ver ainda,
+
+93
+00:04:09,670 --> 00:04:12,933
+a parte, ainda na "functiondefinition".
+
+94
+00:04:12,930 --> 00:04:15,484
+eu provavelmente chamo de "functiondefinition" novamente
+
+95
+00:04:16,982 --> 00:04:18,693
+também precisa ficar em algum lugar.
+
+96
+00:04:18,690 --> 00:04:21,968
+Para estar também junto de nós em qualquer lugar no fonte,
+
+97
+00:04:23,946 --> 00:04:26,786
+que estaria também no nosso "programa",
+
+98
+00:04:26,780 --> 00:04:30,680
+não precisamos tão simplesmente colocar statements ali,
+
+99
+00:04:30,680 --> 00:04:33,746
+aqueles chamados completos por ponto e vírgula,
+
+100
+00:04:33,740 --> 00:04:36,457
+mas ali precisamos então...
+
+101
+00:04:36,893 --> 00:04:38,450
+...também...
+
+102
+00:04:40,986 --> 00:04:43,208
+definir "functiondefinitions".
+
+103
+00:04:43,200 --> 00:04:46,786
+Assim. Então salvamos tudo
+
+104
+00:04:46,780 --> 00:04:50,551
+e geramos nosso novo parser.
+
+105
+00:04:52,888 --> 00:04:54,506
+F5 aqui.
+
+106
+00:04:55,088 --> 00:04:58,204
+E então deixamos os nossos testes rodarem de novo.
+
+107
+00:05:00,320 --> 00:05:01,417
+Como você vê:
+
+108
+00:05:01,410 --> 00:05:05,933
+Ele não fornece nenhum erro a mais do nosso parser ANTLR,
+
+109
+00:05:05,930 --> 00:05:07,462
+mas ainda assim outro erro,
+
+110
+00:05:07,460 --> 00:05:09,257
+que é do Jasmin,
+
+111
+00:05:09,250 --> 00:05:11,546
+que agora no nosso arquivo do Jasmin obviamente
+
+112
+00:05:11,540 --> 00:05:13,942
+novamente está sem sentido, sem preocupação,
+
+113
+00:05:13,940 --> 00:05:16,377
+então ainda não temos algo de significado completo feito ali.
+
+114
+00:05:17,320 --> 00:05:20,204
+Assim continuaremos a fazer nosso visitor agora,
+
+115
+00:05:20,871 --> 00:05:23,066
+abrimos nosso visitor
+
+116
+00:05:23,060 --> 00:05:24,502
+e com ele
+
+117
+00:05:24,500 --> 00:05:27,248
+implementaremos nosso novo método "visit".
+
+118
+00:05:27,453 --> 00:05:30,506
+Assim, vamos então...
+
+119
+00:05:30,500 --> 00:05:32,097
+...para algum lugar aqui embaixo
+
+120
+00:05:33,906 --> 00:05:36,293
+e começamos com:
+
+121
+00:05:36,290 --> 00:05:39,920
+visit...FunctionCall.
+
+122
+00:05:40,822 --> 00:05:43,493
+Se nós temos agora uma chamada de função,
+
+123
+00:05:43,490 --> 00:05:46,848
+então nós temos também no nosso contexto:
+
+124
+00:05:47,191 --> 00:05:49,120
+O nome da função da função que
+
+125
+00:05:49,120 --> 00:05:50,831
+nós queremos chamar
+
+126
+00:05:51,031 --> 00:05:53,173
+e então isso já era.
+
+127
+00:05:53,170 --> 00:05:54,684
+Isto é o suficiente de início,
+
+128
+00:05:54,680 --> 00:05:56,044
+sem parâmetros a mais,
+
+129
+00:05:56,040 --> 00:05:57,484
+isto tudo virá mais tarde.
+
+130
+00:05:57,960 --> 00:06:01,422
+Agora devemos construir uma instrução,
+
+131
+00:06:01,420 --> 00:06:03,537
+que chame esta função.
+
+132
+00:06:04,031 --> 00:06:05,520
+Isto é bem simples
+
+133
+00:06:05,520 --> 00:06:07,724
+então nós damos a ele uma...
+
+134
+00:06:07,995 --> 00:06:10,675
+instrução "invokestatic",
+
+135
+00:06:11,177 --> 00:06:13,426
+que chame um método "static"
+
+136
+00:06:13,420 --> 00:06:16,040
+e iremos depois gerar o método 
+
+137
+00:06:16,040 --> 00:06:17,893
+a partir da "functionDefinition"
+
+138
+00:06:17,890 --> 00:06:20,386
+como método estático.
+
+139
+00:06:20,380 --> 00:06:21,906
+"invokestatic" também
+
+140
+00:06:22,280 --> 00:06:24,542
+e então precisamos também
+
+141
+00:06:24,540 --> 00:06:26,884
+o nome da classe
+
+142
+00:06:26,880 --> 00:06:29,986
+que contém este método estático.
+
+143
+00:06:30,644 --> 00:06:35,151
+Este nome nós temos conosco fornecido no Main
+
+144
+00:06:35,150 --> 00:06:37,391
+e realmente aqui em cima, que ele está aqui,
+
+145
+00:06:37,390 --> 00:06:38,591
+nós chamamos de "HelloWorld",
+
+146
+00:06:38,590 --> 00:06:39,897
+se você chamou de outra coisa
+
+147
+00:06:39,890 --> 00:06:41,902
+então você deve fornecer outro nome
+
+148
+00:06:41,900 --> 00:06:44,097
+mas para a gente agora está de acordo:
+
+149
+00:06:44,604 --> 00:06:46,142
+"HelloWorld"
+
+150
+00:06:47,555 --> 00:06:49,688
+e então uma barra
+
+151
+00:06:49,680 --> 00:06:52,724
+e então o nome da função
+
+152
+00:06:52,720 --> 00:06:55,257
+".getText()".
+
+153
+00:06:56,035 --> 00:06:59,111
+Assim, precisamos agora, é claro, ainda a "functionDefinition",
+
+154
+00:07:03,262 --> 00:07:05,844
+Para isto precisamos agora saber, no Jasmin, como
+
+155
+00:07:05,840 --> 00:07:07,364
+definimos um método                        
+
+156
+00:07:07,360 --> 00:07:08,648
+isto a gente já fez uma vez,
+
+157
+00:07:08,640 --> 00:07:10,235
+que também esteja aqui no "main"
+
+158
+00:07:11,013 --> 00:07:12,635
+e você vê isto aqui:
+
+159
+00:07:12,630 --> 00:07:15,924
+Este "method public static main" significa:
+
+160
+00:07:15,920 --> 00:07:18,164
+Criamos um método "public static"
+
+161
+00:07:18,160 --> 00:07:19,160
+com o nome main,
+
+162
+00:07:19,160 --> 00:07:20,617
+com estes argumentos,
+
+163
+00:07:20,610 --> 00:07:22,146
+sem valor de retorno
+
+164
+00:07:22,342 --> 00:07:23,506
+e assim por diante.
+
+165
+00:07:23,500 --> 00:07:25,431
+Fazemos também similarmente mais uma vez
+
+166
+00:07:25,430 --> 00:07:27,768
+e dizemos então:
+
+167
+00:07:27,760 --> 00:07:29,524
+".method"
+
+168
+00:07:29,520 --> 00:07:30,640
+"public"
+
+169
+00:07:32,013 --> 00:07:33,386
+"static main",
+
+170
+00:07:33,380 --> 00:07:35,173
+não recebe argumentos,
+
+171
+00:07:35,170 --> 00:07:37,791
+tem como valor de retorno um inteiro,
+
+172
+00:07:37,790 --> 00:07:39,648
+porque o que temos de diferente ainda não para. 
+
+173
+00:07:41,560 --> 00:07:44,400
+Então vem o "Limits"
+
+174
+00:07:46,320 --> 00:07:48,404
+com ele ainda não podemos detalhar melhor
+
+175
+00:07:48,400 --> 00:07:50,502
+como nós depois calcularemos corretamente,
+
+176
+00:07:50,500 --> 00:07:52,053
+agora eu apenas pego um valor aqui
+
+177
+00:07:52,053 --> 00:07:54,050
+que seja grande o suficiente.
+
+178
+00:07:56,466 --> 00:07:58,364
+O mesmo para com a pilha.
+
+179
+00:08:01,542 --> 00:08:05,164
+E com ".end method"
+
+180
+00:08:05,160 --> 00:08:07,648
+criamos o fim do método.
+
+181
+00:08:07,964 --> 00:08:09,915
+Aqui no meios precisamos agora
+
+182
+00:08:09,910 --> 00:08:13,844
+colocar as instruções, que ahm...
+
+183
+00:08:13,840 --> 00:08:16,626
+devem ser executados neste método.
+
+184
+00:08:16,620 --> 00:08:18,697
+Ah sim: E o nosso método ainda não deve,
+
+185
+00:08:18,690 --> 00:08:20,351
+é claro, se chamar "main".
+
+186
+00:08:20,746 --> 00:08:23,186
+Também pegamos aqui:
+
+187
+00:08:23,180 --> 00:08:24,871
+"ctx."
+
+188
+00:08:25,897 --> 00:08:27,297
+"funcName".
+
+189
+00:08:28,355 --> 00:08:31,440
+para que as instruções tenham mais uma vez
+
+190
+00:08:31,440 --> 00:08:35,204
+o valor de retorno no nosso contexto,
+
+191
+00:08:35,200 --> 00:08:37,288
+isto é novamente algo como uma "expression",
+
+192
+00:08:37,280 --> 00:08:39,942
+o valor da classe anterior sobre a pilha
+
+193
+00:08:39,940 --> 00:08:42,288
+que então queremos retornar,
+
+194
+00:08:42,280 --> 00:08:44,697
+também executamos de novo:
+
+195
+00:08:44,991 --> 00:08:46,600
+Também deixando com o "visit"
+
+196
+00:08:46,600 --> 00:08:48,737
+a construção de instruções correspondentes
+
+197
+00:08:48,730 --> 00:08:51,333
+e agora temos um valor colocado sobre a pilha,
+
+198
+00:08:51,330 --> 00:08:53,084
+que deve retornar
+
+199
+00:08:53,080 --> 00:08:57,066
+e então iremos retornar agora com o "ireturn".
+
+200
+00:09:04,360 --> 00:09:07,613
+Assim, temos agora, todavia, um pequeno problema:
+
+201
+00:09:07,610 --> 00:09:10,457
+o método está agora em algum lugar
+
+202
+00:09:10,450 --> 00:09:12,835
+no meio o nosso código fonte injetado.
+
+203
+00:09:12,830 --> 00:09:16,017
+Podemos observar de novo isto
+
+204
+00:09:16,010 --> 00:09:19,408
+dentro do nosso Compilertest
+
+205
+00:09:19,400 --> 00:09:21,791
+deixando passar na saída o código Jasmin,
+
+206
+00:09:21,790 --> 00:09:26,026
+vemos também no nosso método "compileAndRun"
+
+207
+00:09:26,386 --> 00:09:28,020
+aqui junto a este código
+
+208
+00:09:28,020 --> 00:09:30,115
+que queremos isto como saída
+
+209
+00:09:32,533 --> 00:09:34,760
+e então deixamos o nosso teste executar.
+
+210
+00:09:36,502 --> 00:09:37,817
+Ele sempre irá aqui
+
+211
+00:09:37,810 --> 00:09:39,773
+dar como produto uma saída de código Jasmin
+
+212
+00:09:39,770 --> 00:09:42,488
+e na última saída irá
+
+213
+00:09:42,480 --> 00:09:44,573
+ser o nosso exemplo atual
+
+214
+00:09:45,831 --> 00:09:48,386
+e que começa aqui.
+
+215
+00:09:49,755 --> 00:09:52,351
+Aqui nós já temos nosso método "main"
+
+216
+00:09:52,350 --> 00:09:54,471
+e neste método "main"
+
+217
+00:09:54,470 --> 00:09:56,302
+existe mais um método.
+
+218
+00:09:56,300 --> 00:09:57,373
+Ali pode-se ver primeiramente:
+
+219
+00:09:57,370 --> 00:09:59,875
+Eu tenho este "getText()", que executa igualmente mais uma vez
+
+220
+00:10:00,191 --> 00:10:03,293
+mas antes de tudo é necessário este método "randomNumber"
+
+221
+00:10:03,290 --> 00:10:05,475
+que aqui não gerará ainda no "main"
+
+222
+00:10:05,470 --> 00:10:07,786
+a definição, ele deve fazer após ou antes
+
+223
+00:10:07,780 --> 00:10:09,982
+ser definido. É indiferente se for
+
+224
+00:10:09,980 --> 00:10:11,502
+antes ou depois, mas
+
+225
+00:10:11,500 --> 00:10:13,586
+não funciona aqui no meio.
+
+226
+00:10:13,580 --> 00:10:16,311
+Agora executamos outra vez o "getText()" ali embaixo
+
+227
+00:10:16,310 --> 00:10:17,791
+para que esteja correto,
+
+228
+00:10:18,275 --> 00:10:21,111
+Para isso, nós vamos no visitor e
+
+229
+00:10:22,035 --> 00:10:24,048
+adicionamos o "getText()" aqui
+
+230
+00:10:24,542 --> 00:10:26,546
+e agora podemos mais uma vez resumidamente
+
+231
+00:10:26,540 --> 00:10:28,644
+dar uma olhada na nossa gramática
+
+232
+00:10:28,640 --> 00:10:32,133
+e aqui em "program" temos agora que expandir
+
+233
+00:10:32,130 --> 00:10:35,173
+"functionDefinitions" ou "statements".
+
+234
+00:10:35,170 --> 00:10:36,911
+Se é um "Statement",
+
+235
+00:10:36,910 --> 00:10:39,364
+então queremos empacotar tudo no método "main"
+
+236
+00:10:39,360 --> 00:10:41,417
+e se é uma "functionDefinition" 
+
+237
+00:10:41,410 --> 00:10:43,622
+então ele está antes ou depois do método "main".
+
+238
+00:10:43,620 --> 00:10:44,991
+Também precisamos em ambos estes casos
+
+239
+00:10:44,990 --> 00:10:46,435
+de alguma maneira separá-los.
+
+240
+00:10:46,430 --> 00:10:49,946
+Por isso, agora eu refatoro isto em uma regra única,
+
+241
+00:10:49,940 --> 00:10:52,177
+também nesta parte aqui,
+
+242
+00:10:53,426 --> 00:10:57,195
+eu nomeio ele, criativamente, de "programPart",
+
+243
+00:10:57,190 --> 00:10:59,626
+podemos também deixar os parênteses fora
+
+244
+00:11:01,506 --> 00:11:03,991
+e assim como o "programPart"
+
+245
+00:11:04,742 --> 00:11:07,311
+consiste agora de 
+
+246
+00:11:08,320 --> 00:11:10,271
+um "Statement"
+
+247
+00:11:11,795 --> 00:11:14,097
+ou uma "functionDefinition".
+
+248
+00:11:15,315 --> 00:11:18,417
+Agora posso novamente escrever um rótulo ali
+
+249
+00:11:18,410 --> 00:11:19,897
+e então digo aqui:
+
+250
+00:11:20,195 --> 00:11:22,302
+"mainStatement", porque
+
+251
+00:11:22,702 --> 00:11:24,008
+um Statement que pertence
+
+252
+00:11:24,008 --> 00:11:26,000
+ao nosso método "main"
+
+253
+00:11:26,244 --> 00:11:30,466
+e aqui apenas uma "functionDefinition"
+
+254
+00:11:30,460 --> 00:11:32,106
+que não precisamos nomear precisamente igual
+
+255
+00:11:32,100 --> 00:11:33,862
+como esta regra então daqui já queremos
+
+256
+00:11:33,860 --> 00:11:36,008
+gerar um método "visit",
+
+257
+00:11:36,000 --> 00:11:40,302
+eu chamo de
+
+258
+00:11:40,300 --> 00:11:43,293
+"Program part function definition".
+
+259
+00:11:43,591 --> 00:11:45,742
+Então nós salvamos isto,
+
+260
+00:11:45,740 --> 00:11:50,191
+geramos mais uma vez o nosso novo parser,
+
+261
+00:11:52,120 --> 00:11:55,244
+vamos então aqui no parser, "F5",
+
+262
+00:11:55,240 --> 00:11:57,164
+vamos novamente no nosso visitor,
+
+263
+00:11:57,160 --> 00:11:59,488
+asssim, então vamos mais uma vez aqui embaixo
+
+264
+00:11:59,924 --> 00:12:02,884
+e então vamos agora implementar o método "visit"
+
+265
+00:12:02,880 --> 00:12:06,964
+daquele "program" aqui.
+
+266
+00:12:10,080 --> 00:12:12,906
+Este "Program" já tem filhos
+
+267
+00:12:12,900 --> 00:12:16,337
+e estes filhos que são cada um ou
+
+268
+00:12:16,330 --> 00:12:20,866
+do tipo "mainStatement" ou "ProgPartFunctionDefinition".
+
+269
+00:12:22,257 --> 00:12:24,782
+Eles simplesmente iteram através.
+
+270
+00:12:42,640 --> 00:12:44,644
+Sabemos agora o código
+
+271
+00:12:44,640 --> 00:12:46,711
+do nosso "child" (filho) atual,
+
+272
+00:12:46,710 --> 00:12:48,351
+então nós o pegamos
+
+273
+00:12:48,350 --> 00:12:50,626
+quando percorremos este Child,
+
+274
+00:12:50,620 --> 00:12:53,902
+fazemos isto com o "visitChild" também
+
+275
+00:12:58,960 --> 00:13:00,155
+e agora vem o macete:
+
+276
+00:13:00,150 --> 00:13:02,964
+Porque estas "Instructions" incluem ou
+
+277
+00:13:02,960 --> 00:13:05,662
+uma função definidora ou
+
+278
+00:13:05,660 --> 00:13:07,915
+Statements para o nosso método "main".
+
+279
+00:13:07,910 --> 00:13:10,235
+E isto nós podemos descobrir agora
+
+280
+00:13:10,230 --> 00:13:13,564
+olhando dentro do tipo deste Child.
+
+281
+00:13:13,560 --> 00:13:15,173
+Aí dizemos aqui então:
+
+282
+00:13:15,170 --> 00:13:18,760
+"if child is instance of",
+
+283
+00:13:18,760 --> 00:13:20,297
+olhamos novamente na nossa gramática:
+
+284
+00:13:20,297 --> 00:13:22,760
+Ou é um "MainStatement",
+
+285
+00:13:25,524 --> 00:13:27,008
+então encontramos agora
+
+286
+00:13:27,000 --> 00:13:29,088
+código para o nosso método "main".
+
+287
+00:13:29,080 --> 00:13:32,608
+Isto significa que salvamos uma vez o código todo
+
+288
+00:13:32,600 --> 00:13:34,724
+para o nosso método main aqui
+
+289
+00:13:41,595 --> 00:13:45,088
+e aqui executamos as instruções em diante.
+
+290
+00:13:49,502 --> 00:13:52,337
+Ou se não for o caso,
+
+291
+00:13:52,330 --> 00:13:53,982
+então nós temos funções.
+
+292
+00:13:55,151 --> 00:13:58,573
+Também dizemos aqui: Nós pegamos
+
+293
+00:13:58,570 --> 00:14:01,422
+funções, também começando com uma string vazia em diante
+
+294
+00:14:01,420 --> 00:14:03,315
+e então diga aqui:
+
+295
+00:14:03,310 --> 00:14:05,733
+Funções são da mesma forma.
+
+296
+00:14:08,955 --> 00:14:12,506
+E como resultado podemos então simplesmente
+
+297
+00:14:12,500 --> 00:14:14,648
+retornar as funções
+
+298
+00:14:14,640 --> 00:14:17,768
+mais nossa definição de método "main".
+
+299
+00:14:17,760 --> 00:14:19,528
+E para a definição do método "main"
+
+300
+00:14:19,520 --> 00:14:21,288
+tomamos o que até agora
+
+301
+00:14:21,280 --> 00:14:22,800
+o que estava no "main",
+
+302
+00:14:22,800 --> 00:14:24,813
+a sabe, toda esta parte daqui
+
+303
+00:14:26,915 --> 00:14:27,928
+até aqui.
+
+304
+00:14:28,697 --> 00:14:30,773
+E aqui então chegam apenas as intruções
+
+305
+00:14:30,770 --> 00:14:34,573
+que já são incluídas na definição do "main".
+
+306
+00:14:39,960 --> 00:14:42,942
+Nós fazemos aqui ainda uma nova linha entre isso
+
+307
+00:14:42,940 --> 00:14:45,080
+com isso alguém pode melhorar a legibilidade depois
+
+308
+00:14:45,080 --> 00:14:46,626
+e com isto também funciona
+
+309
+00:14:47,177 --> 00:14:50,608
+e nossas instruções para o método "main"
+
+310
+00:14:50,600 --> 00:14:52,671
+não chamam mais "instructions",
+
+311
+00:14:52,671 --> 00:14:54,670
+mas "mainCode".
+
+312
+00:14:55,186 --> 00:14:57,093
+Assim, então iremos
+
+313
+00:14:57,737 --> 00:15:00,151
+chamar novamente o nosso teste
+
+314
+00:15:00,426 --> 00:15:03,311
+e observar o nosso resultado primeiro porque
+
+315
+00:15:03,310 --> 00:15:04,475
+nossos outros testes
+
+316
+00:15:04,470 --> 00:15:06,640
+não devemos ter quebrado nada com o que fizemos.
+
+317
+00:15:06,640 --> 00:15:07,653
+E realmente:
+
+318
+00:15:07,650 --> 00:15:09,391
+Nossos testes ainda funcionam,
+
+319
+00:15:09,390 --> 00:15:10,968
+isto significa que não quebramos nada,
+
+320
+00:15:10,960 --> 00:15:12,497
+isto é bom.
+
+321
+00:15:12,490 --> 00:15:15,124
+Nosso novo teste continua, todavia,
+
+322
+00:15:15,120 --> 00:15:15,977
+ainda não funcionando.
+
+323
+00:15:15,970 --> 00:15:16,871
+Isto nós devemos agora olhar mais uma vez:
+
+324
+00:15:16,870 --> 00:15:18,115
+Será que nós erramos algo?
+
+325
+00:15:18,391 --> 00:15:21,528
+"malformed signature".
+
+326
+00:15:21,520 --> 00:15:23,404
+Sim, está certo.
+
+327
+00:15:23,400 --> 00:15:24,577
+Eh também significa:
+
+328
+00:15:24,570 --> 00:15:25,826
+Eu apenas fiz algo errado
+
+329
+00:15:25,820 --> 00:15:27,382
+numa confusão total
+
+330
+00:15:27,380 --> 00:15:31,248
+e pela nossa "visitFunctionCall"
+
+331
+00:15:31,240 --> 00:15:34,004
+tenho apenas até agora o nome da classe
+
+332
+00:15:34,000 --> 00:15:35,471
+e o nome da função fornecida,
+
+333
+00:15:35,470 --> 00:15:36,831
+no entanto, não faz sentido, nós devemos
+
+334
+00:15:36,830 --> 00:15:38,515
+fornecer a assinatura completa.
+
+335
+00:15:39,093 --> 00:15:40,782
+Isto significa que depois disso ainda vem
+
+336
+00:15:40,780 --> 00:15:42,257
+a lista com os argumentos,
+
+337
+00:15:42,250 --> 00:15:43,435
+para sabermos até agora
+
+338
+00:15:43,430 --> 00:15:45,048
+não temos nenhum argumento ainda
+
+339
+00:15:45,040 --> 00:15:46,697
+e o tipo de retorno,
+
+340
+00:15:46,690 --> 00:15:49,013
+é o de um integer.
+
+341
+00:15:50,373 --> 00:15:53,693
+Então executamos nosso teste novamente
+
+342
+00:15:55,800 --> 00:15:57,915
+e huraa: Ele funcionou:
+
+343
+00:15:57,910 --> 00:15:59,706
+Tudo no nosso teste roda,
+
+344
+00:15:59,700 --> 00:16:01,711
+assim como nosso teste randomNumber,
+
+345
+00:16:01,710 --> 00:16:04,017
+ele dá um quatro como retorno
+
+346
+00:16:04,010 --> 00:16:06,168
+e o "println"
+
+347
+00:16:06,160 --> 00:16:09,066
+imprime um quatro sobre nosso console.
+
+348
+00:16:09,680 --> 00:16:11,360
+Neste episódio nós aprendemos
+
+349
+00:16:11,360 --> 00:16:13,346
+como podemos gerar definições de função
+
+350
+00:16:13,340 --> 00:16:14,893
+simples e chamadas de função no Jasmin
+
+351
+00:16:14,890 --> 00:16:17,168
+sobre o nosso código.
+
+352
+00:16:17,160 --> 00:16:18,640
+Além disso, nós aprendemos
+
+353
+00:16:18,640 --> 00:16:20,586
+como podemos separar "Statements" no nosso método "main" 
+
+354
+00:16:20,580 --> 00:16:23,360
+das nossas definições de função.
+
+355
+00:16:23,360 --> 00:16:25,555
+Nós ainda não estamos prontos com isso.
+
+356
+00:16:25,550 --> 00:16:28,004
+Nós queremos adicionar parâmetros de função,
+
+357
+00:16:28,000 --> 00:16:30,311
+permitir códigos mais complexos nas funções,
+
+358
+00:16:30,310 --> 00:16:32,706
+suportar funções sem valores de retorno
+
+359
+00:16:32,700 --> 00:16:34,386
+e reconhecer se o programador
+
+360
+00:16:34,380 --> 00:16:37,475
+chama uma função indefinida.
+
+361
+00:16:37,751 --> 00:16:39,342
+Nós aprenderemos a implementar
+
+362
+00:16:39,342 --> 00:16:41,340
+tudo isso nos próximos episódios.
+
+363
+00:16:41,604 --> 00:16:43,960
+Deixe comentários com suas perguntas,
+
+364
+00:16:43,960 --> 00:16:45,440
+Feedback e requisições. 
+
+365
+00:16:45,440 --> 00:16:46,444
+Curta o vídeo
+
+366
+00:16:46,440 --> 00:16:48,160
+se você gostou dele
+
+367
+00:16:48,160 --> 00:16:49,413
+e inscreva-se no canal,
+
+368
+00:16:49,410 --> 00:16:51,706
+para que não perca nenhum episódio.
+
+369
+00:16:52,290 --> 00:16:53,866
+Muito Obrigado ao Gadarol que 
+
+370
+00:16:53,860 --> 00:16:56,302
+permitiu usar o seu estúdio para as gravações.
+
+371
+00:16:56,300 --> 00:16:58,462
+Muito obrigado a você pela atenção,
+
+372
+00:16:58,460 --> 00:16:59,977
+espero que você tenha se divertido,
+
+373
+00:16:59,970 --> 00:17:02,208
+até a próxima vez, para o próximo:
+
+374
+00:17:02,208 --> 00:17:04,200
+"Let's build a compiler."
