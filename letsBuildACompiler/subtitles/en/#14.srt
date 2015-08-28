@@ -1,0 +1,1103 @@
+﻿1
+00:00:00,000 --> 00:00:03,017
+Welcome back to "Let's build a compiler". 
+
+2
+00:00:03,010 --> 00:00:04,942
+In the last episode we had began
+
+3
+00:00:04,940 --> 00:00:07,720
+to establish simple functions in our language.
+
+4
+00:00:07,720 --> 00:00:09,382
+However, with them we can only put
+
+5
+00:00:09,380 --> 00:00:12,013
+return statement and nothing else.
+
+6
+00:00:12,010 --> 00:00:14,240
+In this episode we will expand our functions
+
+7
+00:00:14,240 --> 00:00:15,942
+for that we can also
+
+8
+00:00:15,940 --> 00:00:17,471
+contain code.
+
+9
+00:00:17,470 --> 00:00:18,884
+In the context, we will
+
+10
+00:00:18,880 --> 00:00:21,240
+also for the first time work with scopes.
+
+11
+00:00:21,240 --> 00:00:23,128
+Because we want the variables table
+
+12
+00:00:23,120 --> 00:00:25,466
+to separate more functions.
+
+13
+00:00:25,880 --> 00:00:27,120
+Here we have our example
+
+14
+00:00:27,120 --> 00:00:28,315
+from last episode:
+
+15
+00:00:28,310 --> 00:00:29,817
+The simple "randomNumber"
+
+16
+00:00:29,810 --> 00:00:31,653
+with the "return 4".
+
+17
+00:00:31,650 --> 00:00:34,328
+I now copy it once out here,
+
+18
+00:00:37,293 --> 00:00:39,217
+add it to our text editor
+
+19
+00:00:39,210 --> 00:00:41,653
+and then we can more easily
+
+20
+00:00:41,653 --> 00:00:43,650
+format around there.
+
+21
+00:00:44,751 --> 00:00:47,951
+Now with this more readable example
+
+22
+00:00:47,950 --> 00:00:49,493
+we'll make the source code
+
+23
+00:00:49,490 --> 00:00:51,306
+a little more complex.
+
+24
+00:00:51,300 --> 00:00:52,808
+As example we can say here:
+
+25
+00:00:52,800 --> 00:00:56,017
+We have here an integer "i"
+
+26
+00:00:56,582 --> 00:00:59,640
+we have then the four
+
+27
+00:01:00,137 --> 00:01:01,657
+and then we want
+
+28
+00:01:01,650 --> 00:01:04,111
+to return this variable here.
+
+29
+00:01:04,342 --> 00:01:06,551
+It's necessary to continue having the same result
+
+30
+00:01:06,550 --> 00:01:08,746
+on output, but the source code is now
+
+31
+00:01:08,740 --> 00:01:10,573
+a little bit more complicated.
+
+32
+00:01:10,570 --> 00:01:13,160
+and with it we have an example for a function
+
+33
+00:01:13,160 --> 00:01:16,048
+that has more than only a return statement.
+
+34
+00:01:16,351 --> 00:01:18,831
+We copy it all again
+
+35
+00:01:19,391 --> 00:01:22,764
+and add it here.
+
+36
+00:01:22,760 --> 00:01:24,475
+For this, we need at first
+
+37
+00:01:24,470 --> 00:01:26,435
+to copy this character here,
+
+38
+00:01:28,977 --> 00:01:32,564
+and then copy this here once more
+
+39
+00:01:32,560 --> 00:01:34,764
+and then we execute.
+
+40
+00:01:38,942 --> 00:01:41,137
+So, then is missing behind
+
+41
+00:01:41,130 --> 00:01:42,866
+yet a comma
+
+42
+00:01:42,860 --> 00:01:45,231
+and then we can let the test running.
+
+43
+00:01:47,404 --> 00:01:49,480
+We observe the result:
+
+44
+00:01:49,480 --> 00:01:52,177
+And here above the ANTLR noticed:
+
+45
+00:01:52,170 --> 00:01:53,782
+It says "mismatched input 'int'",
+
+46
+00:01:53,780 --> 00:01:55,942
+It has waited for a "return".
+
+47
+00:01:55,940 --> 00:01:58,013
+If we observe now our grammatic
+
+48
+00:01:58,010 --> 00:01:58,973
+then we see here,
+
+49
+00:01:58,970 --> 00:02:01,817
+that after the open braces
+
+50
+00:02:01,810 --> 00:02:03,760
+needs to come directly a "return",
+
+51
+00:02:03,760 --> 00:02:06,231
+and not that our "int"
+
+52
+00:02:06,230 --> 00:02:08,515
+with the variable definition.
+
+53
+00:02:08,510 --> 00:02:10,173
+Also we want now here,
+
+54
+00:02:10,170 --> 00:02:13,582
+between the open brackets and the "return"
+
+55
+00:02:13,580 --> 00:02:15,706
+to allow no statements.
+
+56
+00:02:15,700 --> 00:02:17,960
+Thus, I now add here also
+
+57
+00:02:21,840 --> 00:02:23,720
+which returned statements should
+
+58
+00:02:23,720 --> 00:02:25,302
+be a "statementList".
+
+59
+00:02:25,300 --> 00:02:27,155
+Now, we need to define what the "statementList"
+
+60
+00:02:27,155 --> 00:02:29,150
+of course, would exactly be.
+
+61
+00:02:29,786 --> 00:02:32,786
+Therefore, we add here a new rule.
+
+62
+00:02:39,928 --> 00:02:42,311
+So we do with out statementlist
+
+63
+00:02:42,310 --> 00:02:44,271
+that it has a statement
+
+64
+00:02:44,270 --> 00:02:46,880
+respectively followed by a semicolon
+
+65
+00:02:47,155 --> 00:02:49,693
+and it must return often,
+
+66
+00:02:49,690 --> 00:02:52,231
+even returning nothing,
+
+67
+00:02:52,230 --> 00:02:53,720
+then it can truly  
+
+68
+00:02:53,720 --> 00:02:56,502
+contain only a "return" in our function
+
+69
+00:02:56,500 --> 00:02:58,186
+and no other statement.
+
+70
+00:02:58,180 --> 00:03:00,933
+Then we generate our new parser again
+
+71
+00:03:03,835 --> 00:03:06,857
+and press "F5".
+
+72
+00:03:07,746 --> 00:03:10,128
+execute our tests
+
+73
+00:03:12,617 --> 00:03:14,724
+and as you can see, it gives us up there
+
+74
+00:03:14,720 --> 00:03:17,564
+without more errors in the ANTLR or Jasmin
+
+75
+00:03:17,560 --> 00:03:19,586
+but down here we have still
+
+76
+00:03:19,580 --> 00:03:23,666
+UndeclaredVariableException, the variable "i"
+
+77
+00:03:23,660 --> 00:03:24,995
+that we access here
+
+78
+00:03:24,990 --> 00:03:27,284
+its allegedly not defined.
+
+79
+00:03:27,280 --> 00:03:28,617
+It's in this way because,
+
+80
+00:03:28,610 --> 00:03:30,497
+that we have yet defined
+
+81
+00:03:30,490 --> 00:03:32,377
+in our grammatic this part here
+
+82
+00:03:32,370 --> 00:03:34,711
+should return, in the form of a statementlist,
+
+83
+00:03:34,710 --> 00:03:37,351
+but we never generate instructions
+
+84
+00:03:37,350 --> 00:03:38,960
+for this code here and because of this 
+
+85
+00:03:38,960 --> 00:03:42,040
+the variable "i" still not defined.
+
+86
+00:03:42,480 --> 00:03:44,671
+So, we go again in our visitor
+
+87
+00:03:44,670 --> 00:03:47,542
+to our "visitFunctionDefinition"
+
+88
+00:03:47,540 --> 00:03:49,973
+and... then...
+
+89
+00:03:49,970 --> 00:03:51,546
+we create at first here
+
+90
+00:03:51,546 --> 00:03:53,540
+the code to our statements.
+
+91
+00:04:00,653 --> 00:04:03,786
+And we add this list
+
+92
+00:04:03,780 --> 00:04:05,893
+at this point here.
+
+93
+00:04:08,351 --> 00:04:10,235
+It can, however, also be
+
+94
+00:04:10,230 --> 00:04:13,275
+that the "statementInstructions" are "null",
+
+95
+00:04:13,270 --> 00:04:15,986
+because it has no instructions,
+
+96
+00:04:15,980 --> 00:04:19,097
+also when there is no statements,
+
+97
+00:04:19,090 --> 00:04:21,911
+then we can't generate here our "visit",
+
+98
+00:04:21,910 --> 00:04:23,968
+it just gives us "null" back,
+
+99
+00:04:23,960 --> 00:04:26,462
+because it is the default return value
+
+100
+00:04:26,657 --> 00:04:29,520
+And then we want here in place
+
+101
+00:04:29,520 --> 00:04:30,937
+have no output. 
+
+102
+00:04:30,930 --> 00:04:33,506
+Also we say here
+
+103
+00:04:33,500 --> 00:04:36,342
+that when "statementInstructions"
+
+104
+00:04:36,342 --> 00:04:38,340
+equal equal is null,
+
+105
+00:04:38,884 --> 00:04:42,462
+then it shall not add here
+
+106
+00:04:42,460 --> 00:04:45,933
+and otherwise finish only the "statementInstructions" 
+
+107
+00:04:45,930 --> 00:04:50,262
+with a new line
+
+108
+00:04:51,097 --> 00:04:54,182
+Then execute our test more one time.
+
+109
+00:04:54,871 --> 00:04:56,222
+And as we see:
+
+110
+00:04:56,220 --> 00:04:57,484
+Everything worked,
+
+111
+00:04:57,480 --> 00:04:59,484
+all the tests have passed,
+
+112
+00:04:59,484 --> 00:05:01,480
+our new here also.
+
+113
+00:05:03,048 --> 00:05:05,880
+Let's take a look at our source code.
+
+114
+00:05:05,880 --> 00:05:07,871
+What happens here if we
+
+115
+00:05:07,870 --> 00:05:10,613
+have once again our variable "int i"?
+
+116
+00:05:12,457 --> 00:05:15,857
+And then we assign the value 42 here
+
+117
+00:05:19,297 --> 00:05:21,955
+and this at the very end.
+
+118
+00:05:22,382 --> 00:05:24,724
+Now we have twice the "i" variable
+
+119
+00:05:24,720 --> 00:05:26,808
+namely once here and once here.
+
+120
+00:05:27,222 --> 00:05:30,084
+If we call "randomNumber" now,
+
+121
+00:05:30,080 --> 00:05:32,866
+then we need to return something
+
+122
+00:05:32,860 --> 00:05:33,951
+or will not
+
+123
+00:05:34,240 --> 00:05:37,195
+and here we need also something to return.
+
+124
+00:05:37,190 --> 00:05:39,200
+What do you intuitively believe
+
+125
+00:05:39,200 --> 00:05:41,200
+that happened with this source code?
+
+126
+00:05:41,200 --> 00:05:43,537
+I going to say: It would logically
+
+127
+00:05:43,530 --> 00:05:45,684
+if it is here, this "i"
+
+128
+00:05:45,680 --> 00:05:48,026
+would be a global variable
+
+129
+00:05:48,020 --> 00:05:50,862
+and up here in the randomNumber
+
+130
+00:05:50,860 --> 00:05:54,951
+a local variable, and after
+
+131
+00:05:54,950 --> 00:05:58,693
+this global variable will hide from the local.
+
+132
+00:05:58,690 --> 00:06:00,448
+If "randomNumber" will be called,
+
+133
+00:06:00,440 --> 00:06:03,835
+will work here with the local variable,
+
+134
+00:06:03,830 --> 00:06:05,355
+it will return 4,
+
+135
+00:06:05,350 --> 00:06:07,195
+four being the output
+
+136
+00:06:07,190 --> 00:06:09,177
+and here this function
+
+137
+00:06:09,170 --> 00:06:11,017
+also at this place is from
+
+138
+00:06:11,010 --> 00:06:13,986
+the unknown above variable
+
+139
+00:06:13,980 --> 00:06:16,702
+and after will then
+
+140
+00:06:16,700 --> 00:06:18,022
+give 42 as output.
+
+141
+00:06:18,020 --> 00:06:22,088
+Also we needed first as outcome the four and then the 42.
+
+142
+00:06:22,080 --> 00:06:23,733
+Let's have a look
+
+143
+00:06:23,730 --> 00:06:25,937
+on what indeed is the case,
+
+144
+00:06:25,930 --> 00:06:29,280
+what out source code puts on our compiler.
+
+145
+00:06:29,280 --> 00:06:31,262
+Then we copy
+
+146
+00:06:32,342 --> 00:06:34,604
+in a new case test,
+
+147
+00:06:35,226 --> 00:06:39,386
+First, I copy again our template from above
+
+148
+00:06:50,120 --> 00:06:52,817
+and then we need in my opinion
+
+149
+00:06:52,810 --> 00:06:56,875
+give the four as output first
+
+150
+00:06:57,680 --> 00:06:59,164
+...and...
+
+151
+00:06:59,573 --> 00:07:03,008
+after once more the 42.
+
+152
+00:07:06,404 --> 00:07:09,906
+Then we execute the compiler
+
+153
+00:07:10,782 --> 00:07:13,182
+and we look what really occurred.
+
+154
+00:07:13,475 --> 00:07:15,640
+In fact, we have nothing as output,
+
+155
+00:07:15,640 --> 00:07:18,528
+but we have a VariableAlreadyDefinedExcpeition
+
+156
+00:07:18,520 --> 00:07:21,160
+returning, while in the line 6,
+
+157
+00:07:21,160 --> 00:07:24,622
+so is this... 1, 2, 3, 4, 5, 6,
+
+158
+00:07:24,620 --> 00:07:26,293
+so is this line here,
+
+159
+00:07:26,290 --> 00:07:29,555
+is the "i" variable allegedly yet defined.
+
+160
+00:07:29,550 --> 00:07:31,422
+What in other words means:
+
+161
+00:07:31,420 --> 00:07:33,782
+Down here, this part knows
+
+162
+00:07:33,780 --> 00:07:36,186
+which variables above are defined
+
+163
+00:07:36,180 --> 00:07:38,604
+and this might strongly not be the case.
+
+164
+00:07:38,600 --> 00:07:40,617
+This is really a problem 
+
+165
+00:07:40,610 --> 00:07:42,924
+then we could access the local variables table
+
+166
+00:07:42,920 --> 00:07:45,226
+from this function
+
+167
+00:07:45,220 --> 00:07:46,817
+even if we don't want
+
+168
+00:07:46,810 --> 00:07:49,222
+from an another function,
+
+169
+00:07:49,220 --> 00:07:51,297
+also from our "main" function.
+
+170
+00:07:51,290 --> 00:07:53,226
+Then we must to put our variables
+
+171
+00:07:53,220 --> 00:07:56,831
+in other place than in our variables table.
+
+172
+00:07:56,830 --> 00:07:59,026
+The problem is that we have here now
+
+173
+00:07:59,020 --> 00:08:01,524
+work with Scopes.
+
+174
+00:08:01,520 --> 00:08:03,951
+Such a scope states:
+
+175
+00:08:03,950 --> 00:08:08,444
+These variables are valid in a defined area
+
+176
+00:08:08,440 --> 00:08:11,635
+and a so defined area is a scope
+
+177
+00:08:11,630 --> 00:08:14,000
+And then we have now a global scope here then,
+
+178
+00:08:14,000 --> 00:08:15,617
+namely below
+
+179
+00:08:15,610 --> 00:08:18,480
+or from me, it is also a local scope,
+
+180
+00:08:18,480 --> 00:08:20,640
+namely of the "main" function
+
+181
+00:08:20,640 --> 00:08:24,217
+but here we always have an different scope,
+
+182
+00:08:24,210 --> 00:08:26,573
+namely a local scope
+
+183
+00:08:26,570 --> 00:08:29,382
+the function "randomNumber".
+
+184
+00:08:29,380 --> 00:08:30,444
+We want to see 
+
+185
+00:08:30,440 --> 00:08:32,213
+what we could do.
+
+186
+00:08:32,933 --> 00:08:35,728
+So we see again in our visitor
+
+187
+00:08:35,720 --> 00:08:37,906
+and we see again after how
+
+188
+00:08:37,900 --> 00:08:41,924
+does the System work with the variables definition.
+
+189
+00:08:41,920 --> 00:08:43,151
+We have here above in our map
+
+190
+00:08:43,150 --> 00:08:44,728
+with the variables table,
+
+191
+00:08:44,720 --> 00:08:47,755
+which is just a hash map from strings to integers
+
+192
+00:08:47,750 --> 00:08:50,435
+and classified according to each variable name
+
+193
+00:08:50,430 --> 00:08:53,240
+a position in the variables table.
+
+194
+00:08:53,502 --> 00:08:56,351
+But we have not only one variables table.
+
+195
+00:08:56,350 --> 00:08:58,560
+but many, namely a pro function
+
+196
+00:08:58,560 --> 00:09:02,191
+and it's at least once the "main" function
+
+197
+00:09:02,190 --> 00:09:04,733
+and an our local function
+
+198
+00:09:04,730 --> 00:09:07,337
+"randomNumber" in the exemple that we had before.
+
+199
+00:09:07,330 --> 00:09:08,546
+We can say also yet,
+
+200
+00:09:08,540 --> 00:09:11,871
+that the "main" function scope should be global,
+
+201
+00:09:11,870 --> 00:09:13,715
+then we had a global scope before
+
+202
+00:09:13,710 --> 00:09:17,324
+and a local scope for our "randomNumber" function.
+
+203
+00:09:17,320 --> 00:09:18,982
+And if we had more functions,
+
+204
+00:09:18,980 --> 00:09:20,915
+we've had then more above local scopes.
+
+205
+00:09:20,910 --> 00:09:22,293
+Now we need to be able to
+
+206
+00:09:22,290 --> 00:09:25,017
+switch between these scopes
+
+207
+00:09:25,010 --> 00:09:27,040
+and put them in the right places.
+
+208
+00:09:27,040 --> 00:09:28,777
+That means always if it is generated
+
+209
+00:09:28,770 --> 00:09:31,573
+with a function content that we'll deal
+
+210
+00:09:31,570 --> 00:09:33,564
+we need the variables table
+
+211
+00:09:33,560 --> 00:09:36,151
+so that it fits our actual function.
+
+212
+00:09:37,102 --> 00:09:39,084
+This means that we come to functions
+
+213
+00:09:39,080 --> 00:09:41,880
+always when we get a "functionDeclaration".
+
+214
+00:09:42,573 --> 00:09:45,657
+Now we have here these "functionDefinition"s,
+
+215
+00:09:45,650 --> 00:09:48,120
+in which we can say
+
+216
+00:09:48,488 --> 00:09:52,071
+to our function... our old scope,
+
+217
+00:09:52,070 --> 00:09:56,600
+that is the variable table,
+
+218
+00:09:56,950 --> 00:09:58,973
+for us to notice
+
+219
+00:10:00,737 --> 00:10:04,671
+and really is this the "oldVariables"
+
+220
+00:10:06,426 --> 00:10:09,288
+and then we lie
+
+221
+00:10:09,280 --> 00:10:12,617
+in our actual variables table
+
+222
+00:10:12,610 --> 00:10:15,511
+a new variables table,
+
+223
+00:10:15,510 --> 00:10:17,906
+that begins empty at first.
+
+224
+00:10:21,786 --> 00:10:23,826
+Now we can wonderfully
+
+225
+00:10:23,820 --> 00:10:26,093
+work with this table
+
+226
+00:10:26,417 --> 00:10:29,168
+and in the end we need, of course
+
+227
+00:10:29,160 --> 00:10:32,484
+restore this old table, namely "oldVariables",
+
+228
+00:10:32,480 --> 00:10:34,684
+meaning we can at the end of the method
+
+229
+00:10:34,680 --> 00:10:36,866
+what we have used temporarily,
+
+230
+00:10:36,860 --> 00:10:39,120
+forget this variables tables 
+
+231
+00:10:39,120 --> 00:10:41,982
+and then say here accordingly:
+
+232
+00:10:41,980 --> 00:10:45,986
+"variables" is again "oldVariables".
+
+233
+00:10:45,980 --> 00:10:49,333
+Now we must pass before the "return",
+
+234
+00:10:49,330 --> 00:10:53,355
+that means that we pull this here in a temporary variable,
+
+235
+00:10:54,560 --> 00:10:57,777
+which our result contains with the generated code
+
+236
+00:10:57,770 --> 00:10:59,480
+and we give first
+
+237
+00:10:59,480 --> 00:11:03,422
+after this we restore our variables table.
+
+238
+00:11:06,497 --> 00:11:09,982
+Then we try again, to know what happens.
+
+239
+00:11:12,453 --> 00:11:14,097
+And s you can see: 
+
+240
+00:11:14,090 --> 00:11:16,200
+All the tests worked,
+
+241
+00:11:16,200 --> 00:11:18,200
+this example also:
+
+242
+00:11:18,200 --> 00:11:21,773
+Our variables are now separated,
+
+243
+00:11:21,770 --> 00:11:25,760
+this means that returns to us first the four and then the 42.
+
+244
+00:11:25,760 --> 00:11:27,671
+What has not happened yet
+
+245
+00:11:27,670 --> 00:11:29,937
+is that we have a global scope now,
+
+246
+00:11:29,930 --> 00:11:31,955
+that I have firstly implemented
+
+247
+00:11:31,950 --> 00:11:34,502
+to have two local scopes, so
+
+248
+00:11:34,500 --> 00:11:38,573
+the "main" down here has a local scope
+
+249
+00:11:38,570 --> 00:11:39,960
+and this one has a local.
+
+250
+00:11:39,960 --> 00:11:41,195
+That means we can't now also
+
+251
+00:11:41,190 --> 00:11:43,408
+to access the "main" function from here.
+
+252
+00:11:43,400 --> 00:11:46,208
+Now one could say that this is the intention,
+
+253
+00:11:46,200 --> 00:11:51,191
+but for a long duration period we build also global variables
+
+254
+00:11:51,190 --> 00:11:53,551
+simply because we can.
+
+255
+00:11:54,555 --> 00:11:56,511
+In this episode we have learned
+
+256
+00:11:56,510 --> 00:11:58,342
+how from a "return" statement
+
+257
+00:11:58,340 --> 00:12:00,933
+we allowed any instruction expansions.
+
+258
+00:12:00,930 --> 00:12:03,675
+In addition, we have also learned how the variables table
+
+259
+00:12:03,670 --> 00:12:07,595
+allows more functions with resources separation between each other.
+
+260
+00:12:07,800 --> 00:12:10,577
+Nevertheless, it remains many things to do with the functions:
+
+261
+00:12:10,570 --> 00:12:12,840
+The return statement must be always remaining
+
+262
+00:12:12,840 --> 00:12:15,351
+the last statement in each function.
+
+263
+00:12:15,350 --> 00:12:17,622
+It gives us no global varaiable.
+
+264
+00:12:17,620 --> 00:12:19,528
+We do not yet support parameters
+
+265
+00:12:19,520 --> 00:12:22,066
+and still no functions without return value.
+
+266
+00:12:22,060 --> 00:12:25,386
+We see how to do this in the next episodes.
+
+267
+00:12:26,128 --> 00:12:29,351
+Write me your questions, problems and wishes in the comments.
+
+268
+00:12:29,350 --> 00:12:31,906
+Leave a thumb up if you liked this video
+
+269
+00:12:31,900 --> 00:12:34,946
+and subscribe the channel so that you don't loose an episode.
+
+270
+00:12:35,177 --> 00:12:36,426
+Thanks a lot to Gadarol
+
+271
+00:12:36,420 --> 00:12:38,893
+that permitted to use his studio for the recordings
+
+272
+00:12:38,890 --> 00:12:41,751
+and thank you very much for paying attention.
+
+273
+00:12:41,750 --> 00:12:43,066
+My name is Yankee,
+
+274
+00:12:43,060 --> 00:12:44,733
+I hope you've enjoyed,
+
+275
+00:12:44,730 --> 00:12:45,995
+until the next time
+
+276
+00:12:45,990 --> 00:12:48,880
+for the next episode of: "Let's build a compiler".
