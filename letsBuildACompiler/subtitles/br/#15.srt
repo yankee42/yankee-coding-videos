@@ -1,0 +1,1195 @@
+﻿1
+00:00:00,000 --> 00:00:02,822
+Bem-vindo de volta ao "Let's build a compiler".
+
+2
+00:00:02,820 --> 00:00:05,582
+Por enquanto nossas funções podem conter códigos complexos
+
+3
+00:00:05,580 --> 00:00:08,120
+e temos variáveis locais separadas.
+
+4
+00:00:08,120 --> 00:00:09,711
+No entanto, não podemos ainda
+
+5
+00:00:09,711 --> 00:00:11,710
+aceitar parâmetros nas nossas funções.
+
+6
+00:00:11,710 --> 00:00:14,302
+Neste episódio nós iremos resolver este problema
+
+7
+00:00:14,300 --> 00:00:16,791
+e trazer parâmetros para nossas funções.
+
+8
+00:00:16,790 --> 00:00:19,573
+Adicionalmente, este episódio contém um experimento:
+
+9
+00:00:19,570 --> 00:00:21,680
+Invés de se preocupar até agora para esclarecer o código,
+
+10
+00:00:21,680 --> 00:00:24,324
+primeiro eu gravei apenas as imagens
+
+11
+00:00:24,320 --> 00:00:25,333
+e no segundo passo
+
+12
+00:00:25,330 --> 00:00:27,204
+comentei as imagens.
+
+13
+00:00:27,200 --> 00:00:28,457
+Escreva-me nos comentários
+
+14
+00:00:28,450 --> 00:00:29,111
+o que vocês acham disso
+
+15
+00:00:29,110 --> 00:00:32,031
+e como eu devo conduzir nos futuros vídeos.
+
+16
+00:00:32,924 --> 00:00:35,395
+Primeiro iremos expandir as nossas especificações,
+
+17
+00:00:35,390 --> 00:00:36,360
+como vocês já sabem.
+
+18
+00:00:36,360 --> 00:00:38,884
+Para isto, nós afunilamos uma função
+
+19
+00:00:38,880 --> 00:00:40,506
+que tem um parâmetro,
+
+20
+00:00:40,500 --> 00:00:42,608
+eu tenho uma aqui agora
+
+21
+00:00:42,600 --> 00:00:45,591
+uma função que é chamada, de forma totalmente criativa, de "add"
+
+22
+00:00:45,590 --> 00:00:47,840
+e que tem o segundo parâmetro no estilo C,
+
+23
+00:00:47,840 --> 00:00:49,013
+o "a" e o "b"
+
+24
+00:00:49,010 --> 00:00:51,444
+e ambos são adicionados juntos.
+
+25
+00:00:51,440 --> 00:00:53,288
+Então aqui em um teste
+
+26
+00:00:53,280 --> 00:00:56,111
+deixamos a função adicionar 5 e 8 juntos,
+
+27
+00:00:56,110 --> 00:00:58,377
+que deve nos fornecer 13 como saída.
+
+28
+00:00:58,370 --> 00:01:01,355
+Então copiamos tudo isso no nosso teste
+
+29
+00:01:05,195 --> 00:01:07,520
+e ainda definimos aqui então
+
+30
+00:01:07,520 --> 00:01:09,146
+o resultado esperado,
+
+31
+00:01:09,140 --> 00:01:12,697
+que é o 13 e uma nova linha.
+
+32
+00:01:12,690 --> 00:01:14,528
+Assim, deixamos de início como usualmente
+
+33
+00:01:14,520 --> 00:01:15,644
+o nosso teste rodar,
+
+34
+00:01:15,640 --> 00:01:18,377
+então o teste deve retornar erro
+
+35
+00:01:18,370 --> 00:01:20,711
+e observamos porque a execução falhou:
+
+36
+00:01:20,710 --> 00:01:22,755
+Aqui nós também temos esta entrada incompatível
+
+37
+00:01:22,750 --> 00:01:24,480
+com o "int" vem
+
+38
+00:01:24,480 --> 00:01:26,035
+do nosso arquivo
+
+39
+00:01:26,030 --> 00:01:28,093
+lá do topo a nossa definição de função,
+
+40
+00:01:28,090 --> 00:01:29,964
+contendo as definições de variáveis
+
+41
+00:01:29,960 --> 00:01:31,751
+com o "int a" e o "int b"
+
+42
+00:01:31,750 --> 00:01:33,555
+e ele naturalmente tropeça sobre o "int"
+
+43
+00:01:33,555 --> 00:01:35,550
+que não está ali.
+
+44
+00:01:37,035 --> 00:01:39,688
+Devem ser encontrados neste ponto onde
+
+45
+00:01:39,680 --> 00:01:42,800
+existem os abre e fecha chaves,
+
+46
+00:01:42,800 --> 00:01:45,377
+que também temos no nosso "add"
+
+47
+00:01:45,370 --> 00:01:47,884
+mas infelizmente nos falta o do meio,
+
+48
+00:01:47,880 --> 00:01:50,742
+a saber, o parâmetro da função.
+
+49
+00:01:50,740 --> 00:01:52,848
+Precisamos adicioná-lo aqui,
+
+50
+00:01:52,840 --> 00:01:55,475
+para isso colocaremos aqui
+
+51
+00:01:55,470 --> 00:01:56,466
+um novo rótulo
+
+52
+00:01:56,460 --> 00:01:57,817
+que chamamos "params"
+
+53
+00:01:57,810 --> 00:02:00,257
+e então devemos ter o nosso
+
+54
+00:02:00,250 --> 00:02:03,271
+"parameterDeclaration" dentro.
+
+55
+00:02:04,066 --> 00:02:06,297
+A regra ainda deve, é claro, ser estabelecida,
+
+56
+00:02:06,290 --> 00:02:08,404
+porque ela ainda não está feita.
+
+57
+00:02:08,400 --> 00:02:11,426
+Assim como um "parameterDeclaration"
+
+58
+00:02:11,420 --> 00:02:14,240
+está essencialmente em uma declaração de variável,
+
+59
+00:02:14,240 --> 00:02:15,466
+tem primeiro um "int" também
+
+60
+00:02:15,466 --> 00:02:17,460
+e então um nome de variável
+
+61
+00:02:17,460 --> 00:02:19,795
+e agora então opcionalmente uma vírgula
+
+62
+00:02:19,790 --> 00:02:21,204
+e ainda um nome de variável
+
+63
+00:02:21,200 --> 00:02:22,733
+e opcionalmente mais uma vírgula
+
+64
+00:02:22,730 --> 00:02:25,933
+e ainda retorna um nome de variável, etc.
+
+65
+00:02:25,930 --> 00:02:27,013
+Isso pode também, qualquer coisa, 
+
+66
+00:02:27,013 --> 00:02:29,010
+que nós sobretudo nem tenhamos parâmetros
+
+67
+00:02:29,010 --> 00:02:30,573
+e que então é uma lista vazia.
+
+68
+00:02:30,570 --> 00:02:31,942
+Para criarmos aqui uma ou
+
+69
+00:02:31,940 --> 00:02:33,488
+e não escreva nada atrás,
+
+70
+00:02:33,488 --> 00:02:35,480
+isto significa então: ele não pode ser vazio.
+
+71
+00:02:35,906 --> 00:02:38,435
+Temos junto ao "functionCall" exatamente o mesmo:
+
+72
+00:02:38,430 --> 00:02:40,711
+Ali estão também os abre e fecha chaves,
+
+73
+00:02:40,710 --> 00:02:43,453
+como aqui sobre o nosso código com o 5 e o 8
+
+74
+00:02:43,450 --> 00:02:46,631
+mas ainda nos falta, entre as chaves,
+
+75
+00:02:46,630 --> 00:02:50,124
+a lista com os parâmetros que a gente quer que passe.
+
+76
+00:02:50,120 --> 00:02:52,337
+De acordo, nós adicionamos aqui
+
+77
+00:02:52,330 --> 00:02:54,057
+"arguments"
+
+78
+00:02:54,050 --> 00:02:57,511
+e o "arguments" consiste de uma "expressionList"
+
+79
+00:02:57,510 --> 00:02:59,386
+e a regra "expressionList"
+
+80
+00:02:59,386 --> 00:03:01,380
+claro, ainda devemos colocar.
+
+81
+00:03:02,311 --> 00:03:05,351
+Assim uma expressionList vê
+
+82
+00:03:05,764 --> 00:03:08,044
+nossa Parameterdeclaration de maneira parecida,
+
+83
+00:03:08,040 --> 00:03:09,768
+então nos chega primeiro uma "expression",
+
+84
+00:03:09,760 --> 00:03:12,737
+então uma vírgula, então mais uma "expression"
+
+85
+00:03:12,730 --> 00:03:14,680
+e eventualmente sempre continua assim:
+
+86
+00:03:14,680 --> 00:03:16,017
+vírgula, "expression" e assim por diante
+
+87
+00:03:16,010 --> 00:03:18,835
+ou a lista pode ainda estar vazia.
+
+88
+00:03:19,991 --> 00:03:21,822
+Então precisamos, é claro
+
+89
+00:03:21,820 --> 00:03:23,920
+criar de novo nosso parser,
+
+90
+00:03:24,871 --> 00:03:28,817
+vamos ao Eclipse novamente sobre "F5" no nosso projeto do parser,
+
+91
+00:03:29,840 --> 00:03:31,622
+deixando o nosso teste de novo rodar
+
+92
+00:03:31,620 --> 00:03:34,062
+e observamos se os erros do ANTLR
+
+93
+00:03:34,060 --> 00:03:36,600
+de "mismatched int" já se foram.
+
+94
+00:03:37,146 --> 00:03:39,155
+E sim, como você pode ver: Sumiram,
+
+95
+00:03:39,150 --> 00:03:41,813
+não dá mais nenhum erro do ANTLR,
+
+96
+00:03:41,810 --> 00:03:44,035
+acontece apenas, que a nossa resposta ainda continua errada,
+
+97
+00:03:44,030 --> 00:03:46,168
+a saída é uma UndeclaredVariableException,
+
+98
+00:03:46,160 --> 00:03:48,528
+porque a variável "a" não foi encontrada,
+
+99
+00:03:48,520 --> 00:03:51,688
+aqui foi definida a variável "a"
+
+100
+00:03:51,680 --> 00:03:53,311
+e aqui usamos ela,
+
+101
+00:03:53,310 --> 00:03:55,000
+mas ainda não é reconhecida
+
+102
+00:03:55,000 --> 00:03:59,377
+e aqui teríamos a declaração da variável
+
+103
+00:03:59,370 --> 00:04:00,977
+era assim, mas
+
+104
+00:04:00,970 --> 00:04:03,257
+não acessamos o nosso visitor em lugar algum
+
+105
+00:04:03,250 --> 00:04:05,373
+e será isso que vamos agora adicionar.
+
+106
+00:04:05,370 --> 00:04:09,844
+Para isso, vamos sobre o método "visitFunctionDefinition"
+
+107
+00:04:09,840 --> 00:04:13,773
+e ali podemos agora acessar
+
+108
+00:04:13,770 --> 00:04:16,142
+as variáveis da lista de parâmetros.
+
+109
+00:04:16,140 --> 00:04:18,248
+E estas variáveis devemos definir
+
+110
+00:04:18,240 --> 00:04:19,937
+para que possamos simplesmente fazer
+
+111
+00:04:19,930 --> 00:04:21,951
+nela chamar aqui o "visit"
+
+112
+00:04:21,950 --> 00:04:24,937
+e certamente sobre nosso "params".
+
+113
+00:04:27,591 --> 00:04:30,857
+Estes "visit(params)" repassarão todos os parâmetros,
+
+114
+00:04:30,850 --> 00:04:33,297
+assim como o "visit" para cada nó
+
+115
+00:04:33,290 --> 00:04:35,528
+passa a partir de "params"
+
+116
+00:04:36,053 --> 00:04:38,862
+e ali dentro está "varDeclarations".
+
+117
+00:04:38,860 --> 00:04:40,591
+Isto significa que por último é chamado
+
+118
+00:04:40,590 --> 00:04:42,751
+o método "visitVarDeclaration"
+
+119
+00:04:42,750 --> 00:04:44,946
+para cada um dos nossos parâmetros.
+
+120
+00:04:44,940 --> 00:04:47,595
+Olhamos mais uma vez o método "visitVarDeclaration":
+
+121
+00:04:47,590 --> 00:04:48,800
+E você pode ver ali
+
+122
+00:04:48,800 --> 00:04:50,222
+que a variável então
+
+123
+00:04:50,220 --> 00:04:52,662
+é adicionada a nossa tabela de variáveis.
+
+124
+00:04:52,660 --> 00:04:56,635
+Assim devemos agora também declarar as variáveis.
+
+125
+00:04:56,630 --> 00:04:58,200
+Isto ainda não é tudo, no entanto,
+
+126
+00:04:58,200 --> 00:05:00,617
+porque nós precisamos também da assinatura do método
+
+127
+00:05:00,610 --> 00:05:02,511
+que sirva para nós gerarmos elas.
+
+128
+00:05:02,510 --> 00:05:05,000
+Para isso, assim como anteriormente no
+
+129
+00:05:05,000 --> 00:05:06,435
+"visitFunctionDefinition",
+
+130
+00:05:06,430 --> 00:05:08,835
+ali nós geramos nosso ".method"
+
+131
+00:05:08,830 --> 00:05:12,497
+e logo depois disto aqui, você pode ver a lista de parâmetros
+
+132
+00:05:12,490 --> 00:05:14,271
+e atualmente ela ainda está vazia.
+
+133
+00:05:14,270 --> 00:05:15,928
+Ali temos agora que colocar algo,
+
+134
+00:05:15,920 --> 00:05:19,435
+assim dividimos a string neste local,
+
+135
+00:05:20,235 --> 00:05:23,457
+podemos entre ambas as chaves agora
+
+136
+00:05:23,450 --> 00:05:25,640
+gerar a lista de parâmetros.
+
+137
+00:05:25,640 --> 00:05:27,497
+A lista de parâmetros é
+
+138
+00:05:27,490 --> 00:05:29,266
+simplesmente uma série de tipos,
+
+139
+00:05:29,260 --> 00:05:30,253
+isto se nós agora
+
+140
+00:05:30,250 --> 00:05:33,533
+passamos três inteiros que nos dariam "III"
+
+141
+00:05:34,097 --> 00:05:36,146
+e por isso nós precisamos primeiramente
+
+142
+00:05:36,140 --> 00:05:38,471
+o número de parâmetros.
+
+143
+00:05:39,555 --> 00:05:41,995
+E se nós tivermos o número de parâmetros,
+
+144
+00:05:41,990 --> 00:05:43,786
+então podemos
+
+145
+00:05:43,780 --> 00:05:47,991
+repetir respectivamente o tipo de variável
+
+146
+00:05:47,990 --> 00:05:50,386
+tão frequentemente quanto o número de parâmetros.
+
+147
+00:05:50,380 --> 00:05:51,697
+Temos apenas integers até agora,
+
+148
+00:05:51,690 --> 00:05:54,457
+por isso o nosso tipo de variável é definitivamente um "I"
+
+149
+00:05:54,450 --> 00:05:55,924
+e agora ainda precisamos olhar
+
+150
+00:05:55,920 --> 00:05:58,191
+como é que nós na lista de parâmetros
+
+151
+00:05:58,191 --> 00:06:00,190
+chegamos no número de parâmetros.
+
+152
+00:06:00,902 --> 00:06:03,520
+Temos aqui no "params" a "paramDeclaration"
+
+153
+00:06:03,520 --> 00:06:06,457
+e na regra "parameterDeclaration"
+
+154
+00:06:06,450 --> 00:06:09,040
+retorna mais "varDeclarations".
+
+155
+00:06:09,040 --> 00:06:10,848
+Mas agora é mais difícil de se ler
+
+156
+00:06:10,840 --> 00:06:13,555
+quantos "varDeclarations" nós temos.
+
+157
+00:06:13,942 --> 00:06:16,528
+E por isso iremos adicionar agora
+
+158
+00:06:16,520 --> 00:06:18,195
+"Declarations", todos os que ocorrem
+
+159
+00:06:18,190 --> 00:06:20,191
+juntar em uma lista,
+
+160
+00:06:20,190 --> 00:06:21,644
+porque depois disso podemos então 
+
+161
+00:06:21,644 --> 00:06:23,640
+apenas olhar quão grande é a lista.
+
+162
+00:06:23,640 --> 00:06:25,320
+Este "juntar em uma lista",
+
+163
+00:06:25,320 --> 00:06:28,426
+você faz simplesmente com o "+=",
+
+164
+00:06:28,420 --> 00:06:30,933
+então o ANTLR cria para você uma lista
+
+165
+00:06:30,930 --> 00:06:33,533
+e sempre quando uma nova "varDeclaration" chega
+
+166
+00:06:33,530 --> 00:06:35,302
+será acrescentada à lista.
+
+167
+00:06:35,300 --> 00:06:38,271
+Então geramos o parser novamente,
+
+168
+00:06:38,270 --> 00:06:40,568
+vamos de volta no nosso visitor
+
+169
+00:06:40,560 --> 00:06:42,808
+e agora podemos acessar
+
+170
+00:06:42,800 --> 00:06:45,488
+sobre o "numberOfParameters" 
+
+171
+00:06:45,480 --> 00:06:48,604
+esta lista no nosso "params"
+
+172
+00:06:48,600 --> 00:06:50,102
+com a "Declarations"
+
+173
+00:06:50,100 --> 00:06:52,693
+e então a pegamos a partir do "size".
+
+174
+00:06:52,690 --> 00:06:53,760
+Então precisamos ainda
+
+175
+00:06:53,760 --> 00:06:56,084
+implementar a função "strRepeat"
+
+176
+00:06:56,080 --> 00:06:57,871
+porque ela ainda não está ali.
+
+177
+00:06:58,857 --> 00:07:00,231
+Devemos colocar isto agora
+
+178
+00:07:00,230 --> 00:07:02,844
+para não ser um obstáculo muito grande:
+
+179
+00:07:02,840 --> 00:07:05,351
+Nós pegamos apenas um StringBuilder,
+
+180
+00:07:05,350 --> 00:07:08,115
+esta é uma forma um pouco mais eficiente
+
+181
+00:07:08,110 --> 00:07:09,688
+Caracteres para cortar uma a outra
+
+182
+00:07:09,680 --> 00:07:12,022
+e no fim com uma string terminar
+
+183
+00:07:12,020 --> 00:07:14,715
+e então dizemos que
+
+184
+00:07:14,710 --> 00:07:18,346
+quão frequentemente a String dever repetir
+
+185
+00:07:18,340 --> 00:07:21,324
+sempre no "result"
+
+186
+00:07:21,320 --> 00:07:23,280
+uma vez que
+
+187
+00:07:23,280 --> 00:07:25,715
+a string de entrada deve ser anexada.
+
+188
+00:07:25,710 --> 00:07:27,840
+E quando chamamos este método com:
+
+189
+00:07:28,902 --> 00:07:31,448
+a string "i" e o "count" três,
+
+190
+00:07:31,440 --> 00:07:34,346
+então devemos ter a saída "III".
+
+191
+00:07:34,340 --> 00:07:36,808
+Então, o mesmo é feito ainda com a "functionCall":
+
+192
+00:07:36,800 --> 00:07:38,342
+Ainda no "functionCall" devemos
+
+193
+00:07:38,340 --> 00:07:40,093
+repassar a assinatura inteira
+
+194
+00:07:40,090 --> 00:07:42,493
+e inclusive ainda
+
+195
+00:07:42,490 --> 00:07:44,791
+o número de parâmetros.
+
+196
+00:07:44,790 --> 00:07:47,200
+Aqui também é o mesmo:
+
+197
+00:07:47,200 --> 00:07:50,417
+Nós separamos a nossa string
+
+198
+00:07:50,410 --> 00:07:55,244
+com o nome da função e a chamamos.
+
+199
+00:07:55,240 --> 00:07:56,951
+entre as chaves
+
+200
+00:07:56,950 --> 00:07:59,751
+aonde a nossa lista de parâmetros deve estar limpa.
+
+201
+00:08:06,404 --> 00:08:08,697
+E então roubamos daqui debaixo
+
+202
+00:08:08,690 --> 00:08:10,835
+o código do "visitFunctionDefinition" 
+
+203
+00:08:10,830 --> 00:08:13,684
+para tê-lo, porque logo após ele se parecerá bastante:
+
+204
+00:08:13,680 --> 00:08:16,231
+Nós temos aqui o número de parâmetros
+
+205
+00:08:16,230 --> 00:08:19,240
+e criamos com "string repeat"
+
+206
+00:08:20,400 --> 00:08:24,404
+então os conteúdos da nossa lista de parâmetros.
+
+207
+00:08:24,786 --> 00:08:26,706
+Agora naturalmente o "params" não está aqui
+
+208
+00:08:26,700 --> 00:08:28,680
+e nem "declaration"
+
+209
+00:08:29,657 --> 00:08:32,924
+mas algo que nós ainda não criamos.
+
+210
+00:08:32,920 --> 00:08:34,893
+Por isso devemos ainda
+
+211
+00:08:34,890 --> 00:08:37,506
+personalizar a nossa gramatica novamente
+
+212
+00:08:37,500 --> 00:08:39,662
+e iremos depois ajustar no mesmo modelo
+
+213
+00:08:39,660 --> 00:08:42,071
+como no "parameterDeclaration"
+
+214
+00:08:42,070 --> 00:08:44,235
+a "expressionList".
+
+215
+00:08:44,230 --> 00:08:46,408
+criamos aqui também um novo rótulo
+
+216
+00:08:46,400 --> 00:08:48,124
+e invés de apenas "="
+
+217
+00:08:48,120 --> 00:08:50,884
+chamamos como acima de "+="
+
+218
+00:08:50,880 --> 00:08:54,688
+e então chegamos a uma lista com "Expressions".
+
+219
+00:08:55,115 --> 00:08:59,035
+E aqui chegamos agora no conteúdo
+
+220
+00:08:59,030 --> 00:09:02,537
+nele, sobre o contexto
+
+221
+00:09:03,662 --> 00:09:05,524
+pegamos o "Arguments".
+
+222
+00:09:05,520 --> 00:09:08,488
+onde as expressões estão contidas.
+
+223
+00:09:08,480 --> 00:09:10,400
+Para isso precisamos, é claro, que o parser desta maneira
+
+224
+00:09:10,400 --> 00:09:13,017
+crie novos se eu não mencionei ainda.
+
+225
+00:09:16,564 --> 00:09:19,244
+E então as "Expressions" estão dentro
+
+226
+00:09:19,240 --> 00:09:22,986
+e aí podemos agora pegar o "size".
+
+227
+00:09:25,128 --> 00:09:27,000
+Então, nossa variável ainda se chama "instructions"
+
+228
+00:09:27,000 --> 00:09:30,484
+e não "result" e então estamos prontos.
+
+229
+00:09:31,120 --> 00:09:33,071
+Agora devemos ainda
+
+230
+00:09:33,070 --> 00:09:35,577
+passar o parâmetro que queremos, aliás
+
+231
+00:09:35,570 --> 00:09:38,191
+os valores reais que queremos passar
+
+232
+00:09:38,190 --> 00:09:39,782
+em algum lugar daqui.
+
+233
+00:09:40,173 --> 00:09:43,884
+Primeiramente temos nas instruções
+
+234
+00:09:43,880 --> 00:09:45,955
+estes valores para gerarmos
+
+235
+00:09:45,950 --> 00:09:48,622
+e aqueles valores deixados sobre a pilha.
+
+236
+00:09:48,620 --> 00:09:50,524
+E isto ainda está correto, o que queremos,
+
+237
+00:09:50,520 --> 00:09:52,466
+é que precisamos agora os valores então 
+
+238
+00:09:52,460 --> 00:09:53,720
+e então passá-los
+
+239
+00:09:53,720 --> 00:09:55,200
+na ordem correta,
+
+240
+00:09:55,200 --> 00:09:56,888
+com o primeiro argumento primeiro
+
+241
+00:09:56,880 --> 00:09:57,960
+então o segundo argumento
+
+242
+00:09:57,960 --> 00:09:59,688
+então o terceiro argumento e assim por diante
+
+243
+00:09:59,680 --> 00:10:01,631
+todos sucessivamente sobre a pilha.
+
+244
+00:10:01,630 --> 00:10:04,484
+Isto significa que geraremos primeiro
+
+245
+00:10:04,480 --> 00:10:06,684
+as instruções para o primeiro argumento,
+
+246
+00:10:06,680 --> 00:10:08,835
+então para o do segundo argumento, etc.
+
+247
+00:10:08,830 --> 00:10:10,680
+até o último argumento
+
+248
+00:10:10,680 --> 00:10:13,257
+e quando simplesmente esmagamos todos em uma linha,
+
+249
+00:10:13,250 --> 00:10:16,257
+então nos deixa cada uma
+
+250
+00:10:16,250 --> 00:10:17,582
+destas...
+
+251
+00:10:18,422 --> 00:10:21,271
+listas de instruções da lista de argumentos
+
+252
+00:10:21,697 --> 00:10:24,817
+um elemento da pilha com um argumento.
+
+253
+00:10:25,155 --> 00:10:27,657
+E podemos facilmente fazer tudo ficar junto
+
+254
+00:10:27,650 --> 00:10:29,777
+dentro do "visit"
+
+255
+00:10:29,770 --> 00:10:33,017
+que o "arguments" do nosso contexto chama,
+
+256
+00:10:33,010 --> 00:10:35,773
+porque neste "ctx.arguments"
+
+257
+00:10:35,770 --> 00:10:38,155
+está a nossa lista já completa
+
+258
+00:10:38,831 --> 00:10:40,857
+e então precisamos apenas olhar:
+
+259
+00:10:40,850 --> 00:10:43,520
+Esta lista também não está vazia,
+
+260
+00:10:43,520 --> 00:10:45,773
+assim ela não retorna "null"
+
+261
+00:10:45,770 --> 00:10:47,537
+e quando ela não retorna "null",
+
+262
+00:10:47,530 --> 00:10:51,280
+então iremos na nossa "instructions"
+
+263
+00:10:51,280 --> 00:10:53,462
+anexar este "argumentInstructions" gerado
+
+264
+00:10:53,460 --> 00:10:56,360
+e uma nova linha no fim.
+
+265
+00:10:58,506 --> 00:11:01,026
+Então podemos executar o nosso teste novamente
+
+266
+00:11:01,020 --> 00:11:02,977
+E olhar se funcionou.
+
+267
+00:11:02,970 --> 00:11:04,764
+E: Huraaa!
+
+268
+00:11:04,760 --> 00:11:06,173
+Nosso teste funcionou,
+
+269
+00:11:06,170 --> 00:11:07,835
+não dá nenhum erro
+
+270
+00:11:08,755 --> 00:11:10,617
+e nosso novo teste
+
+271
+00:11:10,610 --> 00:11:14,017
+com os parâmetros de função, funcionou.
+
+272
+00:11:15,026 --> 00:11:16,644
+Neste episódio nós aprendemos
+
+273
+00:11:16,640 --> 00:11:18,168
+como com qualquer quantidade de parâmetros 
+
+274
+00:11:18,168 --> 00:11:20,160
+podem ser aceitadas nas nossas funções.
+
+275
+00:11:20,160 --> 00:11:21,804
+Os parâmetros são automáticos
+
+276
+00:11:21,800 --> 00:11:23,671
+como variáveis disponíveis
+
+277
+00:11:23,670 --> 00:11:24,915
+e nós ainda devemos
+
+278
+00:11:24,910 --> 00:11:28,000
+fazer o visitor reconhecido no nosso mapa de variáveis.
+
+279
+00:11:28,213 --> 00:11:29,440
+Para a chamada de função
+
+280
+00:11:29,440 --> 00:11:31,937
+nós simplesmente deixamos os parâmetros na pilha.
+
+281
+00:11:32,248 --> 00:11:34,586
+Junto disso, não temos ainda a verificação
+
+282
+00:11:34,580 --> 00:11:35,924
+se o número de parâmetros
+
+283
+00:11:35,920 --> 00:11:37,968
+que nós passamos junto a chamada de função
+
+284
+00:11:37,960 --> 00:11:39,200
+realmente está correto.
+
+285
+00:11:39,462 --> 00:11:41,386
+Na verdade, nó nem verificamos
+
+286
+00:11:41,380 --> 00:11:44,586
+se a função que é chamada deve mesmo existir.
+
+287
+00:11:44,580 --> 00:11:47,768
+Isto e muito mais você verá nos próximos episódios.
+
+288
+00:11:47,760 --> 00:11:48,826
+Deixe-me comentários
+
+289
+00:11:48,820 --> 00:11:51,360
+com as suas perguntas, desejos e problemas.
+
+290
+00:11:51,360 --> 00:11:53,555
+Curta o vídeo se você gostou dele
+
+291
+00:11:53,550 --> 00:11:54,897
+e se inscreva no meu canal
+
+292
+00:11:54,890 --> 00:11:57,382
+para não perder nenhum episódio novo.
+
+293
+00:11:57,457 --> 00:11:58,626
+Muito obrigado ao Gadarol,
+
+294
+00:11:58,620 --> 00:12:00,017
+que me permitiu usar seu estúdio
+
+295
+00:12:00,010 --> 00:12:01,217
+para as gravações
+
+296
+00:12:01,210 --> 00:12:03,408
+e muito obrigado a você pela sua atenção,
+
+297
+00:12:03,400 --> 00:12:04,995
+eu espero que vocês tenham gostado,
+
+298
+00:12:04,990 --> 00:12:06,088
+até a próxima vez
+
+299
+00:12:06,080 --> 00:12:08,728
+para o próximo episódio de: "Let's build a compiler". 
