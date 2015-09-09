@@ -1,0 +1,1367 @@
+1
+00:00:00,000 --> 00:00:02,902
+Welcome back to "Let's build a compiler".
+
+2
+00:00:02,900 --> 00:00:04,360
+In the last episode we've worked 
+
+3
+00:00:04,360 --> 00:00:06,933
+with a meaningful error message
+
+4
+00:00:06,930 --> 00:00:09,257
+for when the programmer would call a function
+
+5
+00:00:09,250 --> 00:00:10,813
+that was not defined yet.
+
+6
+00:00:11,066 --> 00:00:12,533
+In this episode we want to add
+
+7
+00:00:12,530 --> 00:00:14,604
+one proper error message for
+
+8
+00:00:14,600 --> 00:00:15,537
+when the programmer
+
+9
+00:00:15,530 --> 00:00:18,008
+has defined twice the same function.
+
+10
+00:00:18,706 --> 00:00:20,840
+This happens when we
+
+11
+00:00:20,840 --> 00:00:22,497
+have two functions,
+
+12
+00:00:22,490 --> 00:00:24,715
+that have the very same name
+
+13
+00:00:24,710 --> 00:00:27,191
+but with a different parameters list?
+
+14
+00:00:27,982 --> 00:00:29,693
+In Java something so is allowed
+
+15
+00:00:29,690 --> 00:00:32,857
+and accordingly to the bytecode from Java
+
+16
+00:00:34,208 --> 00:00:36,208
+but what does it have to do with our language? 
+
+17
+00:00:36,200 --> 00:00:38,493
+Do we want our language to allow it?
+
+18
+00:00:38,490 --> 00:00:41,551
+And how works the condition to stay updated?
+
+19
+00:00:41,551 --> 00:00:43,550
+So, we construct an example here
+
+20
+00:00:43,550 --> 00:00:45,200
+and truly test
+
+21
+00:00:45,200 --> 00:00:46,817
+and I would say: Yes,
+
+22
+00:00:46,810 --> 00:00:49,142
+We want to... because...
+
+23
+00:00:49,140 --> 00:00:50,328
+we can provide.
+
+24
+00:00:50,715 --> 00:00:53,111
+Then we'll copy this test
+
+25
+00:00:53,110 --> 00:00:55,768
+inside our CompilerTest,
+
+26
+00:00:55,760 --> 00:00:59,022
+we create here a new test case
+
+27
+00:00:59,453 --> 00:01:02,964
+and then we need right here a null now
+
+28
+00:01:02,960 --> 00:01:06,017
+and then the 42 as outputsss.
+
+29
+00:01:08,475 --> 00:01:10,560
+Then we execute the test once more
+
+30
+00:01:10,560 --> 00:01:11,706
+and look
+
+31
+00:01:11,700 --> 00:01:13,640
+if it's really worked.
+
+32
+00:01:13,640 --> 00:01:15,417
+And yes, it's the case,
+
+33
+00:01:15,410 --> 00:01:16,955
+so, here's the proof:
+
+34
+00:01:16,950 --> 00:01:18,991
+we can really have two functions
+
+35
+00:01:18,990 --> 00:01:20,586
+in our source code
+
+36
+00:01:20,580 --> 00:01:23,244
+differing one another only by parameters
+
+37
+00:01:23,240 --> 00:01:24,960
+and not by the name.
+
+38
+00:01:25,410 --> 00:01:29,137
+Now we came to the actual topic of this episode.
+
+39
+00:01:29,130 --> 00:01:32,302
+Namely: We want that when a function
+
+40
+00:01:32,300 --> 00:01:33,960
+definition is duplicated, 
+
+41
+00:01:33,960 --> 00:01:36,804
+then is thrown a meaningful exception. 
+
+42
+00:01:36,906 --> 00:01:38,884
+So, we create here a new test for us
+
+43
+00:01:38,880 --> 00:01:40,702
+and it says in the test
+
+44
+00:01:40,700 --> 00:01:44,097
+that it should throw FunctionAlreadyDefinedException
+
+45
+00:01:44,090 --> 00:01:48,666
+namely when the function duplicated declarations.
+
+46
+00:01:49,577 --> 00:01:52,302
+Then we need to insert a code
+
+47
+00:01:52,300 --> 00:01:55,155
+in which would also contain two functions
+
+48
+00:01:55,150 --> 00:01:57,053
+that are simply duplicated.
+
+49
+00:01:57,050 --> 00:01:58,937
+So we create here a function
+
+50
+00:01:58,930 --> 00:02:02,942
+and copy&paste does our life easy,
+
+51
+00:02:02,940 --> 00:02:04,386
+we execute the second function
+
+52
+00:02:04,380 --> 00:02:06,946
+in a next line ahead.
+
+53
+00:02:07,995 --> 00:02:11,093
+Now the error is in the second line
+
+54
+00:02:11,090 --> 00:02:13,293
+at the position four
+
+55
+00:02:13,290 --> 00:02:15,355
+and, of course, we arrived at
+
+56
+00:02:15,350 --> 00:02:17,777
+another error message, namely:
+
+57
+00:02:17,770 --> 00:02:20,151
+"function already defined".
+
+58
+00:02:22,111 --> 00:02:25,315
+The function already defined is called "x"
+
+59
+00:02:25,310 --> 00:02:28,573
+and then we copy for us again the error message 
+
+60
+00:02:28,570 --> 00:02:30,333
+because we'll need the same after for
+
+61
+00:02:30,330 --> 00:02:32,760
+when we'll implement our exception.
+
+62
+00:02:32,760 --> 00:02:34,115
+Exactly like we are going to do now.
+
+63
+00:02:34,110 --> 00:02:36,653
+Of course, in our source code
+
+64
+00:02:37,168 --> 00:02:39,924
+and with our other exceptions
+
+65
+00:02:39,920 --> 00:02:43,720
+and this exception inherits from CompileExceptions.
+
+66
+00:02:49,133 --> 00:02:51,217
+Then we give to our token,
+
+67
+00:02:51,210 --> 00:02:54,168
+another "token" variable
+
+68
+00:02:54,160 --> 00:02:56,222
+as precise name
+
+69
+00:02:58,924 --> 00:03:02,368
+and we note in our exception
+
+70
+00:03:02,360 --> 00:03:04,440
+also the function name.
+
+71
+00:03:04,440 --> 00:03:06,608
+Then we access the token,
+
+72
+00:03:06,600 --> 00:03:08,706
+and we add now, still in the constructor
+
+73
+00:03:08,700 --> 00:03:12,053
+that this variable will be filled.
+
+74
+00:03:12,257 --> 00:03:14,035
+Then we need, of course, as normally
+
+75
+00:03:14,030 --> 00:03:16,160
+our "getMessage" method,
+
+76
+00:03:16,160 --> 00:03:19,084
+so, we steal again as sample
+
+77
+00:03:19,080 --> 00:03:21,320
+one of our previous
+
+78
+00:03:21,320 --> 00:03:23,217
+and fit it accordingly,
+
+79
+00:03:23,210 --> 00:03:26,257
+we take from my clipboard history
+
+80
+00:03:26,250 --> 00:03:28,151
+an error message once again
+
+81
+00:03:28,150 --> 00:03:30,000
+that we really want to
+
+82
+00:03:30,328 --> 00:03:33,773
+and we create here the "varName" by "functionName".
+
+83
+00:03:34,671 --> 00:03:38,035
+We are ready with the exception implementation.
+
+84
+00:03:38,346 --> 00:03:40,573
+Then we can save, close
+
+85
+00:03:40,570 --> 00:03:43,222
+and once execute our test.
+
+86
+00:03:44,071 --> 00:03:47,457
+As we see: The test has an error message,
+
+87
+00:03:47,450 --> 00:03:49,066
+as expected,
+
+88
+00:03:49,060 --> 00:03:51,577
+with other values: We have work.
+
+89
+00:03:52,760 --> 00:03:55,720
+Inside all the function definitions we will,
+
+90
+00:03:55,720 --> 00:03:57,848
+by FunctionDefinitionFinder,
+
+91
+00:03:57,840 --> 00:04:01,222
+need here, also at this place a meaningful
+
+92
+00:04:01,220 --> 00:04:04,208
+check over the function to know if it has been already defined.
+
+93
+00:04:04,200 --> 00:04:05,333
+However, we have unfortunately
+
+94
+00:04:05,330 --> 00:04:07,568
+in this "visitFunctionDefinition" method
+
+95
+00:04:07,560 --> 00:04:09,680
+not about the information
+
+96
+00:04:09,680 --> 00:04:12,688
+over which function were already defined,
+
+97
+00:04:12,680 --> 00:04:15,462
+instead, we only have a function name,
+
+98
+00:04:15,460 --> 00:04:18,244
+namely the function name of the function,
+
+99
+00:04:18,240 --> 00:04:21,017
+at the moment, with our generated visitor.
+
+100
+00:04:21,010 --> 00:04:22,564
+And at first at "aggregateResult"
+
+101
+00:04:22,560 --> 00:04:25,284
+we'll add all the methods together.
+
+102
+00:04:25,608 --> 00:04:27,173
+How could we let our problem now,
+
+103
+00:04:27,170 --> 00:04:30,173
+so that we can recognize whether a duplicated function?
+
+104
+00:04:30,170 --> 00:04:32,195
+There we have, clearly, many possibilities:
+
+105
+00:04:32,190 --> 00:04:35,560
+We can pass, for example, "aggregateResult",
+
+106
+00:04:35,560 --> 00:04:39,120
+we might as well up here in the... um...
+
+107
+00:04:39,120 --> 00:04:43,666
+...put in our visitor a private variable with a set
+
+108
+00:04:43,660 --> 00:04:45,386
+in where we always sign
+
+109
+00:04:45,380 --> 00:04:48,497
+what was already defined as function.
+
+110
+00:04:48,490 --> 00:04:50,688
+This, however, is a forward coming part:
+
+111
+00:04:50,680 --> 00:04:53,657
+Because with it, our FunctionDefinitionFinder
+
+112
+00:04:53,650 --> 00:04:56,057
+gets a status.
+
+113
+00:04:56,050 --> 00:04:59,400
+This means our FunctionDefinitionFinder will percept:
+
+114
+00:04:59,400 --> 00:05:01,533
+The following functions are already defined
+
+115
+00:05:01,530 --> 00:05:03,475
+and this will not be only for one call
+
+116
+00:05:03,470 --> 00:05:05,231
+but also for more calls.
+
+117
+00:05:05,230 --> 00:05:07,671
+This means that when we say to the user:
+
+118
+00:05:07,670 --> 00:05:10,773
+Like for this class user, we say:
+
+119
+00:05:10,770 --> 00:05:12,862
+"new FunctionDefinitionFinder"
+
+120
+00:05:12,860 --> 00:05:16,053
+and then saves in a variable and then
+
+121
+00:05:16,050 --> 00:05:18,333
+calls the "visit" method more times,
+
+122
+00:05:18,330 --> 00:05:21,155
+then we'll get the "definedFunctions"
+
+123
+00:05:21,150 --> 00:05:23,715
+for our "visit" method.
+
+124
+00:05:23,710 --> 00:05:25,582
+We have to say for the user:
+
+125
+00:05:25,580 --> 00:05:26,728
+If he doesn't want,
+
+126
+00:05:26,720 --> 00:05:31,226
+that the previous definedFunctions "clearen" must be explicit.
+
+127
+00:05:31,220 --> 00:05:34,444
+This is expensive and could also be easily forgotten.
+
+128
+00:05:34,440 --> 00:05:35,751
+because of this, we go now
+
+129
+00:05:35,750 --> 00:05:37,915
+after get another method.
+
+130
+00:05:37,910 --> 00:05:40,137
+So we say that our "FunctionDefinitionFinder"
+
+131
+00:05:40,130 --> 00:05:43,608
+simply does not inherit nothing else from the DemoBaseVisitor,
+
+132
+00:05:43,600 --> 00:05:46,204
+the definedFunctions that we reject again,
+
+133
+00:05:46,200 --> 00:05:46,933
+we throw it away
+
+134
+00:05:46,930 --> 00:05:49,284
+and we'll put a new static method,
+
+135
+00:05:49,280 --> 00:05:53,986
+which shall return a set with all our the function names.
+
+136
+00:05:54,848 --> 00:05:59,497
+We get our ParseTree now in this passed method 
+
+137
+00:05:59,490 --> 00:06:01,688
+and with this we have the backbone
+
+138
+00:06:01,680 --> 00:06:04,093
+of a "stateless" function
+
+139
+00:06:04,090 --> 00:06:08,142
+and it only shall extract the functions.
+
+140
+00:06:08,140 --> 00:06:09,182
+How could we do that?
+
+141
+00:06:09,180 --> 00:06:12,048
+It can from here create a new class
+
+142
+00:06:12,040 --> 00:06:14,062
+that derives from DemoBaseVisitor.
+
+143
+00:06:14,060 --> 00:06:16,226
+The return value does not interest us here, 
+
+144
+00:06:16,220 --> 00:06:18,351
+so I just call it "Void" here
+
+145
+00:06:18,350 --> 00:06:20,715
+and then this anonymous class
+
+146
+00:06:20,710 --> 00:06:24,822
+overwrites the "visitFunctionDefiniton" method.
+
+147
+00:06:26,093 --> 00:06:28,600
+What the set should give as output,
+
+148
+00:06:28,600 --> 00:06:31,008
+we attribute to a local variable
+
+149
+00:06:31,008 --> 00:06:33,000
+inside the "findFunctions".
+
+150
+00:06:33,000 --> 00:06:36,755
+And then we leave this visitor free from our Tree.
+
+151
+00:06:36,750 --> 00:06:38,422
+Now we have here also a part of the code
+
+152
+00:06:38,420 --> 00:06:41,782
+that calls each "functionDefinition" again
+
+153
+00:06:41,780 --> 00:06:43,324
+but we can't reach it from the outside,
+
+154
+00:06:43,320 --> 00:06:45,400
+so the user can't anymore
+
+155
+00:06:45,400 --> 00:06:48,191
+call five times the "visit", one after another,
+
+156
+00:06:48,190 --> 00:06:51,217
+because he can call "findFunctions" only
+
+157
+00:06:51,210 --> 00:06:53,786
+and "findFunctions" will ever 
+
+158
+00:06:53,780 --> 00:06:56,737
+create a new DemoBaseVisitor again 
+ 
+159
+00:06:56,730 --> 00:07:01,742
+and, by this, the variante ensures stateless
+
+160
+00:07:01,740 --> 00:07:04,817
+and it should let the user less confused.
+
+161
+00:07:05,755 --> 00:07:08,946
+The "definedFunctions" we just create here now
+
+162
+00:07:08,940 --> 00:07:13,004
+in a "definedFunctions" local variable 
+
+163
+00:07:13,982 --> 00:07:16,311
+and over this variable we can now
+
+164
+00:07:16,310 --> 00:07:18,862
+access within our anonymous class
+
+165
+00:07:18,860 --> 00:07:21,791
+and we'll also fill it.
+
+166
+00:07:21,790 --> 00:07:23,337
+We'll do this now on the same way
+
+167
+00:07:23,330 --> 00:07:24,995
+we also did down there,
+
+168
+00:07:24,990 --> 00:07:27,951
+because of this, we copy the code.
+
+169
+00:07:27,950 --> 00:07:29,893
+Then we don't need all the other code anymore,
+
+170
+00:07:29,890 --> 00:07:32,804
+also, we no longer need "aggregateResult".
+
+171
+00:07:33,650 --> 00:07:36,844
+Our FunctionDefinitionFinder will thereby be considerably
+
+172
+00:07:36,840 --> 00:07:39,262
+lighter, by just not returning
+
+173
+00:07:39,260 --> 00:07:42,040
+the result in a Collection,
+
+174
+00:07:42,040 --> 00:07:45,213
+but still into de definedFunctions
+
+175
+00:07:45,210 --> 00:07:47,635
+we add the current function name.
+
+176
+00:07:47,630 --> 00:07:49,573
+As return value we simply accept "null"
+
+177
+00:07:49,570 --> 00:07:51,337
+because it's no use for us.
+
+178
+00:07:51,330 --> 00:07:54,213
+Also, we can access on the variable "definedFunctions"
+
+179
+00:07:54,210 --> 00:07:56,613
+within an anonymous class
+
+180
+00:07:56,610 --> 00:07:58,377
+we have to define it as "final",
+
+181
+00:07:58,370 --> 00:08:00,031
+so we do that too.
+
+182
+00:08:00,030 --> 00:08:02,022
+And in the end, naturally,
+
+183
+00:08:02,020 --> 00:08:04,537
+we want also the "definedFunctions" returned.
+
+184
+00:08:08,311 --> 00:08:11,897
+So, with this our FunctionDefinitionFinder is reasonable 
+
+185
+00:08:11,890 --> 00:08:15,057
+became shorter, but still does about the same thing,
+
+186
+00:08:15,050 --> 00:08:16,951
+the API has change a little bit,
+
+187
+00:08:16,950 --> 00:08:20,560
+therefore we must adapt yet, still in our Main class
+
+188
+00:08:20,560 --> 00:08:22,173
+and say "findFunctions" here
+
+189
+00:08:22,170 --> 00:08:25,542
+instead of a new instance to create and "visit" as saying
+
+190
+00:08:25,875 --> 00:08:29,217
+and otherwise the behavior should be the same.
+
+191
+00:08:29,210 --> 00:08:30,346
+We surely put it now 
+
+192
+00:08:30,340 --> 00:08:32,244
+to execute the test
+
+193
+00:08:34,706 --> 00:08:36,395
+and we say affirmatively:
+
+194
+00:08:36,390 --> 00:08:38,288
+The... new...
+
+195
+00:08:38,280 --> 00:08:40,088
+The new test continues not working,
+
+196
+00:08:40,080 --> 00:08:41,942
+but all the old tests are still working,
+
+197
+00:08:41,940 --> 00:08:44,071
+so we have not break anything.
+
+198
+00:08:44,555 --> 00:08:48,328
+Now it should not be a big problem to us
+
+199
+00:08:48,320 --> 00:08:50,448
+to satisfy the new test
+
+200
+00:08:50,702 --> 00:08:53,546
+and we now consider here
+
+201
+00:08:53,540 --> 00:08:55,071
+in the "definedFunctions":
+
+202
+00:08:55,070 --> 00:08:57,697
+There exists a function
+
+203
+00:08:57,690 --> 00:09:00,240
+with the name we have just found.
+
+204
+00:09:00,871 --> 00:09:03,773
+If so: Then it's an error
+
+205
+00:09:03,770 --> 00:09:05,906
+and we throw our
+
+206
+00:09:05,900 --> 00:09:09,342
+new FunctionAlreadyDefinedException introduced.
+
+207
+00:09:10,675 --> 00:09:12,302
+So, we save and take a look
+
+208
+00:09:12,300 --> 00:09:13,951
+if it already is there,
+
+209
+00:09:13,950 --> 00:09:16,533
+we execute our test again
+
+210
+00:09:17,217 --> 00:09:20,360
+and: No, it has not been!
+
+211
+00:09:20,360 --> 00:09:22,742
+So yes, our new test worked:
+
+212
+00:09:22,740 --> 00:09:24,595
+Now it throws an exception,
+
+213
+00:09:24,590 --> 00:09:27,097
+But unfortunately, the test to know if the
+
+214
+00:09:27,090 --> 00:09:28,311
+functions with the same name
+
+215
+00:09:28,310 --> 00:09:31,231
+but with different parameters does no longer work.
+
+216
+00:09:31,230 --> 00:09:33,377
+It's sad that we have broke something,
+
+217
+00:09:33,370 --> 00:09:34,946
+we have to think about something else
+
+218
+00:09:34,940 --> 00:09:37,586
+if we want to get this functionality.
+
+219
+00:09:37,580 --> 00:09:38,635
+This means now,
+
+220
+00:09:38,630 --> 00:09:41,004
+here in our function it simply does not anymore
+
+221
+00:09:41,000 --> 00:09:43,635
+be defined by the function name,
+
+222
+00:09:43,630 --> 00:09:46,862
+but also by the signature.
+
+223
+00:09:46,860 --> 00:09:49,568
+Here in the contains method we check
+
+224
+00:09:49,560 --> 00:09:53,124
+if we had already defined a method with a name,
+
+225
+00:09:53,120 --> 00:09:54,915
+but this is not enough,
+
+226
+00:09:54,910 --> 00:09:58,471
+we must also check if the parameters match,
+
+227
+00:09:58,808 --> 00:10:00,484
+So tat we can make in an easier way,
+
+228
+00:10:00,480 --> 00:10:03,800
+because a set does not furnish so easily these options
+
+229
+00:10:03,800 --> 00:10:06,408
+we create now a new "FunctionList" class
+
+230
+00:10:06,400 --> 00:10:10,697
+that have the necessary methods
+
+231
+00:10:11,106 --> 00:10:13,902
+We habe a method that checks:
+
+232
+00:10:13,900 --> 00:10:15,577
+if a function was defined
+
+233
+00:10:15,570 --> 00:10:17,920
+with a specific function name
+
+234
+00:10:17,920 --> 00:10:20,973
+and an specific number of parameters
+
+235
+00:10:21,284 --> 00:10:24,075
+and, naturally, we must that this list says:
+
+236
+00:10:24,070 --> 00:10:26,306
+Please, define a function now
+
+237
+00:10:26,300 --> 00:10:28,631
+with the following function name
+
+238
+00:10:28,630 --> 00:10:30,875
+and followed number of parameters.
+
+239
+00:10:39,257 --> 00:10:41,368
+Now we need the parameters Count,
+
+240
+00:10:41,360 --> 00:10:43,706
+we get out our context,
+
+241
+00:10:43,700 --> 00:10:45,484
+that we already have
+
+242
+00:10:45,480 --> 00:10:47,435
+and now we can
+
+243
+00:10:47,430 --> 00:10:50,413
+into our "definedFunctions":
+
+244
+00:10:50,410 --> 00:10:53,666
+Was this function already defined?
+
+245
+00:10:53,660 --> 00:10:55,351
+And if not, we do define it
+
+246
+00:10:55,350 --> 00:10:57,662
+otherwise we through an error.
+
+247
+00:10:58,093 --> 00:11:01,422
+Of course, comes on our FunctionDefinitionFinder
+
+248
+00:11:01,420 --> 00:11:03,280
+as output another return value,
+
+249
+00:11:03,280 --> 00:11:04,640
+because of this we also
+
+250
+00:11:04,640 --> 00:11:06,933
+adjust our Main class again,
+
+251
+00:11:06,930 --> 00:11:08,493
+like the visitor
+
+252
+00:11:08,490 --> 00:11:11,844
+so we must work with the FunctionList, too.
+
+253
+00:11:15,715 --> 00:11:18,471
+No "null" value comes anymore
+
+254
+00:11:18,470 --> 00:11:21,657
+as output on our FunctionDefinitionFinder
+
+255
+00:11:21,650 --> 00:11:24,631
+That is why we can now quietly also say here: 
+
+256
+00:11:24,630 --> 00:11:26,146
+This should not happen
+
+257
+00:11:26,140 --> 00:11:28,337
+and if it's "null", then definitely 
+
+258
+00:11:28,330 --> 00:11:30,151
+is the programmer's error,
+
+259
+00:11:30,150 --> 00:11:32,528
+thus, we easy our life a little bit.
+
+260
+00:11:34,520 --> 00:11:38,017
+So, we get the "number of parameters" from
+
+261
+00:11:38,017 --> 00:11:40,010
+down here to here above
+
+262
+00:11:40,010 --> 00:11:42,675
+and then we need our "contains" statement
+
+263
+00:11:42,670 --> 00:11:44,493
+to be slightly adjusted
+
+264
+00:11:44,490 --> 00:11:47,417
+and with the "number of parameters" added.
+
+265
+00:12:00,271 --> 00:12:02,888
+Now we need to implement in our FunctionList
+
+266
+00:12:02,880 --> 00:12:06,031
+of course, the missing functions over here.
+
+267
+00:12:06,240 --> 00:12:09,484
+We create, firstly, a little help class for us 
+
+268
+00:12:09,480 --> 00:12:11,617
+namely the "function name"
+
+269
+00:12:11,610 --> 00:12:13,888
+and we save the "parameter count".
+
+270
+00:12:14,328 --> 00:12:16,160
+The class is really simple,
+
+271
+00:12:16,160 --> 00:12:19,120
+we throw it like a "struct" in C
+
+272
+00:12:19,120 --> 00:12:21,484
+or as a "record" in Pascal,
+
+273
+00:12:21,480 --> 00:12:25,502
+it's just a simple class with two fields in it
+
+274
+00:12:25,500 --> 00:12:27,911
+with this, we can save 
+
+275
+00:12:27,910 --> 00:12:30,364
+two fields in a list at once.
+
+276
+00:12:30,360 --> 00:12:32,546
+So we create here to us a Collection
+
+277
+00:12:32,540 --> 00:12:34,897
+with ours "FunctionDefintion"s
+
+278
+00:12:34,890 --> 00:12:36,786
+and there we do this in a very simple way
+
+279
+00:12:36,780 --> 00:12:39,240
+and we take by only an ArrayList.
+
+280
+00:12:39,693 --> 00:12:41,040
+For the check
+
+281
+00:12:41,040 --> 00:12:44,080
+if a function corresponds with a 
+
+282
+00:12:44,080 --> 00:12:45,920
+matching function's name and
+
+283
+00:12:45,920 --> 00:12:48,471
+a parameter count already defined
+
+284
+00:12:48,470 --> 00:12:51,377
+we iterate our "Definitions" through
+
+285
+00:12:52,124 --> 00:12:53,982
+and we take a look for every to see
+
+286
+00:12:53,980 --> 00:12:57,008
+if "function name" and "parameter count" match.
+
+287
+00:13:01,422 --> 00:13:03,497
+If this is the case, then
+
+288
+00:13:03,490 --> 00:13:05,382
+the result is obviously true.
+
+289
+00:13:05,380 --> 00:13:06,604
+so we say just "return true".
+
+290
+00:13:06,600 --> 00:13:07,400
+we can stop here,
+
+291
+00:13:07,400 --> 00:13:09,182
+we need also that the loop not to increment anymore.
+
+292
+00:13:09,180 --> 00:13:11,302
+If we reach the end of the function
+
+293
+00:13:11,300 --> 00:13:12,697
+with at least not finding something
+
+294
+00:13:12,697 --> 00:13:14,690
+the result clearly is false.
+
+295
+00:13:15,506 --> 00:13:17,728
+Then we still need the "add" function.
+
+296
+00:13:17,720 --> 00:13:19,702
+We say here in the "FunctionDefinition"
+
+297
+00:13:19,700 --> 00:13:22,604
+that we define our parameter as "final"
+
+298
+00:13:22,955 --> 00:13:25,391
+then we define an "immutable" class
+
+299
+00:13:25,390 --> 00:13:28,400
+and we define a constructor,
+
+300
+00:13:28,400 --> 00:13:30,657
+which sets the parameter.
+
+301
+00:13:31,413 --> 00:13:33,253
+It can also be "private", of course,
+
+302
+00:13:33,250 --> 00:13:34,831
+it's just a private class,
+
+303
+00:13:34,830 --> 00:13:36,995
+that went to be a recognized class.
+
+304
+00:13:37,386 --> 00:13:40,364
+And now, went the "add" method is called
+
+305
+00:13:40,360 --> 00:13:42,515
+we simply create a new "FunctionDefinition"
+
+306
+00:13:42,510 --> 00:13:44,400
+with the corresponding function name
+
+307
+00:13:44,400 --> 00:13:46,400
+and the number of parameters.
+
+308
+00:13:49,648 --> 00:13:51,546
+And now we execute one more time our tests
+
+309
+00:13:51,540 --> 00:13:53,555
+and we look if this is enough yet,
+
+310
+00:13:53,550 --> 00:13:55,302
+to ensure that we are successful.
+
+311
+00:13:55,300 --> 00:13:56,920
+And yes: It worked,
+
+312
+00:13:56,920 --> 00:13:58,920
+all the tests have passed,
+
+313
+00:13:58,920 --> 00:14:01,524
+so we can now
+
+314
+00:14:01,520 --> 00:14:03,862
+throw simple exceptions
+
+315
+00:14:03,860 --> 00:14:06,880
+if the programmer made rubbish
+
+316
+00:14:06,880 --> 00:14:11,924
+and has defined two functions with same signatures.
+
+317
+00:14:12,684 --> 00:14:14,315
+In this episode we have learned
+
+318
+00:14:14,310 --> 00:14:16,408
+how we hit the programmer with a  
+
+319
+00:14:16,400 --> 00:14:17,911
+meaningful error message
+
+320
+00:14:17,910 --> 00:14:20,253
+when he searches a function with the same name
+
+321
+00:14:20,250 --> 00:14:23,248
+and with the same twice parameters to define.
+
+322
+00:14:23,240 --> 00:14:24,542
+Furthermore, we've learned
+
+323
+00:14:24,540 --> 00:14:26,680
+how we check again by same functions
+
+324
+00:14:26,680 --> 00:14:28,826
+the parameters are involved.
+
+325
+00:14:29,844 --> 00:14:31,568
+So, we had summarized
+
+326
+00:14:31,560 --> 00:14:34,337
+in the last episodes with error handling.
+
+327
+00:14:34,330 --> 00:14:36,324
+Together with many features
+
+328
+00:14:36,320 --> 00:14:37,631
+missing on our language.
+
+329
+00:14:37,630 --> 00:14:39,568
+For example, conditionals and loops.
+
+330
+00:14:39,560 --> 00:14:42,604
+We'll say in the next episode how we do this implementation. 
+
+331
+00:14:42,600 --> 00:14:44,288
+Did you like the video?
+
+332
+00:14:44,280 --> 00:14:46,017
+Do you have any question or suggestion?
+
+333
+00:14:46,010 --> 00:14:47,062
+Leave a thumb up
+
+334
+00:14:47,060 --> 00:14:48,355
+and write comments.
+
+335
+00:14:48,350 --> 00:14:49,533
+subscribe the channel,
+
+336
+00:14:49,530 --> 00:14:51,804
+by this you don't lose any new episode.
+
+337
+00:14:51,800 --> 00:14:53,035
+Thanks a lot to Gadarol
+
+338
+00:14:53,030 --> 00:14:55,471
+who permitted to use his studio for the recordings
+
+339
+00:14:55,470 --> 00:14:57,937
+and thank you very much for paying attention.
+
+340
+00:14:57,930 --> 00:14:59,168
+Until the next time,
+
+341
+00:14:59,160 --> 00:15:00,173
+for the next episode of:
+
+342
+00:15:00,173 --> 00:15:02,170
+"Let's build a compiler".
