@@ -152,7 +152,7 @@ para nossa chamada de função
 
 39
 00:01:37,030 --> 00:01:40,177
-e nossas novas regras na definição de funçãos.
+e nossas novas regras na definição de função.
 
 40
 00:01:40,170 --> 00:01:41,955
@@ -236,7 +236,7 @@ então vem o "return" aqui,
 
 60
 00:02:28,130 --> 00:02:31,520
-também inicialmente um abre parênteses,
+também inicialmente um abre chaves,
 
 61
 00:02:31,520 --> 00:02:33,520
@@ -244,7 +244,7 @@ então um "return",
 
 62
 00:02:34,306 --> 00:02:37,662
-então vem aqui algo que possa ser "retornt",
+então vem aqui algo que possa ser retornado,
 
 63
 00:02:37,660 --> 00:02:42,417
@@ -384,7 +384,7 @@ Para estar também junto de nós em qualquer lugar no fonte,
 
 97
 00:04:23,946 --> 00:04:26,786
-que estaria também no nosso "programa",
+que estaria também no nosso "program",
 
 98
 00:04:26,780 --> 00:04:30,680
@@ -1056,7 +1056,7 @@ e então vamos agora implementar o método "visit"
 
 265
 00:12:02,880 --> 00:12:06,964
-daquele "program" aqui.
+deste "program" aqui.
 
 266
 00:12:10,080 --> 00:12:12,906
@@ -1172,7 +1172,7 @@ funções, também começando com uma string vazia em diante
 
 294
 00:14:01,420 --> 00:14:03,315
-e então diga aqui:
+e então dizemos aqui:
 
 295
 00:14:03,310 --> 00:14:05,733
@@ -1204,7 +1204,7 @@ o que estava no "main",
 
 302
 00:14:22,800 --> 00:14:24,813
-a sabe, toda esta parte daqui
+a saber, toda esta parte daqui
 
 303
 00:14:26,915 --> 00:14:27,928

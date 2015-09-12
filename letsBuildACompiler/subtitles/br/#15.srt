@@ -200,7 +200,7 @@ para isso colocaremos aqui
 
 51
 00:01:55,470 --> 00:01:56,466
-um novo rótulo
+um novo label
 
 52
 00:01:56,460 --> 00:01:57,817
@@ -856,7 +856,7 @@ a "expressionList".
 
 215
 00:08:44,230 --> 00:08:46,408
-criamos aqui também um novo rótulo
+criamos aqui também um novo label
 
 216
 00:08:46,400 --> 00:08:48,124
@@ -992,7 +992,7 @@ e quando simplesmente esmagamos todos em uma linha,
 
 249
 00:10:13,250 --> 00:10:16,257
-então nos deixa cada uma
+então cada uma
 
 250
 00:10:16,250 --> 00:10:17,582
@@ -1004,7 +1004,7 @@ listas de instruções da lista de argumentos
 
 252
 00:10:21,697 --> 00:10:24,817
-um elemento da pilha com um argumento.
+nos deixa um elemento da pilha com um argumento.
 
 253
 00:10:25,155 --> 00:10:27,657
@@ -1193,3 +1193,4 @@ até a próxima vez
 299
 00:12:06,080 --> 00:12:08,728
 para o próximo episódio de: "Let's build a compiler". 
+

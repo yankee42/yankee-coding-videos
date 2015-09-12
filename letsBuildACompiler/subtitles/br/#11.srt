@@ -12,7 +12,7 @@ para a nossa linguagem
 
 4
 00:00:06,440 --> 00:00:09,586
-e aos poucos fechando a complexidade do nosso compilador
+e aos poucos fechamos a complexidade do nosso compilador
 
 5
 00:00:09,586 --> 00:00:11,580
@@ -92,7 +92,7 @@ Faremos simplesmente dentro do
 
 24
 00:00:55,200 --> 00:00:59,328
-OutputStream primeiro retirar uma variável
+OutputStream, primeiro retiramos uma variável
 
 25
 00:01:01,320 --> 00:01:03,111
@@ -100,7 +100,7 @@ e então nós iremos aqui
 
 26
 00:01:03,110 --> 00:01:05,831
-usar try-with-resources-Block.
+usar um bloco try-with-resources.
 
 27
 00:01:15,866 --> 00:01:18,640
@@ -112,7 +112,7 @@ no fim dos blocos "try" no OutputStream,
 
 29
 00:01:21,360 --> 00:01:23,488
-aqui criamos fechamentos automáticos
+cria fechamentos automáticos
 
 30
 00:01:23,480 --> 00:01:27,106
@@ -120,7 +120,7 @@ e mesmo se ocorrer uma exception aqui.
 
 31
 00:01:27,200 --> 00:01:30,071
-Provamos mais uma vez se os testes ainda realmente fazem
+Provamos mais uma vez se os testes ainda realmente o fazem
 
 32
 00:01:30,644 --> 00:01:34,226
@@ -180,7 +180,7 @@ do nosso programa para avaliação,
 
 46
 00:02:31,460 --> 00:02:34,640
-mas é dada apenas uma "compileAndRun".
+mas é dada apenas um "compileAndRun".
 
 47
 00:02:36,333 --> 00:02:39,457
@@ -200,11 +200,11 @@ Nós também pegamos aqui um exemplo simples:
 
 51
 00:02:48,320 --> 00:02:49,982
-and depois
+e depois
 
 52
 00:02:49,980 --> 00:02:52,071
-nós devemos naturalmente provar ainda
+nós devemos, naturalmente, checar ainda
 
 53
 00:02:52,070 --> 00:02:55,044
@@ -212,8 +212,7 @@ se agora é um erro exatamente esperado:
 
 54
 00:02:55,040 --> 00:02:58,395
-Das heißt wir schreiben hier in unser Test-annotation rein:
-This means that we write here inside our test annotation:
+Isto significa que escrevemos na nossa anotação de teste:
 
 55
 00:02:58,390 --> 00:03:01,280
@@ -221,61 +220,74 @@ This means that we write here inside our test annotation:
 
 56
 00:03:02,200 --> 00:03:04,537
-and we say "expecten"
+e nós dizemos que esperamos uma
 
 57
 00:03:04,530 --> 00:03:09,337
 "UndeclaredVariableException".
 
+58
 00:03:12,440 --> 00:03:14,666
 E então nós documentamos aqui:
 
+59
 00:03:14,660 --> 00:03:24,133
 "evaluation performed by expected exception".
-"evaluation performed by expected exception".
-60
-Essa exceção não nos fornece nada até agora,
-That exception does not give us nothing until now,
 
-isso significa que nós precisamos deixar,
-this means that we need to leave,
+60
+00:03:26,724 --> 00:03:28,848
+Essa exceção não nos fornece nada até agora,
+
+61
+00:03:28,840 --> 00:03:31,231
+isso significa que nós precisamos deixar ali,
 
 62
-that it don't happen to our test package
+00:03:32,035 --> 00:03:35,128
+para que não acontece no nosso pacote de teste,
 
 63
+00:03:35,120 --> 00:03:37,524
 mas é novamente normal no pacote "source"
 
 64
+00:03:37,520 --> 00:03:40,293
 e então criamos aqui mesmo
-and then we create here
-65
-um pacote "exceptions".
-an "exceptions" package.
 
+65
+00:03:40,290 --> 00:03:43,657
+um pacote "exceptions".
+
+66
+00:03:47,160 --> 00:03:49,680
 Para que então possa agora naturalmente passar por uma exceção,
-So that can now, naturally, pass through an exception,
 
 67
-just by running our "throws declaration" in it again.
+00:03:49,680 --> 00:03:53,755
+apenas rodando nosso "throws declaration" nele novamente. 
 
 68
+00:03:55,626 --> 00:03:58,622
 Com isso, nosso teste é expandido de acordo, 
 
 69
+00:03:58,622 --> 00:04:00,620
 então rodamos ele mais uma vez
-then we run it once more
-70
-e vemos agora por aqui:
-and then we see here:
 
+70
+00:04:03,430 --> 00:04:04,515
+e vemos agora por aqui:
+
+71
+00:04:04,510 --> 00:04:07,288
 Hurraa, um teste deu mensagem de erro,
-Hurraa, a test give us an error message,
 
 72
-namely in our new
+00:04:07,280 --> 00:04:08,840
+no nosso novo
 
 73
+00:04:08,840 --> 00:04:12,524
 "expected exception was UndeclaredVariableException"
 
 74
@@ -336,7 +348,7 @@ o que temos aqui
 
 88
 00:04:49,450 --> 00:04:52,586
-também vem em primeiro na variável
+também vem por primeiro na variável
 
 89
 00:04:54,671 --> 00:04:56,595
@@ -376,7 +388,7 @@ que nós não o podemos fazer,
 
 98
 00:05:27,300 --> 00:05:29,675
-porque for um método de sobrescrita
+porque para um método de sobrescrita
 
 99
 00:05:29,670 --> 00:05:30,928
@@ -400,7 +412,7 @@ ainda emendar para algum "RuntimeException",
 
 104
 00:05:39,900 --> 00:05:42,004
-e fazer simplesmente escrever nele
+e simplesmente escrever nele
 
 105
 00:05:42,000 --> 00:05:45,600
@@ -424,7 +436,7 @@ quando nós acessamos uma variável pelo println,
 
 110
 00:06:01,915 --> 00:06:03,910
-ela não está definida.
+que ela não está definida.
 
 111
 00:06:03,910 --> 00:06:07,391
@@ -436,7 +448,7 @@ Infelizmente nos diz que a mensagem de erro até agora não se alterou, tal como
 
 113
 00:06:10,860 --> 00:06:14,102
-Como foi o erro nós ainda não dissemos
+Ainda não diz como foi o erro,
 
 114
 00:06:14,100 --> 00:06:15,960
@@ -632,7 +644,7 @@ e já vemos que ele reclama aqui,
 
 162
 00:09:32,500 --> 00:09:34,768
-porque nós não entregarmos o token agora
+porque nós não entregamos o token agora
 
 163
 00:09:34,760 --> 00:09:39,560
@@ -648,7 +660,7 @@ Deixamos nosso teste rodar novamente...
 
 166
 00:09:49,260 --> 00:09:53,128
-Nossa mensagem de erro para não contém mais apenas a informação,
+Nossa mensagem de erro não contém mais apenas a informação,
 
 167
 00:09:53,120 --> 00:09:56,808
@@ -676,7 +688,7 @@ Nós temos até o momento no "expression"
 
 173
 00:10:11,000 --> 00:10:13,671
-varName=identifier, também se sobre uma variável
+varName=identifier, também se uma variável
 
 174
 00:10:13,670 --> 00:10:15,311
@@ -888,7 +900,7 @@ aqui no nosso caso chamamos de "requireVariableIndex"
 
 226
 00:13:18,180 --> 00:13:25,382
-e pegamos do "ctx" o token varName.
+e pegamos do "ctx", o token varName.
 
 227
 00:13:27,204 --> 00:13:29,853
@@ -1008,7 +1020,7 @@ e muito obrigado a vocês pela atenção.
 
 256
 00:14:38,680 --> 00:14:41,577
-Meu nome é yankee, eu espero que vocês tenham se divertido,
+Meu nome é Yankee, eu espero que vocês tenham se divertido,
 
 257
 00:14:41,570 --> 00:14:43,951
@@ -1017,3 +1029,4 @@ e até a próxima, com mais um episódio de:
 258
 00:14:43,951 --> 00:14:45,950
 "Let's build a compiler".
+

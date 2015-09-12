@@ -56,7 +56,7 @@ uma entrada cheia de falhas.
 
 15
 00:00:39,186 --> 00:00:42,111
-Nós temos aqui ainda esse "varDeclaration",
+Nós temos aqui ainda esta "varDeclaration",
 
 16
 00:00:42,110 --> 00:00:43,266
@@ -184,7 +184,7 @@ então a sentença faz mais sentido.
 
 47
 00:02:45,124 --> 00:02:48,075
-Agora ainda devemos criar este Exception.
+Agora ainda devemos criar esta Exception.
 
 48
 00:02:51,755 --> 00:02:53,715
@@ -232,7 +232,7 @@ como uma superclasse para todas as Exceptions que
 
 59
 00:03:22,890 --> 00:03:25,911
-ocorre enquanto nosso processo compila.
+ocorrem enquanto nosso processo compila.
 
 60
 00:03:27,080 --> 00:03:29,124
@@ -244,7 +244,7 @@ que até agora ocorreram no "UndeclaredVariableException".
 
 62
 00:03:33,840 --> 00:03:38,324
-que é derivado da "RuntimeException",
+que é extendida da "RuntimeException",
 
 63
 00:03:43,080 --> 00:03:47,240
@@ -264,11 +264,11 @@ E então nós iremos
 
 67
 00:04:01,660 --> 00:04:05,293
-também inserimos ainda o construtor.
+também inserir ainda o constructor.
 
 68
 00:04:12,626 --> 00:04:15,066
-Isto é agora, claramente, não necessariamente um varName do token,
+Isto não é necessariamente um varName do token,
 
 69
 00:04:15,060 --> 00:04:17,368
@@ -288,7 +288,7 @@ expandi-lo também.
 
 73
 00:04:25,822 --> 00:04:28,435
-O nome deve ainda ser ajustado
+O nome ainda deve ser ajustado
 
 74
 00:04:28,430 --> 00:04:29,924
@@ -296,7 +296,7 @@ e então está bom.
 
 75
 00:04:30,208 --> 00:04:34,511
-Então não vamos mais derivar agora 
+Então não vamos mais extender agora 
 
 76
 00:04:34,510 --> 00:04:36,893
@@ -320,7 +320,7 @@ e isto daqui também jogamos fora
 
 81
 00:04:48,488 --> 00:04:53,408
-e em vez de delegar ao nosso super-construtor.
+e em vez de delegar ao nosso super-constructor.
 
 82
 00:04:55,315 --> 00:04:56,542
@@ -340,11 +340,11 @@ você vê algo similar a isto aqui,
 
 86
 00:05:02,610 --> 00:05:07,884
-aqui nós derivamos do nosso caso de cima pelo nosso CompileException,
+aqui nós estendemos do nosso caso de cima pelo nosso CompileException,
 
 87
 00:05:11,204 --> 00:05:14,208
-colocamos um construtor nele,
+colocamos um constructor nele,
 
 88
 00:05:15,271 --> 00:05:18,000
@@ -372,7 +372,7 @@ Ele se mostra aqui um pouco similar,
 
 94
 00:05:53,986 --> 00:05:55,980
-por isso eu o seguro aqui,
+por isso eu o pego aqui,
 
 95
 00:05:59,102 --> 00:06:02,093
@@ -396,11 +396,11 @@ pegamos o token v4
 
 100
 00:06:22,888 --> 00:06:25,240
-e então precisamos desta Exception
+e então precisamos é claro, lançar 
 
 101
 00:06:25,240 --> 00:06:27,360
-é claro, ainda lançada. 
+esta Exception ainda. 
 
 102
 00:06:27,906 --> 00:06:30,617
@@ -412,7 +412,7 @@ e vamos para a "visitVarDeclaration"
 
 104
 00:06:36,026 --> 00:06:38,986
-e observamos isso agora antes que mais tarde:
+e observamos isso agora, antes que tarde demais:
 
 105
 00:06:38,980 --> 00:06:45,053
@@ -432,7 +432,7 @@ Também, quando esta variável já está definida,
 
 109
 00:06:59,871 --> 00:07:07,004
-então jogamos fora um VariableAlreadyDefinedException.
+então jogamos um VariableAlreadyDefinedException.
 
 110
 00:07:08,764 --> 00:07:11,293
@@ -440,7 +440,7 @@ O "new" é muito importante, não se esqueça
 
 111
 00:07:11,773 --> 00:07:16,062
-e passe "ctx.varName".
+e passando "ctx.varName".
 
 112
 00:07:18,484 --> 00:07:22,542
@@ -608,7 +608,7 @@ e podendo armazenar
 
 153
 00:09:23,520 --> 00:09:26,426
-detalhes de erros específicos em classes derivadas.
+detalhes de erros específicos em classes estendidas.
 
 154
 00:09:26,884 --> 00:09:28,560

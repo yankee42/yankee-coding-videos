@@ -24,7 +24,7 @@ Neste episódio iremos expandir nossas funções
 
 7
 00:00:14,240 --> 00:00:15,942
-para que também possamos também
+para que possa também
 
 8
 00:00:15,940 --> 00:00:17,471
@@ -88,7 +88,7 @@ faremos que o código fonte
 
 23
 00:00:49,490 --> 00:00:51,306
-um pouco mais complexo.
+seja um pouco mais complexo.
 
 24
 00:00:51,300 --> 00:00:52,808
@@ -152,7 +152,7 @@ e então copiar isto daqui mais uma vez
 
 39
 00:01:32,560 --> 00:01:34,764
-e então executamos uma vez.
+e então inserimos aqui.
 
 40
 00:01:38,942 --> 00:01:41,137
@@ -216,7 +216,7 @@ entre o abre chaves e o "return"
 
 55
 00:02:13,580 --> 00:02:15,706
-nenhum statement seja permitido.
+não permitir qualquer statement.
 
 56
 00:02:15,700 --> 00:02:17,960
@@ -308,7 +308,7 @@ que acessamos aqui
 
 78
 00:03:24,990 --> 00:03:27,284
-é alegadamente não definido.
+é alegadamente não definida.
 
 79
 00:03:27,280 --> 00:03:28,617
@@ -464,7 +464,7 @@ E então atribuímos 42 aqui
 
 117
 00:05:19,297 --> 00:05:21,955
-e isto bem junto ao fim.
+e mostre ao fim.
 
 118
 00:05:22,382 --> 00:05:24,724
@@ -584,11 +584,11 @@ em um novo caso de teste,
 
 147
 00:06:35,226 --> 00:06:39,386
-eu copio primeiro nosso modelo de novo aqui de cima
+eu copio primeiro nosso template de novo aqui de cima
 
 148
 00:06:50,120 --> 00:06:52,817
-e então precisamos na minha opinião
+e então precisamos, na minha opinião,
 
 149
 00:06:52,810 --> 00:06:56,875
@@ -712,7 +712,7 @@ que é isto abaixo
 
 179
 00:08:15,610 --> 00:08:18,480
-ou de mim, é também um escopo local
+ou para mim, é também um escopo local
 
 180
 00:08:18,480 --> 00:08:20,640
@@ -932,7 +932,7 @@ Agora precisamos passar antes do "return",
 
 234
 00:10:49,330 --> 00:10:53,355
-ist significa que nós jogaremos isto daqui em uma variável temporária,
+isto significa que nós jogaremos isto daqui em uma variável temporária,
 
 235
 00:10:54,560 --> 00:10:57,777

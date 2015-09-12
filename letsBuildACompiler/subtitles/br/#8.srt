@@ -1,6 +1,6 @@
 ﻿1
 00:00:00,000 --> 00:00:02,940
-Bem-vindo de volta ao "Let's build a compiler".
+ Bem-vindo de volta ao "Let's build a compiler".
 
 2
 00:00:02,940 --> 00:00:04,330
@@ -16,7 +16,7 @@ Meu nome é Yankee e eu desejo que vocês se divirtam.
 
 5
 00:00:13,080 --> 00:00:16,850
-Para início daremos a especificação do nosso compilador,
+De início, daremos a especificação do nosso compilador,
 
 6
 00:00:16,850 --> 00:00:20,460
@@ -28,11 +28,11 @@ Então vamos aos exemplos, que nós queremos poder realizar,
 
 8
 00:00:24,640 --> 00:00:28,600
-copiando aqui um linha como modelo
+copiando aqui um linha como template
 
 9
 00:00:28,600 --> 00:00:33,110
-e colocando daqui embaixo alguns exemplos.
+e colocando daqui para baixo alguns exemplos.
 
 10
 00:00:33,110 --> 00:00:35,710
@@ -56,7 +56,7 @@ Então podemos ainda construir multiplicação,
 
 15
 00:00:47,320 --> 00:00:52,550
-pegaremos "2+3", então precisaremos de "6" como saída.
+pegaremos "2*3", então precisaremos de "6" como saída.
 
 16
 00:00:52,550 --> 00:00:59,920
@@ -120,7 +120,7 @@ e então depois "+5", então teremos 11.
 
 31
 00:01:50,380 --> 00:01:53,980
-Em vez de primeiro "2+5", que seriam 7 
+Em vez de primeiro "2+5", que seriam 7
 
 32
 00:01:53,980 --> 00:01:57,130
@@ -128,7 +128,7 @@ e então "8-7", que seriam apenas 1.
 
 33
 00:01:57,130 --> 00:02:06,250
-Logo, isto é o mesmo para a disisão, então vamos pegar o exemplo "8/2*4".
+Logo, isto é o mesmo para a divisão, então vamos pegar o exemplo "8/2*4".
 
 34
 00:02:06,250 --> 00:02:11,300
@@ -140,7 +140,7 @@ Aqui também novamente sai outra coisa,
 
 36
 00:02:13,860 --> 00:02:17,780
-se calcularmos primeiro "2*4", isso seria 8 
+se calcularmos primeiro "2*4", isso seria 8
 
 37
 00:02:17,780 --> 00:02:21,010
@@ -220,7 +220,7 @@ Inicialmente, agora iremos renomear algumas coisas aqui na nossa gramática.
 
 56
 00:03:45,440 --> 00:03:49,110
-Porque o nosso regra "addition" igual será expandida,
+Porque a nossa regra "addition" igual será expandida,
 
 57
 00:03:49,110 --> 00:03:51,340
@@ -228,7 +228,7 @@ ela contém então não mais apenas adições,
 
 58
 00:03:51,340 --> 00:03:54,090
-mar qualquer expressão matemática,
+mas qualquer expressão matemática,
 
 59
 00:03:54,090 --> 00:03:58,020
@@ -236,7 +236,7 @@ por isso eu também chamo a regra de "expressão"
 
 60
 00:03:58,610 --> 00:04:02,730
-e então eu irei utilizar aqui termos padrões em inglês, 
+e então eu irei utilizar aqui termos padrões em inglês,
 
 61
 00:04:02,730 --> 00:04:08,520
@@ -260,19 +260,19 @@ e então se torna não prático, se existem termos demais em alemão.
 
 66
 00:04:31,210 --> 00:04:34,010
-Depois de nós já termos feito...
+Após termos feito isso...
 
 67
 00:04:37,410 --> 00:04:40,400
-Depois nós já termos feito iremos novamente
+Após ter feito isso, iremos novamente
 
 68
 00:04:40,400 --> 00:04:44,110
-na nossa forma usual com a maneira já conhecida
+na nossa forma usual, com a maneira já conhecida.
 
 69
 00:04:44,110 --> 00:04:46,520
-Faço nosso parse gerar novamente,
+Fazer nosso parser gerar novamente,
 
 70
 00:04:46,520 --> 00:04:48,900
@@ -284,7 +284,7 @@ então aqui vamos para o visitor
 
 72
 00:04:50,720 --> 00:04:53,080
-e adaptar nossos termos, 
+e adaptar nossos termos,
 
 73
 00:04:53,080 --> 00:04:56,050
@@ -296,7 +296,7 @@ esta coisa agora se chama naturalmente de "right" aqui,
 
 75
 00:05:04,160 --> 00:05:09,910
-com "Strg+Shift+O" podemos corrigir as importações,
+com "Ctrl+Shift+O" podemos corrigir as importações,
 
 76
 00:05:17,080 --> 00:05:20,610
@@ -324,7 +324,7 @@ e começamos agora com as melhorias.
 
 82
 00:05:37,400 --> 00:05:41,520
-De início vamos construir o operador de "menos".
+Para começar, vamos construir o operador de "menos".
 
 83
 00:05:41,520 --> 00:05:44,850
@@ -336,12 +336,11 @@ e colocar um alternativo para o "menos".
 
 85
 00:05:49,340 --> 00:05:52,770
-Chamamos estade "Minus",
-
+Chamamos esta de "Minus",
 
 86
 00:05:52,770 --> 00:05:54,940
-mudamos o operador para "menos" aqui,
+mudamos o operador para menos aqui,
 
 87
 00:05:54,940 --> 00:05:58,300
@@ -401,11 +400,11 @@ Então copiamos de novo nossa regra anterior também,
 
 101
 00:06:51,300 --> 00:06:57,070
-mais uma ver para a divisão e multiplicação,
+mais uma vez para a divisão e multiplicação,
 
 102
 00:07:06,760 --> 00:07:13,320
-nosso parser deve com o velho conhecido comando gerar novamente,
+nosso parser deve gerar, novamente com o velho conhecido comando,
 
 103
 00:07:13,320 --> 00:07:16,480
@@ -465,7 +464,7 @@ aquele com o "7/2" também funcionou,
 
 117
 00:08:10,520 --> 00:08:14,600
-mas infelizmente estes dois resultados não funcionaram.
+mas infelizmente, estes dois resultados não funcionaram.
 
 118
 00:08:14,600 --> 00:08:19,750
@@ -493,11 +492,11 @@ Nesta localização nos fornece um pequeno Cliffhanger. (à beira do precipício
 
 124
 00:08:38,670 --> 00:08:41,400
-Como nós gerenciamos corretamente as prioridades dos operadores,
+Você aprenderá como gerenciamos corretamente as prioridades dos operadores,
 
 125
 00:08:41,400 --> 00:08:45,570
-para que nossos dois testes restantes funcionem você aprenderá no próximo episódio.
+para que nossos dois testes restantes funcionem, no próximo episódio.
 
 126
 00:08:45,570 --> 00:08:48,090
@@ -541,7 +540,7 @@ variáveis, laços de repetição, funções condicionais e muito mais.
 
 136
 00:09:12,790 --> 00:09:15,920
-Me escreva nos comentários, para o que você quer para os próximos.
+Me escreva nos comentários o que você quer para os próximos episódios.
 
 137
 00:09:15,920 --> 00:09:18,480
@@ -586,3 +585,4 @@ adeus e até a próxima
 147
 00:09:40,420 --> 00:09:43,520
 para mais um: "Let's build a compiler".
+

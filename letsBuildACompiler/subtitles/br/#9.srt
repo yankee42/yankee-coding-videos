@@ -56,11 +56,11 @@ vamos no diretório do nosso parser,
 
 15
 00:00:44,630 --> 00:00:49,590
-pegando novamente o comando de teste da última vez
+pegando novamente o comando TestRig da última vez
 
 16
 00:00:49,940 --> 00:00:59,950
-e então executaremos "println(2+3*3*);",
+e então executaremos "println(2+3*3);",
 
 17
 00:00:59,950 --> 00:01:03,760
@@ -68,7 +68,7 @@ então Ctrl+D no Linux, Ctrl+Z no Windows
 
 18
 00:01:03,760 --> 00:01:07,430
-e então nos é mostrada a árvore.
+e então deixamos mostrar a árvore.
 
 19
 00:01:08,900 --> 00:01:11,100
@@ -96,7 +96,7 @@ Isto é, quando percorremos em pós-ordem
 
 25
 00:01:29,880 --> 00:01:35,900
-então teríamos 2, 3, mais, vezes.
+então teríamos 2, 3, mais, 3, vezes.
 
 26
 00:01:35,900 --> 00:01:40,080
@@ -160,7 +160,7 @@ assim a parte direita do nosso mais
 
 41
 00:02:29,080 --> 00:02:33,960
-pode ser uma "expression" e outro "vezes" também.
+pode ser uma "expression" e um outro "vezes" também.
 
 42
 00:02:33,960 --> 00:02:37,440
@@ -200,7 +200,7 @@ mas por isso devemos adaptar o nosso visitor.
 
 51
 00:02:59,430 --> 00:03:02,820
-Chamamos agora para gerar na próxima vez de novo
+Chamamos agora para gerar na próxima vez 
 
 52
 00:03:02,820 --> 00:03:05,840
@@ -280,7 +280,7 @@ os novos ainda continuam a não funcionar.
 
 71
 00:04:13,060 --> 00:04:14,650
-Aonde estão eles?
+Aonde eles estão?
 
 72
 00:04:15,660 --> 00:04:18,710
@@ -312,7 +312,7 @@ e essa multiplicação tem o filho a esquerda "2+3"
 
 79
 00:04:44,460 --> 00:04:48,630
-e então na direita apenas o 3.
+e então na direita, apenas o 3.
 
 80
 00:04:48,630 --> 00:04:50,570
@@ -364,7 +364,7 @@ ter prioridade mais alta do que o mais.
 
 92
 00:05:20,190 --> 00:05:23,750
-Também devemos trocar ambas estas regras.
+Também devemos trocar ambas as regras.
 
 93
 00:05:29,700 --> 00:05:34,500
@@ -460,11 +460,11 @@ e fazendo direito.
 
 116
 00:06:43,220 --> 00:06:46,490
-Mas nós não podemos mais trabalhar tão bem com os nossos rótulos.
+Mas nós não podemos mais trabalhar tão bem com os nossos labels.
 
 117
 00:06:46,490 --> 00:06:48,810
-Quando nós queremos passar adiante os rótulos em que trabalhamos,
+Quando nós queremos passar adiante os labels em que trabalhamos,
 
 118
 00:06:48,810 --> 00:06:51,480
@@ -620,11 +620,11 @@ como podemos escrever nossas regras de parser para cálculos,
 
 156
 00:09:13,750 --> 00:09:16,340
-isso ainda pelo cálculo em cadeia com mais operadores
+para ainda pelo cálculo em cadeia detectar quaisquer
 
 157
 00:09:16,340 --> 00:09:19,140
-pode detectar quaisquer expressões complexas.
+expressões complexas com os operadores a mais.
 
 158
 00:09:19,140 --> 00:09:20,810
@@ -685,3 +685,4 @@ adeus e até a próxima,
 172
 00:09:52,590 --> 00:09:56,020
 para o próximo episódio de: "Let's build a compiler".
+

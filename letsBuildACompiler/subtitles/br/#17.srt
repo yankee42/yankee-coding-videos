@@ -44,7 +44,7 @@ temos duas funções,
 
 12
 00:00:22,490 --> 00:00:24,715
-que exatamente o mesmo nome
+com exatamente o mesmo nome
 
 13
 00:00:24,710 --> 00:00:27,191
@@ -132,7 +132,7 @@ assim, temos a prova aqui:
 
 34
 00:01:16,950 --> 00:01:18,991
-podemos ter duas realmente funções 
+podemos ter duas funções, realmente,
 
 35
 00:01:18,990 --> 00:01:20,586
@@ -352,7 +352,7 @@ com outros valores: Nós temos trabalho.
 
 89
 00:03:52,760 --> 00:03:55,720
-Vamos dentro todas as definições de função iremos,
+Dentro das definições de função iremos,
 
 90
 00:03:55,720 --> 00:03:57,848
@@ -360,7 +360,7 @@ pelo FunctionDefinitionFinder,
 
 91
 00:03:57,840 --> 00:04:01,222
-precisar aqui, também neste local dar um significativa
+precisamos aqui, neste local, dar um significativa
 
 92
 00:04:01,220 --> 00:04:04,208
@@ -424,7 +424,7 @@ nós podemos aqui em cima no... hm...
 
 107
 00:04:39,120 --> 00:04:43,666
-...colocar no visitor uma nova variável privada com um conjunto
+...colocar no visitor uma nova variável privada com um Set
 
 108
 00:04:43,660 --> 00:04:45,386
@@ -631,7 +631,7 @@ e "findFunctions" irá toda vez novamente
 criar uma nova DemoBaseVisitor 
  
 159
-00:06:56,730 --> 00:07:01,742
+00:06:56,740 --> 00:07:01,742
 e, por isso, que esta variante agora garante ser stateless
 
 160
@@ -804,7 +804,7 @@ na "definedFunctions":
 
 202
 00:08:55,070 --> 00:08:57,697
-Que existem em uma função
+Que exista em uma função
 
 203
 00:08:57,690 --> 00:09:00,240
@@ -828,7 +828,7 @@ Assim, salvamos e olhamos
 
 208
 00:09:12,300 --> 00:09:13,951
-se ela já está feito,
+se ela já está feita,
 
 209
 00:09:13,950 --> 00:09:16,533
@@ -888,7 +888,7 @@ além disso, ainda por meio da assinatura.
 
 223
 00:09:46,860 --> 00:09:49,568
-Aqui no método contains chechamos
+Aqui no método contains checamos
 
 224
 00:09:49,560 --> 00:09:53,124
@@ -908,7 +908,7 @@ Para fazer isto de maneira mais fácil,
 
 228
 00:10:00,480 --> 00:10:03,800
-porque um conjunto não fornece estas opções tão facilmente
+porque um Set não fornece estas opções tão facilmente
 
 229
 00:10:03,800 --> 00:10:06,408
@@ -996,7 +996,7 @@ por isso devemos também
 
 250
 00:11:04,640 --> 00:11:06,933
-ajustamos novamente nossa classe Main,
+ajustar novamente nossa classe Main,
 
 251
 00:11:06,930 --> 00:11:08,493
@@ -1016,7 +1016,7 @@ como saída do nosso FunctionDefinitionFinder
 
 255
 00:11:21,650 --> 00:11:24,631
-por isso podemos agora dizer ainda dizer tranquilamente aqui:
+por isso podemos agora dizer tranquilamente aqui:
 
 256
 00:11:24,630 --> 00:11:26,146
@@ -1288,11 +1288,11 @@ Além disso, nós aprendemos
 
 323
 00:14:24,540 --> 00:14:26,680
-como junto a uma checagem de funções idênticas
+como os parâmetros se envolvem junto a uma 
 
 324
 00:14:26,680 --> 00:14:28,826
-os parâmetros se envolvem.
+checagem de funções idênticas.
 
 325
 00:14:29,844 --> 00:14:31,568
@@ -1365,3 +1365,4 @@ com um episódio de:
 342
 00:15:00,173 --> 00:15:02,170
 "Let's build a compiler".
+

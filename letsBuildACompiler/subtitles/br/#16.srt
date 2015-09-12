@@ -16,7 +16,7 @@ mas nós ainda não tomamos conta
 
 5
 00:00:09,370 --> 00:00:12,253
-que retorna alguma mensagem de erro útil 
+de retornar alguma mensagem de erro útil 
 
 6
 00:00:12,250 --> 00:00:14,040
@@ -368,7 +368,7 @@ e lá estão todas as definições de variáveis dentro
 
 93
 00:04:04,960 --> 00:04:07,422
-e se temos "visitAssignment" por exemplo
+e se temos "visitAssignment", por exemplo,
 
 94
 00:04:07,420 --> 00:04:10,826
@@ -480,7 +480,7 @@ Mais cedo foi dito que,
 
 121
 00:05:12,760 --> 00:05:15,177
-geralmente faze-se num compilador mais simples:
+geralmente faz-se num compilador mais simples:
 
 122
 00:05:15,170 --> 00:05:16,111
@@ -516,7 +516,7 @@ chamar uma função, vindo o que está primeiro depois,
 
 130
 00:05:31,360 --> 00:05:33,413
-então precisa antes definir:
+então precisamos antes definir:
 
 131
 00:05:33,410 --> 00:05:36,253
@@ -548,7 +548,7 @@ nós naturalmente queremos
 
 138
 00:05:47,180 --> 00:05:49,875
-não precisemos fazer mais algo assim.
+não mais precisar fazer algo assim.
 
 139
 00:05:50,288 --> 00:05:52,582
@@ -560,7 +560,7 @@ para que possamos também chamar funções
 
 141
 00:05:55,480 --> 00:06:00,471
-que sejam chamada antes das nossas definições de função
+que sejam chamadas antes das nossas definições de função
 
 142
 00:06:00,470 --> 00:06:01,942
@@ -616,11 +616,11 @@ Ele deve agora
 
 155
 00:06:33,760 --> 00:06:35,395
-retornar um conjunto,
+retornar um Set,
 
 156
 00:06:35,390 --> 00:06:37,151
-um conjunto com strings,
+um Set com strings,
 
 157
 00:06:37,822 --> 00:06:40,222
@@ -652,7 +652,7 @@ nossos nomes de funções dentro do contexto
 
 164
 00:06:58,600 --> 00:07:01,697
-e agora precisamos então apenas retornar como conjunto.
+e agora precisamos então apenas retornar como Set.
 
 165
 00:07:01,690 --> 00:07:03,431
@@ -664,7 +664,7 @@ Lá ele dá no correspondente Java
 
 167
 00:07:05,850 --> 00:07:09,773
-e ele cria um conjunto com exatamente uma entrada.
+e ele cria um Set com exatamente uma entrada.
 
 168
 00:07:11,155 --> 00:07:12,857
@@ -744,15 +744,15 @@ não são null
 
 187
 00:07:54,110 --> 00:07:57,275
-e então devemos unir ambos os conjuntos.
+e então devemos unir ambos os Sets.
 
 188
 00:07:57,270 --> 00:08:00,200
-Para criarmos agora também um novo conjunto
+Para criarmos agora também um novo Set
 
 189
 00:08:00,200 --> 00:08:03,226
-e para que executemos o combinado conjunto,
+e para que executemos o combinado Set,
 
 190
 00:08:03,220 --> 00:08:05,195
@@ -768,7 +768,7 @@ e passamos no constructor uma Collection
 
 193
 00:08:11,310 --> 00:08:13,795
-na qual chega tudo o que está no conjunto,
+na qual chega tudo o que está no Set,
 
 194
 00:08:13,790 --> 00:08:15,866
@@ -776,7 +776,7 @@ dizemos tudo o que vai sobre o aggregate
 
 195
 00:08:15,860 --> 00:08:17,862
-dentro do nosso conjunto combinado e
+dentro do nosso Set combinado e
 
 196
 00:08:17,860 --> 00:08:19,240
@@ -788,7 +788,7 @@ todas as entradas do "nextResult"
 
 198
 00:08:21,670 --> 00:08:23,306
-que também cabem dentro do conjunto,
+que também cabem dentro do Set,
 
 199
 00:08:23,300 --> 00:08:25,435
@@ -800,7 +800,7 @@ e passar nextResult.
 
 201
 00:08:27,240 --> 00:08:31,080
-Então damos nosso conjunto combinado de volta
+Então damos nosso Set combinado de volta
 
 202
 00:08:31,555 --> 00:08:33,515
@@ -832,7 +832,7 @@ O pegamos de acordo
 
 209
 00:08:49,530 --> 00:08:51,675
-novamente o conjunto
+novamente o Set
 
 210
 00:08:52,151 --> 00:08:54,088
@@ -852,7 +852,7 @@ deixamos nosso ParseTree coletado.
 
 214
 00:09:01,970 --> 00:09:04,395
-Se o nosso conjunto
+Se o nosso Set
 
 215
 00:09:04,835 --> 00:09:06,915
@@ -932,7 +932,7 @@ dando um método prático de "emptySet"
 
 234
 00:09:50,120 --> 00:09:52,777
-para retornar um conjunto vazio eficiente
+para retornar um Set vazio eficientemente
 
 235
 00:09:52,990 --> 00:09:54,973
@@ -940,7 +940,7 @@ e se não for "null",
 
 236
 00:09:54,970 --> 00:09:56,520
-então apenas pegamos o conjunto,
+então apenas pegamos o Set,
 
 237
 00:09:56,520 --> 00:09:58,146
@@ -976,7 +976,7 @@ no nosso "definedFunctions":
 
 245
 00:10:15,542 --> 00:10:19,977
-Se este conjunto não contém:
+Se este Set não contém:
 
 246
 00:10:19,970 --> 00:10:23,355

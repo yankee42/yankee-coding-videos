@@ -1,6 +1,6 @@
 ﻿1
 00:00:00,000 --> 00:00:03,430
-Bem-vindo de volta ao "Let's build a compiler"
+\Bem-vindo de volta ao "Let's build a compiler"
 
 2
 00:00:03,430 --> 00:00:04,920
@@ -260,7 +260,7 @@ e a origem deles é o "println"
 
 66
 00:02:53,890 --> 00:02:56,240
-e os colchetes não são reconhecidos.
+e os parênteses não são reconhecidos.
 
 67
 00:02:56,240 --> 00:02:58,740
@@ -304,7 +304,7 @@ então vemos que os nossos dois casos de teste,
 
 77
 00:03:19,260 --> 00:03:21,170
-esses aqui,
+estes aqui,
 
 78
 00:03:21,170 --> 00:03:22,850
@@ -320,7 +320,7 @@ Nosso novo caso de teste, no entanto, falha
 
 81
 00:03:30,140 --> 00:03:32,420
-porque ele para aqui depois do "1"
+porque ele para depois do "1"
 
 82
 00:03:32,420 --> 00:03:34,420
@@ -368,7 +368,7 @@ que primeiro venha a palavra "println"
 
 93
 00:04:03,630 --> 00:04:05,960
-com um abre colchetes,
+com um abre parêntesis,
 
 94
 00:04:06,610 --> 00:04:08,800
@@ -376,7 +376,7 @@ então uma adição
 
 95
 00:04:09,410 --> 00:04:12,460
-e então o fecha colchetes.
+e então fechamos os parênteses.
 
 96
 00:04:12,980 --> 00:04:17,130
@@ -464,7 +464,7 @@ e geramos a nossa gramática.
 
 117
 00:05:16,580 --> 00:05:19,590
-Para irmos novamente ao console
+Vamos novamente ao console
 
 118
 00:05:19,590 --> 00:05:22,610
@@ -520,7 +520,7 @@ incluindo o "getstatic" e o "invokevirtual" para o println.
 
 131
 00:05:59,780 --> 00:06:04,430
-Esta eu copio deste modelo aqui
+Esta eu copio deste template aqui
 
 132
 00:06:05,340 --> 00:06:08,070
@@ -528,7 +528,7 @@ e adiciono ele aqui, junto com o "return"
 
 133
 00:06:10,410 --> 00:06:14,150
-e as "instruções" que nós temos aqui no meio
+e as "instructions" que nós temos aqui no meio
 
 134
 00:06:14,150 --> 00:06:18,230
@@ -568,7 +568,7 @@ retornará uma série de instruções
 
 143
 00:06:43,840 --> 00:06:48,350
-que devemos, no fim, deixa um integer na pilha.
+que deve, no fim, deixar um integer na pilha.
 
 144
 00:06:48,510 --> 00:06:50,620
@@ -616,7 +616,7 @@ Agora, nós continuamos precisando adaptar o nosso método de adição,
 
 155
 00:07:18,520 --> 00:07:20,270
-que necessita ser um "programa"
+que necessita ser um "program"
 
 156
 00:07:20,270 --> 00:07:23,460
@@ -708,7 +708,7 @@ e carriage returns (início de linha)
 
 178
 00:08:24,440 --> 00:08:28,120
-não importa quantas vezes ocorra.
+jogamos fora, não importa quantas vezes ocorra.
 
 179
 00:08:28,120 --> 00:08:31,070
@@ -768,7 +768,7 @@ Para que eu copie o código daqui,
 
 193
 00:09:15,650 --> 00:09:17,420
-vá ao console,
+indo no console,
 
 194
 00:09:17,980 --> 00:09:22,910
@@ -876,7 +876,7 @@ então no Linux pressione "Ctrl+D"
 
 220
 00:10:34,570 --> 00:10:38,560
-e no Windows "Ctrl+Z" e então dê enter
+e no Windows "Ctrl+Z" e então Enter
 
 221
 00:10:38,990 --> 00:10:41,890
@@ -932,7 +932,7 @@ Adicionalmente, nós aprendemos como ignorar whitespaces.
 
 234
 00:11:19,950 --> 00:11:21,720
-Nos próximos vídeos esperamos
+Nos próximos vídeos nos esperam
 
 235
 00:11:21,720 --> 00:11:22,440
