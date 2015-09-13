@@ -120,7 +120,7 @@ and the same if an exception occurs here.
 
 31
 00:01:27,200 --> 00:01:30,071
-We'll prove once more if the tests still really make
+We'll try once more if the tests still really make
 
 32
 00:01:30,644 --> 00:01:34,226
@@ -180,7 +180,7 @@ from our program to evaluate,
 
 46
 00:02:31,460 --> 00:02:34,640
-but is given only a "compileAndRun".
+but only a "compileAndRun" is given.
 
 47
 00:02:36,333 --> 00:02:39,457
@@ -204,7 +204,7 @@ and after
 
 52
 00:02:49,980 --> 00:02:52,071
-we need naturally to prove 
+we need naturally to try 
 
 53
 00:02:52,070 --> 00:02:55,044
@@ -212,70 +212,81 @@ if the error is the waited:
 
 54
 00:02:55,040 --> 00:02:58,395
-Isto significa que escrevemos aqui dentro da nossa anotação de teste:
 This means that we write here inside our test annotation:
 
 55
-"expectedExceptions"
+00:02:58,390 --> 00:03:01,280
 "expectedExceptions"
 
 56
-e dizemos "expecten" 
-and we say "expecten"
+00:03:02,200 --> 00:03:04,537
+and we say "expected"
 
 57
-"UndeclaredVariableException".
+00:03:04,530 --> 00:03:09,337
 "UndeclaredVariableException".
 
+58
 00:03:12,440 --> 00:03:14,666
 And then we document here:
 
+59
 00:03:14,660 --> 00:03:24,133
 "evaluation performed by expected exception".
 
 60
-Essa exceção não nos fornece nada até agora,
 That exception does not give us nothing until now,
+
 61
-isso significa que nós precisamos deixar,
+00:03:26,724 --> 00:03:28,848
 this means that we need to leave,
 
-isso já não acontece no nosso pacote de testes
+62
+00:03:32,035 --> 00:03:35,128
 that it don't happen to our test package
 
 63
+00:03:35,120 --> 00:03:37,524
 but is normal again in the "source" package
 
 64
-e então criamos aqui mesmo
+00:03:37,520 --> 00:03:40,293
+and then we create here
 
 65
-um pacote "exceptions".
+00:03:40,290 --> 00:03:43,657
 an "exceptions" package.
+
 66
-Para que então possa agora naturalmente passar por uma exceção,
+00:03:47,160 --> 00:03:49,680
 So that can now, naturally, pass through an exception,
 
-simplesmente rodamos de novo nosso "throws declaration" nele.
+67
+00:03:49,680 --> 00:03:53,755
 just by running our "throws declaration" in it again.
 
 68
+00:03:55,626 --> 00:03:58,622
 With this, our test is expanded respectably,
 
 69
-então rodamos ele mais uma vez
+00:03:58,622 --> 00:04:00,620
+then we execute it once more
 
 70
-e vemos agora por aqui:
+00:04:03,430 --> 00:04:04,515
 and then we see here:
+
 71
-Hurraa, um teste deu mensagem de erro,
+00:04:04,510 --> 00:04:07,288
 Hurraa, a test give us an error message,
 
-no nosso novo
+72
+00:04:07,280 --> 00:04:08,840
 namely in our new
 
 73
+00:04:08,840 --> 00:04:12,524
 "expected exception was UndeclaredVariableException"
 
 74
@@ -416,7 +427,7 @@ and as it says: Huraa, it worked!
 
 108
 00:05:54,270 --> 00:05:58,955
-Now we arrived to a "UndeclaredVariableException"
+Now we arrived to an "UndeclaredVariableException"
 
 109
 00:05:58,950 --> 00:06:01,915
@@ -660,7 +671,7 @@ but also exactly what variable
 
 169
 00:09:59,280 --> 00:10:03,257
-and in what position in our source code
+and in which position in our source code
 
 170
 00:10:03,746 --> 00:10:06,173
@@ -744,7 +755,7 @@ Then we need another code example,
 
 190
 00:11:10,950 --> 00:11:14,551
-I suppose a simple "x-5" for now
+I suppose a simple "x=5" for now
 
 191
 00:11:15,315 --> 00:11:21,200
@@ -812,7 +823,7 @@ as we can write here inserting a little help method.
 
 207
 00:12:07,568 --> 00:12:09,995
-I say here just now:
+Now, I just say here:
 
 208
 00:12:13,608 --> 00:12:17,804
@@ -984,7 +995,7 @@ Write me in the comments!
 
 250
 00:14:26,150 --> 00:14:27,857
-Don't forget to leave a thump up
+Don't forget to leave a thumb up
 
 251
 00:14:27,850 --> 00:14:29,208
@@ -1017,3 +1028,4 @@ and see you later, with a new episode of:
 258
 00:14:43,951 --> 00:14:45,950
 "Let's build a compiler".
+

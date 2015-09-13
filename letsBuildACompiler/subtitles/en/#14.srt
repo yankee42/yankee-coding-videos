@@ -40,7 +40,7 @@ also for the first time work with scopes.
 
 11
 00:00:21,240 --> 00:00:23,128
-Because we want the variables table
+Because we want the variable table
 
 12
 00:00:23,120 --> 00:00:25,466
@@ -76,7 +76,7 @@ and then we can more easily
 
 20
 00:00:41,653 --> 00:00:43,650
-format around there.
+format around here.
 
 21
 00:00:44,751 --> 00:00:47,951
@@ -148,7 +148,7 @@ to copy this character here,
 
 38
 00:01:28,977 --> 00:01:32,564
-and then copy this here once more
+and then we copy this here once more
 
 39
 00:01:32,560 --> 00:01:34,764
@@ -156,7 +156,7 @@ and then we execute.
 
 40
 00:01:38,942 --> 00:01:41,137
-So, then is missing behind
+So, is missing behind then 
 
 41
 00:01:41,130 --> 00:01:42,866
@@ -172,7 +172,7 @@ We observe the result:
 
 44
 00:01:49,480 --> 00:01:52,177
-And here above the ANTLR noticed:
+And the ANTLR noticed here above:
 
 45
 00:01:52,170 --> 00:01:53,782
@@ -180,11 +180,11 @@ It says "mismatched input 'int'",
 
 46
 00:01:53,780 --> 00:01:55,942
-It has waited for a "return".
+It waited for a "return".
 
 47
 00:01:55,940 --> 00:01:58,013
-If we observe now our grammatic
+If we observe now our grammar
 
 48
 00:01:58,010 --> 00:01:58,973
@@ -192,7 +192,7 @@ then we see here,
 
 49
 00:01:58,970 --> 00:02:01,817
-that after the open braces
+that after the open curly braces
 
 50
 00:02:01,810 --> 00:02:03,760
@@ -212,7 +212,7 @@ Also we want now here,
 
 54
 00:02:10,170 --> 00:02:13,582
-between the open brackets and the "return"
+between the opening curly brace and the "return"
 
 55
 00:02:13,580 --> 00:02:15,706
@@ -244,7 +244,7 @@ Therefore, we add here a new rule.
 
 62
 00:02:39,928 --> 00:02:42,311
-So we do with out statementlist
+So we do without statementlist
 
 63
 00:02:42,310 --> 00:02:44,271
@@ -320,7 +320,7 @@ that we have yet defined
 
 81
 00:03:30,490 --> 00:03:32,377
-in our grammatic this part here
+in our grammar this part here
 
 82
 00:03:32,370 --> 00:03:34,711
@@ -444,7 +444,7 @@ all the tests have passed,
 
 112
 00:04:59,484 --> 00:05:01,480
-our new here also.
+our new also here.
 
 113
 00:05:03,048 --> 00:05:05,880
@@ -656,7 +656,7 @@ This is really a problem
 
 165
 00:07:40,610 --> 00:07:42,924
-then we could access the local variables table
+then we could access the local variable table
 
 166
 00:07:42,920 --> 00:07:45,226
@@ -680,7 +680,7 @@ Then we must to put our variables
 
 171
 00:07:53,220 --> 00:07:56,831
-in other place than in our variables table.
+in other place than in our variable table.
 
 172
 00:07:56,830 --> 00:07:59,026
@@ -756,7 +756,7 @@ We have here above in our map
 
 190
 00:08:43,150 --> 00:08:44,728
-with the variables table,
+with the variable table,
 
 191
 00:08:44,720 --> 00:08:47,755
@@ -768,11 +768,11 @@ and classified according to each variable name
 
 193
 00:08:50,430 --> 00:08:53,240
-a position in the variables table.
+a position in the variable table.
 
 194
 00:08:53,502 --> 00:08:56,351
-But we have not only one variables table.
+But we have not only one variable table.
 
 195
 00:08:56,350 --> 00:08:58,560
@@ -836,7 +836,7 @@ with a function content that we'll deal
 
 210
 00:09:31,570 --> 00:09:33,564
-we need the variables table
+we need the variable table
 
 211
 00:09:33,560 --> 00:09:36,151
@@ -880,11 +880,11 @@ and then we lie
 
 221
 00:10:09,280 --> 00:10:12,617
-in our actual variables table
+in our actual variable table
 
 222
 00:10:12,610 --> 00:10:15,511
-a new variables table,
+a new variable table,
 
 223
 00:10:15,510 --> 00:10:17,906
@@ -916,7 +916,7 @@ what we have used temporarily,
 
 230
 00:10:36,860 --> 00:10:39,120
-forget this variables tables 
+forget this variable table 
 
 231
 00:10:39,120 --> 00:10:41,982
@@ -944,7 +944,7 @@ and we give first
 
 237
 00:10:59,480 --> 00:11:03,422
-after this we restore our variables table.
+after this we restore our variable table.
 
 238
 00:11:06,497 --> 00:11:09,982
@@ -952,7 +952,7 @@ Then we try again, to know what happens.
 
 239
 00:11:12,453 --> 00:11:14,097
-And s you can see: 
+And as you can see: 
 
 240
 00:11:14,090 --> 00:11:16,200
@@ -1028,7 +1028,7 @@ we allowed any instruction expansions.
 
 258
 00:12:00,930 --> 00:12:03,675
-In addition, we have also learned how the variables table
+In addition, we have also learned how the variable table
 
 259
 00:12:03,670 --> 00:12:07,595
@@ -1048,7 +1048,7 @@ the last statement in each function.
 
 263
 00:12:15,350 --> 00:12:17,622
-It gives us no global varaiable.
+It gives us no global variable.
 
 264
 00:12:17,620 --> 00:12:19,528
@@ -1100,4 +1100,4 @@ until the next time
 
 276
 00:12:45,990 --> 00:12:48,880
-for the next episode of: "Let's build a compiler".
+or the next episode of: "Let's build a compiler".

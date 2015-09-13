@@ -997,3 +997,4 @@ até o momento não havíamos trabalhado com mensagens de erro úteis de saída.
 250
 00:16:16,240 --> 00:16:18,730
 Este deve ser o tema do próximo episódio.
+

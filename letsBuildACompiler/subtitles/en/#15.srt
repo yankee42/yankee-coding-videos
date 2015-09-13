@@ -32,7 +32,7 @@ In addition, this episode contains an experiment:
 
 9
 00:00:19,570 --> 00:00:21,680
-Instead while until now we bother to make the code clear,
+Until now, we bother to make the code clear while doing, instead,
 
 10
 00:00:21,680 --> 00:00:24,324
@@ -44,7 +44,7 @@ and in the second step
 
 12
 00:00:25,330 --> 00:00:27,204
-I commented the images.
+I commented the videos.
 
 13
 00:00:27,200 --> 00:00:28,457
@@ -76,7 +76,7 @@ that has a parameter,
 
 20
 00:00:40,500 --> 00:00:42,608
-I have a one here now
+I have an one here now
 
 21
 00:00:42,600 --> 00:00:45,591
@@ -176,7 +176,7 @@ Should be found at this point over here,
 
 45
 00:01:39,680 --> 00:01:42,800
-where are opening and closing brackets,
+where are opening and closing parenthesis,
 
 46
 00:01:42,800 --> 00:01:45,377
@@ -284,7 +284,7 @@ We have the exactly same by "functionCall":
 
 72
 00:02:38,430 --> 00:02:40,711
-There are also the opening and closing brackets,
+There are also the opening and closing parenthesis,
 
 73
 00:02:40,710 --> 00:02:43,453
@@ -292,7 +292,7 @@ like over our code here with the 5 and the 8
 
 74
 00:02:43,450 --> 00:02:46,631
-but here is missing, also between the brackets, the list
+but here is missing, also between the parenthesis, the list
 
 75
 00:02:46,630 --> 00:02:50,124
@@ -448,7 +448,7 @@ and indeed on our "params".
 
 113
 00:04:27,591 --> 00:04:30,857
-These "visit(pararms)" will then pass all the parameters,
+These "visit(params)" will then pass all the parameters,
 
 114
 00:04:30,850 --> 00:04:33,297
@@ -488,7 +488,7 @@ that the variable then
 
 123
 00:04:50,220 --> 00:04:52,662
-is added to our variables table.
+is added to our variable table.
 
 124
 00:04:52,660 --> 00:04:56,635
@@ -792,7 +792,7 @@ with the function name and call it.
 
 199
 00:07:55,240 --> 00:07:56,951
-between the brackets
+between the parenthesis
 
 200
 00:07:56,950 --> 00:07:59,751
@@ -840,7 +840,7 @@ Because of this we still
 
 211
 00:08:34,890 --> 00:08:37,506
-customize our grammatic again
+customize our grammar again
 
 212
 00:08:37,500 --> 00:08:39,662
@@ -984,7 +984,7 @@ then for the second argument, etc.
 
 247
 00:10:08,830 --> 00:10:10,680
-until the last argumetn
+until the last argument
 
 248
 00:10:10,680 --> 00:10:13,257
@@ -1193,3 +1193,4 @@ until the next time
 299
 00:12:06,080 --> 00:12:08,728
 to the next episode of: "Let's build a compiler". 
+

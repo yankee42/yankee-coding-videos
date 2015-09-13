@@ -244,7 +244,7 @@ which until now occurred in the "UndeclaredVariableException".
 
 62
 00:03:33,840 --> 00:03:38,324
-namely it derives from the "RuntimeException",
+namely it extends from the "RuntimeException",
 
 63
 00:03:43,080 --> 00:03:47,240
@@ -296,7 +296,7 @@ and then it's good.
 
 75
 00:04:30,208 --> 00:04:34,511
-Then we will not derive that now
+Then we will not extend that now
 
 76
 00:04:34,510 --> 00:04:36,893
@@ -340,7 +340,7 @@ you see something like this here,
 
 86
 00:05:02,610 --> 00:05:07,884
-there we derive in the case above from our CompileException,
+there we extend in the case above from our CompileException,
 
 87
 00:05:11,204 --> 00:05:14,208
@@ -384,7 +384,7 @@ but "variable already defined".
 
 97
 00:06:11,582 --> 00:06:14,173
-So, we only still missing the "import",
+So, we only have still missing the "import",
 
 98
 00:06:14,813 --> 00:06:18,915
@@ -400,7 +400,7 @@ and then we need this Exception
 
 101
 00:06:25,240 --> 00:06:27,360
-of course, still throw.
+of course, to throw.
 
 102
 00:06:27,906 --> 00:06:30,617
@@ -436,12 +436,12 @@ then we toss out a VariableAlreadyDefinedException.
 
 110
 00:07:08,764 --> 00:07:11,293
-The is really important, don't you forget
+The new is really important, don't you forget
 
 111
 00:07:11,773 --> 00:07:16,062
 and pass "ctx.varName".
-
+ 
 112
 00:07:18,484 --> 00:07:22,542
 So, we execute our test one more time
@@ -608,7 +608,7 @@ and can store
 
 153
 00:09:23,520 --> 00:09:26,426
-specific error details in derived classes.
+specific error details in extended classes.
 
 154
 00:09:26,884 --> 00:09:28,560
@@ -661,3 +661,4 @@ Until next time,
 166
 00:09:47,580 --> 00:09:50,368
 for the next: "Let's build a compiler".
+

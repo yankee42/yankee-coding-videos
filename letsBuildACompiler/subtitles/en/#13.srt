@@ -52,7 +52,7 @@ and call it "randomNumber",
 
 14
 00:00:34,062 --> 00:00:37,417
-That shall return a random number
+That should return a random number
 
 15
 00:00:37,410 --> 00:00:39,773
@@ -124,7 +124,7 @@ Now we start also to
 
 32
 00:01:21,960 --> 00:01:24,080
-expand our grammatic.
+expand our grammar.
 
 33
 00:01:24,284 --> 00:01:25,888
@@ -136,11 +136,11 @@ with what soon looks to be
 
 35
 00:01:27,480 --> 00:01:29,626
-the same with our grammatic.
+the same with our grammar.
 
 36
 00:01:29,620 --> 00:01:32,186
-Then we go over our grammatic
+Then we go over our grammar
 
 37
 00:01:32,180 --> 00:01:34,635
@@ -236,7 +236,7 @@ then comes the "return" here,
 
 60
 00:02:28,130 --> 00:02:31,520
-also first an open parenthesis,
+also first an opening curly braces,
 
 61
 00:02:31,520 --> 00:02:33,520
@@ -256,7 +256,7 @@ then comes the semicolon
 
 65
 00:02:49,760 --> 00:02:53,275
-and then comes a close bracket.
+and then comes a closing curly braces.
 
 66
 00:02:55,293 --> 00:02:58,102
@@ -428,7 +428,7 @@ As you see:
 
 108
 00:05:01,410 --> 00:05:05,933
-It doesn't give us any erros anymore from our ANTLR parser,
+It doesn't give us any errors anymore from our ANTLR parser,
 
 109
 00:05:05,930 --> 00:05:07,462
@@ -620,7 +620,7 @@ a method in Jasmin
 
 156
 00:07:07,360 --> 00:07:08,648
-that we have already done once,
+this we have already done once,
 
 157
 00:07:08,640 --> 00:07:10,235
@@ -848,7 +848,7 @@ and in the last output it will
 
 213
 00:09:42,480 --> 00:09:44,573
-be our actual exxample
+be our actual example
 
 214
 00:09:45,831 --> 00:09:48,386
@@ -920,7 +920,7 @@ and we can now once more briefly
 
 231
 00:10:26,540 --> 00:10:28,644
-take a look at our grammatic
+take a look at our grammar
 
 232
 00:10:28,640 --> 00:10:32,133
@@ -1048,7 +1048,7 @@ we go again in our visitor,
 
 263
 00:11:57,160 --> 00:11:59,488
-sooo, then we go one more time down there
+so, then we go one more time down there
 
 264
 00:11:59,924 --> 00:12:02,884
@@ -1072,7 +1072,7 @@ from "mainStatement" or "ProgPartFunctionDefinition" type.
 
 269
 00:12:22,257 --> 00:12:24,782
-They just iterate through.
+We just iterate them through.
 
 270
 00:12:42,640 --> 00:12:44,644
@@ -1128,7 +1128,7 @@ Then we say here:
 
 283
 00:13:18,760 --> 00:13:20,297
-we look again in out grammatic:
+we look again in out grammar:
 
 284
 00:13:20,297 --> 00:13:22,760
@@ -1168,7 +1168,7 @@ Also we say: we take
 
 293
 00:13:58,570 --> 00:14:01,422
-functions, also begin with an empty string on
+functions, also beginning with an empty string on
 
 294
 00:14:01,420 --> 00:14:03,315
@@ -1436,7 +1436,7 @@ and recognize if the programmer
 
 360
 00:16:34,380 --> 00:16:37,475
-calls a undefined function.
+calls an undefined function.
 
 361
 00:16:37,751 --> 00:16:39,342
@@ -1493,3 +1493,4 @@ until next time, for the next:
 374
 00:17:02,208 --> 00:17:04,200
 "Let's build a compiler."
+

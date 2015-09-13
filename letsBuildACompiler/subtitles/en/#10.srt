@@ -164,7 +164,7 @@ hold on: Huraah, this gives us each types of error,
 
 42
 00:02:42,580 --> 00:02:47,410
-our tests still not working, all the three news.
+our tests still not working, all the three new.
 
 43
 00:02:48,040 --> 00:02:51,530
@@ -184,7 +184,7 @@ and then I'll execute a new rule here
 
 47
 00:03:02,890 --> 00:03:05,790
-to join the variables declarations.
+to join the variable's declarations.
 
 48
 00:03:05,790 --> 00:03:08,090
@@ -224,7 +224,7 @@ this can not only turn into a println,
 
 57
 00:03:46,420 --> 00:03:49,630
-but also a variables declaration,
+but also a variable's declaration,
 
 58
 00:03:49,630 --> 00:03:54,990
@@ -308,7 +308,7 @@ So, we take yet as possibility:
 
 78
 00:05:27,460 --> 00:05:31,910
-and we give to her the name "Variable".
+and we give it the name "Variable".
 
 79
 00:05:33,100 --> 00:05:35,790
@@ -400,7 +400,7 @@ In such a case we want after to access the "IDENTIFIER",
 
 101
 00:06:55,820 --> 00:07:00,140
-we note that here exists a Label.
+we note that here exists a label.
 
 102
 00:07:00,140 --> 00:07:05,130
@@ -428,7 +428,7 @@ and can be overall a "statement", an allocation,
 
 108
 00:07:25,490 --> 00:07:29,320
-we also write within the statement "assignment".
+we also write "assignment" within the statement.
 
 109
 00:07:30,170 --> 00:07:34,400
@@ -460,11 +460,11 @@ and then if the Jasmin tries these
 
 116
 00:07:53,570 --> 00:07:57,450
-invalid codes, the parsing over the erros are thrown here.
+invalid codes, the errors over the parsing are thrown here.
 
 117
 00:07:57,450 --> 00:07:59,830
-We want to fix this later,
+We want to fix this next,
 
 118
 00:07:59,830 --> 00:08:03,030
@@ -516,7 +516,7 @@ the variable table in Java works with 4-Bytes write,
 
 130
 00:08:42,000 --> 00:08:46,680
-that means to say this variable tables with 100 input of 4 bytes each
+that means to say this variable table has now 100 inputs of 4 bytes each
 
 131
 00:08:46,680 --> 00:08:50,470
@@ -532,7 +532,7 @@ and while integers have 4 bytes
 
 134
 00:08:56,160 --> 00:09:02,790
-we can thought store in our variable table 100 integers.
+we can thought store 100 integers in our variable table.
 
 135
 00:09:02,790 --> 00:09:05,330
@@ -576,7 +576,7 @@ the Strings, variable names to integers,
 
 145
 00:09:35,700 --> 00:09:39,280
-namely positions mapped to variables table.
+namely, positions mapped to variables table.
 
 146
 00:09:50,990 --> 00:09:52,450
@@ -584,7 +584,7 @@ and here then,
 
 147
 00:09:52,450 --> 00:09:56,560
-we always stumble over the variables declaration,
+we always stumble over the variables' declaration,
 
 148
 00:09:56,560 --> 00:10:02,660
@@ -600,13 +600,13 @@ We do this were we say:
 
 151
 00:10:10,660 --> 00:10:14,900
-and as key we call our variables name
+and as key we call our variable's name
 
 152
 00:10:17,430 --> 00:10:24,290
-and as value we call the size of the variables table updated.
+and as value we call the size of the variable table updated.
 
-153
+153                                          
 00:10:26,330 --> 00:10:30,100
 And we do not need to make anything else in the declaration method,
 
@@ -620,7 +620,7 @@ because it can't generate instructions.
 
 156
 00:10:37,780 --> 00:10:42,710
-Now for next in the visit methods: namely "visitAssignment".
+Now for next, in the visit methods: namely "visitAssignment".
 
 157
 00:10:42,710 --> 00:10:45,170
@@ -652,7 +652,7 @@ with the value, that returned together?
 
 164
 00:11:07,330 --> 00:11:10,990
-This, ini Java, give us an "istore" instruction
+There is, in Java, an "istore" instruction
 
 165
 00:11:10,990 --> 00:11:17,160
@@ -660,7 +660,7 @@ and the instruction "istore" takes the integer from the top of Stack
 
 166
 00:11:17,160 --> 00:11:19,600
-and salve in the variables table
+and saves in the variable table
 
 167
 00:11:19,600 --> 00:11:22,020
@@ -688,7 +688,7 @@ Now it is at position 17, naturally,
 
 173
 00:11:38,170 --> 00:11:43,080
-but we get the position in our variables map,
+but we get the position from our variable map,
 
 174
 00:11:43,080 --> 00:11:45,550
@@ -696,7 +696,7 @@ we ask inside:
 
 175
 00:11:47,230 --> 00:11:53,170
-Which is the position to our variable name?
+Which is the position to our variable's name?
 
 176
 00:11:57,070 --> 00:11:59,790
@@ -816,7 +816,7 @@ Our program here consists now
 
 205
 00:13:54,080 --> 00:13:56,920
-from a serie of joined statements.
+from a joined statements series.
 
 206
 00:13:56,920 --> 00:14:00,330
@@ -892,7 +892,7 @@ which is over the stack
 
 224
 00:14:53,210 --> 00:14:58,910
-and then will be sabe at position 0 of the variables table.
+and then will be saved at position 0 of the variables table.
 
 225
 00:15:00,130 --> 00:15:03,990
@@ -908,7 +908,7 @@ Thus, it can see simultaneously.
 
 228
 00:15:14,750 --> 00:15:16,270
-Looks like:
+Looks like this:
 
 229
 00:15:17,130 --> 00:15:20,150
@@ -916,7 +916,7 @@ Here is the 2, which is at position 0,
 
 230
 00:15:20,150 --> 00:15:23,070
-this is the position for our variable to be saved,
+this is the position for our variable a to be saved,
 
 231
 00:15:23,070 --> 00:15:25,620
@@ -964,7 +964,7 @@ In this episode we learned how we can
 
 242
 00:15:53,600 --> 00:15:57,840
-map the variables' names to position  in a variables table.
+map the variables' names to position  in a variable table.
 
 243
 00:15:57,840 --> 00:15:59,100
@@ -976,7 +976,7 @@ how we can use the instructions "iload" and "istore"
 
 245
 00:16:02,030 --> 00:16:06,550
-over two values in the stack and copy here and there in the variables table
+over two values in the stack and copy here and there in the variable table
 
 246
 00:16:06,550 --> 00:16:09,090
@@ -997,3 +997,4 @@ until this moment, we haven't worked with helpful output error messages.
 250
 00:16:16,240 --> 00:16:18,730
 This will be the next episode's theme.
+

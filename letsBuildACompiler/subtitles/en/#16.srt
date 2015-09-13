@@ -92,7 +92,7 @@ The test should now say, namely
 
 24
 00:00:48,560 --> 00:00:50,857
-that aways a
+that always an
 
 25
 00:00:50,850 --> 00:00:54,084
@@ -124,7 +124,7 @@ and the new code should now
 
 32
 00:01:11,230 --> 00:01:13,911
-calls an undefined function.
+call an undefined function.
 
 33
 00:01:17,222 --> 00:01:19,013
@@ -160,7 +160,7 @@ Than we execute the test once more
 
 41
 00:01:41,430 --> 00:01:43,942
-and to control what it really gives fails
+and to control what it really gives as fails
 
 42
 00:01:43,940 --> 00:01:45,711
@@ -208,7 +208,7 @@ and we let them derivate from our "CompileException".
 
 53
 00:02:18,973 --> 00:02:20,768
-The constructor we take with us 
+We take with us the constructor 
 
 54
 00:02:20,760 --> 00:02:22,182
@@ -432,7 +432,7 @@ and after this we call this function.
 
 109
 00:04:45,200 --> 00:04:47,404
-Wonderful: Our visitor goes
+Wonderful: Our visitor 
 
 110
 00:04:47,400 --> 00:04:49,777
@@ -476,7 +476,7 @@ then the before function is still not defined.
 
 120
 00:05:11,097 --> 00:05:12,760
-Early one does say that,
+Early one would say that,
 
 121
 00:05:12,760 --> 00:05:15,177
@@ -540,7 +540,7 @@ before even access the function
 
 136
 00:05:42,780 --> 00:05:46,093
-but that's very similar to 20th century,
+but we are in the 20th century,
 
 137
 00:05:46,090 --> 00:05:47,182
@@ -564,7 +564,7 @@ that would be called before our
 
 142
 00:06:00,470 --> 00:06:01,942
-definições de função
+function definitions
 
 143
 00:06:02,090 --> 00:06:03,475
@@ -608,7 +608,7 @@ and we lay it like our other visitor
 
 153
 00:06:28,160 --> 00:06:30,253
-from "DemoBaseVisitor.
+from "DemoBaseVisitor".
 
 154
 00:06:32,053 --> 00:06:33,764
@@ -636,7 +636,7 @@ that are defined.
 
 160
 00:06:45,946 --> 00:06:47,933
-The functions names we get
+The functions names that we get
 
 161
 00:06:47,930 --> 00:06:50,497
@@ -824,7 +824,7 @@ at the same point
 
 207
 00:08:43,370 --> 00:08:46,786
-there we also called our visitor until now.
+where we also called our visitor until now.
 
 208
 00:08:47,284 --> 00:08:49,533
@@ -832,7 +832,7 @@ We get it accordingly
 
 209
 00:08:49,530 --> 00:08:51,675
-again also the set
+also the set
 
 210
 00:08:52,151 --> 00:08:54,088
@@ -996,7 +996,7 @@ Now we can execute our test once more
 
 250
 00:10:29,650 --> 00:10:31,728
-and we look if it was just
+and we look if it goes
 
 251
 00:10:31,720 --> 00:10:33,200
@@ -1048,7 +1048,7 @@ how to set the obtained list so that
 
 263
 00:10:57,370 --> 00:11:00,115
-we produce a meaningful erro message
+we produce a meaningful error message
 
 264
 00:11:00,110 --> 00:11:01,524
@@ -1125,5 +1125,4 @@ We'll be back together in another:
 282
 00:11:32,280 --> 00:11:34,280
 "Let's build a compiler".
-
 

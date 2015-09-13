@@ -12,7 +12,7 @@ the minus, times, anda division for our language.
 
 4
 00:00:09,050 --> 00:00:10,640
-Sadly, we still have problems 
+Sadly, we still have problems
 
 5
 00:00:10,640 --> 00:00:13,510
@@ -60,7 +60,7 @@ we take for us again the TestRig command from the last time
 
 16
 00:00:49,940 --> 00:00:59,950
-and then we'll execute println(2+3*3*);",
+and then we'll execute println(2+3*3);",
 
 17
 00:00:59,950 --> 00:01:03,760
@@ -96,7 +96,7 @@ That means, if we traverse here in Post-Order,
 
 25
 00:01:29,880 --> 00:01:35,900
-then we'd have 2, 3, plus, times.
+then we'd have 2, 3, plus, 3,  times.
 
 26
 00:01:35,900 --> 00:01:40,080
@@ -220,7 +220,7 @@ thus, we open our visitor
 
 56
 00:03:17,770 --> 00:03:19,740
-and henceforth we adjust it. 
+and henceforth we adjust it.
 
 57
 00:03:19,740 --> 00:03:23,010
@@ -248,7 +248,7 @@ and it already gives us the "ldc".
 
 63
 00:03:37,190 --> 00:03:39,140
-That's really elegant, because it means 
+That's really elegant, because it means
 
 64
 00:03:39,140 --> 00:03:42,350
@@ -368,7 +368,7 @@ Also, we have to change these both rules.
 
 93
 00:05:29,700 --> 00:05:34,500
-Therefor, we generate again our parser anew,
+Therefore, we generate again our parser anew,
 
 94
 00:05:36,620 --> 00:05:39,250
@@ -376,7 +376,7 @@ going here with "F5"
 
 95
 00:05:39,250 --> 00:05:42,310
-and executing our tests.
+and our tests execute.
 
 96
 00:05:43,830 --> 00:05:45,120
@@ -452,7 +452,7 @@ and truly, the ANTLR would be in this case
 
 114
 00:06:38,470 --> 00:06:41,640
-solve the operators from the left to the right 
+solve the operators from the left to the right
 
 115
 00:06:41,640 --> 00:06:43,220
@@ -528,7 +528,7 @@ Furthermore, the multiplication operator holds,
 
 133
 00:07:46,520 --> 00:07:51,150
-in contrast with the division operator, the commutative property. 
+in contrast with the division operator, the commutative property.
 
 134
 00:07:53,580 --> 00:07:55,400
@@ -620,15 +620,15 @@ how we can write our parser rules for calculations,
 
 156
 00:09:13,750 --> 00:09:16,340
-that also in the chain calculations with more operators
+that also, in the chain calculations, can detect
 
 157
 00:09:16,340 --> 00:09:19,140
-can detect any complex expression.
+any complex expression with more operators.
 
 158
 00:09:19,140 --> 00:09:20,810
-We learned alo, that through
+We learned also, that through
 
 159
 00:09:20,810 --> 00:09:22,330
@@ -636,7 +636,7 @@ the order of sub-rules
 
 160
 00:09:22,330 --> 00:09:25,400
-can change the operators precedence ranking. 
+can change the operators precedence ranking.
 
 161
 00:09:25,400 --> 00:09:28,220
@@ -685,3 +685,4 @@ goodbye and until the next time,
 172
 00:09:52,590 --> 00:09:56,020
 for the next episode of: "Let's build a compiler".
+

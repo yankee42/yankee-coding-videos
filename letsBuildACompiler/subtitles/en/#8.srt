@@ -1,6 +1,6 @@
 ﻿1
 00:00:00,000 --> 00:00:02,940
-Welcome back to "Let's build a compiler". 
+Welcome back to "Let's build a compiler".
 
 2
 00:00:02,940 --> 00:00:04,330
@@ -24,11 +24,11 @@ which will as well be known by the name "CompilerTest".
 
 7
 00:00:20,460 --> 00:00:24,640
-Then we'll go to our examples, that we want to be able to
+Then we'll go to our examples, we want to be able to
 
 8
 00:00:24,640 --> 00:00:28,600
-copy one line as sample
+copy one line as template
 
 9
 00:00:28,600 --> 00:00:33,110
@@ -76,7 +76,7 @@ on what happens if no result returns as output,
 
 20
 00:01:08,720 --> 00:01:13,050
-also, what should happened with "7/2"?
+also, what should happen with "7/2"?
 
 21
 00:01:13,050 --> 00:01:16,320
@@ -96,11 +96,11 @@ later we naturally will have floating point types
 
 25
 00:01:24,030 --> 00:01:26,970
-but for the beginning we still with what we have
+but for the beginning we continue with what we have
 
 26
 00:01:26,970 --> 00:01:32,650
-and the result stays 3, without the 0.5 behind.
+and the result stays 3, without the .5 behind.
 
 27
 00:01:32,650 --> 00:01:36,140
@@ -120,7 +120,7 @@ and thereafter "+5", so we'll have 11.
 
 31
 00:01:50,380 --> 00:01:53,980
-In place of "2+5", which would be 7 
+In place of "2+5", which would be 7
 
 32
 00:01:53,980 --> 00:01:57,130
@@ -128,7 +128,7 @@ and so does "8-7", which would be 1.
 
 33
 00:01:57,130 --> 00:02:06,250
-The same happening to division, were we could take "8/2*4" as example.
+The same happens to division, were we could take "8/2*4", for  example.
 
 34
 00:02:06,250 --> 00:02:11,300
@@ -140,11 +140,11 @@ Here again, another thing outcomes,
 
 36
 00:02:13,860 --> 00:02:17,780
-if we calculate first the '2*4", it would be 8
+if we calculate first the "2*4", it would be 8
 
 37
 00:02:17,780 --> 00:02:21,010
-and then we would have "8/8, naturally 1.
+and then we would have "8/8", naturally 1.
 
 38
 00:02:21,010 --> 00:02:27,350
@@ -156,7 +156,7 @@ We can take for example "2+3*3",
 
 40
 00:02:32,140 --> 00:02:38,520
-we should first calculate "3*3" (being 9), "+2" being 11, 
+we should first calculate "3*3" (being 9), "+2" being 11,
 
 41
 00:02:38,520 --> 00:02:43,760
@@ -248,15 +248,15 @@ and this is not good.
 
 63
 00:04:13,400 --> 00:04:16,510
-Otherwise, I like the idea where 
+Otherwise, I like the idea of
 
 64
 00:04:16,510 --> 00:04:20,000
-with this number translate to the English
+translating this number to English
 
 65
 00:04:20,000 --> 00:04:25,890
-e is very unpractical, if there are too much German terms.
+and is very unpractical if there are too much German terms.
 
 66
 00:04:31,210 --> 00:04:34,010
@@ -264,7 +264,7 @@ After we have this done...
 
 67
 00:04:37,410 --> 00:04:40,400
-After we have this done again
+After we have this done, we go again
 
 68
 00:04:40,400 --> 00:04:44,110
@@ -272,7 +272,7 @@ in our usual known way
 
 69
 00:04:44,110 --> 00:04:46,520
-I build our parser again,
+build our parser again,
 
 70
 00:04:46,520 --> 00:04:48,900
@@ -296,7 +296,7 @@ this thing here is called naturally "right" now,
 
 75
 00:05:04,160 --> 00:05:09,910
-with "Ctrl+Shift+0" we can fix the importations,
+with "Ctrl+Shift+0" we can fix the impor  ts,
 
 76
 00:05:17,080 --> 00:05:20,610
@@ -372,7 +372,7 @@ Now, here I simply copy the template,
 
 94
 00:06:20,080 --> 00:06:25,760
-for the subtraction we only in place of "iadd" we name it "isub".
+we name in place of "iadd", "isub", for subtraction.
 
 95
 00:06:25,760 --> 00:06:31,410
@@ -384,7 +384,7 @@ What's the result?
 
 97
 00:06:37,090 --> 00:06:41,940
-In our minus test the "println(3-2) worked!
+In our minus test, the "println(3-2) worked!
 
 98
 00:06:41,940 --> 00:06:43,820
@@ -392,7 +392,7 @@ Hey! That was simple!
 
 99
 00:06:43,820 --> 00:06:47,760
-We want to see once again if it will be right together with the other operators.
+We want to see once again if it will be right, together with the other operators.
 
 100
 00:06:47,760 --> 00:06:51,300
@@ -416,7 +416,7 @@ we go to our visitor
 
 105
 00:07:18,520 --> 00:07:22,950
-and will implement the new "visit" method.
+and implement the new "visit" method.
 
 106
 00:07:23,600 --> 00:07:26,230
@@ -432,7 +432,7 @@ just with "idiv" standing for i-divide
 
 109
 00:07:36,400 --> 00:07:41,210
-and then again another for multiplication
+and then again, another for multiplication
 
 110
 00:07:42,520 --> 00:07:47,280
@@ -448,7 +448,7 @@ and what do we see here?
 
 113
 00:07:56,780 --> 00:08:01,510
-Eight of our tests worked, two doesn't.
+Eight of our tests worked, two don't.
 
 114
 00:08:01,510 --> 00:08:04,000
@@ -456,7 +456,7 @@ Times worked, division worked,
 
 115
 00:08:04,000 --> 00:08:07,340
-that with the "7/2" also worked,
+the one with "7/2" also worked,
 
 116
 00:08:07,340 --> 00:08:10,520
@@ -492,11 +492,11 @@ At this local it gives us a little Cliffhanger.
 
 124
 00:08:38,670 --> 00:08:41,400
-How we manage correctly the operators priorities,
+You will learn how we manage correctly the operators priorities,
 
 125
 00:08:41,400 --> 00:08:45,570
-so that our two remaining tests would work you will learn in the next episode.
+so that our two remaining tests work, in the next episode.
 
 126
 00:08:45,570 --> 00:08:48,090
@@ -585,3 +585,4 @@ goodbye and see you later
 147
 00:09:40,420 --> 00:09:43,520
 for another: "Let's build a compiler".
+
