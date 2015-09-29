@@ -1,0 +1,1196 @@
+﻿1
+00:00:00,000 --> 00:00:02,822
+Welcome back to "Let's build a compiler".
+
+2
+00:00:02,820 --> 00:00:05,582
+Meanwhile, our functions can contain complex code
+
+3
+00:00:05,580 --> 00:00:08,120
+and we have separate local variables.
+
+4
+00:00:08,120 --> 00:00:09,711
+However, we couldn't until now
+
+5
+00:00:09,711 --> 00:00:11,710
+accept parameters in our functions.
+
+6
+00:00:11,710 --> 00:00:14,302
+In this episode we'll resolve this problem
+
+7
+00:00:14,300 --> 00:00:16,791
+and bring parameters to our functions.
+
+8
+00:00:16,790 --> 00:00:19,573
+In addition, this episode contains an experiment:
+
+9
+00:00:19,570 --> 00:00:21,680
+Until now, we bother to make the code clear while doing, instead,
+
+10
+00:00:21,680 --> 00:00:24,324
+first I had recorded just the imagery
+
+11
+00:00:24,320 --> 00:00:25,333
+and in the second step
+
+12
+00:00:25,330 --> 00:00:27,204
+I commented the videos.
+
+13
+00:00:27,200 --> 00:00:28,457
+Write me in the comments
+
+14
+00:00:28,450 --> 00:00:29,111
+what you think about it
+
+15
+00:00:29,110 --> 00:00:32,031
+and how should carry on in future videos.
+
+16
+00:00:32,924 --> 00:00:35,395
+At first, we will expand our specifications,
+
+17
+00:00:35,390 --> 00:00:36,360
+as you already know.
+
+18
+00:00:36,360 --> 00:00:38,884
+For this, we tinker a function
+
+19
+00:00:38,880 --> 00:00:40,506
+that has a parameter,
+
+20
+00:00:40,500 --> 00:00:42,608
+I have an one here now
+
+21
+00:00:42,600 --> 00:00:45,591
+a function that is, in a total creative way, named "add"
+
+22
+00:00:45,590 --> 00:00:47,840
+and that has the second parameter in C style,
+
+23
+00:00:47,840 --> 00:00:49,013
+namely "a" and "b"
+
+24
+00:00:49,010 --> 00:00:51,444
+and both are added together.
+
+25
+00:00:51,440 --> 00:00:53,288
+Then here in a test
+
+26
+00:00:53,280 --> 00:00:56,111
+we let the function add together 5 and 8,
+
+27
+00:00:56,110 --> 00:00:58,377
+that should give 13 as output.
+
+28
+00:00:58,370 --> 00:01:01,355
+Then we copy all this in our test
+
+29
+00:01:05,195 --> 00:01:07,520
+and then we still define here
+
+30
+00:01:07,520 --> 00:01:09,146
+the expected result,
+
+31
+00:01:09,140 --> 00:01:12,697
+namely the 13 and a new line.
+
+32
+00:01:12,690 --> 00:01:14,528
+So, we let how at first as usual
+
+33
+00:01:14,520 --> 00:01:15,644
+our test run,
+
+34
+00:01:15,640 --> 00:01:18,377
+then the test must return error
+
+35
+00:01:18,370 --> 00:01:20,711
+and we observe why the execution failed:
+
+36
+00:01:20,710 --> 00:01:22,755
+We have here also this mismatched input
+
+37
+00:01:22,750 --> 00:01:24,480
+with the "int" comes
+
+38
+00:01:24,480 --> 00:01:26,035
+from our file
+
+39
+00:01:26,030 --> 00:01:28,093
+the definition function from the top,
+
+40
+00:01:28,090 --> 00:01:29,964
+containing the variables definitions
+
+41
+00:01:29,960 --> 00:01:31,751
+with the "int a" and the "int b"
+
+42
+00:01:31,750 --> 00:01:33,555
+and he naturally stumbles over the "int"
+
+43
+00:01:33,555 --> 00:01:35,550
+which is not there.
+
+44
+00:01:37,035 --> 00:01:39,688
+Should be found at this point over here,
+
+45
+00:01:39,680 --> 00:01:42,800
+where are opening and closing parenthesis,
+
+46
+00:01:42,800 --> 00:01:45,377
+that we also have in our "add"
+
+47
+00:01:45,370 --> 00:01:47,884
+but unfortunately is lacking the in between,
+
+48
+00:01:47,880 --> 00:01:50,742
+namely the parameter from the function.
+
+49
+00:01:50,740 --> 00:01:52,848
+We have to add it here,
+
+50
+00:01:52,840 --> 00:01:55,475
+for this, we will put here
+
+51
+00:01:55,470 --> 00:01:56,466
+a new Label
+
+52
+00:01:56,460 --> 00:01:57,817
+that we name "params"
+
+53
+00:01:57,810 --> 00:02:00,257
+then we need to have our
+
+54
+00:02:00,250 --> 00:02:03,271
+"parameterDeclaration" inside.
+
+55
+00:02:04,066 --> 00:02:06,297
+The rule has yet, of course, to be established,
+
+56
+00:02:06,290 --> 00:02:08,404
+because it's not there yet.
+
+57
+00:02:08,400 --> 00:02:11,426
+As does a "parameterDeclaration"
+
+58
+00:02:11,420 --> 00:02:14,240
+is essentially a variable declaration,
+
+59
+00:02:14,240 --> 00:02:15,466
+at first an "int" also
+
+60
+00:02:15,466 --> 00:02:17,460
+and then a variable name
+
+61
+00:02:17,460 --> 00:02:19,795
+and then optionally a comma now
+
+62
+00:02:19,790 --> 00:02:21,204
+and then a variable name
+
+63
+00:02:21,200 --> 00:02:22,733
+and optionally more one comma
+
+64
+00:02:22,730 --> 00:02:25,933
+and also a variable name, etc.
+
+65
+00:02:25,930 --> 00:02:27,013
+It can be, however,
+
+66
+00:02:27,013 --> 00:02:29,010
+that we have no parameters overall
+
+67
+00:02:29,010 --> 00:02:30,573
+and that it is a empty list then.
+
+68
+00:02:30,570 --> 00:02:31,942
+Thus, we create here one or
+
+69
+00:02:31,940 --> 00:02:33,488
+and don't write behind there,
+
+70
+00:02:33,488 --> 00:02:35,480
+that means then: it can't be empty.
+
+71
+00:02:35,906 --> 00:02:38,435
+We have the exactly same by "functionCall":
+
+72
+00:02:38,430 --> 00:02:40,711
+There are also the opening and closing parenthesis,
+
+73
+00:02:40,710 --> 00:02:43,453
+like over our code here with the 5 and the 8
+
+74
+00:02:43,450 --> 00:02:46,631
+but here is missing, also between the parenthesis, the list
+
+75
+00:02:46,630 --> 00:02:50,124
+with the parameters that we want to pass. 
+
+76
+00:02:50,120 --> 00:02:52,337
+Accordingly, we add here the
+
+77
+00:02:52,330 --> 00:02:54,057
+"arguments"
+
+78
+00:02:54,050 --> 00:02:57,511
+and the "arguments" consists of an "expressionList"
+
+79
+00:02:57,510 --> 00:02:59,386
+and the rule "expressionList"
+
+80
+00:02:59,386 --> 00:03:01,380
+we have to still insert, of course.
+
+81
+00:03:02,311 --> 00:03:05,351
+Such an expressionList sees
+
+82
+00:03:05,764 --> 00:03:08,044
+our Parameterdeclaration very similar,
+
+83
+00:03:08,040 --> 00:03:09,768
+then arrive us firstly an "expression",
+
+84
+00:03:09,760 --> 00:03:12,737
+then a comma, then another "expression"
+
+85
+00:03:12,730 --> 00:03:14,680
+and possibly it goes on and on:
+
+86
+00:03:14,680 --> 00:03:16,017
+comma, "expression" and so on
+
+87
+00:03:16,010 --> 00:03:18,835
+or the list may be empty.
+
+88
+00:03:19,991 --> 00:03:21,822
+Then we need, clearly
+
+89
+00:03:21,820 --> 00:03:23,920
+to create our parser new,
+
+90
+00:03:24,871 --> 00:03:28,817
+we go to Eclipse again over "F5" in our parser project,
+
+91
+00:03:29,840 --> 00:03:31,622
+leaving our test run again
+
+92
+00:03:31,620 --> 00:03:34,062
+and we take a look if the ANTL errors
+
+93
+00:03:34,060 --> 00:03:36,600
+with the "mismatched int" have gone away.
+
+94
+00:03:37,146 --> 00:03:39,155
+And yes, as you can see: They disappeared,
+
+95
+00:03:39,150 --> 00:03:41,813
+there's no ANTLR errors anymore,
+
+96
+00:03:41,810 --> 00:03:44,035
+it's just that our answer stills not right,
+
+97
+00:03:44,030 --> 00:03:46,168
+it gives us an UndeclaredVariableException,
+
+98
+00:03:46,160 --> 00:03:48,528
+because the variable "a" was not found,
+
+99
+00:03:48,520 --> 00:03:51,688
+here is defined the variable "a"
+
+100
+00:03:51,680 --> 00:03:53,311
+and here we used it,
+
+101
+00:03:53,310 --> 00:03:55,000
+but it still not recognized
+
+102
+00:03:55,000 --> 00:03:59,377
+and here would be the variable declaration
+
+103
+00:03:59,370 --> 00:04:00,977
+it was, but
+
+104
+00:04:00,970 --> 00:04:03,257
+we have nowhere accessed our visitor yet
+
+105
+00:04:03,250 --> 00:04:05,373
+and that will be what we do next.
+
+106
+00:04:05,370 --> 00:04:09,844
+Hence, we go over the "visitFunctionDefinition" method
+
+107
+00:04:09,840 --> 00:04:13,773
+and there we can access the
+
+108
+00:04:13,770 --> 00:04:16,142
+variables from the parameter list.
+
+109
+00:04:16,140 --> 00:04:18,248
+And these variables we must define
+
+110
+00:04:18,240 --> 00:04:19,937
+that we can really simply do
+
+111
+00:04:19,930 --> 00:04:21,951
+in it to call here the "visit"
+
+112
+00:04:21,950 --> 00:04:24,937
+and indeed on our "params".
+
+113
+00:04:27,591 --> 00:04:30,857
+These "visit(params)" will then pass all the parameters,
+
+114
+00:04:30,850 --> 00:04:33,297
+as for every "visit" to each node
+
+115
+00:04:33,290 --> 00:04:35,528
+passes from "params"
+
+116
+00:04:36,053 --> 00:04:38,862
+and "varDeclarations" is inside there.
+
+117
+00:04:38,860 --> 00:04:40,591
+That means that the "visitVarDeclaration"
+
+118
+00:04:40,590 --> 00:04:42,751
+method is called last.
+
+119
+00:04:42,750 --> 00:04:44,946
+for every one of our parameters.
+
+120
+00:04:44,940 --> 00:04:47,595
+We look one more time to the "visitVarDeclaration" method:
+
+121
+00:04:47,590 --> 00:04:48,800
+And you can see there
+
+122
+00:04:48,800 --> 00:04:50,222
+that the variable then
+
+123
+00:04:50,220 --> 00:04:52,662
+is added to our variable table.
+
+124
+00:04:52,660 --> 00:04:56,635
+So, we need now to declare also the variables.
+
+125
+00:04:56,630 --> 00:04:58,200
+However, this is not everything,
+
+126
+00:04:58,200 --> 00:05:00,617
+because we need the method signature
+
+127
+00:05:00,610 --> 00:05:02,511
+that fits us to create them.
+
+128
+00:05:02,510 --> 00:05:05,000
+For this, again like before in
+
+129
+00:05:05,000 --> 00:05:06,435
+"visitFunctionDefinition",
+
+130
+00:05:06,430 --> 00:05:08,835
+there we generate our ".method"
+
+131
+00:05:08,830 --> 00:05:12,497
+and soon after this, you can see the parameter list
+
+132
+00:05:12,490 --> 00:05:14,271
+and now it stills empty.
+
+133
+00:05:14,270 --> 00:05:15,928
+There we must put something,
+
+134
+00:05:15,920 --> 00:05:19,435
+so we split the string at this point,
+
+135
+00:05:20,235 --> 00:05:23,457
+we can now in between the brackets
+
+136
+00:05:23,450 --> 00:05:25,640
+generate the parameter list.
+
+137
+00:05:25,640 --> 00:05:27,497
+The parameter list is
+
+138
+00:05:27,490 --> 00:05:29,266
+simply a serie of types,
+
+139
+00:05:29,260 --> 00:05:30,253
+this if now we
+
+140
+00:05:30,250 --> 00:05:33,533
+passed three integers that would get "III"
+
+141
+00:05:34,097 --> 00:05:36,146
+and because of this we need first
+
+142
+00:05:36,140 --> 00:05:38,471
+the number of parameters.
+
+143
+00:05:39,555 --> 00:05:41,995
+And if we have the number of parameters,
+
+144
+00:05:41,990 --> 00:05:43,786
+then we could
+
+145
+00:05:43,780 --> 00:05:47,991
+repeat respectively the variable type
+
+146
+00:05:47,990 --> 00:05:50,386
+as much as number of parameters.
+
+147
+00:05:50,380 --> 00:05:51,697
+We also have only integers until now,
+
+148
+00:05:51,690 --> 00:05:54,457
+because of this our variable type is definitely an "I"
+
+149
+00:05:54,450 --> 00:05:55,924
+and now we have to take a look
+
+150
+00:05:55,920 --> 00:05:58,191
+how in the parameters list we
+
+151
+00:05:58,191 --> 00:06:00,190
+arrive at the number of parameters.
+
+152
+00:06:00,902 --> 00:06:03,520
+Here in "params" we have the "paramDeclaration"
+
+153
+00:06:03,520 --> 00:06:06,457
+and in the "parameterDeclaration" rule
+
+154
+00:06:06,450 --> 00:06:09,040
+returns more "varDeclarations".
+
+155
+00:06:09,040 --> 00:06:10,848
+But now is harder to read
+
+156
+00:06:10,840 --> 00:06:13,555
+how many "varDeclarations" we have.
+
+157
+00:06:13,942 --> 00:06:16,528
+And because of this we'll add now
+
+158
+00:06:16,520 --> 00:06:18,195
+"Declarations", everyone that occurs
+
+159
+00:06:18,190 --> 00:06:20,191
+together in a list,
+
+160
+00:06:20,190 --> 00:06:21,644
+because we can after this then namely
+
+161
+00:06:21,644 --> 00:06:23,640
+just look how big is the list.
+
+162
+00:06:23,640 --> 00:06:25,320
+This "together in a list",
+
+163
+00:06:25,320 --> 00:06:28,426
+you do with just the "+=",
+
+164
+00:06:28,420 --> 00:06:30,933
+then, ANTLR creates for you a list
+
+165
+00:06:30,930 --> 00:06:33,533
+and every time when a new "varDeclaration" comes 
+
+166
+00:06:33,530 --> 00:06:35,302
+it will be appended to the list.
+
+167
+00:06:35,300 --> 00:06:38,271
+Then we create again the parser anew,
+
+168
+00:06:38,270 --> 00:06:40,568
+we go back to our visitor
+
+169
+00:06:40,560 --> 00:06:42,808
+and now we can access
+
+170
+00:06:42,800 --> 00:06:45,488
+on the "numberOfParameters" 
+
+171
+00:06:45,480 --> 00:06:48,604
+this list from "params"
+
+172
+00:06:48,600 --> 00:06:50,102
+with the "Declarations"
+
+173
+00:06:50,100 --> 00:06:52,693
+and then we get it by "size".
+
+174
+00:06:52,690 --> 00:06:53,760
+Then we still need
+
+175
+00:06:53,760 --> 00:06:56,084
+to implemente the "strRepeat" function
+
+176
+00:06:56,080 --> 00:06:57,871
+because it is not already there.
+
+177
+00:06:58,857 --> 00:07:00,231
+We need this yet
+
+178
+00:07:00,230 --> 00:07:02,844
+so that it will not be a big obstacle:
+
+179
+00:07:02,840 --> 00:07:05,351
+We take just a StringBuilder,
+
+180
+00:07:05,350 --> 00:07:08,115
+this is a little more efficient way
+
+181
+00:07:08,110 --> 00:07:09,688
+Characters to cut each other
+
+182
+00:07:09,680 --> 00:07:12,022
+and in the end a string to finish
+
+183
+00:07:12,020 --> 00:07:14,715
+and then we say
+
+184
+00:07:14,710 --> 00:07:18,346
+how often the string should repeat
+
+185
+00:07:18,340 --> 00:07:21,324
+always to "result"
+
+186
+00:07:21,320 --> 00:07:23,280
+once the
+
+187
+00:07:23,280 --> 00:07:25,715
+input string should be appended.
+
+188
+00:07:25,710 --> 00:07:27,840
+And when we call this method with:
+
+189
+00:07:28,902 --> 00:07:31,448
+the string "i" and the "count" three,
+
+190
+00:07:31,440 --> 00:07:34,346
+then the output should be "III".
+
+191
+00:07:34,340 --> 00:07:36,808
+So, the same is in the "functionCall" also:
+
+192
+00:07:36,800 --> 00:07:38,342
+Yet we need in "functionCall"
+
+193
+00:07:38,340 --> 00:07:40,093
+handle over the whole signature
+
+194
+00:07:40,090 --> 00:07:42,493
+and also including
+
+195
+00:07:42,490 --> 00:07:44,791
+the number of parameters.
+
+196
+00:07:44,790 --> 00:07:47,200
+Here it's the same:
+
+197
+00:07:47,200 --> 00:07:50,417
+we split our string
+
+198
+00:07:50,410 --> 00:07:55,244
+with the function name and call it.
+
+199
+00:07:55,240 --> 00:07:56,951
+between the parenthesis
+
+200
+00:07:56,950 --> 00:07:59,751
+where our parameter list should be clean.
+
+201
+00:08:06,404 --> 00:08:08,697
+And then we steal from below
+
+202
+00:08:08,690 --> 00:08:10,835
+the code from "visitFunctionDefinition" 
+
+203
+00:08:10,830 --> 00:08:13,684
+to have it, because after it will look quite similar:
+
+204
+00:08:13,680 --> 00:08:16,231
+We have over here the number of parameters
+
+205
+00:08:16,230 --> 00:08:19,240
+and create with "string repeat"
+
+206
+00:08:20,400 --> 00:08:24,404
+then the contents of our parameter list.
+
+207
+00:08:24,786 --> 00:08:26,706
+Now, of course, the "params" isn't here
+
+208
+00:08:26,700 --> 00:08:28,680
+and neither "declaration"
+
+209
+00:08:29,657 --> 00:08:32,924
+but something that we haven't created already.
+
+210
+00:08:32,920 --> 00:08:34,893
+Because of this we still
+
+211
+00:08:34,890 --> 00:08:37,506
+customize our grammar again
+
+212
+00:08:37,500 --> 00:08:39,662
+and we'll after on the same model
+
+213
+00:08:39,660 --> 00:08:42,071
+adjust as the "parameterDeclaration"
+
+214
+00:08:42,070 --> 00:08:44,235
+the "expressionList"
+
+215
+00:08:44,230 --> 00:08:46,408
+we create here also a new label
+
+216
+00:08:46,400 --> 00:08:48,124
+and instead of only "="
+
+217
+00:08:48,120 --> 00:08:50,884
+we call "+=" as above
+
+218
+00:08:50,880 --> 00:08:54,688
+and then we come here with an "Expressions" list.
+
+219
+00:08:55,115 --> 00:08:59,035
+And now we come here with the content
+
+220
+00:08:59,030 --> 00:09:02,537
+in there over the context
+
+221
+00:09:03,662 --> 00:09:05,524
+we get the "Arguments".
+
+222
+00:09:05,520 --> 00:09:08,488
+where the expressions are inside.
+
+223
+00:09:08,480 --> 00:09:10,400
+For this we need, of course, that the parser by the way
+
+224
+00:09:10,400 --> 00:09:13,017
+generate new if I didn't mentioned.
+
+225
+00:09:16,564 --> 00:09:19,244
+And then the "Expressions" are inside
+
+226
+00:09:19,240 --> 00:09:22,986
+and there we get the "size".
+
+227
+00:09:25,128 --> 00:09:27,000
+So, our variable is still named "instructions"
+
+228
+00:09:27,000 --> 00:09:30,484
+and not "result" and then we are done.
+
+229
+00:09:31,120 --> 00:09:33,071
+Now we must also
+
+230
+00:09:33,070 --> 00:09:35,577
+pass the parameters we want, moreover
+
+231
+00:09:35,570 --> 00:09:38,191
+the true values that we want to pass
+
+232
+00:09:38,190 --> 00:09:39,782
+in somewhere over here.
+
+233
+00:09:40,173 --> 00:09:43,884
+Firstly, we have in the instructions
+
+234
+00:09:43,880 --> 00:09:45,955
+these values for us to generate
+
+235
+00:09:45,950 --> 00:09:48,622
+and those values that are on the stack.
+
+236
+00:09:48,620 --> 00:09:50,524
+And this is already right, what we want,
+
+237
+00:09:50,520 --> 00:09:52,466
+is that we need now the values then
+
+238
+00:09:52,460 --> 00:09:53,720
+and pass them.
+
+239
+00:09:53,720 --> 00:09:55,200
+in the right order,
+
+240
+00:09:55,200 --> 00:09:56,888
+also the first argument first
+
+241
+00:09:56,880 --> 00:09:57,960
+then the second argument
+
+242
+00:09:57,960 --> 00:09:59,688
+then the third argument and so on
+
+243
+00:09:59,680 --> 00:10:01,631
+all successively put on the stack
+
+244
+00:10:01,630 --> 00:10:04,484
+This means that we generate for first
+
+245
+00:10:04,480 --> 00:10:06,684
+the instructions for the first argument,
+
+246
+00:10:06,680 --> 00:10:08,835
+then for the second argument, etc.
+
+247
+00:10:08,830 --> 00:10:10,680
+until the last argument
+
+248
+00:10:10,680 --> 00:10:13,257
+and when we just smack them all in a row,
+
+249
+00:10:13,250 --> 00:10:16,257
+then leaves each
+
+250
+00:10:16,250 --> 00:10:17,582
+these,..
+
+251
+00:10:18,422 --> 00:10:21,271
+instructions list from the argument list
+
+252
+00:10:21,697 --> 00:10:24,817
+an element of the stack with an argument.
+
+253
+00:10:25,155 --> 00:10:27,657
+And we can easily put them all together
+
+254
+00:10:27,650 --> 00:10:29,777
+inside the "visit"
+
+255
+00:10:29,770 --> 00:10:33,017
+that the "arguments" from our context call,
+
+256
+00:10:33,010 --> 00:10:35,773
+because in this "ctx.arguments"
+
+257
+00:10:35,770 --> 00:10:38,155
+stays our already complete list
+
+258
+00:10:38,831 --> 00:10:40,857
+and then we need only to look:
+
+259
+00:10:40,850 --> 00:10:43,520
+Is this list also not empty,
+
+260
+00:10:43,520 --> 00:10:45,773
+so that it doesn't return "null"
+
+261
+00:10:45,770 --> 00:10:47,537
+and when it doesn't return "null",
+
+262
+00:10:47,530 --> 00:10:51,280
+then we will in our "instructions"
+
+263
+00:10:51,280 --> 00:10:53,462
+append this "argumentInstructions" generated
+
+264
+00:10:53,460 --> 00:10:56,360
+and a new line in the end.
+
+265
+00:10:58,506 --> 00:11:01,026
+Then we can execute our test once again
+
+266
+00:11:01,020 --> 00:11:02,977
+And look if it had worked.
+
+267
+00:11:02,970 --> 00:11:04,764
+And: Huraaa!
+
+268
+00:11:04,760 --> 00:11:06,173
+Our test worked,
+
+269
+00:11:06,170 --> 00:11:07,835
+It doesn't give any error
+
+270
+00:11:08,755 --> 00:11:10,617
+and our new test
+
+271
+00:11:10,610 --> 00:11:14,017
+with the function parameters, has worked.
+
+272
+00:11:15,026 --> 00:11:16,644
+In this episode we have learned
+
+273
+00:11:16,640 --> 00:11:18,168
+how any parameters quantity
+
+274
+00:11:18,168 --> 00:11:20,160
+can be accepted in our functions.
+
+275
+00:11:20,160 --> 00:11:21,804
+The parameters are automatic
+
+276
+00:11:21,800 --> 00:11:23,671
+made available as variables
+
+277
+00:11:23,670 --> 00:11:24,915
+and we need also
+
+278
+00:11:24,910 --> 00:11:28,000
+make our visitor known in our variables map.
+
+279
+00:11:28,213 --> 00:11:29,440
+For the function call
+
+280
+00:11:29,440 --> 00:11:31,937
+we just lay the parameters on the stack.
+
+281
+00:11:32,248 --> 00:11:34,586
+Together, we don't have yet a verification
+
+282
+00:11:34,580 --> 00:11:35,924
+of if the number of parameters
+
+283
+00:11:35,920 --> 00:11:37,968
+that we passed with the function call
+
+284
+00:11:37,960 --> 00:11:39,200
+is really correct.
+
+285
+00:11:39,462 --> 00:11:41,386
+In fact, we don't even verified
+
+286
+00:11:41,380 --> 00:11:44,586
+if the function called must really exist.
+
+287
+00:11:44,580 --> 00:11:47,768
+This and much more you will see in the next episodes.
+
+288
+00:11:47,760 --> 00:11:48,826
+Leave comments
+
+289
+00:11:48,820 --> 00:11:51,360
+with your questions, wishes and problems.
+
+290
+00:11:51,360 --> 00:11:53,555
+Leave a thumb up if you liked the video
+
+291
+00:11:53,550 --> 00:11:54,897
+and subscribe to my channel
+
+292
+00:11:54,890 --> 00:11:57,382
+so that you don't lose any episode.
+
+293
+00:11:57,457 --> 00:11:58,626
+Thanks a lot to Gadarol,
+
+294
+00:11:58,620 --> 00:12:00,017
+that permitted me to use his studio
+
+295
+00:12:00,010 --> 00:12:01,217
+for the recordings
+
+296
+00:12:01,210 --> 00:12:03,408
+and thank you very muck for your attention,
+
+297
+00:12:03,400 --> 00:12:04,995
+I hope you have had fun,
+
+298
+00:12:04,990 --> 00:12:06,088
+until the next time
+
+299
+00:12:06,080 --> 00:12:08,728
+to the next episode of: "Let's build a compiler". 
+
