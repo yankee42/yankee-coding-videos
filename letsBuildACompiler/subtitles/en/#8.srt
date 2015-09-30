@@ -16,15 +16,15 @@ My name is Yankee and I hope you have a lot of fun.
 
 5
 00:00:13,080 --> 00:00:16,850
-Initially, we will specify our compiler,
+Initially, we will update the specification of our compiler,
 
 6
 00:00:16,850 --> 00:00:20,460
-which will as well be known by the name "CompilerTest".
+which is also known by the name "CompilerTest".
 
 7
 00:00:20,460 --> 00:00:24,640
-Then we'll go to our examples, we want to be able to
+Then we'll go to our examples, that we want to support,
 
 8
 00:00:24,640 --> 00:00:28,600
@@ -48,7 +48,7 @@ taking "3-2" for example,
 
 13
 00:00:40,390 --> 00:00:43,960
-then we will have an 1 as output.
+then we will have a 1 as output.
 
 14
 00:00:43,960 --> 00:00:47,320
@@ -56,7 +56,7 @@ Then we might as well build multiplication,
 
 15
 00:00:47,320 --> 00:00:52,550
-taking "2+3", so that we need "6" as output.
+taking "2*3", so that should result in "6",
 
 16
 00:00:52,550 --> 00:00:59,920
@@ -72,11 +72,11 @@ Then, we can think later
 
 19
 00:01:05,600 --> 00:01:08,720
-on what happens if no result returns as output,
+on what happens if no even result returns as output,
 
 20
 00:01:08,720 --> 00:01:13,050
-also, what should happen with "7/2"?
+for example, what should happen with "7/2"?
 
 21
 00:01:13,050 --> 00:01:16,320
@@ -112,7 +112,7 @@ For example, if we have: "8-2+5",
 
 29
 00:01:40,840 --> 00:01:46,750
-is really important to calculate first the "8-2" (making 6)
+then it is really important to calculate first the "8-2" (making 6)
 
 30
 00:01:46,750 --> 00:01:50,380
@@ -128,7 +128,7 @@ and so does "8-7", which would be 1.
 
 33
 00:01:57,130 --> 00:02:06,250
-The same happens to division, were we could take "8/2*4", for  example.
+The same happens to division, were we could take "8/2*4", for example.
 
 34
 00:02:06,250 --> 00:02:11,300
@@ -184,15 +184,15 @@ In reverse, "9-2" would be 7, times 3 would be 21.
 
 47
 00:03:10,320 --> 00:03:13,780
-Then we save this and go forward...
+Then we save this and next...
 
 48
 00:03:13,780 --> 00:03:18,380
-Ah, for the first time we will see if our test has fails already.
+Ah, first we will check if our test fails already.
 
 49
 00:03:18,710 --> 00:03:22,220
-Yes, we have many "Failures" here, 7 Failures,
+Yes, we have many "Failures" here, 7 failures,
 
 50
 00:03:22,220 --> 00:03:24,290
@@ -204,7 +204,7 @@ and here at the top we have many "Token recognition error"s,
 
 52
 00:03:28,770 --> 00:03:33,170
-because ANTLR still not recognize all these operators over here.
+because ANTLR still does not recognize all these operators over here.
 
 53
 00:03:33,170 --> 00:03:36,660
@@ -212,7 +212,7 @@ So now we go next to our grammar
 
 54
 00:03:36,660 --> 00:03:40,220
-and we will continue with our new operators.
+and we will extend it with our new operators.
 
 55
 00:03:40,220 --> 00:03:45,440
@@ -236,27 +236,27 @@ for this I call the "expression" rule
 
 60
 00:03:58,610 --> 00:04:02,730
-and then I will be using default English terms here,
+and then I will be using English terms consistently here,
 
 61
 00:04:02,730 --> 00:04:08,520
-because at the moment there is an incompatibility between German and English writing
+because at the moment it is a mixture of German and English terms
 
 62
 00:04:08,520 --> 00:04:11,980
-and this is not good.
+and this is not pretty.
 
 63
 00:04:13,400 --> 00:04:16,510
-Otherwise, I like the idea of
+Furthermore, I like the idea of
 
 64
 00:04:16,510 --> 00:04:20,000
-translating this number to English
+translating this series to english
 
 65
 00:04:20,000 --> 00:04:25,890
-and is very unpractical if there are too much German terms.
+and then it is very unpractical if there are too many German terms.
 
 66
 00:04:31,210 --> 00:04:34,010
@@ -288,23 +288,23 @@ and adapt our terms,
 
 73
 00:04:53,080 --> 00:04:56,050
-this thing here is called naturally "right" now,
+this thing here is naturally called "right" now,
 
 74
 00:04:56,050 --> 00:05:03,080
-"ZahlContext" doesn't work anymore, now we name it "NumberContext"
+"ZahlContext" doesn't exist anymore, now we name it "NumberContext"
 
 75
 00:05:04,160 --> 00:05:09,910
-with "Ctrl+Shift+0" we can fix the impor  ts,
+with "Ctrl+Shift+O" we can fix the imports,
 
 76
 00:05:17,080 --> 00:05:20,610
-and we save again and we'll see later,
+and we save again and we'll check later,
 
 77
 00:05:20,610 --> 00:05:25,000
-if our tests still correct or working badly like just before.
+if our tests are working just as good or bad as before.
 
 78
 00:05:25,000 --> 00:05:27,540
@@ -312,7 +312,7 @@ Yes, our first three tests are working
 
 79
 00:05:27,540 --> 00:05:31,670
-and the news, those, that we generated just now, aren't working.
+and the new ones, those, that we generated just now, aren't working anymore.
 
 80
 00:05:31,670 --> 00:05:34,710
@@ -328,11 +328,11 @@ At first, we will build our "minus" operator.
 
 83
 00:05:41,520 --> 00:05:44,850
-We'll gona by here also copy our previous "plus" rule
+We'll go here, copy our previous "plus" rule
 
 84
 00:05:44,850 --> 00:05:49,340
-and put an alternative for the "minus".
+and insert an alternative for the "minus".
 
 85
 00:05:49,340 --> 00:05:52,770
@@ -348,7 +348,7 @@ we save, we return again to the console,
 
 88
 00:05:58,300 --> 00:06:01,970
-we leave our parser generate anew,
+we regenerate our parser anew,
 
 89
 00:06:01,970 --> 00:06:04,250
@@ -356,7 +356,7 @@ go to the parser, press "F5",
 
 90
 00:06:04,250 --> 00:06:07,030
-we go over the visitor, behind the visitPlus
+we go to the visitor, behind the visitPlus
 
 91
 00:06:07,030 --> 00:06:12,040
@@ -372,11 +372,11 @@ Now, here I simply copy the template,
 
 94
 00:06:20,080 --> 00:06:25,760
-we name in place of "iadd", "isub", for subtraction.
+we use in place of "iadd", "isub", for subtraction.
 
 95
 00:06:25,760 --> 00:06:31,410
-Wonderful, we close it and leave the test run once more.
+Wonderful, we close it and fire up  the test run once more.
 
 96
 00:06:34,200 --> 00:06:36,290
@@ -384,7 +384,7 @@ What's the result?
 
 97
 00:06:37,090 --> 00:06:41,940
-In our minus test, the "println(3-2) worked!
+In our minus test, the "println(3-2)" worked!
 
 98
 00:06:41,940 --> 00:06:43,820
@@ -392,7 +392,7 @@ Hey! That was simple!
 
 99
 00:06:43,820 --> 00:06:47,760
-We want to see once again if it will be right, together with the other operators.
+Let's check if it is just as simple for the other operators.
 
 100
 00:06:47,760 --> 00:06:51,300
@@ -416,7 +416,7 @@ we go to our visitor
 
 105
 00:07:18,520 --> 00:07:22,950
-and implement the new "visit" method.
+and implement the new "visit" methods.
 
 106
 00:07:23,600 --> 00:07:26,230
@@ -424,7 +424,7 @@ For division
 
 107
 00:07:27,780 --> 00:07:31,070
-The same again what we have had with minus,
+the same again what we have had with minus,
 
 108
 00:07:31,070 --> 00:07:35,890
@@ -436,11 +436,11 @@ and then again, another for multiplication
 
 110
 00:07:42,520 --> 00:07:47,280
-and we call the instructions "imul".
+and there the instruction is called "imul".
 
 111
 00:07:47,980 --> 00:07:52,350
-We save, leave our tests run
+We save, let our tests run
 
 112
 00:07:53,910 --> 00:07:56,380
@@ -448,7 +448,7 @@ and what do we see here?
 
 113
 00:07:56,780 --> 00:08:01,510
-Eight of our tests worked, two don't.
+Eight of our tests worked, two didn't.
 
 114
 00:08:01,510 --> 00:08:04,000
@@ -468,7 +468,7 @@ but, unfortunately these two didn't work.
 
 118
 00:08:14,600 --> 00:08:19,750
-And as you can see here: we have 11 waiting, but 15 retrieved,
+And as you can see here: we have expected 11, but found 15,
 
 119
 00:08:19,750 --> 00:08:24,340
@@ -476,11 +476,11 @@ obviously, the operator order was not properly observed here,
 
 120
 00:08:24,340 --> 00:08:29,210
-here it would have to calculate "2+3" first, making 5
+here "2+3" was calculated  first, making 5
 
 121
 00:08:29,210 --> 00:08:32,720
-and then times 3, making 15, and it's what we received here.
+and then times 3, making 15, and it's what we found here.
 
 122
 00:08:32,720 --> 00:08:35,970
@@ -508,35 +508,35 @@ division and plus operators in the grammar
 
 128
 00:08:51,230 --> 00:08:53,700
-and how we generate combined instructions:
+and how we generate the corresponding instructions:
 
 129
 00:08:53,700 --> 00:08:56,350
-Further operators with sub-rules definitions
+We can define multiple operators using sub-rules
 
 130
 00:08:56,350 --> 00:08:59,520
-and combined instructions generation with new visit methods,
+and the matching instructions are generated with new visit methods,
 
 131
 00:08:59,520 --> 00:09:02,660
-looks almost exactly like "visitPlus" method.
+that look almost exactly like "visitPlus" method.
 
 132
 00:09:02,660 --> 00:09:05,250
-On our next episode we're expecting, as mentioned
+On our next episode we're expected by, as mentioned
 
 133
 00:09:05,250 --> 00:09:07,730
-the right order definition for the operators
+the right order of operators definition
 
 134
 00:09:07,730 --> 00:09:08,910
-and we expect later
+and after that we are expected by
 
 135
 00:09:08,910 --> 00:09:12,790
-variables, loops, conditional functions and much more.
+variables, loops, conditions, functions and much more.
 
 136
 00:09:12,790 --> 00:09:15,920
@@ -544,11 +544,11 @@ Write me in the comments, for what you want for the next episodes.
 
 137
 00:09:15,920 --> 00:09:18,480
-Naturally, I would be flattered with comment replies:
+Naturally, I am also looking forward to further comments:
 
 138
 00:09:18,480 --> 00:09:19,950
-What are the pluses and the minuses?
+Do you have praise or criticism?
 
 139
 00:09:19,950 --> 00:09:21,950
@@ -560,7 +560,7 @@ Do you program along?
 
 141
 00:09:23,470 --> 00:09:26,440
-You use the videos for research about concrete problems?
+Do you use the videos for research about concrete problems?
 
 142
 00:09:26,440 --> 00:09:30,050
@@ -568,7 +568,7 @@ Or do you watch the videos without any project, just for interest?
 
 143
 00:09:30,050 --> 00:09:33,730
-Thanks a lot to Gadarol, that permitted to record in his studio
+Thanks a lot to Gadarol, who allowed me to record in his studio
 
 144
 00:09:33,730 --> 00:09:36,200
